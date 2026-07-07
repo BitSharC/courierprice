@@ -1,0 +1,427 @@
+---
+// src/components/ResultsList.astro
+---
+
+<div id="comparison-results-section" class="w-full space-y-8 scroll-mt-20 hidden">
+  
+  <!-- Section Title -->
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-hairline pb-4 transition-colors duration-200">
+    <div>
+      <h2 class="display-lg text-ink font-semibold">Available Options.</h2>
+      <p class="body-sm text-body mt-1">Rates are estimates based on standard courier calculations.</p>
+    </div>
+    
+    <!-- Sorting buttons -->
+    <div class="flex items-center gap-2 border border-hairline rounded-full p-1 bg-canvas shadow-level-1 text-sm transition-colors duration-200">
+      <button 
+        type="button" 
+        id="sort-price" 
+        class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight transition-colors cursor-pointer bg-primary text-on-primary"
+      >
+        Lowest Price
+      </button>
+      <button 
+        type="button" 
+        id="sort-speed" 
+        class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
+      >
+        Fastest Delivery
+      </button>
+      <button 
+        type="button" 
+        id="sort-rating" 
+        class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
+      >
+        Best Rated
+      </button>
+    </div>
+  </div>
+
+  <!-- Shipment Summary Banner -->
+  <div id="shipment-summary-banner"></div>
+
+  <!-- Smart Recommendation Card -->
+  <div id="smart-recommendation-card" class="bg-canvas-soft border border-hairline rounded-lg p-6 shadow-level-2 transition-colors duration-200">
+    <div class="flex items-start gap-4">
+      <div class="p-2 bg-link/10 text-link rounded-md">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      </div>
+      <div>
+        <h3 class="body-md-strong text-ink">Smart recommendation</h3>
+        <p id="recommendation-text" class="body-sm text-body mt-1 leading-relaxed">
+          Comparing rates for your shipment...
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Cards Grid / Container -->
+  <div id="estimates-list" class="space-y-4">
+    <!-- Dynamic Cards Will Be Inserted Here -->
+  </div>
+</div>
+
+<script>
+  import { getEstimates, CATEGORIES, type CourierEstimate, type ShippingInput } from '../utils/calculator';
+
+  // Component State
+  let currentEstimates: CourierEstimate[] = [];
+  let currentInput: ShippingInput | null = null;
+  let currentSort: 'price' | 'speed' | 'rating' = 'price';
+
+  // DOM elements
+  const resultsSection = document.getElementById('comparison-results-section');
+  const estimatesList = document.getElementById('estimates-list');
+  const recommendationText = document.getElementById('recommendation-text');
+  const summaryBanner = document.getElementById('shipment-summary-banner');
+  const sortPriceBtn = document.getElementById('sort-price');
+  const sortSpeedBtn = document.getElementById('sort-speed');
+  const sortRatingBtn = document.getElementById('sort-rating');
+
+  // Helper variables for formatting summaries
+  let totalParcelsCount = 0;
+  let totalActualWeight = 0;
+  let routeStr = '';
+
+  // Listen to calculations event
+  window.addEventListener('calculate-shipping', (event: any) => {
+    const input = event.detail as ShippingInput;
+    currentInput = input;
+
+    // Calculate total summary metrics
+    totalParcelsCount = input.parcels.length;
+    totalActualWeight = input.parcels.reduce((sum, p) => {
+      let w = p.weight;
+      if (p.weightUnit === 'g') w /= 1000;
+      return sum + w;
+    }, 0);
+    
+    routeStr = input.type === 'domestic'
+      ? `${input.pickupCity} to ${input.deliveryCity}`
+      : `${input.pickupCity} to ${input.deliveryCountry}`;
+
+    // Calculate estimates
+    currentEstimates = getEstimates(input);
+    
+    // Sort initially by lowest price
+    currentSort = 'price';
+    updateSortButtonStyles();
+    sortEstimates();
+
+    // Render results
+    renderResults();
+    
+    // Show sections
+    resultsSection?.classList.remove('hidden');
+  });
+
+  // Sorting Listeners
+  sortPriceBtn?.addEventListener('click', () => {
+    currentSort = 'price';
+    updateSortButtonStyles();
+    sortEstimates();
+    renderResults();
+  });
+
+  sortSpeedBtn?.addEventListener('click', () => {
+    currentSort = 'speed';
+    updateSortButtonStyles();
+    sortEstimates();
+    renderResults();
+  });
+
+  sortRatingBtn?.addEventListener('click', () => {
+    currentSort = 'rating';
+    updateSortButtonStyles();
+    sortEstimates();
+    renderResults();
+  });
+
+  function updateSortButtonStyles() {
+    const buttons = [
+      { btn: sortPriceBtn, type: 'price' },
+      { btn: sortSpeedBtn, type: 'speed' },
+      { btn: sortRatingBtn, type: 'rating' }
+    ];
+
+    buttons.forEach(({ btn, type }) => {
+      if (!btn) return;
+      if (currentSort === type) {
+        btn.className = "px-4 py-1.5 rounded-full font-medium text-xs tracking-tight transition-colors cursor-pointer bg-primary text-on-primary";
+      } else {
+        btn.className = "px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer";
+      }
+    });
+  }
+
+  function sortEstimates() {
+    if (currentSort === 'price') {
+      currentEstimates.sort((a, b) => a.estimatedPrice - b.estimatedPrice);
+    } else if (currentSort === 'speed') {
+      currentEstimates.sort((a, b) => {
+        if (a.estimatedDays === b.estimatedDays) {
+          return b.reliabilityScore - a.reliabilityScore;
+        }
+        return a.estimatedDays - b.estimatedDays;
+      });
+    } else if (currentSort === 'rating') {
+      currentEstimates.sort((a, b) => b.reliabilityScore - a.reliabilityScore);
+    }
+  }
+
+  function generateRecommendation() {
+    if (!currentInput || currentEstimates.length === 0) return '';
+
+    const cheapest = [...currentEstimates].sort((a, b) => a.estimatedPrice - b.estimatedPrice)[0];
+    const fastest = [...currentEstimates].sort((a, b) => a.estimatedDays - b.estimatedDays)[0];
+    
+    // Value index calculation
+    const bestValue = [...currentEstimates].sort((a, b) => {
+      const valA = (a.reliabilityScore * 1000) / ((a.estimatedPrice / 100) * a.estimatedDays);
+      const valB = (b.reliabilityScore * 1000) / ((b.estimatedPrice / 100) * b.estimatedDays);
+      return valB - valA;
+    })[0];
+
+    const weightStr = `${totalParcelsCount} ${totalParcelsCount === 1 ? 'item' : 'items'} (${totalActualWeight.toFixed(2)} kg)`;
+    const pathStr = routeStr;
+
+    // Dynamic messaging
+    if (cheapest.id === fastest.id) {
+      return `For your <strong>${weightStr}</strong> shipment from <strong>${pathStr}</strong>, <strong>${cheapest.name}</strong> is both the fastest and cheapest option available, offering superb value at ₹${cheapest.estimatedPrice} in ${cheapest.estimatedDays} days.`;
+    }
+    
+    if (currentSort === 'speed') {
+      return `If delivery time is critical, <strong>${fastest.name}</strong> delivers in <strong>${fastest.estimatedDays} days</strong> for ₹${fastest.estimatedPrice}. Otherwise, you can save ₹${fastest.estimatedPrice - cheapest.estimatedPrice} by choosing ${cheapest.name}.`;
+    }
+
+    return `For your <strong>${weightStr}</strong> shipment from <strong>${pathStr}</strong>, <strong>${bestValue.name}</strong> provides the best balance, delivering in <strong>${bestValue.estimatedDays} days</strong> for <strong>₹${bestValue.estimatedPrice}</strong>. For the absolute lowest price, choose <strong>${cheapest.name}</strong> at ₹${cheapest.estimatedPrice}.`;
+  }
+
+  function renderResults() {
+    if (!estimatesList || !currentInput) return;
+
+    // Render summary banner
+    if (summaryBanner) {
+      summaryBanner.innerHTML = `
+        <div class="bg-canvas border border-hairline rounded-lg px-5 py-4 flex flex-wrap gap-x-8 gap-y-3 justify-between items-center text-xs text-body transition-colors duration-200">
+          <div class="flex items-center gap-2">
+            <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
+            <span class="font-medium text-ink">Shipment Type:</span>
+            <span class="capitalize text-body">${currentInput.type} Shipping</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
+            <span class="font-medium text-ink">Route:</span>
+            <span class="text-body font-medium">${routeStr}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
+            <span class="font-medium text-ink">Consignment:</span>
+            <span class="text-body">${totalParcelsCount} ${totalParcelsCount === 1 ? 'parcel' : 'parcels'} | Total Weight: ${totalActualWeight.toFixed(2)} kg</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Set Recommendation text
+    if (recommendationText) {
+      recommendationText.innerHTML = generateRecommendation();
+    }
+
+    if (currentEstimates.length === 0) {
+      estimatesList.innerHTML = `
+        <div class="text-center py-12 border border-dashed border-hairline rounded-lg bg-canvas text-body">
+          <p class="body-md">No couriers match your selection or the combined weight exceeds limit capabilities.</p>
+        </div>
+      `;
+      return;
+    }
+
+    estimatesList.innerHTML = currentEstimates.map(est => {
+      const isCheapest = est.recommendationBadge === 'cheapest';
+      const isFastest = est.recommendationBadge === 'fastest';
+      const isValue = est.recommendationBadge === 'value';
+
+      let badgeHTML = '';
+      if (isCheapest) {
+        badgeHTML = `<span class="inline-flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">Cheapest</span>`;
+      } else if (isFastest) {
+        badgeHTML = `<span class="inline-flex items-center gap-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">Fastest</span>`;
+      } else if (isValue) {
+        badgeHTML = `<span class="inline-flex items-center gap-1 bg-violet-soft/20 text-violet dark:text-violet-deep text-xs font-semibold px-2.5 py-0.5 rounded-full">Best Value</span>`;
+      }
+
+      // Individual parcels listing for the breakdown
+      const parcelsBreakdownListHTML = currentInput!.parcels.map((p, pIdx) => {
+        let pw = p.weight;
+        let pwUnit = p.weightUnit;
+        let pVolStr = '';
+        if (p.length && p.width && p.height) {
+          let pVol = (p.length * p.width * p.height) / 5000;
+          pVolStr = ` | Vol: ${pVol.toFixed(2)} kg (${p.length}x${p.width}x${p.height} cm)`;
+        }
+        const catObj = CATEGORIES.find(c => c.id === p.category);
+        const catName = catObj ? catObj.name : p.category;
+        return `
+          <div class="flex justify-between py-1 text-xs border-b border-hairline/40 last:border-b-0">
+            <span class="text-body">Item #${pIdx + 1} (${catName})</span>
+            <span class="text-ink font-medium">${pw} ${pwUnit}${pVolStr}</span>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="group relative bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 sm:p-6 shadow-level-2 hover:shadow-level-3 transition-all duration-200">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            
+            <!-- Left Info -->
+            <div class="space-y-3 flex-1">
+              <div class="flex flex-wrap items-center gap-2.5">
+                <h3 class="display-sm text-ink text-lg font-medium">${est.name}</h3>
+                ${badgeHTML}
+              </div>
+              
+              <!-- Features Grid -->
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-body">
+                <div class="flex items-center gap-1.5">
+                  <span class="inline-block h-1.5 w-1.5 rounded-full ${est.trackingAvailable ? 'bg-green-500' : 'bg-mute'}"></span>
+                  <span>Tracking ${est.trackingAvailable ? 'Available' : 'Unavailable'}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="inline-block h-1.5 w-1.5 rounded-full ${est.insuranceAvailable ? 'bg-green-500' : 'bg-mute'}"></span>
+                  <span>Insurance ${est.insuranceAvailable ? 'Covered' : 'Not Available'}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="inline-block h-1.5 w-1.5 rounded-full ${est.pickupAvailable ? 'bg-green-500' : 'bg-mute'}"></span>
+                  <span>Home Pickup ${est.pickupAvailable ? 'Available' : 'No Pickup'}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Middle stats (Speed & Rating) -->
+            <div class="flex flex-wrap items-center gap-6 sm:gap-10">
+              <div class="text-left">
+                <span class="caption-mono uppercase text-mute tracking-wider block">DELIVERY TIME</span>
+                <span class="body-lg text-ink font-medium mt-0.5 inline-flex items-center gap-1">
+                  ${est.estimatedDays} ${est.estimatedDays === 1 ? 'day' : 'days'}
+                  <span class="text-xs text-body font-normal">(Est.)</span>
+                </span>
+              </div>
+              <div class="text-left">
+                <span class="caption-mono uppercase text-mute tracking-wider block">RELIABILITY</span>
+                <span class="body-lg text-ink font-medium mt-0.5 flex items-center gap-1">
+                  ${est.reliabilityScore}
+                  <svg class="h-4 w-4 fill-amber-400 text-amber-400" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Price Column -->
+            <div class="flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-2 border-t border-hairline lg:border-t-0 pt-4 lg:pt-0">
+              <div class="text-left lg:text-right">
+                <span class="caption-mono uppercase text-mute tracking-wider block">ESTIMATED PRICE</span>
+                <span class="display-sm text-ink font-semibold text-2xl">₹${est.estimatedPrice}</span>
+              </div>
+              
+              <button 
+                type="button" 
+                class="details-btn inline-flex items-center gap-1 text-xs text-body hover:text-ink font-medium cursor-pointer border border-hairline rounded px-2.5 py-1 bg-canvas hover:bg-canvas-soft-2 transition-all"
+                data-id="${est.id}"
+              >
+                <span>Breakdown</span>
+                <svg class="h-3 w-3 arrow-icon transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Collapsible Pricing Breakdown Panel -->
+          <div id="breakdown-${est.id}" class="hidden mt-6 border-t border-hairline pt-5 space-y-6 animate-fade-in text-sm transition-colors duration-200">
+            
+            <!-- Items Detail -->
+            <div>
+              <h4 class="text-xs text-ink font-semibold uppercase tracking-wider caption-mono mb-2">Shipment Consignment</h4>
+              <div class="bg-canvas-soft-2 border border-hairline/60 rounded px-4 py-2.5 space-y-1">
+                ${parcelsBreakdownListHTML}
+              </div>
+            </div>
+
+            <!-- Pricing Breakdown details -->
+            <div class="space-y-4">
+              <h4 class="text-xs text-ink font-semibold uppercase tracking-wider caption-mono">Shipping Cost Breakdown</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-body">
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span>Base Courier Charge</span>
+                    <span class="text-ink font-medium">₹${est.breakdown.baseCharge}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Weight Surcharge</span>
+                    <span class="text-ink font-medium">₹${est.breakdown.weightCharge}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Distance Transit Charge</span>
+                    <span class="text-ink font-medium">₹${est.breakdown.distanceCharge}</span>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span>Insurance Surcharge</span>
+                    <span class="text-ink font-medium">${est.breakdown.insuranceCharge > 0 ? '₹' + est.breakdown.insuranceCharge : '₹0'}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Packaging Surcharge (All Items)</span>
+                    <span class="text-ink font-medium">₹${est.breakdown.packagingCharge}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Pickup Surcharge</span>
+                    <span class="text-ink font-medium">₹${est.breakdown.pickupFee}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-t border-hairline pt-3 flex justify-between items-center text-base">
+              <div class="text-xs text-mute flex flex-col">
+                <span>Inclusive of 18% GST</span>
+                <span>GST Amount: ₹${est.breakdown.taxes}</span>
+              </div>
+              <div class="text-right">
+                <span class="body-sm text-body mr-2">Estimated Total:</span>
+                <span class="body-md-strong text-ink font-semibold text-lg">₹${est.breakdown.total}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }).join('');
+
+    // Rebind togglers
+    const detailsBtns = estimatesList.querySelectorAll('.details-btn');
+    detailsBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const breakdownPanel = document.getElementById(`breakdown-${id}`);
+        const arrow = btn.querySelector('.arrow-icon');
+        
+        if (breakdownPanel) {
+          const isHidden = breakdownPanel.classList.contains('hidden');
+          if (isHidden) {
+            breakdownPanel.classList.remove('hidden');
+            arrow?.classList.add('rotate-180');
+          } else {
+            breakdownPanel.classList.add('hidden');
+            arrow?.classList.remove('rotate-180');
+          }
+        }
+      });
+    });
+  }
+</script>

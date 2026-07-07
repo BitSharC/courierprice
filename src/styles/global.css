@@ -1,0 +1,380 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #171717;
+  --color-on-primary: #ffffff;
+  --color-ink: #171717;
+  --color-body: #4d4d4d;
+  --color-mute: #888888;
+  --color-hairline: #ebebeb;
+  --color-hairline-strong: #a1a1a1;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #fafafa;
+  --color-canvas-soft-2: #f5f5f5;
+  --color-link: #0070f3;
+  --color-link-deep: #0761d1;
+  --color-link-bg-soft: #d3e5ff;
+  --color-success: #0070f3;
+  --color-error: #ee0000;
+  --color-error-soft: #f7d4d6;
+  --color-error-deep: #c50000;
+  --color-warning: #f5a623;
+  --color-warning-soft: #ffefcf;
+  --color-warning-deep: #ab570a;
+  
+  --color-violet: #7928ca;
+  --color-violet-soft: #d8ccf1;
+  --color-violet-deep: #4c2889;
+  --color-cyan: #50e3c2;
+  --color-cyan-soft: #aaffec;
+  --color-cyan-deep: #29bc9b;
+  --color-highlight-pink: #ff0080;
+  --color-highlight-magenta: #eb367f;
+
+  --color-gradient-develop-start: #007cf0;
+  --color-gradient-develop-end: #00dfd8;
+  --color-gradient-preview-start: #7928ca;
+  --color-gradient-preview-end: #ff0080;
+  --color-gradient-ship-start: #ff4d4d;
+  --color-gradient-ship-end: #f9cb28;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+  /* Custom spacings */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+  --spacing-5xl: 96px;
+  --spacing-6xl: 128px;
+  --spacing-section: 192px;
+
+  /* Border radius custom tokens */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill-sm: 64px;
+  --radius-pill: 100px;
+
+  /* Explicit max-width container scales to override spacing scale fallback conflicts */
+  --max-width-xs: 20rem;
+  --max-width-sm: 24rem;
+  --max-width-md: 28rem;
+  --max-width-lg: 32rem;
+  --max-width-xl: 36rem;
+  --max-width-2xl: 42rem;
+  --max-width-3xl: 48rem;
+  --max-width-4xl: 56rem;
+  --max-width-5xl: 64rem;
+  --max-width-6xl: 72rem;
+  --max-width-7xl: 80rem;
+}
+
+/* Base resets & styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-canvas-soft);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Inter alternate features for geometric layout */
+body {
+  font-feature-settings: "ss01", "ss02";
+}
+
+/* Dark mode definitions */
+.dark {
+  --color-primary: #ffffff;
+  --color-on-primary: #171717;
+  --color-ink: #ededed;
+  --color-body: #a1a1a1;
+  --color-mute: #666666;
+  --color-hairline: #222222;
+  --color-hairline-strong: #444444;
+  --color-canvas: #0a0a0a;
+  --color-canvas-soft: #000000;
+  --color-canvas-soft-2: #0f0f0f;
+  --color-link: #0070f3;
+  --color-link-deep: #3291ff;
+  --color-link-bg-soft: #002654;
+  --color-success: #0070f3;
+  --color-warning-soft: #302008;
+  --color-warning-deep: #f5a623;
+  --color-error-soft: #330000;
+  --color-error-deep: #ee0000;
+}
+
+/* Typography utilities */
+@utility display-xl {
+  font-family: var(--font-sans);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -2.4px;
+}
+@utility display-lg {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -1.28px;
+}
+@utility display-md {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: -0.96px;
+}
+@utility display-sm {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.6px;
+}
+@utility body-lg {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+@utility body-md {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@utility body-md-strong {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@utility body-sm {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42;
+  letter-spacing: -0.28px;
+}
+@utility body-sm-strong {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.42;
+  letter-spacing: -0.28px;
+}
+@utility caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: 0;
+}
+@utility caption-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: 0;
+}
+@utility code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.53;
+  letter-spacing: 0;
+}
+
+/* Stacked shadow layers matching DESIGN.md */
+@utility shadow-level-1 {
+  box-shadow: 0 0 0 1px var(--color-hairline) inset;
+}
+@utility shadow-level-2 {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.02), 0px 2px 2px rgba(0, 0, 0, 0.04), 0 0 0 1px var(--color-hairline) inset;
+}
+@utility shadow-level-3 {
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.04), 0px 8px 8px -8px rgba(0, 0, 0, 0.04), 0 0 0 1px var(--color-hairline) inset;
+}
+@utility shadow-level-4 {
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.04), 0px 8px 16px -4px rgba(0, 0, 0, 0.04), 0 0 0 1px var(--color-hairline) inset;
+}
+@utility shadow-level-5 {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.02), 0px 8px 16px -4px rgba(0, 0, 0, 0.04), 0px 24px 32px -8px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--color-hairline) inset;
+}
+
+/* Core layouts and components styling guidelines */
+@utility form-input {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  height: 40px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:focus {
+    border-color: var(--color-hairline-strong);
+    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.15);
+  }
+}
+
+@utility form-input-sm {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  height: 32px;
+  outline: none;
+}
+
+@utility form-input-lg {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  border-radius: var(--radius-sm);
+  padding: 0 16px;
+  height: 48px;
+  outline: none;
+}
+
+/* Button systems matching DESIGN.md */
+@utility button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  padding: 0 24px;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@utility button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  padding: 0 24px;
+  height: 48px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--color-hairline) inset, 0 1px 2px rgba(0,0,0,0.05);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-canvas-soft-2);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@utility button-primary-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  padding: 0 16px;
+  height: 32px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@utility button-secondary-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  padding: 0 16px;
+  height: 32px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--color-hairline) inset, 0 1px 1px rgba(0,0,0,0.03);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-canvas-soft-2);
+  }
+}
+
+/* Signature Gradient Mesh animation */
+@keyframes mesh-pulse {
+  0% { transform: scale(1) translate(0px, 0px) rotate(0deg); }
+  33% { transform: scale(1.1) translate(30px, -50px) rotate(120deg); }
+  66% { transform: scale(0.95) translate(-20px, 20px) rotate(240deg); }
+  100% { transform: scale(1) translate(0px, 0px) rotate(360deg); }
+}
+
+.mesh-glow-1 {
+  filter: blur(80px);
+  animation: mesh-pulse 18s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+.mesh-glow-2 {
+  filter: blur(100px);
+  animation: mesh-pulse 24s ease-in-out infinite alternate-reverse;
+  mix-blend-mode: screen;
+}
+.dark .mesh-glow-1, .dark .mesh-glow-2 {
+  mix-blend-mode: plus-lighter;
+  opacity: 0.45;
+}

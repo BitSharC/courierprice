@@ -1,0 +1,134 @@
+---
+// src/components/Educational.astro
+// Educational sections explaining pricing mechanics, volumetric weights, and shipping tips.
+---
+
+<section id="guides" class="py-20 border-t border-hairline bg-canvas-soft transition-colors duration-200">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+    <!-- Title -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="caption-mono text-mute uppercase tracking-widest block mb-3">SHIPPING INTELLIGENCE</span>
+      <h2 class="display-lg text-ink font-semibold">How courier shipping works.</h2>
+      <p class="body-md text-body mt-2">Learn the calculations and logistics concepts used by top shipping providers in India.</p>
+    </div>
+
+    <!-- Grid Container -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Card 1: Volumetric Weight -->
+      <div class="bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-2 transition-all duration-200 hover:border-hairline-strong">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2 bg-primary/5 text-ink rounded border border-hairline">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </div>
+          <h3 class="display-sm text-lg text-ink font-medium">What is volumetric weight?</h3>
+        </div>
+        <p class="body-sm text-body leading-relaxed mb-4">
+          Courier companies bill you based on the space a package occupies rather than its actual physical weight if the box is large but light. This is called Volumetric Weight (or dimensional weight).
+        </p>
+        <div class="bg-canvas-soft-2 border border-hairline rounded p-4 mb-3 transition-colors duration-200">
+          <span class="caption-mono uppercase text-mute tracking-wider block mb-1">THE FORMULA</span>
+          <code class="code text-ink block font-semibold">Volumetric Weight (kg) = (Length × Width × Height in cm) / 5000</code>
+        </div>
+        <p class="caption text-mute">
+          If your parcel weights 2 kg physically but measures 30x30x30 cm, its volumetric weight is 5.4 kg. You will be billed for 6 kg (rounded up).
+        </p>
+      </div>
+
+      <!-- Card 2: Pricing breakdown -->
+      <div class="bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-2 transition-all duration-200 hover:border-hairline-strong">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2 bg-primary/5 text-ink rounded border border-hairline">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="display-sm text-lg text-ink font-medium">How pricing is calculated</h3>
+        </div>
+        <p class="body-sm text-body leading-relaxed mb-4">
+          Standard shipment quotes represent the combined sum of several dynamic cost factors:
+        </p>
+        <ul class="space-y-2.5 body-sm text-body">
+          <li class="flex items-start gap-2">
+            <span class="text-ink font-semibold select-none">•</span>
+            <span><strong>Base Courier Fee:</strong> Flat handling charge required for each booking.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-ink font-semibold select-none">•</span>
+            <span><strong>Weight Premium:</strong> Calculated on the higher of physical or volumetric weight.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-ink font-semibold select-none">•</span>
+            <span><strong>Distance Cost:</strong> Factored using transit corridors and distance between cities.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-ink font-semibold select-none">•</span>
+            <span><strong>GST (18%):</strong> Integrated Central and State goods/services tax applied by code.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 3: Shipping Tips -->
+      <div class="bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-2 transition-all duration-200 hover:border-hairline-strong">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2 bg-primary/5 text-ink rounded border border-hairline">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="display-sm text-lg text-ink font-medium">How to reduce shipping costs</h3>
+        </div>
+        <p class="body-sm text-body leading-relaxed mb-4">
+          Optimize your shipping arrangements to save up to 40% on standard quotes:
+        </p>
+        <ul class="space-y-2.5 body-sm text-body">
+          <li class="flex items-start gap-2">
+            <span class="text-success font-semibold select-none">✓</span>
+            <span><strong>Pack efficiently:</strong> Use the smallest possible box to limit volumetric weight surcharges.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-success font-semibold select-none">✓</span>
+            <span><strong>Drop-off at hubs:</strong> Dropping items directly at courier locations bypasses pickup fees.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-success font-semibold select-none">✓</span>
+            <span><strong>Choose Standard Service:</strong> Unless highly urgent, standard surface routes cost 50% less than express air.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-success font-semibold select-none">✓</span>
+            <span><strong>Consolidate boxes:</strong> Multiple separate boxes cost more base charges than a single unified box.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 4: Movers vs Courier -->
+      <div class="bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-2 transition-all duration-200 hover:border-hairline-strong">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-2 bg-primary/5 text-ink rounded border border-hairline">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+          </div>
+          <h3 class="display-sm text-lg text-ink font-medium">Couriers vs. Packers & Movers</h3>
+        </div>
+        <p class="body-sm text-body leading-relaxed mb-4">
+          Selecting the wrong shipping channel can drastically impact charges and parcel safety:
+        </p>
+        <div class="space-y-3.5">
+          <div>
+            <span class="body-sm-strong text-ink block">Standard/Express Couriers</span>
+            <span class="body-sm text-body block">Best for boxes under 35 kg, documents, books, or single electronics. Offers quick tracking and air delivery.</span>
+          </div>
+          <div class="border-t border-hairline pt-3 transition-colors duration-200">
+            <span class="body-sm-strong text-ink block">Packers & Movers</span>
+            <span class="body-sm text-body block">Best for furniture, heavy household shifting, vehicles, or items exceeding 100 kg. Includes wrapping, loading, and truck transport.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

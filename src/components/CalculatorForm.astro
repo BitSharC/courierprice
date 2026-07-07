@@ -1,0 +1,501 @@
+---
+// src/components/CalculatorForm.astro
+import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
+---
+
+<div id="calculator" class="w-full bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-3 transition-colors duration-200">
+  <div class="mb-6">
+    <h2 class="display-sm text-ink mb-1.5">Shipping details.</h2>
+    <p class="body-sm text-body">Configure your domestic or international shipment parameters.</p>
+  </div>
+
+  <!-- Domestic vs International Switcher -->
+  <div class="flex justify-center mb-8">
+    <div class="flex items-center gap-1 border border-hairline rounded-full p-1 bg-canvas-soft-2 shadow-level-1 text-sm transition-colors duration-200">
+      <button 
+        type="button" 
+        id="tab-domestic" 
+        class="px-5 py-1.5 rounded-full font-medium text-xs tracking-tight transition-all cursor-pointer bg-primary text-on-primary"
+      >
+        Domestic
+      </button>
+      <button 
+        type="button" 
+        id="tab-international" 
+        class="px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer"
+      >
+        International
+      </button>
+    </div>
+  </div>
+
+  <form id="shipping-form" class="space-y-6">
+    <!-- Hidden input for type -->
+    <input type="hidden" id="shipping-type" name="type" value="domestic" />
+
+    <!-- Route Parameters Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Pickup City (Always required, starting in India) -->
+      <div class="flex flex-col gap-1.5">
+        <label for="pickupCity" class="body-sm-strong text-ink">Pickup City (India)</label>
+        <div class="relative">
+          <select id="pickupCity" name="pickupCity" required class="form-input w-full appearance-none pr-8">
+            <option value="" disabled selected>Select starting city</option>
+            {Object.keys(CITIES).map(city => (
+              <option value={city}>{city} ({CITIES[city].state})</option>
+            ))}
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Destination City (Domestic only) -->
+      <div id="delivery-city-container" class="flex flex-col gap-1.5">
+        <label for="deliveryCity" class="body-sm-strong text-ink">Delivery City</label>
+        <div class="relative">
+          <select id="deliveryCity" name="deliveryCity" required class="form-input w-full appearance-none pr-8">
+            <option value="" disabled selected>Select destination city</option>
+            {Object.keys(CITIES).map(city => (
+              <option value={city}>{city} ({CITIES[city].state})</option>
+            ))}
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Destination Country (International only) -->
+      <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden">
+        <label for="deliveryCountry" class="body-sm-strong text-ink">Destination Country</label>
+        <div class="relative">
+          <select id="deliveryCountry" name="deliveryCountry" class="form-input w-full appearance-none pr-8">
+            <option value="" disabled selected>Select destination country</option>
+            {Object.keys(COUNTRIES).map(country => (
+              <option value={country}>{country}</option>
+            ))}
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parcels Section -->
+    <div class="border-t border-hairline pt-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="body-md-strong text-ink">Parcels to Send.</h3>
+        <p class="caption text-mute">Define weight and categories for your items</p>
+      </div>
+
+      <!-- Parcels list container -->
+      <div id="parcels-container" class="space-y-4">
+        <!-- Render first parcel dynamically -->
+        <div class="parcel-card bg-canvas-soft-2 border border-hairline p-4 rounded-md relative space-y-4 transition-colors duration-200">
+          <div class="flex items-center justify-between border-b border-hairline/60 pb-2">
+            <span class="caption-mono text-xs uppercase tracking-wider text-ink font-semibold">Parcel #<span class="parcel-idx">1</span></span>
+            <button 
+              type="button" 
+              class="remove-parcel-btn hidden text-xs text-error hover:text-error-deep cursor-pointer focus:outline-none transition-colors duration-150"
+            >
+              Remove
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Parcel Weight -->
+            <div class="flex flex-col gap-1.5">
+              <label class="body-sm-strong text-ink text-xs">Parcel Weight</label>
+              <div class="flex">
+                <input 
+                  type="number" 
+                  name="parcelWeight" 
+                  min="0.01" 
+                  step="any" 
+                  placeholder="e.g. 2.5" 
+                  required 
+                  class="form-input flex-1 rounded-r-none border-r-0"
+                />
+                <select 
+                  name="parcelWeightUnit" 
+                  class="form-input w-20 rounded-l-none border-l-1 bg-canvas-soft appearance-none pr-6 cursor-pointer"
+                >
+                  <option value="kg">kg</option>
+                  <option value="g">g</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Parcel Category -->
+            <div class="flex flex-col gap-1.5">
+              <label class="body-sm-strong text-ink text-xs">Parcel Category</label>
+              <div class="relative">
+                <select name="parcelCategory" required class="form-input w-full appearance-none pr-8">
+                  <option value="" disabled selected>Select category</option>
+                  {CATEGORIES.map(cat => (
+                    <option value={cat.id}>{cat.name}</option>
+                  ))}
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dimensions (For volumetric weights per parcel) -->
+          <div class="space-y-2">
+            <span class="body-sm-strong text-ink text-xs block">Dimensions (Optional - For Volumetric Weight)</span>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="flex flex-col gap-1">
+                <label class="caption text-mute text-xs">Length (cm)</label>
+                <input type="number" name="parcelLength" min="1" placeholder="L" class="form-input w-full" />
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="caption text-mute text-xs">Width (cm)</label>
+                <input type="number" name="parcelWidth" min="1" placeholder="W" class="form-input w-full" />
+              </div>
+              <div class="flex flex-col gap-1">
+                <label class="caption text-mute text-xs">Height (cm)</label>
+                <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add another parcel button -->
+      <button 
+        type="button" 
+        id="add-parcel-btn" 
+        class="w-full mt-3 border border-dashed border-hairline py-2 flex items-center justify-center gap-1.5 hover:bg-canvas-soft-2 text-sm text-body hover:text-ink font-medium rounded-md transition-all duration-200 cursor-pointer"
+      >
+        <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        Add another parcel
+      </button>
+      <p class="caption text-mute mt-2 text-center">Volumetric weight is computed per parcel as (L × W × H) / 5000 and used if it exceeds physical weight.</p>
+    </div>
+
+    <!-- Add-on switches Accordion (General parameters) -->
+    <div class="border-t border-hairline pt-4 transition-colors duration-200">
+      <button 
+        type="button" 
+        id="advanced-toggle" 
+        class="flex items-center gap-2 text-sm font-medium text-body hover:text-ink cursor-pointer focus:outline-none"
+      >
+        <svg id="advanced-arrow" class="h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <span>Shipment add-ons (Insurance, Express, Pickup)</span>
+      </button>
+
+      <div id="advanced-section" class="hidden mt-4 space-y-6 animate-fade-in">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+          <!-- Insurance Toggle -->
+          <label class="flex items-start gap-3 cursor-pointer group">
+            <input type="checkbox" id="insurance" name="insurance" class="sr-only peer" />
+            <div class="relative w-9 h-5 bg-canvas-soft-2 peer-focus:outline-none rounded-full border border-hairline peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-body peer-checked:after:bg-on-primary after:border-none after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-primary peer-checked:border-primary transition-all"></div>
+            <div class="flex flex-col">
+              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors">Insurance cover</span>
+              <span class="caption text-mute">Protect valuable cargo</span>
+            </div>
+          </label>
+
+          <!-- Express Delivery Toggle -->
+          <label class="flex items-start gap-3 cursor-pointer group">
+            <input type="checkbox" id="express" name="express" class="sr-only peer" />
+            <div class="relative w-9 h-5 bg-canvas-soft-2 peer-focus:outline-none rounded-full border border-hairline peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-body peer-checked:after:bg-on-primary after:border-none after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-primary peer-checked:border-primary transition-all"></div>
+            <div class="flex flex-col">
+              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors">Express transit</span>
+              <span class="caption text-mute">Prioritize delivery speed</span>
+            </div>
+          </label>
+
+          <!-- Pickup Required Toggle -->
+          <label class="flex items-start gap-3 cursor-pointer group">
+            <input type="checkbox" id="pickupRequired" name="pickupRequired" class="sr-only peer" />
+            <div class="relative w-9 h-5 bg-canvas-soft-2 peer-focus:outline-none rounded-full border border-hairline peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-body peer-checked:after:bg-on-primary after:border-none after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-primary peer-checked:border-primary transition-all"></div>
+            <div class="flex flex-col">
+              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors">Home pickup</span>
+              <span class="caption text-mute">Courier collects at door</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      class="button-primary w-full shadow-level-3 font-medium transition-all"
+    >
+      Compare prices
+    </button>
+  </form>
+</div>
+
+<script>
+  import { CATEGORIES } from '../utils/calculator';
+
+  // Toggle Domestic/International Tab Switch
+  const tabDomestic = document.getElementById('tab-domestic');
+  const tabInternational = document.getElementById('tab-international');
+  const shippingType = document.getElementById('shipping-type') as HTMLInputElement | null;
+  const deliveryCityContainer = document.getElementById('delivery-city-container');
+  const deliveryCountryContainer = document.getElementById('delivery-country-container');
+  const deliveryCitySelect = document.getElementById('deliveryCity') as HTMLSelectElement | null;
+  const deliveryCountrySelect = document.getElementById('deliveryCountry') as HTMLSelectElement | null;
+
+  tabDomestic?.addEventListener('click', () => {
+    if (shippingType) shippingType.value = "domestic";
+    
+    // UI Switch
+    tabDomestic.className = "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight transition-all cursor-pointer bg-primary text-on-primary";
+    tabInternational?.setAttribute("class", "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer");
+    
+    // Visibility
+    deliveryCityContainer?.classList.remove('hidden');
+    deliveryCountryContainer?.classList.add('hidden');
+    
+    // Validation constraints
+    if (deliveryCitySelect) deliveryCitySelect.required = true;
+    if (deliveryCountrySelect) {
+      deliveryCountrySelect.required = false;
+      deliveryCountrySelect.value = "";
+    }
+  });
+
+  tabInternational?.addEventListener('click', () => {
+    if (shippingType) shippingType.value = "international";
+
+    // UI Switch
+    tabInternational.className = "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight transition-all cursor-pointer bg-primary text-on-primary";
+    tabDomestic?.setAttribute("class", "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer");
+
+    // Visibility
+    deliveryCityContainer?.classList.add('hidden');
+    deliveryCountryContainer?.classList.remove('hidden');
+
+    // Validation constraints
+    if (deliveryCitySelect) {
+      deliveryCitySelect.required = false;
+      deliveryCitySelect.value = "";
+    }
+    if (deliveryCountrySelect) deliveryCountrySelect.required = true;
+  });
+
+  // Advanced settings toggle
+  const advToggle = document.getElementById('advanced-toggle');
+  const advSection = document.getElementById('advanced-section');
+  const advArrow = document.getElementById('advanced-arrow');
+
+  advToggle?.addEventListener('click', () => {
+    const isHidden = advSection?.classList.contains('hidden');
+    if (isHidden) {
+      advSection?.classList.remove('hidden');
+      advArrow?.classList.add('rotate-90');
+    } else {
+      advSection?.classList.add('hidden');
+      advArrow?.classList.remove('rotate-90');
+    }
+  });
+
+  // Dynamic Multi-Parcel Management
+  const parcelsContainer = document.getElementById('parcels-container');
+  const addParcelBtn = document.getElementById('add-parcel-btn');
+
+  function updateParcelNumbers() {
+    if (!parcelsContainer) return;
+    const cards = parcelsContainer.querySelectorAll('.parcel-card');
+    
+    cards.forEach((card, index) => {
+      const idxSpan = card.querySelector('.parcel-idx');
+      if (idxSpan) idxSpan.textContent = (index + 1).toString();
+
+      // Show remove button for all except if it's the only parcel card
+      const removeBtn = card.querySelector('.remove-parcel-btn') as HTMLButtonElement | null;
+      if (removeBtn) {
+        if (cards.length > 1) {
+          removeBtn.classList.remove('hidden');
+        } else {
+          removeBtn.classList.add('hidden');
+        }
+      }
+    });
+  }
+
+  // Bind events to remove button
+  function bindRemoveEvent(card: HTMLElement) {
+    const removeBtn = card.querySelector('.remove-parcel-btn');
+    removeBtn?.addEventListener('click', () => {
+      card.remove();
+      updateParcelNumbers();
+    });
+  }
+
+  // Bind initial card's remove button
+  const initialCard = parcelsContainer?.querySelector('.parcel-card') as HTMLElement | null;
+  if (initialCard) {
+    bindRemoveEvent(initialCard);
+  }
+
+  addParcelBtn?.addEventListener('click', () => {
+    if (!parcelsContainer) return;
+
+    // Create a new parcel card element
+    const newCard = document.createElement('div');
+    newCard.className = "parcel-card bg-canvas-soft-2 border border-hairline p-4 rounded-md relative space-y-4 transition-colors duration-200";
+    
+    // Create categories selection options
+    const categoryOptions = CATEGORIES.map(cat => `<option value="${cat.id}">${cat.name}</option>`).join('');
+
+    newCard.innerHTML = `
+      <div class="flex items-center justify-between border-b border-hairline/60 pb-2">
+        <span class="caption-mono text-xs uppercase tracking-wider text-ink font-semibold">Parcel #<span class="parcel-idx">2</span></span>
+        <button 
+          type="button" 
+          class="remove-parcel-btn text-xs text-error hover:text-error-deep cursor-pointer focus:outline-none transition-colors duration-150"
+        >
+          Remove
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Parcel Weight -->
+        <div class="flex flex-col gap-1.5">
+          <label class="body-sm-strong text-ink text-xs">Parcel Weight</label>
+          <div class="flex">
+            <input 
+              type="number" 
+              name="parcelWeight" 
+              min="0.01" 
+              step="any" 
+              placeholder="e.g. 2.5" 
+              required 
+              class="form-input flex-1 rounded-r-none border-r-0"
+            />
+            <select 
+              name="parcelWeightUnit" 
+              class="form-input w-20 rounded-l-none border-l-1 bg-canvas-soft appearance-none pr-6 cursor-pointer"
+            >
+              <option value="kg">kg</option>
+              <option value="g">g</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Parcel Category -->
+        <div class="flex flex-col gap-1.5">
+          <label class="body-sm-strong text-ink text-xs">Parcel Category</label>
+          <div class="relative">
+            <select name="parcelCategory" required class="form-input w-full appearance-none pr-8">
+              <option value="" disabled selected>Select category</option>
+              ${categoryOptions}
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dimensions -->
+      <div class="space-y-2">
+        <span class="body-sm-strong text-ink text-xs block">Dimensions (Optional - For Volumetric Weight)</span>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="flex flex-col gap-1">
+            <label class="caption text-mute text-xs">Length (cm)</label>
+            <input type="number" name="parcelLength" min="1" placeholder="L" class="form-input w-full" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="caption text-mute text-xs">Width (cm)</label>
+            <input type="number" name="parcelWidth" min="1" placeholder="W" class="form-input w-full" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="caption text-mute text-xs">Height (cm)</label>
+            <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
+          </div>
+        </div>
+      </div>
+    `;
+
+    parcelsContainer.appendChild(newCard);
+    bindRemoveEvent(newCard);
+    updateParcelNumbers();
+  });
+
+  // Handle Form Submission
+  const form = document.getElementById('shipping-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form || !parcelsContainer) return;
+
+    const formData = new FormData(form);
+    
+    // Gather all parcels in an array
+    const parcelCards = parcelsContainer.querySelectorAll('.parcel-card');
+    const parcels: any[] = [];
+
+    parcelCards.forEach(card => {
+      const weightInput = card.querySelector('input[name="parcelWeight"]') as HTMLInputElement | null;
+      const weightUnitSelect = card.querySelector('select[name="parcelWeightUnit"]') as HTMLSelectElement | null;
+      const categorySelect = card.querySelector('select[name="parcelCategory"]') as HTMLSelectElement | null;
+      const lengthInput = card.querySelector('input[name="parcelLength"]') as HTMLInputElement | null;
+      const widthInput = card.querySelector('input[name="parcelWidth"]') as HTMLInputElement | null;
+      const heightInput = card.querySelector('input[name="parcelHeight"]') as HTMLInputElement | null;
+
+      if (weightInput && weightUnitSelect && categorySelect) {
+        parcels.push({
+          weight: parseFloat(weightInput.value),
+          weightUnit: weightUnitSelect.value as 'kg' | 'g',
+          category: categorySelect.value,
+          length: lengthInput && lengthInput.value ? parseFloat(lengthInput.value) : undefined,
+          width: widthInput && widthInput.value ? parseFloat(widthInput.value) : undefined,
+          height: heightInput && heightInput.value ? parseFloat(heightInput.value) : undefined,
+        });
+      }
+    });
+
+    if (parcels.length === 0) {
+      alert("Please add at least one parcel.");
+      return;
+    }
+
+    // Package shipping form values
+    const data = {
+      type: (formData.get('type') as 'domestic' | 'international') || 'domestic',
+      pickupCity: formData.get('pickupCity') as string,
+      deliveryCity: formData.get('deliveryCity') as string || undefined,
+      deliveryCountry: formData.get('deliveryCountry') as string || undefined,
+      parcels: parcels,
+      insurance: formData.get('insurance') === 'on',
+      express: formData.get('express') === 'on',
+      pickupRequired: formData.get('pickupRequired') === 'on'
+    };
+
+    // Dispatch a custom event with details to trigger results calculation in the shell
+    const event = new CustomEvent('calculate-shipping', { detail: data });
+    window.dispatchEvent(event);
+
+    // Smooth scroll to results
+    const resultsContainer = document.getElementById('comparison-results-section');
+    if (resultsContainer) {
+      resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+</script>

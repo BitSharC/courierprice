@@ -1,11 +1,46 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import CalculatorForm from '../components/CalculatorForm.astro';
+import ResultsList from '../components/ResultsList.astro';
+import Educational from '../components/Educational.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout 
+  title="Courier Price Comparison - Compare Shipping Charges in India"
+  description="Instantly compare parcel delivery and courier pricing quotes across India from India Post, Blue Dart, DTDC, Delhivery, Porter and more in under 30 seconds."
+>
+  <!-- Header Nav -->
+  <Header />
+
+  <!-- Main Content Layout -->
+  <main class="flex-grow">
+    <!-- Hero Section with animated mesh gradient background -->
+    <Hero />
+
+    <!-- Application Engine Container -->
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-16">
+      
+      <!-- Anchor for form scroll target -->
+      <div id="calculator-anchor" class="scroll-mt-24">
+        <CalculatorForm />
+      </div>
+
+      <!-- Live Results Area (toggled visible when estimates generate) -->
+      <ResultsList />
+
+    </div>
+
+    <!-- Educational Resource Hub -->
+    <Educational />
+
+    <!-- Frequently Asked Questions -->
+    <FAQ />
+  </main>
+
+  <!-- Footer Nav -->
+  <Footer />
 </Layout>
