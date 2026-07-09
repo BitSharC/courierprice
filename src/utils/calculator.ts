@@ -605,6 +605,20 @@ const INTL_COURIERS: InternationalCourierConfig[] = [
     maxWeightAllowed: 300
   },
   {
+    id: "garudavega-intl",
+    name: "Garudavega International",
+    reliabilityScore: 4.4,
+    tracking: true,
+    insurance: true,
+    pickup: true,
+    baseRateUsd: 12.50,
+    perAdditionalHalfKgRateUsd: 4.20,
+    distanceRatePer2000KmUsd: 1.40,
+    speedFactor: 0.6,
+    minDays: 4,
+    maxWeightAllowed: 150
+  },
+  {
     id: "aramex-intl",
     name: "Aramex International",
     reliabilityScore: 4.3,
