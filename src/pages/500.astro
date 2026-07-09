@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="500 - Server Error | Courier Price Comparison"
+  description="We encountered an internal error. Please try again later or contact support."
+>
+  <Header />
+
+  <main class="flex-grow bg-canvas-soft transition-colors duration-200 flex items-center justify-center py-16 sm:py-24">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center space-y-8">
+      
+      <!-- Interactive 500 Illustration -->
+      <div class="relative flex justify-center items-center">
+        <!-- Background Mesh Glow behind illustration -->
+        <div class="absolute -inset-10 z-0 pointer-events-none overflow-hidden select-none opacity-40">
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-gradient-to-r from-gradient-develop-start via-violet to-gradient-preview-start blur-2xl opacity-60"></div>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center">
+          <!-- Monospace Technical Badge -->
+          <span class="text-xs font-mono font-semibold tracking-widest text-mute bg-canvas border border-hairline px-3 py-1 rounded shadow-level-1 transition-colors duration-200">
+            STATUS: 500_INTERNAL_SERVER_ERROR
+          </span>
+          
+          <!-- Package Stack SVG (Broken cargo line theme) -->
+          <div class="mt-8 mb-6">
+            <svg class="h-28 w-28 text-body dark:text-ink transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+              <rect x="3" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="14" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v4m0 0l-3-3m3 3l3-3m-3 7v1" />
+              <path stroke-dasharray="3,3" stroke-linecap="round" d="M6 14V9a2 2 0 012-2h8a2 2 0 012 2v5" />
+              <circle cx="12" cy="12" r="2.5" fill="var(--color-error)" class="opacity-80 animate-pulse" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Headline: sentence case, period terminated -->
+      <h1 class="display-lg text-ink font-semibold tracking-tight" data-i18n="error-500-heading">
+        Delivery disrupted.
+      </h1>
+
+      <!-- Description -->
+      <p class="body-md text-body max-w-md mx-auto leading-relaxed" data-i18n="error-500-desc">
+        We encountered an internal error. Please try again later or contact support.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <button 
+          id="retry-button"
+          class="button-secondary w-full sm:w-auto shadow-level-2 font-sans flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <svg class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89H18v3" />
+          </svg>
+          <span data-i18n="error-btn-retry">Try Again</span>
+        </button>
+        <a 
+          href="/" 
+          class="button-primary w-full sm:w-auto shadow-level-4 font-sans flex items-center justify-center gap-2"
+        >
+          <span data-i18n="error-btn-home">Return Home</span>
+          <svg class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import { TRANSLATIONS } from '../utils/translations';
+
+  function updateTitle(lang: string) {
+    const titleKey = 'error-500-title';
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][titleKey]) {
+      document.title = TRANSLATIONS[lang][titleKey];
+    }
+  }
+
+  const retryBtn = document.getElementById('retry-button');
+  if (retryBtn) {
+    retryBtn.addEventListener('click', () => {
+      window.location.reload();
+    });
+  }
+
+  const currentLang = localStorage.getItem('lang') || 'en';
+  updateTitle(currentLang);
+
+  window.addEventListener('language-change', (e: any) => {
+    updateTitle(e.detail);
+  });
+</script>

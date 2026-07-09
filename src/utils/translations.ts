@@ -210,7 +210,16 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "footer-col-4-title": "Contact",
     "footer-col-4-link-1": "Contact Us",
     "footer-copyright": "All rights reserved.",
-    "footer-disclaimer": "Designed to simplify courier price comparison globally. All trademarked carrier logos and names are properties of their respective owners."
+    "footer-disclaimer": "Designed to simplify courier price comparison globally. All trademarked carrier logos and names are properties of their respective owners.",
+    "error-404-title": "404 - Page Not Found | Courier Price Comparison",
+    "error-404-heading": "Lost in transit.",
+    "error-404-desc": "The page you are looking for does not exist or has been moved to a new route.",
+    "error-500-title": "500 - Server Error | Courier Price Comparison",
+    "error-500-heading": "Delivery disrupted.",
+    "error-500-desc": "We encountered an internal error. Please try again later or contact support.",
+    "error-btn-home": "Return Home",
+    "error-btn-back": "Go Back",
+    "error-btn-retry": "Try Again"
   },
   hi: {
     // Header
@@ -412,7 +421,16 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "footer-col-4-title": "संपर्क",
     "footer-col-4-link-1": "संपर्क करें",
     "footer-copyright": "सर्वाधिकार सुरक्षित।",
-    "footer-disclaimer": "विश्व स्तर पर कूरियर मूल्य तुलना को आसान बनाने के लिए डिज़ाइन किया गया। सभी ट्रेडमार्क लोगो और नाम उनके संबंधित स्वामियों की संपत्ति हैं।"
+    "footer-disclaimer": "विश्व स्तर पर कूरियर मूल्य तुलना को आसान बनाने के लिए डिज़ाइन किया गया। सभी ट्रेडमार्क लोगो और नाम उनके संबंधित स्वामियों की संपत्ति हैं।",
+    "error-404-title": "404 - पेज नहीं मिला | कूरियर मूल्य तुलना",
+    "error-404-heading": "ट्रांजिट में खो गया।",
+    "error-404-desc": "आप जिस पेज की तलाश कर रहे हैं वह मौजूद नहीं है या किसी नए रूट पर ले जाया गया है।",
+    "error-500-title": "500 - सर्वर त्रुटि | कूरियर मूल्य तुलना",
+    "error-500-heading": "वितरण बाधित हुआ।",
+    "error-500-desc": "हमें एक आंतरिक त्रुटि का सामना करना पड़ा। कृपया बाद में पुनः प्रयास करें या सहायता से संपर्क करें।",
+    "error-btn-home": "होम पेज पर जाएं",
+    "error-btn-back": "पीछे जाएं",
+    "error-btn-retry": "पुनः प्रयास करें"
   },
   es: {
     // Header
@@ -614,7 +632,16 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "footer-col-4-title": "Contacto",
     "footer-col-4-link-1": "Contacto",
     "footer-copyright": "Todos los derechos reservados.",
-    "footer-disclaimer": "Diseñado para simplificar la comparación de precios de mensajería a nivel global. Todos los logotipos y nombres de transportistas comerciales son propiedad de sus respectivos dueños."
+    "footer-disclaimer": "Diseñado para simplificar la comparación de precios de mensajería a nivel global. Todos los logotipos y nombres de transportistas comerciales son propiedad de sus respectivos dueños.",
+    "error-404-title": "404 - Página no encontrada | Comparación de precios de mensajería",
+    "error-404-heading": "Perdido en tránsito.",
+    "error-404-desc": "La página que busca no existe o se ha movido a una nueva ruta.",
+    "error-500-title": "500 - Error del servidor | Comparación de precios de mensajería",
+    "error-500-heading": "Entrega interrumpida.",
+    "error-500-desc": "Hemos detectado un error interno. Inténtelo de nuevo más tarde o póngase en contacto con el servicio de soporte.",
+    "error-btn-home": "Volver al inicio",
+    "error-btn-back": "Atrás",
+    "error-btn-retry": "Intentar de nuevo"
   },
   fr: {
     // Header
@@ -816,7 +843,16 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "footer-col-4-title": "Contact",
     "footer-col-4-link-1": "Contactez-nous",
     "footer-copyright": "Tous droits réservés.",
-    "footer-disclaimer": "Outil conçu pour simplifier la comparaison des tarifs de livraison à l'échelle mondiale. Les marques et logos des transporteurs sont la propriété de leurs détenteurs respectifs."
+    "footer-disclaimer": "Outil conçu pour simplifier la comparaison des tarifs de livraison à l'échelle mondiale. Les marques et logos des transporteurs sont la propriété de leurs détenteurs respectifs.",
+    "error-404-title": "404 - Page non trouvée | Comparateur de tarifs de livraison",
+    "error-404-heading": "Perdu en cours d'acheminement.",
+    "error-404-desc": "La page que vous recherchez n'existe pas ou a été déplacée vers une nouvelle adresse.",
+    "error-500-title": "500 - Erreur du serveur | Comparateur de tarifs de livraison",
+    "error-500-heading": "Livraison perturbée.",
+    "error-500-desc": "Nous avons rencontré une erreur interne. Veuillez réessayer plus tard ou contacter le support.",
+    "error-btn-home": "Retour à l'accueil",
+    "error-btn-back": "Retour",
+    "error-btn-retry": "Réessayer"
   },
   de: {
     // Header
@@ -1018,7 +1054,16 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "footer-col-4-title": "Kontakt",
     "footer-col-4-link-1": "Kontakt",
     "footer-copyright": "Alle Rechte vorbehalten.",
-    "footer-disclaimer": "Entwickelt, um den Preisvergleich von Kurierdiensten weltweit zu vereinfachen. Alle geschützten Logos und Herstellernamen sind Eigentum der jeweiligen Inhaber."
+    "footer-disclaimer": "Entwickelt, um den Preisvergleich von Kurierdiensten weltweit zu vereinfachen. Alle geschützten Logos und Herstellernamen sind Eigentum der jeweiligen Inhaber.",
+    "error-404-title": "404 - Seite nicht gefunden | Kurier-Preisvergleich",
+    "error-404-heading": "Auf dem Transportweg verloren gegangen.",
+    "error-404-desc": "Die von Ihnen gesuchte Seite existiert nicht oder wurde auf eine andere Route verschoben.",
+    "error-500-title": "500 - Serverfehler | Kurier-Preisvergleich",
+    "error-500-heading": "Zustellung unterbrochen.",
+    "error-500-desc": "Es ist ein interner Serverfehler aufgetreten. Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Support.",
+    "error-btn-home": "Zur Startseite",
+    "error-btn-back": "Zurück",
+    "error-btn-retry": "Erneut versuchen"
   },
   ar: {
     // Header
@@ -1220,6 +1265,15 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "footer-col-4-title": "الاتصال",
     "footer-col-4-link-1": "اتصل بنا",
     "footer-copyright": "جميع الحقوق محفوظة.",
-    "footer-disclaimer": "صُمم لتسهيل مقارنة أسعار شركات الشحن عالمياً. جميع الشعارات والأسماء التجارية للناقلين هي ملك لأصحابها المعنيين."
+    "footer-disclaimer": "صُمم لتسهيل مقارنة أسعار شركات الشحن عالمياً. جميع الشعارات والأسماء التجارية للناقلين هي ملك لأصحابها المعنيين.",
+    "error-404-title": "404 - لم يتم العثور على الصفحة | مقارنة أسعار شركات الشحن",
+    "error-404-heading": "فُقِدت أثناء النقل.",
+    "error-404-desc": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها إلى رابط جديد.",
+    "error-500-title": "500 - خطأ في الخادم | مقارنة أسعار شركات الشحن",
+    "error-500-heading": "تعطلت عملية التسليم.",
+    "error-500-desc": "واجهنا خطأً داخلياً في الخادم. يرجى المحاولة مرة أخرى لاحقاً أو الاتصال بالدعم.",
+    "error-btn-home": "العودة للرئيسية",
+    "error-btn-back": "الرجوع للخلف",
+    "error-btn-retry": "إعادة المحاولة"
   }
 };
