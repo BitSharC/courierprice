@@ -96,6 +96,12 @@ body {
   font-feature-settings: "ss01", "ss02";
 }
 
+/* Ensure option dropdowns have readable colors matching the active theme */
+option {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+
 /* Dark mode definitions */
 .dark {
   --color-primary: #ffffff;
