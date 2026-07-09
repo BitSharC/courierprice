@@ -11,7 +11,7 @@ const faqs = [
     a: "Volumetric weight represents the volume of a parcel relative to its physical density. It is calculated using the formula: (Length × Width × Height in cm) / 5000. Courier companies compare this value to the physical scale weight and bill based on whichever weight is larger."
   },
   {
-    q: "Which courier is cheapest?",
+    q: "Which is the cheapest courier?",
     a: "For small domestic parcels, national postal services (like India Post, USPS in the US, Royal Mail in the UK, or Canada Post) are generally the most economical choice, followed by private standard carriers. For heavy or local items, specialized on-demand point-to-point services are usually most cost-effective."
   },
   {
@@ -21,6 +21,74 @@ const faqs = [
   {
     q: "Are these shipping rates guaranteed?",
     a: "No, these estimates are simulated rates generated using the pricing algorithms of global couriers. Actual booking charges might fluctuate based on fuel surcharges, physical measurement checks at hubs, and extra value-added parameters like special packaging or remote location surcharges."
+  },
+  {
+    q: "What is the cost of a 1 kg parcel?",
+    a: "The cost of a 1 kg parcel depends on the service level (standard vs. express) and destination. Domestically, it typically ranges from ₹40 to ₹150 in India, $8 to $20 in the US, and £3 to £10 in the UK. International shipping for 1 kg can range from $20 to $60 depending on the country corridor."
+  },
+  {
+    q: "How much is the courier fee?",
+    a: "A base courier fee is a flat charge applied per booking to cover administrative and handling costs, typically starting around $2 to $5 for domestic shipments, onto which weight and distance surcharges are added."
+  },
+  {
+    q: "How do I send a 100 kg parcel?",
+    a: "Sending a 100 kg parcel is best done via heavy cargo, LTL (Less-Than-Truckload) freight, or professional Packers & Movers. Standard couriers have individual box weight limits (typically 30–35 kg). For 100 kg, you should request a freight or cargo quote which includes palletized shipping or ground truck logistics."
+  },
+  {
+    q: "Which type of courier is best?",
+    a: "The \"best\" type of courier depends on your needs: Express Air is best for urgent, time-sensitive documents or high-value items; Standard Surface/Ground is best for cost-effective delivery of heavier parcels; and Local/Same-day courier services are best for immediate city-wide deliveries."
+  },
+  {
+    q: "What is the price of courier from US to India?",
+    a: "Shipping a parcel from the US to India generally starts around $25 to $45 for a lightweight package (under 0.5 kg) using standard economy services. Express delivery via DHL, FedEx, or UPS for 1 kg typically ranges from $50 to $90, with transit times of 3 to 7 business days."
+  },
+  {
+    q: "What is the price of courier from India to US?",
+    a: "Courier charges from India to the US start around ₹1,200 to ₹2,500 ($15 to $30 USD) for lightweight documents or small parcels using economy international shipping. Express delivery via major private carriers typically costs between ₹3,000 and ₹6,000 for 1 kg."
+  },
+  {
+    q: "What is the price of courier from UK to India?",
+    a: "Courier rates from the UK to India start at approximately £15 to £25 for economy postal/parcel services under 1 kg. Express delivery through private international networks like DHL or UPS ranges from £35 to £65, depending on the speed and exact location."
+  },
+  {
+    q: "What is the price of courier from India to UK?",
+    a: "Shipping a courier from India to the UK starts from ₹1,000 to ₹2,200 for lightweight documents via economy carriers. Standard parcels of 1 kg using express services range from ₹2,500 to ₹5,000 depending on the carrier and priority."
+  },
+  {
+    q: "What is the price of courier?",
+    a: "The price of a courier is calculated dynamically based on three main factors: the parcel's chargeable weight (physical or volumetric, whichever is higher), the distance between origin and destination, and the desired delivery speed (standard ground or express air)."
+  },
+  {
+    q: "What is the price of DTDC courier?",
+    a: "DTDC domestic shipping rates in India start at ₹40 to ₹80 for local/regional documents under 0.5 kg. For heavier packages, DTDC Lite (surface) costs around ₹50 to ₹100 per kg, while DTDC Air (express) starts from ₹100 to ₹250 per kg depending on the destination."
+  },
+  {
+    q: "How much price for 1 kg for courier?",
+    a: "The courier price for a 1 kg package typically starts around ₹60 to ₹120 for domestic ground shipments in India, $10 to $18 in the US, and £4 to £8 in the UK. International 1 kg shipping varies from $30 to $80 depending on the route."
+  },
+  {
+    q: "What is the price of post office courier?",
+    a: "Post office courier services (like Speed Post in India, USPS Ground Advantage, or Royal Mail 2nd Class) are highly economical. Speed Post in India starts at ₹25 to ₹50 for local/domestic delivery under 50g, and scales based on distance, making it one of the most budget-friendly options."
+  },
+  {
+    q: "What is the price of Blue Dart courier?",
+    a: "Blue Dart is a premium express carrier. Domestic air shipping rates for documents start around ₹150 to ₹250. For 1 kg parcels, rates typically range from ₹250 to ₹500 depending on the distance, city tier, and delivery speed."
+  },
+  {
+    q: "What is the price of courier from India to Canada?",
+    a: "International shipping from India to Canada starts from ₹1,500 to ₹2,800 ($25 to $45 CAD) for small envelopes or packages under 0.5 kg. A 1 kg package via standard delivery runs around ₹3,500 to ₹6,000."
+  },
+  {
+    q: "What is the price of courier from Canada to India?",
+    a: "Courier shipping from Canada to India starts at approximately $30 to $50 CAD for economy options under 0.5 kg. Standard express options from major carriers like Canada Post, DHL, or FedEx for a 1 kg box cost between $70 and $110 CAD."
+  },
+  {
+    q: "Which courier service is low price?",
+    a: "National postal systems offer the lowest price globally. In India, India Post (Speed Post/Registered Post) is the cheapest. Among private carriers, DTDC (Surface/Economy), Delhivery (Ground), and Professional Couriers are well-known for low-priced domestic shipping."
+  },
+  {
+    q: "How to price courier service?",
+    a: "Courier service pricing is determined by adding the base booking fee, the weight surcharge (calculated on the higher of actual weight or volumetric weight, which is L × W × H / 5000), the distance zone tariff, and any selected add-ons like insurance or urgent express handling."
   }
 ];
 

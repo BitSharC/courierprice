@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Privacy Policy - Courier Price Comparison"
+  description="Privacy Policy and data practices for courierprice.com. Learn about how we simulate shipping estimates and manage user preferences securely."
+>
+  <Header />
+
+  <main class="flex-grow bg-canvas-soft transition-colors duration-200">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      
+      <!-- Page Hero Header -->
+      <div class="border-b border-hairline pb-8 mb-12">
+        <span class="caption-mono uppercase tracking-wider text-mute">Information Security</span>
+        <h1 class="display-lg text-ink font-semibold mt-2">Privacy Policy.</h1>
+        <p class="body-lg text-body mt-3">
+          Last updated: July 9, 2026. Learn about how courierprice.com handles user inputs, shipping parameters, and analytics.
+        </p>
+      </div>
+
+      <!-- Content Sections -->
+      <div class="space-y-12 text-ink">
+        
+        <!-- Section 1 -->
+        <section class="space-y-4">
+          <h2 class="display-sm text-ink font-semibold">1. Commitment to Privacy.</h2>
+          <p class="body-md text-body leading-relaxed">
+            At courierprice.com, we are committed to providing transparent, accurate courier price estimates without compromising your personal information. Because our platform functions as a price simulator and comparison tool, we do not require you to register an account or input personal identity data to use the core calculator.
+          </p>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="space-y-4">
+          <h2 class="display-sm text-ink font-semibold">2. Data We Collect & Store.</h2>
+          <p class="body-md text-body leading-relaxed">
+            We collect non-personal parameters required to calculate shipping rates, including:
+          </p>
+          <ul class="list-disc pl-5 space-y-2 body-md text-body">
+            <li><strong>Shipment Details:</strong> Origin country, pickup state/district, destination country/state/district, and package weight/dimensions.</li>
+            <li><strong>Add-on Preferences:</strong> Options selected for transit insurance, express delivery, or door pickup.</li>
+            <li><strong>Local Settings:</strong> Your language selection and dark/light visual theme preferences, which are stored securely on your browser via <code class="code bg-canvas-soft-2 px-1.5 py-0.5 rounded shadow-level-1">localStorage</code>.</li>
+          </ul>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="space-y-4">
+          <h2 class="display-sm text-ink font-semibold">3. Third-Party Trademarks & Carrier Logos.</h2>
+          <p class="body-md text-body leading-relaxed">
+            All carrier names, trademarks, and logos (such as India Post, Blue Dart, Professional Couriers, DTDC, Delhivery, Garudavega, and others) displayed on this website are properties of their respective owners. courierprice.com is an independent rate comparison engine and has no direct affiliation, endorsement, or commercial association with these carriers unless explicitly specified.
+          </p>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="space-y-4">
+          <h2 class="display-sm text-ink font-semibold">4. Analytical Data.</h2>
+          <p class="body-md text-body leading-relaxed">
+            We may use aggregate, anonymous analytical tools to measure website performance, user interaction levels, and general geographical distributions. This information helps us optimize calculations and server response speeds without tracking individual users.
+          </p>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="space-y-4">
+          <h2 class="display-sm text-ink font-semibold">5. Contact Information.</h2>
+          <p class="body-md text-body leading-relaxed">
+            If you have questions about this Privacy Policy or how your local browser preferences are stored, please feel free to visit our <a href="/contact" class="text-link hover:underline">Contact Us</a> page or email us at <a href="mailto:support@courierprice.com" class="text-link hover:underline">support@courierprice.com</a>.
+          </p>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

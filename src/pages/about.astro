@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="About Us - Courier Price Comparison"
+  description="Learn about courierprice.com, our mission of transparency, shipping calculation accuracy, and how we help users globally compare courier rates."
+>
+  <Header />
+
+  <main class="flex-grow bg-canvas-soft transition-colors duration-200">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-16">
+      
+      <!-- Page Hero Header -->
+      <div class="border-b border-hairline pb-8">
+        <span class="caption-mono uppercase tracking-wider text-mute">Our Mission</span>
+        <h1 class="display-lg text-ink font-semibold mt-2">About courierprice.com.</h1>
+        <p class="body-lg text-body mt-3">
+          We believe comparing shipping rates should be simple, transparent, and instant. We eliminate the frustration of checking multiple carrier sites one by one.
+        </p>
+      </div>
+
+      <!-- Core Pillars (Grid) -->
+      <section class="space-y-6">
+        <h2 class="caption-mono uppercase tracking-wider text-mute">Core Principles</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Pillar 1 -->
+          <div class="bg-canvas border border-hairline rounded-md p-6 shadow-level-2 transition-colors duration-200">
+            <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-1 rounded">01 / INTEGRITY</span>
+            <h3 class="display-sm text-ink font-semibold mt-4">Transparency.</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed">
+              We break down estimate structures, separating base booking fees, volumetric surcharges, insurance additions, and taxes, so there are no surprises.
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="bg-canvas border border-hairline rounded-md p-6 shadow-level-2 transition-colors duration-200">
+            <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-1 rounded">02 / SIMULATION</span>
+            <h3 class="display-sm text-ink font-semibold mt-4">Accuracy.</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed">
+              Our proprietary simulation models closely mimic calculations used by top domestic and global carriers to give you highly realistic shipping rates.
+            </p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="bg-canvas border border-hairline rounded-md p-6 shadow-level-2 transition-colors duration-200">
+            <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-1 rounded">03 / VELOCITY</span>
+            <h3 class="display-sm text-ink font-semibold mt-4">Speed.</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed">
+              No registration requirements, no log-in loops, and no persistent marketing notifications. Configure your route and get rates in under 30 seconds.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detailed Story -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-hairline">
+        <div>
+          <h2 class="display-sm text-ink font-semibold">Our Story.</h2>
+        </div>
+        <div class="md:col-span-2 space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            courierprice.com was created by a small group of developers and logistics enthusiasts who realized that volumetric weight calculations (dimensional billing) are incredibly confusing for everyday shippers. Often, packages that are large but lightweight end up costing double or triple their physical weight estimate due to packaging size.
+          </p>
+          <p class="body-md text-body leading-relaxed">
+            By building an interactive calculator that accounts for volumetric parameters, distance, category surcharges, and optional add-ons, we put clear calculations back into the hands of the sender. We hope to simplify shipping decisions for thousands of e-commerce owners, families sending care packages, and businesses globally.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

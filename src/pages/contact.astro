@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Contact Us - Courier Price Comparison"
+  description="Contact courierprice.com. Send a message for calculator feedback, carrier inquiries, or support queries."
+>
+  <Header />
+
+  <main class="flex-grow bg-canvas-soft transition-colors duration-200">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      
+      <!-- Page Hero Header -->
+      <div class="border-b border-hairline pb-8 mb-12">
+        <span class="caption-mono uppercase tracking-wider text-mute">Support Channel</span>
+        <h1 class="display-lg text-ink font-semibold mt-2">Contact Us.</h1>
+        <p class="body-lg text-body mt-3">
+          Have feedback on our calculator estimates, found a rate discrepancy, or want to suggest a new carrier? Drop us a message.
+        </p>
+      </div>
+
+      <!-- Layout Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+        
+        <!-- Info Column -->
+        <div class="space-y-6">
+          <div>
+            <h2 class="caption-mono uppercase tracking-wider text-mute">Direct Email</h2>
+            <a href="mailto:support@courierprice.com" class="body-md text-ink font-medium hover:text-link transition-colors block mt-1.5">
+              support@courierprice.com
+            </a>
+          </div>
+          <div>
+            <h2 class="caption-mono uppercase tracking-wider text-mute">Response Standard</h2>
+            <p class="body-sm text-body mt-1.5 leading-relaxed">
+              We typically review and respond to inquiries within 24 business hours. Feedback about specific calculator routes helps us improve simulation formulas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Form Column -->
+        <div class="md:col-span-2">
+          <div id="contact-container" class="bg-canvas border border-hairline rounded-md p-6 sm:p-8 shadow-level-3 transition-colors duration-200">
+            <!-- Form State -->
+            <form id="contact-form" class="space-y-5">
+              <!-- Grid name/email -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <label for="contact-name" class="body-sm-strong text-ink font-medium">Your Name</label>
+                  <input 
+                    type="text" 
+                    id="contact-name" 
+                    name="name" 
+                    required 
+                    placeholder="Enter your name" 
+                    class="form-input w-full"
+                  />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label for="contact-email" class="body-sm-strong text-ink font-medium">Email Address</label>
+                  <input 
+                    type="email" 
+                    id="contact-email" 
+                    name="email" 
+                    required 
+                    placeholder="you@example.com" 
+                    class="form-input w-full"
+                  />
+                </div>
+              </div>
+
+              <!-- Subject -->
+              <div class="flex flex-col gap-1.5">
+                <label for="contact-subject" class="body-sm-strong text-ink font-medium">Subject</label>
+                <input 
+                  type="text" 
+                  id="contact-subject" 
+                  name="subject" 
+                  required 
+                  placeholder="Inquiry subject" 
+                  class="form-input w-full"
+                />
+              </div>
+
+              <!-- Message -->
+              <div class="flex flex-col gap-1.5">
+                <label for="contact-message" class="body-sm-strong text-ink font-medium">Message</label>
+                <textarea 
+                  id="contact-message" 
+                  name="message" 
+                  required 
+                  rows="4" 
+                  placeholder="Type your message here..." 
+                  class="form-input w-full min-h-[120px] py-2 resize-none"
+                ></textarea>
+              </div>
+
+              <!-- Error Box -->
+              <div id="form-error" class="hidden text-sm text-error bg-error-soft border border-error/20 p-3 rounded-md transition-colors duration-200"></div>
+
+              <!-- Button -->
+              <button 
+                type="submit" 
+                class="button-primary w-full mt-2 font-medium"
+              >
+                Send Message
+              </button>
+            </form>
+
+            <!-- Success State (hidden initially) -->
+            <div id="contact-success" class="hidden py-8 text-center space-y-4 animate-fade-in">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-link-bg-soft text-link">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="space-y-2">
+                <h3 class="display-sm text-ink font-semibold">Message sent.</h3>
+                <p class="body-sm text-body max-w-sm mx-auto">
+                  Thank you for reaching out! We have received your inquiry and will respond to your email as soon as possible.
+                </p>
+              </div>
+              <button 
+                id="reset-form-btn" 
+                class="button-secondary-sm mx-auto"
+              >
+                Send another message
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const containerForm = document.getElementById('contact-form');
+  const successState = document.getElementById('contact-success');
+  const errorBox = document.getElementById('form-error');
+  const resetBtn = document.getElementById('reset-form-btn');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (errorBox) errorBox.classList.add('hidden');
+
+    // Simulate simple client side validation
+    const name = (document.getElementById('contact-name') as HTMLInputElement)?.value.trim();
+    const email = (document.getElementById('contact-email') as HTMLInputElement)?.value.trim();
+    const subject = (document.getElementById('contact-subject') as HTMLInputElement)?.value.trim();
+    const message = (document.getElementById('contact-message') as HTMLInputElement)?.value.trim();
+
+    if (!name || !email || !subject || !message) {
+      if (errorBox) {
+        errorBox.textContent = 'Please fill out all required fields.';
+        errorBox.classList.remove('hidden');
+      }
+      return;
+    }
+
+    // Mock successful submission (no backend needed for corporate form)
+    containerForm?.classList.add('hidden');
+    successState?.classList.remove('hidden');
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    form?.reset();
+    successState?.classList.add('hidden');
+    containerForm?.classList.remove('hidden');
+  });
+</script>
