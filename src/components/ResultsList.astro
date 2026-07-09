@@ -99,8 +99,8 @@
     }, 0);
     
     routeStr = input.type === 'domestic'
-      ? `${input.pickupCity} to ${input.deliveryCity}`
-      : `${input.pickupCity} to ${input.deliveryCountry}`;
+      ? `${input.pickupDistrict} (${input.pickupState}) to ${input.deliveryDistrict} (${input.deliveryState})`
+      : `${input.pickupDistrict} (${input.pickupState}) to ${input.deliveryCountry}`;
 
     // Calculate estimates
     currentEstimates = getEstimates(input);

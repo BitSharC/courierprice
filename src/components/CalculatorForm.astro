@@ -1,6 +1,7 @@
 ---
 // src/components/CalculatorForm.astro
-import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
+import { INDIA_STATES } from '../utils/indiaData';
+import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 ---
 
 <div id="calculator" class="w-full bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-3 transition-colors duration-200">
@@ -35,59 +36,104 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
 
     <!-- Route Parameters Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Pickup City (Always required, starting in India) -->
-      <div class="flex flex-col gap-1.5">
-        <label for="pickupCity" class="body-sm-strong text-ink">Pickup City (India)</label>
-        <div class="relative">
-          <select id="pickupCity" name="pickupCity" required class="form-input w-full appearance-none pr-8">
-            <option value="" disabled selected>Select starting city</option>
-            {Object.keys(CITIES).map(city => (
-              <option value={city}>{city} ({CITIES[city].state})</option>
-            ))}
-          </select>
-          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
+      
+      <!-- Pickup Location (Always in India) -->
+      <div class="space-y-4">
+        <h3 class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold">Pickup Location (India)</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- State -->
+          <div class="flex flex-col gap-1.5">
+            <label for="pickupState" class="caption text-mute text-xs font-semibold">State / UT</label>
+            <div class="relative">
+              <select id="pickupState" name="pickupState" required class="form-input w-full appearance-none pr-8">
+                <option value="" disabled selected>Select state</option>
+                {INDIA_STATES.map(s => (
+                  <option value={s.name}>{s.name}</option>
+                ))}
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!-- District -->
+          <div class="flex flex-col gap-1.5">
+            <label for="pickupDistrict" class="caption text-mute text-xs font-semibold">District</label>
+            <div class="relative">
+              <select id="pickupDistrict" name="pickupDistrict" required class="form-input w-full appearance-none pr-8" disabled>
+                <option value="" disabled selected>Select district</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Destination City (Domestic only) -->
-      <div id="delivery-city-container" class="flex flex-col gap-1.5">
-        <label for="deliveryCity" class="body-sm-strong text-ink">Delivery City</label>
-        <div class="relative">
-          <select id="deliveryCity" name="deliveryCity" required class="form-input w-full appearance-none pr-8">
-            <option value="" disabled selected>Select destination city</option>
-            {Object.keys(CITIES).map(city => (
-              <option value={city}>{city} ({CITIES[city].state})</option>
-            ))}
-          </select>
-          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
+      <!-- Destination Location -->
+      <div class="space-y-4">
+        <h3 id="delivery-title" class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold">Delivery Location (Domestic)</h3>
+        
+        <!-- Domestic Delivery State/District Inputs -->
+        <div id="delivery-city-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- State -->
+          <div class="flex flex-col gap-1.5">
+            <label for="deliveryState" class="caption text-mute text-xs font-semibold">State / UT</label>
+            <div class="relative">
+              <select id="deliveryState" name="deliveryState" required class="form-input w-full appearance-none pr-8">
+                <option value="" disabled selected>Select state</option>
+                {INDIA_STATES.map(s => (
+                  <option value={s.name}>{s.name}</option>
+                ))}
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!-- District -->
+          <div class="flex flex-col gap-1.5">
+            <label for="deliveryDistrict" class="caption text-mute text-xs font-semibold">District</label>
+            <div class="relative">
+              <select id="deliveryDistrict" name="deliveryDistrict" required class="form-input w-full appearance-none pr-8" disabled>
+                <option value="" disabled selected>Select district</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- Destination Country (International only) -->
+        <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden">
+          <label for="deliveryCountry" class="caption text-mute text-xs font-semibold">Destination Country</label>
+          <div class="relative">
+            <select id="deliveryCountry" name="deliveryCountry" class="form-input w-full appearance-none pr-8">
+              <option value="" disabled selected>Select destination country</option>
+              {Object.keys(COUNTRIES).map(country => (
+                <option value={country}>{country}</option>
+              ))}
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Destination Country (International only) -->
-      <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden">
-        <label for="deliveryCountry" class="body-sm-strong text-ink">Destination Country</label>
-        <div class="relative">
-          <select id="deliveryCountry" name="deliveryCountry" class="form-input w-full appearance-none pr-8">
-            <option value="" disabled selected>Select destination country</option>
-            {Object.keys(COUNTRIES).map(country => (
-              <option value={country}>{country}</option>
-            ))}
-          </select>
-          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Parcels Section -->
@@ -248,6 +294,7 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
 </div>
 
 <script>
+  import { INDIA_STATES } from '../utils/indiaData';
   import { CATEGORIES } from '../utils/calculator';
 
   // Toggle Domestic/International Tab Switch
@@ -256,8 +303,10 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
   const shippingType = document.getElementById('shipping-type') as HTMLInputElement | null;
   const deliveryCityContainer = document.getElementById('delivery-city-container');
   const deliveryCountryContainer = document.getElementById('delivery-country-container');
-  const deliveryCitySelect = document.getElementById('deliveryCity') as HTMLSelectElement | null;
+  const deliveryStateSelect = document.getElementById('deliveryState') as HTMLSelectElement | null;
+  const deliveryDistrictSelect = document.getElementById('deliveryDistrict') as HTMLSelectElement | null;
   const deliveryCountrySelect = document.getElementById('deliveryCountry') as HTMLSelectElement | null;
+  const deliveryTitle = document.getElementById('delivery-title');
 
   tabDomestic?.addEventListener('click', () => {
     if (shippingType) shippingType.value = "domestic";
@@ -269,9 +318,11 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
     // Visibility
     deliveryCityContainer?.classList.remove('hidden');
     deliveryCountryContainer?.classList.add('hidden');
+    if (deliveryTitle) deliveryTitle.textContent = "Delivery Location (Domestic)";
     
     // Validation constraints
-    if (deliveryCitySelect) deliveryCitySelect.required = true;
+    if (deliveryStateSelect) deliveryStateSelect.required = true;
+    if (deliveryDistrictSelect) deliveryDistrictSelect.required = true;
     if (deliveryCountrySelect) {
       deliveryCountrySelect.required = false;
       deliveryCountrySelect.value = "";
@@ -288,13 +339,55 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
     // Visibility
     deliveryCityContainer?.classList.add('hidden');
     deliveryCountryContainer?.classList.remove('hidden');
+    if (deliveryTitle) deliveryTitle.textContent = "Delivery Location (International)";
 
     // Validation constraints
-    if (deliveryCitySelect) {
-      deliveryCitySelect.required = false;
-      deliveryCitySelect.value = "";
+    if (deliveryStateSelect) {
+      deliveryStateSelect.required = false;
+      deliveryStateSelect.value = "";
+    }
+    if (deliveryDistrictSelect) {
+      deliveryDistrictSelect.required = false;
+      deliveryDistrictSelect.value = "";
+      deliveryDistrictSelect.disabled = true;
     }
     if (deliveryCountrySelect) deliveryCountrySelect.required = true;
+  });
+
+  // Dynamic State -> District selection
+  const pickupStateSelect = document.getElementById('pickupState') as HTMLSelectElement | null;
+  const pickupDistrictSelect = document.getElementById('pickupDistrict') as HTMLSelectElement | null;
+
+  function updateDistricts(stateSelect: HTMLSelectElement, districtSelect: HTMLSelectElement, placeholderText: string) {
+    const selectedState = stateSelect.value;
+    const stateObj = INDIA_STATES.find(s => s.name === selectedState);
+    
+    // Clear districts
+    districtSelect.innerHTML = `<option value="" disabled selected>${placeholderText}</option>`;
+    
+    if (stateObj && stateObj.districts.length > 0) {
+      districtSelect.disabled = false;
+      stateObj.districts.forEach(dist => {
+        const option = document.createElement('option');
+        option.value = dist;
+        option.textContent = dist;
+        districtSelect.appendChild(option);
+      });
+    } else {
+      districtSelect.disabled = true;
+    }
+  }
+
+  pickupStateSelect?.addEventListener('change', () => {
+    if (pickupStateSelect && pickupDistrictSelect) {
+      updateDistricts(pickupStateSelect, pickupDistrictSelect, 'Select district');
+    }
+  });
+
+  deliveryStateSelect?.addEventListener('change', () => {
+    if (deliveryStateSelect && deliveryDistrictSelect) {
+      updateDistricts(deliveryStateSelect, deliveryDistrictSelect, 'Select district');
+    }
   });
 
   // Advanced settings toggle
@@ -376,7 +469,7 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <!-- Parcel Weight -->
         <div class="flex flex-col gap-1.5">
-          <label class="body-sm-strong text-ink text-xs">Parcel Weight</label>
+          <label class="body-sm-strong text-ink text-xs font-semibold">Parcel Weight</label>
           <div class="flex">
             <input 
               type="number" 
@@ -399,7 +492,7 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
 
         <!-- Parcel Category -->
         <div class="flex flex-col gap-1.5">
-          <label class="body-sm-strong text-ink text-xs">Parcel Category</label>
+          <label class="body-sm-strong text-ink text-xs font-semibold">Parcel Category</label>
           <div class="relative">
             <select name="parcelCategory" required class="form-input w-full appearance-none pr-8">
               <option value="" disabled selected>Select category</option>
@@ -416,7 +509,7 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
 
       <!-- Dimensions -->
       <div class="space-y-2">
-        <span class="body-sm-strong text-ink text-xs block">Dimensions (Optional - For Volumetric Weight)</span>
+        <span class="body-sm-strong text-ink text-xs block font-semibold">Dimensions (Optional - For Volumetric Weight)</span>
         <div class="grid grid-cols-3 gap-3">
           <div class="flex flex-col gap-1">
             <label class="caption text-mute text-xs">Length (cm)</label>
@@ -479,8 +572,10 @@ import { CITIES, CATEGORIES, COUNTRIES } from '../utils/calculator';
     // Package shipping form values
     const data = {
       type: (formData.get('type') as 'domestic' | 'international') || 'domestic',
-      pickupCity: formData.get('pickupCity') as string,
-      deliveryCity: formData.get('deliveryCity') as string || undefined,
+      pickupState: formData.get('pickupState') as string,
+      pickupDistrict: formData.get('pickupDistrict') as string,
+      deliveryState: formData.get('deliveryState') as string || undefined,
+      deliveryDistrict: formData.get('deliveryDistrict') as string || undefined,
       deliveryCountry: formData.get('deliveryCountry') as string || undefined,
       parcels: parcels,
       insurance: formData.get('insurance') === 'on',

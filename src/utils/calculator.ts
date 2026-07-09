@@ -1,27 +1,6 @@
 // src/utils/calculator.ts
 
-// Coordinates for major Indian cities to calculate relative distances (lat/lng-based)
-export interface City {
-  name: string;
-  state: string;
-  lat: number;
-  lng: number;
-}
-
-export const CITIES: Record<string, City> = {
-  "Mumbai": { name: "Mumbai", state: "Maharashtra", lat: 19.0760, lng: 72.8777 },
-  "Delhi": { name: "Delhi", state: "Delhi", lat: 28.6139, lng: 77.2090 },
-  "Bengaluru": { name: "Bengaluru", state: "Karnataka", lat: 12.9716, lng: 77.5946 },
-  "Pune": { name: "Pune", state: "Maharashtra", lat: 18.5204, lng: 73.8567 },
-  "Kolkata": { name: "Kolkata", state: "West Bengal", lat: 22.5726, lng: 88.3639 },
-  "Chennai": { name: "Chennai", state: "Tamil Nadu", lat: 13.0827, lng: 80.2707 },
-  "Hyderabad": { name: "Hyderabad", state: "Telangana", lat: 17.3850, lng: 78.4867 },
-  "Ahmedabad": { name: "Ahmedabad", state: "Gujarat", lat: 23.0225, lng: 72.5714 },
-  "Jammu": { name: "Jammu", state: "Jammu and Kashmir", lat: 32.7266, lng: 74.8570 },
-  "Guwahati": { name: "Guwahati", state: "Assam", lat: 26.1445, lng: 91.7362 },
-  "Patna": { name: "Patna", state: "Bihar", lat: 25.5941, lng: 85.1376 },
-  "Jaipur": { name: "Jaipur", state: "Rajasthan", lat: 26.9124, lng: 75.7873 }
-};
+import { INDIA_STATES } from './indiaData';
 
 // Supported international countries with zone pricing factor and distance in km
 export interface Country {
@@ -66,8 +45,10 @@ export interface ParcelInput {
 
 export interface ShippingInput {
   type: "domestic" | "international";
-  pickupCity: string;
-  deliveryCity?: string;      // empty if international
+  pickupState: string;
+  pickupDistrict: string;
+  deliveryState?: string;      // empty if international
+  deliveryDistrict?: string;   // empty if international
   deliveryCountry?: string;   // empty if domestic
   parcels: ParcelInput[];
   insurance: boolean;
@@ -324,9 +305,18 @@ const INTL_COURIER_CONFIGS: IntlCourierConfig[] = [
   }
 ];
 
+function isMetroDistrict(state: string, district: string): boolean {
+  const metros = [
+    "Mumbai City", "Mumbai Suburban", "Pune", "Thane",
+    "New Delhi", "Central Delhi", "South Delhi", "West Delhi", "North Delhi", "East Delhi", "South West Delhi", "South East Delhi", "North West Delhi", "North East Delhi", "Shahdara",
+    "Bengaluru Urban", "Chennai", "Kolkata", "Hyderabad"
+  ];
+  return metros.includes(district) || state === "Delhi (NCT)";
+}
+
 export function getEstimates(input: ShippingInput): CourierEstimate[] {
-  const pickup = CITIES[input.pickupCity];
-  if (!pickup) return [];
+  const pickupStateObj = INDIA_STATES.find(s => s.name === input.pickupState);
+  if (!pickupStateObj) return [];
 
   // Determine destination
   let isInternational = input.type === "international";
@@ -343,21 +333,31 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
     zoneFactor = country.zoneFactor;
     zone = "INTERNATIONAL";
   } else {
-    if (!input.deliveryCity) return [];
-    const delivery = CITIES[input.deliveryCity];
-    if (!delivery) return [];
-    distance = calculateDistance(pickup.lat, pickup.lng, delivery.lat, delivery.lng);
-    isSameCity = input.pickupCity === input.deliveryCity;
+    if (!input.deliveryState || !input.deliveryDistrict) return [];
+    const deliveryStateObj = INDIA_STATES.find(s => s.name === input.deliveryState);
+    if (!deliveryStateObj) return [];
 
-    const metroList = ["Mumbai", "Delhi", "Bengaluru", "Chennai", "Kolkata", "Hyderabad", "Pune"];
+    isSameCity = input.pickupState === input.deliveryState && input.pickupDistrict === input.deliveryDistrict;
+
     if (isSameCity) {
+      distance = 10;
       zone = "LOCAL";
-    } else if (metroList.includes(input.pickupCity) && metroList.includes(input.deliveryCity)) {
-      zone = "METRO";
-    } else if (pickup.state === delivery.state) {
+    } else if (input.pickupState === input.deliveryState) {
+      distance = 180; // standard intra-state distance
       zone = "REGIONAL";
     } else {
-      zone = "NATIONAL";
+      // Inter-state
+      distance = calculateDistance(pickupStateObj.lat, pickupStateObj.lng, deliveryStateObj.lat, deliveryStateObj.lng);
+      // Floor it to at least 150km for adjacent/close states to prevent unrealistically low distance rates
+      if (distance < 50) {
+        distance = 150;
+      }
+      
+      if (isMetroDistrict(input.pickupState, input.pickupDistrict) && isMetroDistrict(input.deliveryState, input.deliveryDistrict)) {
+        zone = "METRO";
+      } else {
+        zone = "NATIONAL";
+      }
     }
   }
 
