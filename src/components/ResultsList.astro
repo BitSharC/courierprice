@@ -7,8 +7,8 @@
   <!-- Section Title -->
   <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-hairline pb-4 transition-colors duration-200">
     <div>
-      <h2 class="display-lg text-ink font-semibold">Available Options.</h2>
-      <p class="body-sm text-body mt-1">Rates are estimates based on standard courier calculations.</p>
+      <h2 class="display-lg text-ink font-semibold" data-i18n="results-title">Available Options.</h2>
+      <p class="body-sm text-body mt-1" data-i18n="results-subtitle">Rates are estimates based on standard courier calculations.</p>
     </div>
     
     <!-- Sorting buttons -->
@@ -17,6 +17,7 @@
         type="button" 
         id="sort-price" 
         class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight transition-colors cursor-pointer bg-primary text-on-primary"
+        data-i18n="results-sort-price"
       >
         Lowest Price
       </button>
@@ -24,6 +25,7 @@
         type="button" 
         id="sort-speed" 
         class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
+        data-i18n="results-sort-speed"
       >
         Fastest Delivery
       </button>
@@ -31,6 +33,7 @@
         type="button" 
         id="sort-rating" 
         class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
+        data-i18n="results-sort-rating"
       >
         Best Rated
       </button>
@@ -49,7 +52,7 @@
         </svg>
       </div>
       <div>
-        <h3 class="body-md-strong text-ink">Smart recommendation</h3>
+        <h3 class="body-md-strong text-ink" data-i18n="results-smart-rec">Smart recommendation</h3>
         <p id="recommendation-text" class="body-sm text-body mt-1 leading-relaxed">
           Comparing rates for your shipment...
         </p>
@@ -65,6 +68,8 @@
 
 <script>
   import { getEstimates, CATEGORIES, type CourierEstimate, type ShippingInput } from '../utils/calculator';
+  import { TRANSLATIONS } from '../utils/translations';
+  import { COUNTRIES_DATA } from '../utils/countryData';
 
   // Component State
   let currentEstimates: CourierEstimate[] = [];
@@ -85,6 +90,23 @@
   let totalActualWeight = 0;
   let routeStr = '';
 
+  function getLang() {
+    return localStorage.getItem('lang') || 'en';
+  }
+
+  // Localized badge texts helper
+  const BADGES_TRANSLATIONS: Record<string, Record<string, string>> = {
+    cheapest: {
+      en: "Cheapest", hi: "सबसे सस्ता", es: "Más barato", fr: "Moins cher", de: "Günstigste", ar: "الأرخص"
+    },
+    fastest: {
+      en: "Fastest", hi: "सबसे तेज़", es: "Más rápido", fr: "Plus rapide", de: "Schnellste", ar: "الأسرع"
+    },
+    value: {
+      en: "Best Value", hi: "सर्वोत्तम मूल्य", es: "Mejor valor", fr: "Meilleur rapport q/p", de: "Beste Wahl", ar: "أفضل قيمة"
+    }
+  };
+
   // Listen to calculations event
   window.addEventListener('calculate-shipping', (event: any) => {
     const input = event.detail as ShippingInput;
@@ -98,9 +120,19 @@
       return sum + w;
     }, 0);
     
-    routeStr = input.type === 'domestic'
-      ? `${input.pickupDistrict} (${input.pickupState}) to ${input.deliveryDistrict} (${input.deliveryState})`
-      : `${input.pickupDistrict} (${input.pickupState}) to ${input.deliveryCountry}`;
+    // Construct localized route representation
+    const pickupCountryName = COUNTRIES_DATA[input.pickupCountry]?.name || input.pickupCountry;
+    const deliveryCountryName = COUNTRIES_DATA[input.deliveryCountry]?.name || input.deliveryCountry;
+
+    const pickupLoc = input.pickupCountry === 'IN' 
+      ? `${input.pickupDistrict}, ${input.pickupState}` 
+      : `${input.pickupState}, ${pickupCountryName}`;
+      
+    const deliveryLoc = input.deliveryCountry === 'IN'
+      ? `${input.deliveryDistrict}, ${input.deliveryState}`
+      : `${input.deliveryState}, ${deliveryCountryName}`;
+
+    routeStr = `${pickupLoc} ➔ ${deliveryLoc}`;
 
     // Calculate estimates
     currentEstimates = getEstimates(input);
@@ -115,6 +147,27 @@
     
     // Show sections
     resultsSection?.classList.remove('hidden');
+  });
+
+  // Re-render immediately on language switch
+  window.addEventListener('language-change', () => {
+    if (currentInput) {
+      // Re-evaluate route string with potentially translated terms if necessary
+      const pickupCountryName = COUNTRIES_DATA[currentInput.pickupCountry]?.name || currentInput.pickupCountry;
+      const deliveryCountryName = COUNTRIES_DATA[currentInput.deliveryCountry]?.name || currentInput.deliveryCountry;
+
+      const pickupLoc = currentInput.pickupCountry === 'IN' 
+        ? `${currentInput.pickupDistrict}, ${currentInput.pickupState}` 
+        : `${currentInput.pickupState}, ${pickupCountryName}`;
+        
+      const deliveryLoc = currentInput.deliveryCountry === 'IN'
+        ? `${currentInput.deliveryDistrict}, ${currentInput.deliveryState}`
+        : `${currentInput.deliveryState}, ${deliveryCountryName}`;
+
+      routeStr = `${pickupLoc} ➔ ${deliveryLoc}`;
+
+      renderResults();
+    }
   });
 
   // Sorting Listeners
@@ -174,6 +227,7 @@
   function generateRecommendation() {
     if (!currentInput || currentEstimates.length === 0) return '';
 
+    const lang = getLang();
     const cheapest = [...currentEstimates].sort((a, b) => a.estimatedPrice - b.estimatedPrice)[0];
     const fastest = [...currentEstimates].sort((a, b) => a.estimatedDays - b.estimatedDays)[0];
     
@@ -184,42 +238,76 @@
       return valB - valA;
     })[0];
 
-    const weightStr = `${totalParcelsCount} ${totalParcelsCount === 1 ? 'item' : 'items'} (${totalActualWeight.toFixed(2)} kg)`;
+    const currencySymbol = cheapest.currencySymbol;
+    const parcelCountTrans = TRANSLATIONS[lang]?.[totalParcelsCount === 1 ? 'results-parcel-count' : 'results-parcels-count'] || (totalParcelsCount === 1 ? 'parcel' : 'parcels');
+    const weightStr = `${totalParcelsCount} ${parcelCountTrans} (${totalActualWeight.toFixed(2)} kg)`;
     const pathStr = routeStr;
 
-    // Dynamic messaging
+    // Direct match: cheapest is also fastest
     if (cheapest.id === fastest.id) {
-      return `For your <strong>${weightStr}</strong> shipment from <strong>${pathStr}</strong>, <strong>${cheapest.name}</strong> is both the fastest and cheapest option available, offering superb value at ₹${cheapest.estimatedPrice} in ${cheapest.estimatedDays} days.`;
+      let tpl = TRANSLATIONS[lang]?.[`results-rec-both`] || "For your {weight} shipment from {route}, {name} is both the fastest and cheapest option available, offering superb value at {price} in {days} days.";
+      return tpl
+        .replace('{weight}', `<strong>${weightStr}</strong>`)
+        .replace('{route}', `<strong>${pathStr}</strong>`)
+        .replace('{name}', `<strong>${cheapest.name}</strong>`)
+        .replace('{price}', `${currencySymbol}${cheapest.estimatedPrice}`)
+        .replace('{days}', `${cheapest.estimatedDays}`);
     }
     
+    // Sorted by Speed priority
     if (currentSort === 'speed') {
-      return `If delivery time is critical, <strong>${fastest.name}</strong> delivers in <strong>${fastest.estimatedDays} days</strong> for ₹${fastest.estimatedPrice}. Otherwise, you can save ₹${fastest.estimatedPrice - cheapest.estimatedPrice} by choosing ${cheapest.name}.`;
+      let tpl = TRANSLATIONS[lang]?.[`results-rec-speed`] || "If delivery time is critical, {name} delivers in {days} days for {price}. Otherwise, you can save {diff} by choosing {cheapest}.";
+      const diffVal = Math.round((fastest.estimatedPrice - cheapest.estimatedPrice) * 100) / 100;
+      return tpl
+        .replace('{name}', `<strong>${fastest.name}</strong>`)
+        .replace('{days}', `${fastest.estimatedDays}`)
+        .replace('{price}', `${currencySymbol}${fastest.estimatedPrice}`)
+        .replace('{diff}', `${currencySymbol}${diffVal}`)
+        .replace('{cheapest}', `${cheapest.name}`);
     }
 
-    return `For your <strong>${weightStr}</strong> shipment from <strong>${pathStr}</strong>, <strong>${bestValue.name}</strong> provides the best balance, delivering in <strong>${bestValue.estimatedDays} days</strong> for <strong>₹${bestValue.estimatedPrice}</strong>. For the absolute lowest price, choose <strong>${cheapest.name}</strong> at ₹${cheapest.estimatedPrice}.`;
+    // Default value preference recommendation
+    let tpl = TRANSLATIONS[lang]?.[`results-rec-value`] || "For your {weight} shipment from {route}, {name} provides the best balance, delivering in {days} days for {price}. For the absolute lowest price, choose {cheapest} at {cheapestPrice}.";
+    return tpl
+      .replace('{weight}', `<strong>${weightStr}</strong>`)
+      .replace('{route}', `<strong>${pathStr}</strong>`)
+      .replace('{name}', `<strong>${bestValue.name}</strong>`)
+      .replace('{days}', `${bestValue.estimatedDays}`)
+      .replace('{price}', `<strong>${currencySymbol}${bestValue.estimatedPrice}</strong>`)
+      .replace('{cheapest}', `<strong>${cheapest.name}</strong>`)
+      .replace('{cheapestPrice}', `${currencySymbol}${cheapest.estimatedPrice}`);
   }
 
   function renderResults() {
     if (!estimatesList || !currentInput) return;
+    const lang = getLang();
 
     // Render summary banner
     if (summaryBanner) {
+      const typeLabel = TRANSLATIONS[lang]?.[`results-shipment-type`] || "Shipment Type";
+      const routeLabel = TRANSLATIONS[lang]?.[`results-route`] || "Route";
+      const consLabel = TRANSLATIONS[lang]?.[`results-consignment`] || "Consignment";
+      const weightLabel = TRANSLATIONS[lang]?.[`results-total-weight`] || "Total Weight";
+      
+      const typeTrans = TRANSLATIONS[lang]?.[`form-tab-${currentInput.type}`] || currentInput.type;
+      const parcelCountTrans = TRANSLATIONS[lang]?.[totalParcelsCount === 1 ? 'results-parcel-count' : 'results-parcels-count'] || (totalParcelsCount === 1 ? 'parcel' : 'parcels');
+
       summaryBanner.innerHTML = `
         <div class="bg-canvas border border-hairline rounded-lg px-5 py-4 flex flex-wrap gap-x-8 gap-y-3 justify-between items-center text-xs text-body transition-colors duration-200">
           <div class="flex items-center gap-2">
             <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
-            <span class="font-medium text-ink">Shipment Type:</span>
-            <span class="capitalize text-body">${currentInput.type} Shipping</span>
+            <span class="font-medium text-ink">${typeLabel}:</span>
+            <span class="capitalize text-body font-medium">${typeTrans}</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
-            <span class="font-medium text-ink">Route:</span>
+            <span class="font-medium text-ink">${routeLabel}:</span>
             <span class="text-body font-medium">${routeStr}</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
-            <span class="font-medium text-ink">Consignment:</span>
-            <span class="text-body">${totalParcelsCount} ${totalParcelsCount === 1 ? 'parcel' : 'parcels'} | Total Weight: ${totalActualWeight.toFixed(2)} kg</span>
+            <span class="font-medium text-ink">${consLabel}:</span>
+            <span class="text-body">${totalParcelsCount} ${parcelCountTrans} | ${weightLabel}: ${totalActualWeight.toFixed(2)} kg</span>
           </div>
         </div>
       `;
@@ -231,14 +319,16 @@
     }
 
     if (currentEstimates.length === 0) {
+      const noOptMsg = TRANSLATIONS[lang]?.[`results-no-options`] || "No couriers match your selection or the combined weight exceeds limit capabilities.";
       estimatesList.innerHTML = `
         <div class="text-center py-12 border border-dashed border-hairline rounded-lg bg-canvas text-body">
-          <p class="body-md">No couriers match your selection or the combined weight exceeds limit capabilities.</p>
+          <p class="body-md">${noOptMsg}</p>
         </div>
       `;
       return;
     }
 
+    // Render comparison cards
     estimatesList.innerHTML = currentEstimates.map(est => {
       const isCheapest = est.recommendationBadge === 'cheapest';
       const isFastest = est.recommendationBadge === 'fastest';
@@ -246,11 +336,14 @@
 
       let badgeHTML = '';
       if (isCheapest) {
-        badgeHTML = `<span class="inline-flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">Cheapest</span>`;
+        const text = BADGES_TRANSLATIONS.cheapest[lang] || "Cheapest";
+        badgeHTML = `<span class="inline-flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">${text}</span>`;
       } else if (isFastest) {
-        badgeHTML = `<span class="inline-flex items-center gap-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">Fastest</span>`;
+        const text = BADGES_TRANSLATIONS.fastest[lang] || "Fastest";
+        badgeHTML = `<span class="inline-flex items-center gap-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">${text}</span>`;
       } else if (isValue) {
-        badgeHTML = `<span class="inline-flex items-center gap-1 bg-violet-soft/20 text-violet dark:text-violet-deep text-xs font-semibold px-2.5 py-0.5 rounded-full">Best Value</span>`;
+        const text = BADGES_TRANSLATIONS.value[lang] || "Best Value";
+        badgeHTML = `<span class="inline-flex items-center gap-1 bg-violet-soft/20 text-violet dark:text-violet-deep text-xs font-semibold px-2.5 py-0.5 rounded-full">${text}</span>`;
       }
 
       // Individual parcels listing for the breakdown
@@ -262,16 +355,39 @@
           let pVol = (p.length * p.width * p.height) / 5000;
           pVolStr = ` | Vol: ${pVol.toFixed(2)} kg (${p.length}x${p.width}x${p.height} cm)`;
         }
-        const catObj = CATEGORIES.find(c => c.id === p.category);
-        const catName = catObj ? catObj.name : p.category;
+        const catTrans = TRANSLATIONS[lang]?.[`cat-${p.category}`] || p.category;
+        const parcelLabel = TRANSLATIONS[lang]?.[`form-parcel-idx`] || "Parcel #";
         return `
           <div class="flex justify-between py-1 text-xs border-b border-hairline/40 last:border-b-0">
-            <span class="text-body">Item #${pIdx + 1} (${catName})</span>
+            <span class="text-body">${parcelLabel} ${pIdx + 1} (${catTrans})</span>
             <span class="text-ink font-medium">${pw} ${pwUnit}${pVolStr}</span>
           </div>
         `;
       }).join('');
 
+      // Dynamic labels mapping
+      const delTimeLabel = TRANSLATIONS[lang]?.[`results-card-delivery`] || "DELIVERY TIME";
+      const relLabel = TRANSLATIONS[lang]?.[`results-card-reliability`] || "RELIABILITY";
+      const estPriceLabel = TRANSLATIONS[lang]?.[`results-card-price`] || "ESTIMATED PRICE";
+      const breakdownLabel = TRANSLATIONS[lang]?.[`results-card-breakdown`] || "Breakdown";
+      
+      const bdItems = TRANSLATIONS[lang]?.[`results-breakdown-items`] || "Shipment Consignment";
+      const bdCost = TRANSLATIONS[lang]?.[`results-breakdown-cost`] || "Shipping Cost Breakdown";
+      const bdBase = TRANSLATIONS[lang]?.[`results-breakdown-base`] || "Base Courier Charge";
+      const bdWeight = TRANSLATIONS[lang]?.[`results-breakdown-weight`] || "Weight Surcharge";
+      const bdDistance = TRANSLATIONS[lang]?.[`results-breakdown-distance`] || "Distance Transit Charge";
+      const bdInsurance = TRANSLATIONS[lang]?.[`results-breakdown-insurance`] || "Insurance Surcharge";
+      const bdPackaging = TRANSLATIONS[lang]?.[`results-breakdown-packaging`] || "Packaging Surcharge (All Items)";
+      const bdPickup = TRANSLATIONS[lang]?.[`results-breakdown-pickup`] || "Pickup Surcharge";
+      const bdTaxDesc = TRANSLATIONS[lang]?.[`results-breakdown-gst`] || "Inclusive of local taxes/fees";
+      const bdTaxAmt = TRANSLATIONS[lang]?.[`results-breakdown-gst-amt`] || "Taxes Amount";
+      const bdTotal = TRANSLATIONS[lang]?.[`results-breakdown-total`] || "Estimated Total";
+      
+      const currencySymbol = est.currencySymbol;
+      const daysSuffix = est.estimatedDays === 1 ? (lang === 'ar' ? 'يوم' : 'day') : (lang === 'ar' ? 'أيام' : 'days');
+      const estSuffix = lang === 'ar' ? 'تقريبي' : 'Est.';
+
+      // Display dynamic details card
       return `
         <div class="group relative bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 sm:p-6 shadow-level-2 hover:shadow-level-3 transition-all duration-200">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -302,15 +418,15 @@
 
             <!-- Middle stats (Speed & Rating) -->
             <div class="flex flex-wrap items-center gap-6 sm:gap-10">
-              <div class="text-left">
-                <span class="caption-mono uppercase text-mute tracking-wider block">DELIVERY TIME</span>
+              <div class="text-left rtl:text-right">
+                <span class="caption-mono uppercase text-mute tracking-wider block">${delTimeLabel}</span>
                 <span class="body-lg text-ink font-medium mt-0.5 inline-flex items-center gap-1">
-                  ${est.estimatedDays} ${est.estimatedDays === 1 ? 'day' : 'days'}
-                  <span class="text-xs text-body font-normal">(Est.)</span>
+                  ${est.estimatedDays} ${daysSuffix}
+                  <span class="text-xs text-body font-normal">(${estSuffix})</span>
                 </span>
               </div>
-              <div class="text-left">
-                <span class="caption-mono uppercase text-mute tracking-wider block">RELIABILITY</span>
+              <div class="text-left rtl:text-right">
+                <span class="caption-mono uppercase text-mute tracking-wider block">${relLabel}</span>
                 <span class="body-lg text-ink font-medium mt-0.5 flex items-center gap-1">
                   ${est.reliabilityScore}
                   <svg class="h-4 w-4 fill-amber-400 text-amber-400" viewBox="0 0 20 20">
@@ -322,9 +438,9 @@
 
             <!-- Price Column -->
             <div class="flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-2 border-t border-hairline lg:border-t-0 pt-4 lg:pt-0">
-              <div class="text-left lg:text-right">
-                <span class="caption-mono uppercase text-mute tracking-wider block">ESTIMATED PRICE</span>
-                <span class="display-sm text-ink font-semibold text-2xl">₹${est.estimatedPrice}</span>
+              <div class="text-left lg:text-right rtl:text-right">
+                <span class="caption-mono uppercase text-mute tracking-wider block">${estPriceLabel}</span>
+                <span class="display-sm text-ink font-semibold text-2xl">${currencySymbol}${est.estimatedPrice}</span>
               </div>
               
               <button 
@@ -332,7 +448,7 @@
                 class="details-btn inline-flex items-center gap-1 text-xs text-body hover:text-ink font-medium cursor-pointer border border-hairline rounded px-2.5 py-1 bg-canvas hover:bg-canvas-soft-2 transition-all"
                 data-id="${est.id}"
               >
-                <span>Breakdown</span>
+                <span>${breakdownLabel}</span>
                 <svg class="h-3 w-3 arrow-icon transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -346,7 +462,7 @@
             
             <!-- Items Detail -->
             <div>
-              <h4 class="text-xs text-ink font-semibold uppercase tracking-wider caption-mono mb-2">Shipment Consignment</h4>
+              <h4 class="text-xs text-ink font-semibold uppercase tracking-wider caption-mono mb-2">${bdItems}</h4>
               <div class="bg-canvas-soft-2 border border-hairline/60 rounded px-4 py-2.5 space-y-1">
                 ${parcelsBreakdownListHTML}
               </div>
@@ -354,34 +470,34 @@
 
             <!-- Pricing Breakdown details -->
             <div class="space-y-4">
-              <h4 class="text-xs text-ink font-semibold uppercase tracking-wider caption-mono">Shipping Cost Breakdown</h4>
+              <h4 class="text-xs text-ink font-semibold uppercase tracking-wider caption-mono">${bdCost}</h4>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-body">
                 <div class="space-y-2">
                   <div class="flex justify-between">
-                    <span>Base Courier Charge</span>
-                    <span class="text-ink font-medium">₹${est.breakdown.baseCharge}</span>
+                    <span>${bdBase}</span>
+                    <span class="text-ink font-medium">${currencySymbol}${est.breakdown.baseCharge}</span>
                   </div>
                   <div class="flex justify-between">
-                    <span>Weight Surcharge</span>
-                    <span class="text-ink font-medium">₹${est.breakdown.weightCharge}</span>
+                    <span>${bdWeight}</span>
+                    <span class="text-ink font-medium">${currencySymbol}${est.breakdown.weightCharge}</span>
                   </div>
                   <div class="flex justify-between">
-                    <span>Distance Transit Charge</span>
-                    <span class="text-ink font-medium">₹${est.breakdown.distanceCharge}</span>
+                    <span>${bdDistance}</span>
+                    <span class="text-ink font-medium">${currencySymbol}${est.breakdown.distanceCharge}</span>
                   </div>
                 </div>
                 <div class="space-y-2">
                   <div class="flex justify-between">
-                    <span>Insurance Surcharge</span>
-                    <span class="text-ink font-medium">${est.breakdown.insuranceCharge > 0 ? '₹' + est.breakdown.insuranceCharge : '₹0'}</span>
+                    <span>${bdInsurance}</span>
+                    <span class="text-ink font-medium">${est.breakdown.insuranceCharge > 0 ? currencySymbol + est.breakdown.insuranceCharge : currencySymbol + '0'}</span>
                   </div>
                   <div class="flex justify-between">
-                    <span>Packaging Surcharge (All Items)</span>
-                    <span class="text-ink font-medium">₹${est.breakdown.packagingCharge}</span>
+                    <span>${bdPackaging}</span>
+                    <span class="text-ink font-medium">${currencySymbol}${est.breakdown.packagingCharge}</span>
                   </div>
                   <div class="flex justify-between">
-                    <span>Pickup Surcharge</span>
-                    <span class="text-ink font-medium">₹${est.breakdown.pickupFee}</span>
+                    <span>${bdPickup}</span>
+                    <span class="text-ink font-medium">${currencySymbol}${est.breakdown.pickupFee}</span>
                   </div>
                 </div>
               </div>
@@ -389,12 +505,12 @@
             
             <div class="border-t border-hairline pt-3 flex justify-between items-center text-base">
               <div class="text-xs text-mute flex flex-col">
-                <span>Inclusive of 18% GST</span>
-                <span>GST Amount: ₹${est.breakdown.taxes}</span>
+                <span>${bdTaxDesc}</span>
+                <span>${bdTaxAmt}: ${currencySymbol}${est.breakdown.taxes}</span>
               </div>
               <div class="text-right">
-                <span class="body-sm text-body mr-2">Estimated Total:</span>
-                <span class="body-md-strong text-ink font-semibold text-lg">₹${est.breakdown.total}</span>
+                <span class="body-sm text-body mr-2">${bdTotal}:</span>
+                <span class="body-md-strong text-ink font-semibold text-lg">${currencySymbol}${est.breakdown.total}</span>
               </div>
             </div>
           </div>

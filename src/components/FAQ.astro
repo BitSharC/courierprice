@@ -3,24 +3,24 @@
 
 const faqs = [
   {
-    q: "How much does a courier cost in India?",
-    a: "Courier costs in India vary widely based on weight, distance, and speed. A local document shipment under 500g via Speed Post starts around ₹40. In contrast, premium express air delivery for a 10kg parcel from Mumbai to Delhi via Blue Dart can range between ₹800 and ₹1,500."
+    q: "How much does a courier cost?",
+    a: "Courier costs vary widely based on weight, distance, origin, destination, and selected speed. A local document shipment under 0.5kg starts around $5 in the US, £3.50 in the UK, or ₹40 in India. In contrast, premium express air delivery for heavy parcels can range significantly higher."
   },
   {
     q: "How is volumetric weight calculated?",
     a: "Volumetric weight represents the volume of a parcel relative to its physical density. It is calculated using the formula: (Length × Width × Height in cm) / 5000. Courier companies compare this value to the physical scale weight and bill based on whichever weight is larger."
   },
   {
-    q: "Which courier is cheapest in India?",
-    a: "For small parcels under 35kg, India Post (Speed Post) is generally the most economical choice across India, followed closely by budget private shippers like Delhivery and XpressBees. For intra-city heavy loads, Porter is the most cost-effective."
+    q: "Which courier is cheapest?",
+    a: "For small domestic parcels, national postal services (like India Post, USPS in the US, Royal Mail in the UK, or Canada Post) are generally the most economical choice, followed by private standard carriers. For heavy or local items, specialized on-demand point-to-point services are usually most cost-effective."
   },
   {
     q: "How long does courier delivery take?",
-    a: "Standard surface shipping between metropolitan hubs in India (like Mumbai to Delhi or Pune to Bengaluru) typically takes 3 to 5 business days. Express shipping reduces transit time to 1 to 2 business days, while local shipments are usually delivered same-day or next-day."
+    a: "Standard surface shipping between domestic regions typically takes 3 to 5 business days. Express shipping reduces transit time to 1 to 2 business days, while local shipments are usually delivered same-day or next-day. International shipping ranges from 2 to 14 days depending on service class."
   },
   {
     q: "Are these shipping rates guaranteed?",
-    a: "No, these estimates are simulated rates generated using the pricing algorithms of Indian couriers. Actual booking charges might fluctuate based on fuel surcharges, physical measurement checks at hubs, and extra value-added parameters like special packaging or location surcharges."
+    a: "No, these estimates are simulated rates generated using the pricing algorithms of global couriers. Actual booking charges might fluctuate based on fuel surcharges, physical measurement checks at hubs, and extra value-added parameters like special packaging or remote location surcharges."
   }
 ];
 
@@ -28,7 +28,7 @@ const faqs = [
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(item => ({
+  "mainEntity": faqs.map((item, idx) => ({
     "@type": "Question",
     "name": item.q,
     "acceptedAnswer": {
@@ -44,17 +44,17 @@ const faqSchema = {
     
     <!-- Title -->
     <div class="text-center mb-16">
-      <span class="caption-mono text-mute uppercase tracking-widest block mb-3">RESOLVING QUESTIONS</span>
-      <h2 class="display-lg text-ink font-semibold">Frequently Asked Questions.</h2>
-      <p class="body-md text-body mt-2">Answers to common queries regarding shipping calculations and courier logistics in India.</p>
+      <span class="caption-mono text-mute uppercase tracking-widest block mb-3" data-i18n="faq-title-eyebrow">RESOLVING QUESTIONS</span>
+      <h2 class="display-lg text-ink font-semibold" data-i18n="faq-title">Frequently Asked Questions.</h2>
+      <p class="body-md text-body mt-2" data-i18n="faq-subtitle">Answers to common queries regarding shipping calculations and courier logistics globally.</p>
     </div>
 
     <!-- Accordion Group -->
     <div class="space-y-4">
-      {faqs.map((faq) => (
+      {faqs.map((faq, idx) => (
         <details class="group border border-hairline rounded-lg bg-canvas-soft-2 hover:bg-canvas transition-colors duration-200 [&_summary::-webkit-details-marker]:hidden">
           <summary class="flex justify-between items-center p-5 cursor-pointer select-none outline-none focus:text-primary">
-            <span class="body-md-strong text-ink">{faq.q}</span>
+            <span class="body-md-strong text-ink" data-i18n={`faq-q-${idx}`}>{faq.q}</span>
             <span class="ml-4 flex-shrink-0 text-mute group-open:rotate-180 transition-transform duration-200">
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -62,7 +62,7 @@ const faqSchema = {
             </span>
           </summary>
           <div class="px-5 pb-5 border-t border-hairline/50 pt-3 transition-colors duration-200">
-            <p class="body-sm text-body leading-relaxed">{faq.a}</p>
+            <p class="body-sm text-body leading-relaxed" data-i18n={`faq-a-${idx}`}>{faq.a}</p>
           </div>
         </details>
       ))}
@@ -70,5 +70,5 @@ const faqSchema = {
   </div>
 </section>
 
-<!-- Inject FAQ structured data for search engine optimization (SEO) -->
+<!-- Inject FAQ structured data for SEO -->
 <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />

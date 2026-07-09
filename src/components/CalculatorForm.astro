@@ -1,13 +1,13 @@
 ---
 // src/components/CalculatorForm.astro
-import { INDIA_STATES } from '../utils/indiaData';
-import { CATEGORIES, COUNTRIES } from '../utils/calculator';
+import { COUNTRIES_DATA } from '../utils/countryData';
+import { CATEGORIES } from '../utils/calculator';
 ---
 
 <div id="calculator" class="w-full bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-3 transition-colors duration-200">
   <div class="mb-6">
-    <h2 class="display-sm text-ink mb-1.5">Shipping details.</h2>
-    <p class="body-sm text-body">Configure your domestic or international shipment parameters.</p>
+    <h2 class="display-sm text-ink mb-1.5" data-i18n="form-title">Shipping details.</h2>
+    <p class="body-sm text-body" data-i18n="form-subtitle">Configure your domestic or international shipment parameters.</p>
   </div>
 
   <!-- Domestic vs International Switcher -->
@@ -17,6 +17,7 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
         type="button" 
         id="tab-domestic" 
         class="px-5 py-1.5 rounded-full font-medium text-xs tracking-tight transition-all cursor-pointer bg-primary text-on-primary"
+        data-i18n="form-tab-domestic"
       >
         Domestic
       </button>
@@ -24,6 +25,7 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
         type="button" 
         id="tab-international" 
         class="px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer"
+        data-i18n="form-tab-international"
       >
         International
       </button>
@@ -37,19 +39,34 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
     <!-- Route Parameters Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       
-      <!-- Pickup Location (Always in India) -->
+      <!-- Pickup Location -->
       <div class="space-y-4">
-        <h3 class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold">Pickup Location (India)</h3>
+        <h3 class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-pickup-title">Pickup Location</h3>
+        
+        <!-- Pickup Country -->
+        <div class="flex flex-col gap-1.5">
+          <label for="pickupCountry" class="caption text-mute text-xs font-semibold" data-i18n="form-origin-country">Origin Country</label>
+          <div class="relative">
+            <select id="pickupCountry" name="pickupCountry" required class="form-input w-full appearance-none pr-8 font-medium">
+              {Object.values(COUNTRIES_DATA).map(c => (
+                <option value={c.code} selected={c.code === 'IN'}>{c.name}</option>
+              ))}
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- State -->
           <div class="flex flex-col gap-1.5">
-            <label for="pickupState" class="caption text-mute text-xs font-semibold">State / UT</label>
+            <label for="pickupState" class="caption text-mute text-xs font-semibold" data-i18n="form-pickup-state">State / Region</label>
             <div class="relative">
               <select id="pickupState" name="pickupState" required class="form-input w-full appearance-none pr-8">
-                <option value="" disabled selected>Select state</option>
-                {INDIA_STATES.map(s => (
-                  <option value={s.name}>{s.name}</option>
-                ))}
+                <option value="" disabled selected data-i18n="select-state-prompt">Select state/region</option>
               </select>
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -59,11 +76,11 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
             </div>
           </div>
           <!-- District -->
-          <div class="flex flex-col gap-1.5">
-            <label for="pickupDistrict" class="caption text-mute text-xs font-semibold">District</label>
+          <div id="pickup-district-container" class="flex flex-col gap-1.5">
+            <label for="pickupDistrict" class="caption text-mute text-xs font-semibold" data-i18n="form-pickup-district">District</label>
             <div class="relative">
               <select id="pickupDistrict" name="pickupDistrict" required class="form-input w-full appearance-none pr-8" disabled>
-                <option value="" disabled selected>Select district</option>
+                <option value="" disabled selected data-i18n="select-district-prompt">Select district</option>
               </select>
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -77,19 +94,33 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 
       <!-- Destination Location -->
       <div class="space-y-4">
-        <h3 id="delivery-title" class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold">Delivery Location (Domestic)</h3>
+        <h3 id="delivery-title" class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-delivery-title-dom">Delivery Location (Domestic)</h3>
         
-        <!-- Domestic Delivery State/District Inputs -->
-        <div id="delivery-city-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Destination Country (International only) -->
+        <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden animate-fade-in">
+          <label for="deliveryCountry" class="caption text-mute text-xs font-semibold" data-i18n="form-delivery-country">Destination Country</label>
+          <div class="relative">
+            <select id="deliveryCountry" name="deliveryCountry" class="form-input w-full appearance-none pr-8">
+              <option value="" disabled selected data-i18n="select-country-prompt">Select destination country</option>
+              {Object.values(COUNTRIES_DATA).map(c => (
+                <option value={c.code}>{c.name}</option>
+              ))}
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- State -->
           <div class="flex flex-col gap-1.5">
-            <label for="deliveryState" class="caption text-mute text-xs font-semibold">State / UT</label>
+            <label for="deliveryState" class="caption text-mute text-xs font-semibold" data-i18n="form-delivery-state">State / Region</label>
             <div class="relative">
               <select id="deliveryState" name="deliveryState" required class="form-input w-full appearance-none pr-8">
-                <option value="" disabled selected>Select state</option>
-                {INDIA_STATES.map(s => (
-                  <option value={s.name}>{s.name}</option>
-                ))}
+                <option value="" disabled selected data-i18n="select-state-prompt">Select state/region</option>
               </select>
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -99,35 +130,17 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
             </div>
           </div>
           <!-- District -->
-          <div class="flex flex-col gap-1.5">
-            <label for="deliveryDistrict" class="caption text-mute text-xs font-semibold">District</label>
+          <div id="delivery-district-container" class="flex flex-col gap-1.5">
+            <label for="deliveryDistrict" class="caption text-mute text-xs font-semibold" data-i18n="form-delivery-district">District</label>
             <div class="relative">
               <select id="deliveryDistrict" name="deliveryDistrict" required class="form-input w-full appearance-none pr-8" disabled>
-                <option value="" disabled selected>Select district</option>
+                <option value="" disabled selected data-i18n="select-district-prompt">Select district</option>
               </select>
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destination Country (International only) -->
-        <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden">
-          <label for="deliveryCountry" class="caption text-mute text-xs font-semibold">Destination Country</label>
-          <div class="relative">
-            <select id="deliveryCountry" name="deliveryCountry" class="form-input w-full appearance-none pr-8">
-              <option value="" disabled selected>Select destination country</option>
-              {Object.keys(COUNTRIES).map(country => (
-                <option value={country}>{country}</option>
-              ))}
-            </select>
-            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
             </div>
           </div>
         </div>
@@ -139,8 +152,8 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
     <!-- Parcels Section -->
     <div class="border-t border-hairline pt-6">
       <div class="flex items-center justify-between mb-4">
-        <h3 class="body-md-strong text-ink">Parcels to Send.</h3>
-        <p class="caption text-mute">Define weight and categories for your items</p>
+        <h3 class="body-md-strong text-ink" data-i18n="form-parcels-title">Parcels to Send.</h3>
+        <p class="caption text-mute" data-i18n="form-parcels-subtitle">Define weight and categories for your items</p>
       </div>
 
       <!-- Parcels list container -->
@@ -148,10 +161,13 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
         <!-- Render first parcel dynamically -->
         <div class="parcel-card bg-canvas-soft-2 border border-hairline p-4 rounded-md relative space-y-4 transition-colors duration-200">
           <div class="flex items-center justify-between border-b border-hairline/60 pb-2">
-            <span class="caption-mono text-xs uppercase tracking-wider text-ink font-semibold">Parcel #<span class="parcel-idx">1</span></span>
+            <span class="caption-mono text-xs uppercase tracking-wider text-ink font-semibold">
+              <span data-i18n="form-parcel-idx">Parcel #</span><span class="parcel-idx">1</span>
+            </span>
             <button 
               type="button" 
               class="remove-parcel-btn hidden text-xs text-error hover:text-error-deep cursor-pointer focus:outline-none transition-colors duration-150"
+              data-i18n="form-parcel-remove"
             >
               Remove
             </button>
@@ -160,7 +176,7 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <!-- Parcel Weight -->
             <div class="flex flex-col gap-1.5">
-              <label class="body-sm-strong text-ink text-xs">Parcel Weight</label>
+              <label class="body-sm-strong text-ink text-xs font-semibold" data-i18n="form-parcel-weight">Parcel Weight</label>
               <div class="flex">
                 <input 
                   type="number" 
@@ -183,12 +199,12 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 
             <!-- Parcel Category -->
             <div class="flex flex-col gap-1.5">
-              <label class="body-sm-strong text-ink text-xs">Parcel Category</label>
+              <label class="body-sm-strong text-ink text-xs font-semibold" data-i18n="form-parcel-category">Parcel Category</label>
               <div class="relative">
                 <select name="parcelCategory" required class="form-input w-full appearance-none pr-8">
-                  <option value="" disabled selected>Select category</option>
+                  <option value="" disabled selected data-i18n="select-category-prompt">Select category</option>
                   {CATEGORIES.map(cat => (
-                    <option value={cat.id}>{cat.name}</option>
+                    <option value={cat.id} data-i18n={`cat-${cat.id}`}>{cat.name}</option>
                   ))}
                 </select>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
@@ -200,20 +216,20 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
             </div>
           </div>
 
-          <!-- Dimensions (For volumetric weights per parcel) -->
+          <!-- Dimensions -->
           <div class="space-y-2">
-            <span class="body-sm-strong text-ink text-xs block">Dimensions (Optional - For Volumetric Weight)</span>
+            <span class="body-sm-strong text-ink text-xs block font-semibold" data-i18n="form-parcel-dim-title">Dimensions (Optional - For Volumetric Weight)</span>
             <div class="grid grid-cols-3 gap-3">
               <div class="flex flex-col gap-1">
-                <label class="caption text-mute text-xs">Length (cm)</label>
+                <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-l">Length (cm)</label>
                 <input type="number" name="parcelLength" min="1" placeholder="L" class="form-input w-full" />
               </div>
               <div class="flex flex-col gap-1">
-                <label class="caption text-mute text-xs">Width (cm)</label>
+                <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-w">Width (cm)</label>
                 <input type="number" name="parcelWidth" min="1" placeholder="W" class="form-input w-full" />
               </div>
               <div class="flex flex-col gap-1">
-                <label class="caption text-mute text-xs">Height (cm)</label>
+                <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-h">Height (cm)</label>
                 <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
               </div>
             </div>
@@ -230,12 +246,12 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
         <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        Add another parcel
+        <span data-i18n="form-parcel-btn-add">Add another parcel</span>
       </button>
-      <p class="caption text-mute mt-2 text-center">Volumetric weight is computed per parcel as (L × W × H) / 5000 and used if it exceeds physical weight.</p>
+      <p class="caption text-mute mt-2 text-center" data-i18n="form-parcel-vol-desc">Volumetric weight is computed per parcel as (L × W × H) / 5000 and used if it exceeds physical weight.</p>
     </div>
 
-    <!-- Add-on switches Accordion (General parameters) -->
+    <!-- Add-on switches Accordion -->
     <div class="border-t border-hairline pt-4 transition-colors duration-200">
       <button 
         type="button" 
@@ -245,7 +261,7 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
         <svg id="advanced-arrow" class="h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
         </svg>
-        <span>Shipment add-ons (Insurance, Express, Pickup)</span>
+        <span data-i18n="form-addons-toggle">Shipment add-ons (Insurance, Express, Pickup)</span>
       </button>
 
       <div id="advanced-section" class="hidden mt-4 space-y-6 animate-fade-in">
@@ -255,8 +271,8 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
             <input type="checkbox" id="insurance" name="insurance" class="sr-only peer" />
             <div class="relative w-9 h-5 bg-canvas-soft-2 peer-focus:outline-none rounded-full border border-hairline peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-body peer-checked:after:bg-on-primary after:border-none after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-primary peer-checked:border-primary transition-all"></div>
             <div class="flex flex-col">
-              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors">Insurance cover</span>
-              <span class="caption text-mute">Protect valuable cargo</span>
+              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors" data-i18n="form-addon-insurance-title">Insurance cover</span>
+              <span class="caption text-mute" data-i18n="form-addon-insurance-desc">Protect valuable cargo</span>
             </div>
           </label>
 
@@ -265,8 +281,8 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
             <input type="checkbox" id="express" name="express" class="sr-only peer" />
             <div class="relative w-9 h-5 bg-canvas-soft-2 peer-focus:outline-none rounded-full border border-hairline peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-body peer-checked:after:bg-on-primary after:border-none after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-primary peer-checked:border-primary transition-all"></div>
             <div class="flex flex-col">
-              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors">Express transit</span>
-              <span class="caption text-mute">Prioritize delivery speed</span>
+              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors" data-i18n="form-addon-express-title">Express transit</span>
+              <span class="caption text-mute" data-i18n="form-addon-express-desc">Prioritize delivery speed</span>
             </div>
           </label>
 
@@ -275,8 +291,8 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
             <input type="checkbox" id="pickupRequired" name="pickupRequired" class="sr-only peer" />
             <div class="relative w-9 h-5 bg-canvas-soft-2 peer-focus:outline-none rounded-full border border-hairline peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-body peer-checked:after:bg-on-primary after:border-none after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-primary peer-checked:border-primary transition-all"></div>
             <div class="flex flex-col">
-              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors">Home pickup</span>
-              <span class="caption text-mute">Courier collects at door</span>
+              <span class="body-sm-strong text-ink group-hover:text-primary transition-colors" data-i18n="form-addon-pickup-title">Home pickup</span>
+              <span class="caption text-mute" data-i18n="form-addon-pickup-desc">Courier collects at door</span>
             </div>
           </label>
         </div>
@@ -287,6 +303,7 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
     <button 
       type="submit" 
       class="button-primary w-full shadow-level-3 font-medium transition-all"
+      data-i18n="form-btn-submit"
     >
       Compare prices
     </button>
@@ -294,103 +311,195 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 </div>
 
 <script>
-  import { INDIA_STATES } from '../utils/indiaData';
+  import { COUNTRIES_DATA } from '../utils/countryData';
   import { CATEGORIES } from '../utils/calculator';
+  import { TRANSLATIONS } from '../utils/translations';
 
   // Toggle Domestic/International Tab Switch
   const tabDomestic = document.getElementById('tab-domestic');
   const tabInternational = document.getElementById('tab-international');
   const shippingType = document.getElementById('shipping-type') as HTMLInputElement | null;
-  const deliveryCityContainer = document.getElementById('delivery-city-container');
+  
+  const pickupCountrySelect = document.getElementById('pickupCountry') as HTMLSelectElement | null;
+  const pickupStateSelect = document.getElementById('pickupState') as HTMLSelectElement | null;
+  const pickupDistrictSelect = document.getElementById('pickupDistrict') as HTMLSelectElement | null;
+  const pickupDistrictContainer = document.getElementById('pickup-district-container');
+
   const deliveryCountryContainer = document.getElementById('delivery-country-container');
+  const deliveryCountrySelect = document.getElementById('deliveryCountry') as HTMLSelectElement | null;
   const deliveryStateSelect = document.getElementById('deliveryState') as HTMLSelectElement | null;
   const deliveryDistrictSelect = document.getElementById('deliveryDistrict') as HTMLSelectElement | null;
-  const deliveryCountrySelect = document.getElementById('deliveryCountry') as HTMLSelectElement | null;
+  const deliveryDistrictContainer = document.getElementById('delivery-district-container');
   const deliveryTitle = document.getElementById('delivery-title');
 
+  function getLang() {
+    return localStorage.getItem('lang') || 'en';
+  }
+
+  // Populate state dropdown based on selected country
+  function updateStates(countryCode: string, stateSelect: HTMLSelectElement, placeholderKey: string) {
+    const country = COUNTRIES_DATA[countryCode];
+    const currentLang = getLang();
+    const promptText = TRANSLATIONS[currentLang]?.[placeholderKey] || "Select state/region";
+    
+    stateSelect.innerHTML = `<option value="" disabled selected data-i18n="${placeholderKey}">${promptText}</option>`;
+    
+    if (country && country.states.length > 0) {
+      stateSelect.disabled = false;
+      country.states.forEach(s => {
+        const option = document.createElement('option');
+        option.value = s.name;
+        option.textContent = s.name;
+        stateSelect.appendChild(option);
+      });
+    } else {
+      stateSelect.disabled = true;
+    }
+  }
+
+  // Update district dropdown based on selected state (Only for India)
+  function updateDistricts(countryCode: string, stateName: string, districtSelect: HTMLSelectElement, placeholderKey: string) {
+    const country = COUNTRIES_DATA[countryCode];
+    const currentLang = getLang();
+    const promptText = TRANSLATIONS[currentLang]?.[placeholderKey] || "Select district";
+    
+    districtSelect.innerHTML = `<option value="" disabled selected data-i18n="${placeholderKey}">${promptText}</option>`;
+    
+    if (countryCode === 'IN' && country) {
+      const stateObj = country.states.find(s => s.name === stateName);
+      if (stateObj && stateObj.districts && stateObj.districts.length > 0) {
+        districtSelect.disabled = false;
+        stateObj.districts.forEach(dist => {
+          const option = document.createElement('option');
+          option.value = dist;
+          option.textContent = dist;
+          districtSelect.appendChild(option);
+        });
+        return;
+      }
+    }
+    
+    districtSelect.disabled = true;
+  }
+
+  // Hide/Show district containers conditionally
+  function adjustDistrictVisibility(countryCode: string, selectEl: HTMLSelectElement | null, container: HTMLElement | null) {
+    if (!selectEl || !container) return;
+    if (countryCode === 'IN') {
+      container.classList.remove('hidden');
+      selectEl.disabled = false;
+      selectEl.required = true;
+    } else {
+      container.classList.add('hidden');
+      selectEl.disabled = true;
+      selectEl.required = false;
+      selectEl.value = "";
+    }
+  }
+
+  // Handle updates when the origin/pickup country changes
+  function handlePickupCountryChange() {
+    if (!pickupCountrySelect || !pickupStateSelect) return;
+    const country = pickupCountrySelect.value;
+    updateStates(country, pickupStateSelect, "select-state-prompt");
+    adjustDistrictVisibility(country, pickupDistrictSelect, pickupDistrictContainer);
+
+    // If domestic mode is active, lock delivery country to pickup country
+    if (shippingType && shippingType.value === 'domestic') {
+      if (deliveryCountrySelect) {
+        deliveryCountrySelect.value = country;
+      }
+      handleDeliveryCountryChange();
+    }
+  }
+
+  // Handle updates when the destination/delivery country changes
+  function handleDeliveryCountryChange() {
+    const isDom = shippingType && shippingType.value === 'domestic';
+    const activeCountryCode = isDom 
+      ? (pickupCountrySelect?.value || 'IN') 
+      : (deliveryCountrySelect?.value || 'IN');
+
+    if (deliveryStateSelect) {
+      updateStates(activeCountryCode, deliveryStateSelect, "select-state-prompt");
+    }
+    adjustDistrictVisibility(activeCountryCode, deliveryDistrictSelect, deliveryDistrictContainer);
+  }
+
+  // Setup listeners for select updates
+  pickupCountrySelect?.addEventListener('change', handlePickupCountryChange);
+  deliveryCountrySelect?.addEventListener('change', handleDeliveryCountryChange);
+
+  pickupStateSelect?.addEventListener('change', () => {
+    if (pickupCountrySelect && pickupStateSelect && pickupDistrictSelect) {
+      updateDistricts(pickupCountrySelect.value, pickupStateSelect.value, pickupDistrictSelect, "select-district-prompt");
+    }
+  });
+
+  deliveryStateSelect?.addEventListener('change', () => {
+    const isDom = shippingType && shippingType.value === 'domestic';
+    const activeCountryCode = isDom 
+      ? (pickupCountrySelect?.value || 'IN') 
+      : (deliveryCountrySelect?.value || 'IN');
+      
+    if (deliveryStateSelect && deliveryDistrictSelect) {
+      updateDistricts(activeCountryCode, deliveryStateSelect.value, deliveryDistrictSelect, "select-district-prompt");
+    }
+  });
+
+  // Switcher Actions
   tabDomestic?.addEventListener('click', () => {
     if (shippingType) shippingType.value = "domestic";
     
-    // UI Switch
+    // UI Classes
     tabDomestic.className = "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight transition-all cursor-pointer bg-primary text-on-primary";
     tabInternational?.setAttribute("class", "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer");
     
     // Visibility
-    deliveryCityContainer?.classList.remove('hidden');
     deliveryCountryContainer?.classList.add('hidden');
-    if (deliveryTitle) deliveryTitle.textContent = "Delivery Location (Domestic)";
     
-    // Validation constraints
-    if (deliveryStateSelect) deliveryStateSelect.required = true;
-    if (deliveryDistrictSelect) deliveryDistrictSelect.required = true;
+    // Title Translation key update
+    if (deliveryTitle) {
+      deliveryTitle.setAttribute('data-i18n', 'form-delivery-title-dom');
+      const curLang = getLang();
+      deliveryTitle.textContent = TRANSLATIONS[curLang]?.["form-delivery-title-dom"] || "Delivery Location (Domestic)";
+    }
+    
     if (deliveryCountrySelect) {
       deliveryCountrySelect.required = false;
-      deliveryCountrySelect.value = "";
+      if (pickupCountrySelect) {
+        deliveryCountrySelect.value = pickupCountrySelect.value;
+      }
     }
+    handleDeliveryCountryChange();
   });
 
   tabInternational?.addEventListener('click', () => {
     if (shippingType) shippingType.value = "international";
 
-    // UI Switch
+    // UI Classes
     tabInternational.className = "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight transition-all cursor-pointer bg-primary text-on-primary";
     tabDomestic?.setAttribute("class", "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer");
 
     // Visibility
-    deliveryCityContainer?.classList.add('hidden');
     deliveryCountryContainer?.classList.remove('hidden');
-    if (deliveryTitle) deliveryTitle.textContent = "Delivery Location (International)";
 
-    // Validation constraints
-    if (deliveryStateSelect) {
-      deliveryStateSelect.required = false;
-      deliveryStateSelect.value = "";
+    if (deliveryTitle) {
+      deliveryTitle.setAttribute('data-i18n', 'form-delivery-title-intl');
+      const curLang = getLang();
+      deliveryTitle.textContent = TRANSLATIONS[curLang]?.["form-delivery-title-intl"] || "Delivery Location (International)";
     }
-    if (deliveryDistrictSelect) {
-      deliveryDistrictSelect.required = false;
-      deliveryDistrictSelect.value = "";
-      deliveryDistrictSelect.disabled = true;
+
+    if (deliveryCountrySelect) {
+      deliveryCountrySelect.required = true;
+      if (deliveryCountrySelect.value === pickupCountrySelect?.value) {
+        deliveryCountrySelect.value = ""; // Force them to pick a different country
+      }
     }
-    if (deliveryCountrySelect) deliveryCountrySelect.required = true;
+    handleDeliveryCountryChange();
   });
 
-  // Dynamic State -> District selection
-  const pickupStateSelect = document.getElementById('pickupState') as HTMLSelectElement | null;
-  const pickupDistrictSelect = document.getElementById('pickupDistrict') as HTMLSelectElement | null;
-
-  function updateDistricts(stateSelect: HTMLSelectElement, districtSelect: HTMLSelectElement, placeholderText: string) {
-    const selectedState = stateSelect.value;
-    const stateObj = INDIA_STATES.find(s => s.name === selectedState);
-    
-    // Clear districts
-    districtSelect.innerHTML = `<option value="" disabled selected>${placeholderText}</option>`;
-    
-    if (stateObj && stateObj.districts.length > 0) {
-      districtSelect.disabled = false;
-      stateObj.districts.forEach(dist => {
-        const option = document.createElement('option');
-        option.value = dist;
-        option.textContent = dist;
-        districtSelect.appendChild(option);
-      });
-    } else {
-      districtSelect.disabled = true;
-    }
-  }
-
-  pickupStateSelect?.addEventListener('change', () => {
-    if (pickupStateSelect && pickupDistrictSelect) {
-      updateDistricts(pickupStateSelect, pickupDistrictSelect, 'Select district');
-    }
-  });
-
-  deliveryStateSelect?.addEventListener('change', () => {
-    if (deliveryStateSelect && deliveryDistrictSelect) {
-      updateDistricts(deliveryStateSelect, deliveryDistrictSelect, 'Select district');
-    }
-  });
-
-  // Advanced settings toggle
+  // Advanced section toggle
   const advToggle = document.getElementById('advanced-toggle');
   const advSection = document.getElementById('advanced-section');
   const advArrow = document.getElementById('advanced-arrow');
@@ -413,14 +522,18 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
   function updateParcelNumbers() {
     if (!parcelsContainer) return;
     const cards = parcelsContainer.querySelectorAll('.parcel-card');
+    const currentLang = getLang();
+    const parcelLabel = TRANSLATIONS[currentLang]?.["form-parcel-idx"] || "Parcel #";
+    const removeLabel = TRANSLATIONS[currentLang]?.["form-parcel-remove"] || "Remove";
     
     cards.forEach((card, index) => {
       const idxSpan = card.querySelector('.parcel-idx');
       if (idxSpan) idxSpan.textContent = (index + 1).toString();
 
-      // Show remove button for all except if it's the only parcel card
+      // Show remove button for all except the first card
       const removeBtn = card.querySelector('.remove-parcel-btn') as HTMLButtonElement | null;
       if (removeBtn) {
+        removeBtn.textContent = removeLabel;
         if (cards.length > 1) {
           removeBtn.classList.remove('hidden');
         } else {
@@ -430,7 +543,6 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
     });
   }
 
-  // Bind events to remove button
   function bindRemoveEvent(card: HTMLElement) {
     const removeBtn = card.querySelector('.remove-parcel-btn');
     removeBtn?.addEventListener('click', () => {
@@ -447,29 +559,46 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 
   addParcelBtn?.addEventListener('click', () => {
     if (!parcelsContainer) return;
+    const currentLang = getLang();
 
     // Create a new parcel card element
     const newCard = document.createElement('div');
     newCard.className = "parcel-card bg-canvas-soft-2 border border-hairline p-4 rounded-md relative space-y-4 transition-colors duration-200";
     
-    // Create categories selection options
-    const categoryOptions = CATEGORIES.map(cat => `<option value="${cat.id}">${cat.name}</option>`).join('');
+    // Create categories selection options matching current lang
+    const categoryOptions = CATEGORIES.map(cat => {
+      const catTrans = TRANSLATIONS[currentLang]?.[`cat-${cat.id}`] || cat.name;
+      return `<option value="${cat.id}" data-i18n="cat-${cat.id}">${catTrans}</option>`;
+    }).join('');
+
+    const idxLabel = TRANSLATIONS[currentLang]?.["form-parcel-idx"] || "Parcel #";
+    const removeLabel = TRANSLATIONS[currentLang]?.["form-parcel-remove"] || "Remove";
+    const weightLabel = TRANSLATIONS[currentLang]?.["form-parcel-weight"] || "Parcel Weight";
+    const catLabel = TRANSLATIONS[currentLang]?.["form-parcel-category"] || "Parcel Category";
+    const selectCatPrompt = TRANSLATIONS[currentLang]?.["select-category-prompt"] || "Select category";
+    const dimTitle = TRANSLATIONS[currentLang]?.["form-parcel-dim-title"] || "Dimensions (Optional - For Volumetric Weight)";
+    const dimL = TRANSLATIONS[currentLang]?.["form-parcel-dim-l"] || "Length (cm)";
+    const dimW = TRANSLATIONS[currentLang]?.["form-parcel-dim-w"] || "Width (cm)";
+    const dimH = TRANSLATIONS[currentLang]?.["form-parcel-dim-h"] || "Height (cm)";
 
     newCard.innerHTML = `
       <div class="flex items-center justify-between border-b border-hairline/60 pb-2">
-        <span class="caption-mono text-xs uppercase tracking-wider text-ink font-semibold">Parcel #<span class="parcel-idx">2</span></span>
+        <span class="caption-mono text-xs uppercase tracking-wider text-ink font-semibold">
+          <span data-i18n="form-parcel-idx">${idxLabel}</span><span class="parcel-idx">2</span>
+        </span>
         <button 
           type="button" 
           class="remove-parcel-btn text-xs text-error hover:text-error-deep cursor-pointer focus:outline-none transition-colors duration-150"
+          data-i18n="form-parcel-remove"
         >
-          Remove
+          ${removeLabel}
         </button>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <!-- Parcel Weight -->
         <div class="flex flex-col gap-1.5">
-          <label class="body-sm-strong text-ink text-xs font-semibold">Parcel Weight</label>
+          <label class="body-sm-strong text-ink text-xs font-semibold" data-i18n="form-parcel-weight">${weightLabel}</label>
           <div class="flex">
             <input 
               type="number" 
@@ -492,10 +621,10 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 
         <!-- Parcel Category -->
         <div class="flex flex-col gap-1.5">
-          <label class="body-sm-strong text-ink text-xs font-semibold">Parcel Category</label>
+          <label class="body-sm-strong text-ink text-xs font-semibold" data-i18n="form-parcel-category">${catLabel}</label>
           <div class="relative">
             <select name="parcelCategory" required class="form-input w-full appearance-none pr-8">
-              <option value="" disabled selected>Select category</option>
+              <option value="" disabled selected data-i18n="select-category-prompt">${selectCatPrompt}</option>
               ${categoryOptions}
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
@@ -509,18 +638,18 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 
       <!-- Dimensions -->
       <div class="space-y-2">
-        <span class="body-sm-strong text-ink text-xs block font-semibold">Dimensions (Optional - For Volumetric Weight)</span>
+        <span class="body-sm-strong text-ink text-xs block font-semibold" data-i18n="form-parcel-dim-title">${dimTitle}</span>
         <div class="grid grid-cols-3 gap-3">
           <div class="flex flex-col gap-1">
-            <label class="caption text-mute text-xs">Length (cm)</label>
+            <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-l">${dimL}</label>
             <input type="number" name="parcelLength" min="1" placeholder="L" class="form-input w-full" />
           </div>
           <div class="flex flex-col gap-1">
-            <label class="caption text-mute text-xs">Width (cm)</label>
+            <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-w">${dimW}</label>
             <input type="number" name="parcelWidth" min="1" placeholder="W" class="form-input w-full" />
           </div>
           <div class="flex flex-col gap-1">
-            <label class="caption text-mute text-xs">Height (cm)</label>
+            <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-h">${dimH}</label>
             <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
           </div>
         </div>
@@ -532,6 +661,30 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
     updateParcelNumbers();
   });
 
+  // Re-translate card components when global language changes
+  window.addEventListener('language-change', () => {
+    updateParcelNumbers();
+    
+    // Refresh placeholders or option text for category select
+    const currentLang = getLang();
+    const statePlaceholder = TRANSLATIONS[currentLang]?.["select-state-prompt"] || "Select state/region";
+    const districtPlaceholder = TRANSLATIONS[currentLang]?.["select-district-prompt"] || "Select district";
+    const countryPlaceholder = TRANSLATIONS[currentLang]?.["select-country-prompt"] || "Select destination country";
+
+    document.querySelectorAll('[data-i18n="select-state-prompt"]').forEach(opt => {
+      opt.textContent = statePlaceholder;
+    });
+    document.querySelectorAll('[data-i18n="select-district-prompt"]').forEach(opt => {
+      opt.textContent = districtPlaceholder;
+    });
+    document.querySelectorAll('[data-i18n="select-country-prompt"]').forEach(opt => {
+      opt.textContent = countryPlaceholder;
+    });
+  });
+
+  // Initialize defaults
+  handlePickupCountryChange();
+
   // Handle Form Submission
   const form = document.getElementById('shipping-form') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {
@@ -540,7 +693,7 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
 
     const formData = new FormData(form);
     
-    // Gather all parcels in an array
+    // Gather all parcels
     const parcelCards = parcelsContainer.querySelectorAll('.parcel-card');
     const parcels: any[] = [];
 
@@ -569,25 +722,30 @@ import { CATEGORIES, COUNTRIES } from '../utils/calculator';
       return;
     }
 
+    const pickupCountry = formData.get('pickupCountry') as string;
+    const isDom = (formData.get('type') as 'domestic' | 'international') === 'domestic';
+    const deliveryCountry = isDom ? pickupCountry : (formData.get('deliveryCountry') as string);
+
     // Package shipping form values
     const data = {
       type: (formData.get('type') as 'domestic' | 'international') || 'domestic',
+      pickupCountry: pickupCountry,
       pickupState: formData.get('pickupState') as string,
-      pickupDistrict: formData.get('pickupDistrict') as string,
-      deliveryState: formData.get('deliveryState') as string || undefined,
+      pickupDistrict: formData.get('pickupDistrict') as string || undefined,
+      deliveryCountry: deliveryCountry,
+      deliveryState: formData.get('deliveryState') as string,
       deliveryDistrict: formData.get('deliveryDistrict') as string || undefined,
-      deliveryCountry: formData.get('deliveryCountry') as string || undefined,
       parcels: parcels,
       insurance: formData.get('insurance') === 'on',
       express: formData.get('express') === 'on',
       pickupRequired: formData.get('pickupRequired') === 'on'
     };
 
-    // Dispatch a custom event with details to trigger results calculation in the shell
+    // Dispatch custom event to ResultsList
     const event = new CustomEvent('calculate-shipping', { detail: data });
     window.dispatchEvent(event);
 
-    // Smooth scroll to results
+    // Scroll to results section
     const resultsContainer = document.getElementById('comparison-results-section');
     if (resultsContainer) {
       resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
