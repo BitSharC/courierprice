@@ -25,7 +25,8 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "hero-subtitle": "Eliminate the hassle of visiting multiple shipping websites individually. Estimate shipping charges, compare delivery speeds, and find the cheapest courier service in under 30 seconds.",
     "hero-cta-compare": "Calculate & Compare Shipping Cost",
     "hero-cta-learn": "Learn How Pricing Works",
-    "hero-providers-title": "COMPATIBLE PROVIDERS",
+    "hero-providers-title": "COMPARE LEADING COURIER SERVICES",
+    "hero-providers-subtitle": "Supporting 40+ courier services across 7 countries",
     
     // Form General
     "form-title": "Shipping details.",
@@ -240,7 +241,8 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "hero-subtitle": "अलग-अलग कई शिपिंग वेबसाइटों पर जाने की परेशानी को समाप्त करें। शिपिंग शुल्कों का अनुमान लगाएं, वितरण गति की तुलना करें, और 30 सेकंड से कम समय में सबसे सस्ती कूरियर सेवा खोजें।",
     "hero-cta-compare": "शिपिंग लागत की गणना और तुलना करें",
     "hero-cta-learn": "जानें कि मूल्य निर्धारण कैसे काम करता है",
-    "hero-providers-title": "संगत प्रदाता",
+    "hero-providers-title": "अग्रणी कूरियर सेवाओं की तुलना करें",
+    "hero-providers-subtitle": "7 देशों में 40+ कूरियर सेवाओं का समर्थन",
     
     // Form General
     "form-title": "शिपिंग विवरण।",
@@ -455,7 +457,8 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "hero-subtitle": "Elimine la molestia de visitar múltiples sitios web de envío individualmente. Estime cargos de envío, compare velocidades de entrega y encuentre el servicio de mensajería más barato en menos de 30 segundos.",
     "hero-cta-compare": "Calcular y Comparar Costos de Envío",
     "hero-cta-learn": "Aprenda Cómo Funciona el Precio",
-    "hero-providers-title": "PROVEEDORES COMPATIBLES",
+    "hero-providers-title": "COMPARAR SERVICIOS DE MENSAJERÍA LÍDERES",
+    "hero-providers-subtitle": "Compatible con más de 40 servicios de mensajería en 7 países",
     
     // Form General
     "form-title": "Detalles del envío.",
@@ -670,7 +673,8 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "hero-subtitle": "Éliminez le tracas de devoir visiter plusieurs sites d'expédition individuellement. Estimez vos frais d'envoi, comparez les vitesses de livraison et trouvez le service le moins cher en moins de 30 secondes.",
     "hero-cta-compare": "Calculer & Comparer les Frais de Port",
     "hero-cta-learn": "Comprendre le Fonctionnement des Tarifs",
-    "hero-providers-title": "FOURNISSEURS COMPATIBLES",
+    "hero-providers-title": "COMPARER LES PRINCIPAUX SERVICES DE COURRIER",
+    "hero-providers-subtitle": "Prise en charge de plus de 40 services de messagerie dans 7 pays",
     
     // Form General
     "form-title": "Détails de l'expédition.",
@@ -885,7 +889,8 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "hero-subtitle": "Sparen Sie sich den Aufwand, mehrere Versand-Websites einzeln aufzurufen. Berechnen Sie die Versandkosten, vergleichen Sie die Lieferzeiten und finden Sie in weniger als 30 Sekunden den günstigsten Anbieter.",
     "hero-cta-compare": "Versandkosten berechnen & vergleichen",
     "hero-cta-learn": "So funktioniert die Preisberechnung",
-    "hero-providers-title": "UNTERSTÜTZTE ANBIETER",
+    "hero-providers-title": "FÜHRENDE KURIERDIENSTE VERGLEICHEN",
+    "hero-providers-subtitle": "Unterstützt mehr als 40 Kurierdienste in 7 Ländern",
     
     // Form General
     "form-title": "Versanddetails.",
@@ -1100,7 +1105,8 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
     "hero-subtitle": "تخلص من عناء زيارة مواقع الشحن المتعددة بشكل فردي. قم بتقدير رسوم الشحن ومقارنة سرعات التسليم والعثور على أرخص خدمة شحن في أقل من 30 ثانية.",
     "hero-cta-compare": "احسب وقارن تكلفة الشحن",
     "hero-cta-learn": "تعرف على كيفية تسعير الخدمات",
-    "hero-providers-title": "الشركات المدعومة",
+    "hero-providers-title": "مقارنة خدمات البريد السريع الرائدة",
+    "hero-providers-subtitle": "دعم أكثر من 40 خدمة بريد سريع في 7 دول",
     
     // Form General
     "form-title": "تفاصيل الشحن.",
