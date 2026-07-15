@@ -216,20 +216,6 @@ import { CATEGORIES } from '../utils/calculator';
             </div>
           </div>
 
-          <!-- Declared Value -->
-          <div class="flex flex-col gap-1.5 mt-2">
-            <label class="body-sm-strong text-ink text-xs font-semibold" data-i18n="form-parcel-value">Declared Value (For Insurance)</label>
-            <div class="relative flex items-center">
-              <input 
-                type="number" 
-                name="parcelValue" 
-                min="0" 
-                placeholder="e.g. 500" 
-                class="form-input w-full pr-14"
-              />
-              <span class="absolute right-3 text-xs text-mute currency-label">USD</span>
-            </div>
-          </div>
 
           <!-- Dimensions -->
           <div class="space-y-2">
@@ -419,12 +405,7 @@ import { CATEGORIES } from '../utils/calculator';
     updateStates(country, pickupStateSelect, "select-state-prompt");
     adjustDistrictVisibility(country, pickupDistrictSelect, pickupDistrictContainer);
 
-    // Update currency labels for declared value inputs
-    const countryData = COUNTRIES_DATA[country];
-    const currencyCode = countryData ? countryData.currency : 'USD';
-    document.querySelectorAll('.currency-label').forEach(label => {
-      label.textContent = currencyCode;
-    });
+
 
     // If domestic mode is active, lock delivery country to pickup country
     if (shippingType && shippingType.value === 'domestic') {
@@ -601,11 +582,6 @@ import { CATEGORIES } from '../utils/calculator';
     const dimL = TRANSLATIONS[currentLang]?.["form-parcel-dim-l"] || "Length (cm)";
     const dimW = TRANSLATIONS[currentLang]?.["form-parcel-dim-w"] || "Width (cm)";
     const dimH = TRANSLATIONS[currentLang]?.["form-parcel-dim-h"] || "Height (cm)";
-    const valueLabel = TRANSLATIONS[currentLang]?.["form-parcel-value"] || "Declared Value (For Insurance)";
-    
-    const pickupCountry = (document.getElementById('pickupCountry') as HTMLSelectElement | null)?.value || 'US';
-    const pickupCountryData = COUNTRIES_DATA[pickupCountry];
-    const currencyCode = pickupCountryData ? pickupCountryData.currency : 'USD';
 
     newCard.innerHTML = `
       <div class="flex items-center justify-between border-b border-hairline/60 pb-2">
@@ -662,20 +638,6 @@ import { CATEGORIES } from '../utils/calculator';
         </div>
       </div>
 
-      <!-- Declared Value -->
-      <div class="flex flex-col gap-1.5 mt-2">
-        <label class="body-sm-strong text-ink text-xs font-semibold" data-i18n="form-parcel-value">${valueLabel}</label>
-        <div class="relative flex items-center">
-          <input 
-            type="number" 
-            name="parcelValue" 
-            min="0" 
-            placeholder="e.g. 500" 
-            class="form-input w-full pr-14"
-          />
-          <span class="absolute right-3 text-xs text-mute currency-label">${currencyCode}</span>
-        </div>
-      </div>
 
       <!-- Dimensions -->
       <div class="space-y-2">
@@ -745,7 +707,6 @@ import { CATEGORIES } from '../utils/calculator';
       const lengthInput = card.querySelector('input[name="parcelLength"]') as HTMLInputElement | null;
       const widthInput = card.querySelector('input[name="parcelWidth"]') as HTMLInputElement | null;
       const heightInput = card.querySelector('input[name="parcelHeight"]') as HTMLInputElement | null;
-      const valueInput = card.querySelector('input[name="parcelValue"]') as HTMLInputElement | null;
 
       if (weightInput && weightUnitSelect && categorySelect) {
         parcels.push({
@@ -754,8 +715,7 @@ import { CATEGORIES } from '../utils/calculator';
           category: categorySelect.value,
           length: lengthInput && lengthInput.value ? parseFloat(lengthInput.value) : undefined,
           width: widthInput && widthInput.value ? parseFloat(widthInput.value) : undefined,
-          height: heightInput && heightInput.value ? parseFloat(heightInput.value) : undefined,
-          declaredValue: valueInput && valueInput.value ? parseFloat(valueInput.value) : 0
+          height: heightInput && heightInput.value ? parseFloat(heightInput.value) : undefined
         });
       }
     });

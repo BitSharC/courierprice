@@ -61,7 +61,6 @@ export interface ParcelInput {
   length?: number; // cm
   width?: number;  // cm
   height?: number; // cm
-  declaredValue?: number; // monetary value in display currency
 }
 
 export interface ShippingInput {
@@ -142,6 +141,61 @@ function deg2rad(deg: number): number {
   return deg * (Math.PI / 180);
 }
 
+function isCourierAvailable(courierId: string, input: ShippingInput): boolean {
+  if (courierId === 'porter-domestic-in') {
+    if (input.type !== 'domestic' || input.pickupCountry !== 'IN') {
+      return false;
+    }
+    const d1 = input.pickupDistrict;
+    const d2 = input.deliveryDistrict;
+    if (!d1 || !d2 || d1 !== d2) {
+      return false;
+    }
+    const PORTER_CITIES = [
+      "Ahmedabad",
+      "Bengaluru Rural",
+      "Bengaluru Urban",
+      "Chandigarh",
+      "Chennai",
+      "Coimbatore",
+      "Central Delhi", "East Delhi", "New Delhi", "North Delhi", "North East Delhi", "North West Delhi", "Shahdara", "South Delhi", "South East Delhi", "South West Delhi", "West Delhi",
+      "Gurugram",
+      "Gautam Buddha Nagar",
+      "Ernakulam",
+      "Indore",
+      "Jaipur",
+      "Kolkata",
+      "Lucknow",
+      "Ludhiana",
+      "Mumbai City",
+      "Mumbai Suburban",
+      "Nagpur",
+      "Nashik",
+      "Pune",
+      "Surat",
+      "Vadodara"
+    ];
+    return PORTER_CITIES.includes(d1);
+  }
+
+  if (courierId === 'lso-regional-tx') {
+    if (input.type !== 'domestic' || input.pickupCountry !== 'US') {
+      return false;
+    }
+    return input.pickupState === 'Texas' && input.deliveryState === 'Texas';
+  }
+
+  if (courierId === 'ontrac-regional-us') {
+    if (input.type !== 'domestic' || input.pickupCountry !== 'US') {
+      return false;
+    }
+    const coveredStates = ['California', 'Washington'];
+    return coveredStates.includes(input.pickupState) && coveredStates.includes(input.deliveryState);
+  }
+
+  return true;
+}
+
 export function getEstimates(input: ShippingInput): CourierEstimate[] {
   const pickupCountryObj = COUNTRIES_DATA[input.pickupCountry];
   const deliveryCountryObj = COUNTRIES_DATA[input.deliveryCountry];
@@ -180,7 +234,6 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
 
   // ================= Step 1: Determine Chargeable Weight =================
   let totalChargeableWeight = 0;
-  let totalDeclaredValue = 0;
   let totalPhysicalWeight = 0;
 
   for (const parcel of input.parcels) {
@@ -198,9 +251,6 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
 
     const chargeableWeight = Math.max(weightInKg, volumetricWeight);
     totalChargeableWeight += chargeableWeight;
-    
-    // Sum declared value
-    totalDeclaredValue += parcel.declaredValue || 0;
   }
 
   // Ensure weight is at least 0.5 kg for baseline pricing
@@ -214,6 +264,8 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
   const estimates: CourierEstimate[] = [];
 
   for (const courierId of compatibleCourierIds) {
+    if (!isCourierAvailable(courierId, input)) continue;
+
     const courier = COURIERS.find(c => c.id === courierId);
     if (!courier) continue;
 
@@ -286,7 +338,7 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
     let insuranceCharge = 0;
     if (input.insurance && courier.features.insurance) {
       const rate = rule.insuranceRate !== undefined ? rule.insuranceRate : 0.01;
-      const calculatedInsurance = totalDeclaredValue * rate;
+      const calculatedInsurance = currentCost * rate;
       const minInsurance = 5.0 * rateConversion; // Currency dependent min fee (5 in rule currency)
       insuranceCharge = Math.max(calculatedInsurance, minInsurance);
     }
