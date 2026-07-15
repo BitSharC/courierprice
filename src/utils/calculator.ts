@@ -1,7 +1,7 @@
 // src/utils/calculator.ts
 
 import { COUNTRIES_DATA, type StateRegion } from './countryData';
-import { COURIER_SERVICES } from './courierData';
+import { COURIER_SERVICES, DOMESTIC_PRICING_RULES, INTERNATIONAL_PRICING_RULES } from './courierData';
 
 export interface ParcelInput {
   weight: number;
@@ -216,18 +216,32 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
       continue;
     }
 
-    // Base Charge (For international, rates in courierData are in USD; for domestic, they are in local currency)
-    let baseCharge = isInternational ? courier.baseRate * rateConversion : courier.baseRate;
+    const intlRouteKey = `${input.pickupCountry}_TO_${input.deliveryCountry}`;
+    const rule = !isInternational
+      ? DOMESTIC_PRICING_RULES[input.pickupCountry]?.[courier.id]
+      : INTERNATIONAL_PRICING_RULES[intlRouteKey]?.[courier.id];
 
-    // Weight Surcharge
+    // Base Charge (For international, rates in courierData are in USD; for domestic, they are in local currency)
+    let baseCharge = 0;
     let weightCharge = 0;
-    if (totalBillingWeight > 0.5) {
-      const additionalSlabs = (totalBillingWeight - 0.5) / 0.5;
-      const rawWeightRate = isInternational ? courier.perAdditionalHalfKgRate * rateConversion : courier.perAdditionalHalfKgRate;
-      if (courier.id.includes("porter")) {
-        weightCharge = totalBillingWeight * rawWeightRate;
-      } else {
-        weightCharge = additionalSlabs * rawWeightRate;
+
+    if (rule) {
+      baseCharge = rule.baseRate;
+      if (totalBillingWeight > rule.baseWeightLimit) {
+        const additionalWeight = totalBillingWeight - rule.baseWeightLimit;
+        weightCharge = additionalWeight * rule.perUnitWeightCost;
+      }
+    } else {
+      baseCharge = isInternational ? courier.baseRate * rateConversion : courier.baseRate;
+      // Weight Surcharge
+      if (totalBillingWeight > 0.5) {
+        const additionalSlabs = (totalBillingWeight - 0.5) / 0.5;
+        const rawWeightRate = isInternational ? courier.perAdditionalHalfKgRate * rateConversion : courier.perAdditionalHalfKgRate;
+        if (courier.id.includes("porter")) {
+          weightCharge = totalBillingWeight * rawWeightRate;
+        } else {
+          weightCharge = additionalSlabs * rawWeightRate;
+        }
       }
     }
 
@@ -284,7 +298,9 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
     // Home Pickup Surcharge
     let pickupFee = 0;
     if (input.pickupRequired && courier.features.pickup) {
-      if (!isInternational) {
+      if (rule) {
+        pickupFee = rule.pickupSurcharge;
+      } else if (!isInternational) {
         if (totalBillingWeight > 30) {
           pickupFee = currencyCode === "INR" ? 150 : 5.0;
         } else {
@@ -307,8 +323,14 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
 
     if (input.express) {
       speedFactor *= isInternational ? 0.65 : 0.7;
-      baseCharge *= isInternational ? 1.4 : 1.35;
-      weightCharge *= isInternational ? 1.2 : 1.15;
+      if (rule) {
+        const expressMult = rule.expressMultiplier ?? 1.0;
+        baseCharge *= expressMult;
+        weightCharge *= expressMult;
+      } else {
+        baseCharge *= isInternational ? 1.4 : 1.35;
+        weightCharge *= isInternational ? 1.2 : 1.15;
+      }
     }
 
     // Transit days estimation

@@ -189,6 +189,22 @@ export const COURIER_SERVICES: CourierService[] = [
     maxWeightAllowed: 70
   },
   {
+    id: "lso-regional-tx",
+    company: "LSO",
+    serviceName: "Regional",
+    type: "domestic",
+    originCountry: "US",
+    supportedRoutes: ["US"],
+    features: { tracking: true, insurance: true, pickup: true },
+    deliveryDays: { min: 1, max: 2 },
+    reliabilityScore: 8.3,
+    tags: ["ecommerce_friendly", "regional_specialist"],
+    baseRate: 7.50,
+    perAdditionalHalfKgRate: 0.55,
+    distanceRate: 0.50,
+    maxWeightAllowed: 70
+  },
+  {
     id: "dhl-ecommerce-us",
     company: "DHL",
     serviceName: "eCommerce",
@@ -205,7 +221,7 @@ export const COURIER_SERVICES: CourierService[] = [
     maxWeightAllowed: 25
   },
   {
-    id: "dhl-express-worldwide",
+    id: "dhl-express-worldwide-us",
     company: "DHL",
     serviceName: "Express Worldwide",
     type: "international",
@@ -1353,3 +1369,353 @@ export const COURIER_SERVICES: CourierService[] = [
     maxWeightAllowed: 35
   }
 ];
+
+export interface PricingRule {
+  baseRate: number;
+  baseWeightLimit: number;
+  perUnitWeightCost: number;
+  pickupSurcharge?: number;
+  expressMultiplier?: number;
+}
+
+export const DOMESTIC_PRICING_RULES: Record<string, Record<string, PricingRule>> = {
+  "US": {
+    "usps-ground-advantage": {
+      "baseRate": 4.75,
+      "baseWeightLimit": 1,
+      "perUnitWeightCost": 0.65,
+      "pickupSurcharge": 0.00,
+      "expressMultiplier": 1.0
+    },
+    "fedex-ground-us": {
+      "baseRate": 8.50,
+      "baseWeightLimit": 1,
+      "perUnitWeightCost": 1.25,
+      "pickupSurcharge": 4.00,
+      "expressMultiplier": 1.0
+    },
+    "ups-ground-us": {
+      "baseRate": 8.75,
+      "baseWeightLimit": 1,
+      "perUnitWeightCost": 1.30,
+      "pickupSurcharge": 4.00,
+      "expressMultiplier": 1.0
+    },
+    "ontrac-regional-us": {
+      "baseRate": 7.10,
+      "baseWeightLimit": 1,
+      "perUnitWeightCost": 0.95,
+      "pickupSurcharge": 3.50,
+      "expressMultiplier": 1.0
+    },
+    "lso-regional-tx": {
+      "baseRate": 7.50,
+      "baseWeightLimit": 1,
+      "perUnitWeightCost": 1.10,
+      "pickupSurcharge": 3.00,
+      "expressMultiplier": 1.5
+    }
+  },
+  "GB": {
+    "royal-mail-tracked-24": { "baseRate": 4.15, "baseWeightLimit": 1, "perUnitWeightCost": 1.20, "pickupSurcharge": 0.50 },
+    "royal-mail-tracked-48": { "baseRate": 3.40, "baseWeightLimit": 1, "perUnitWeightCost": 1.00, "pickupSurcharge": 0.50 },
+    "royal-mail-special-delivery": { "baseRate": 7.35, "baseWeightLimit": 1, "perUnitWeightCost": 2.50, "pickupSurcharge": 0.00 },
+    "evri-standard-gb": { "baseRate": 2.99, "baseWeightLimit": 1, "perUnitWeightCost": 0.85, "pickupSurcharge": 0.00 },
+    "dpd-local-gb": { "baseRate": 6.50, "baseWeightLimit": 1, "perUnitWeightCost": 1.40, "pickupSurcharge": 2.00 },
+    "parcelforce-express24": { "baseRate": 8.10, "baseWeightLimit": 1, "perUnitWeightCost": 1.30, "pickupSurcharge": 2.50 },
+    "ups-standard-gb": { "baseRate": 7.90, "baseWeightLimit": 1, "perUnitWeightCost": 1.50, "pickupSurcharge": 2.00 },
+    "dhl-parcel-uk": { "baseRate": 7.50, "baseWeightLimit": 1, "perUnitWeightCost": 1.60, "pickupSurcharge": 2.00 }
+  },
+  "CA": {
+    "canadapost-regular": { "baseRate": 16.50, "baseWeightLimit": 1, "perUnitWeightCost": 2.50, "pickupSurcharge": 0.00 },
+    "canpar-ground": { "baseRate": 14.75, "baseWeightLimit": 1, "perUnitWeightCost": 2.25, "pickupSurcharge": 3.00 },
+    "canadapost-expedited": { "baseRate": 18.50, "baseWeightLimit": 1, "perUnitWeightCost": 2.75, "pickupSurcharge": 3.50 },
+    "fedex-ground-ca": { "baseRate": 21.00, "baseWeightLimit": 1, "perUnitWeightCost": 3.25, "pickupSurcharge": 4.00 },
+    "ups-standard-ca": { "baseRate": 21.50, "baseWeightLimit": 1, "perUnitWeightCost": 3.30, "pickupSurcharge": 4.00 },
+    "canadapost-xpresspost": { "baseRate": 26.00, "baseWeightLimit": 1, "perUnitWeightCost": 4.50, "pickupSurcharge": 3.50 },
+    "purolator-express": { "baseRate": 32.00, "baseWeightLimit": 1, "perUnitWeightCost": 5.00, "pickupSurcharge": 5.00 }
+  },
+  "AU": {
+    "aramex-au-domestic": { "baseRate": 9.95, "baseWeightLimit": 1, "perUnitWeightCost": 1.80, "pickupSurcharge": 0.00 },
+    "auspost-parcel-post": { "baseRate": 10.95, "baseWeightLimit": 1, "perUnitWeightCost": 2.20, "pickupSurcharge": 0.00 },
+    "couriersplease-standard": { "baseRate": 11.50, "baseWeightLimit": 1, "perUnitWeightCost": 2.00, "pickupSurcharge": 2.50 },
+    "auspost-express-post": { "baseRate": 14.95, "baseWeightLimit": 1, "perUnitWeightCost": 3.50, "pickupSurcharge": 0.00 },
+    "startrack-premium": { "baseRate": 18.50, "baseWeightLimit": 1, "perUnitWeightCost": 3.80, "pickupSurcharge": 4.50 }
+  },
+  "DE": {
+    "hermes-de": { "baseRate": 4.50, "baseWeightLimit": 1, "perUnitWeightCost": 0.70, "pickupSurcharge": 2.50 },
+    "gls-de": { "baseRate": 4.30, "baseWeightLimit": 1, "perUnitWeightCost": 0.75, "pickupSurcharge": 0.00 },
+    "dpd-de": { "baseRate": 4.90, "baseWeightLimit": 1, "perUnitWeightCost": 0.80, "pickupSurcharge": 2.50 },
+    "dhl-paket-de": { "baseRate": 5.49, "baseWeightLimit": 1, "perUnitWeightCost": 0.90, "pickupSurcharge": 3.00 },
+    "ups-standard-de": { "baseRate": 7.50, "baseWeightLimit": 1, "perUnitWeightCost": 1.20, "pickupSurcharge": 4.00 }
+  },
+  "AE": {
+    "emirates-post-domestic": { "baseRate": 25.00, "baseWeightLimit": 1, "perUnitWeightCost": 5.00, "pickupSurcharge": 0.00 },
+    "aramex-domestic-ae": { "baseRate": 30.00, "baseWeightLimit": 1, "perUnitWeightCost": 6.50, "pickupSurcharge": 10.00 },
+    "shipa-delivery-ae": { "baseRate": 35.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.50, "pickupSurcharge": 0.00 }
+  },
+  "IN": {
+    "indiapost-domestic-in": { "baseRate": 42.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 40.00, "pickupSurcharge": 0.00 },
+    "xpressbees-domestic-in": { "baseRate": 55.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 50.00, "pickupSurcharge": 10.00 },
+    "ecomexpress-domestic-in": { "baseRate": 60.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 55.00, "pickupSurcharge": 10.00 },
+    "delhivery-domestic-in": { "baseRate": 65.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 60.00, "pickupSurcharge": 0.00 },
+    "shadowfax-domestic-in": { "baseRate": 65.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 60.00, "pickupSurcharge": 10.00 },
+    "professional-domestic-in": { "baseRate": 70.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 65.00, "pickupSurcharge": 15.00 },
+    "dtdc-domestic-in": { "baseRate": 85.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 75.00, "pickupSurcharge": 25.00 },
+    "porter-domestic-in": { "baseRate": 150.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 20.00, "pickupSurcharge": 0.00 },
+    "bluedart-domestic-in": { "baseRate": 180.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 120.00, "pickupSurcharge": 50.00 }
+  }
+};
+
+export const INTERNATIONAL_PRICING_RULES: Record<string, Record<string, PricingRule>> = {
+  "US_TO_CA": {
+    "usps-priority-intl": { "baseRate": 30.00, "baseWeightLimit": 1, "perUnitWeightCost": 4.50 },
+    "fedex-intl-economy": { "baseRate": 45.00, "baseWeightLimit": 1, "perUnitWeightCost": 6.50 },
+    "dhl-express-worldwide-us": { "baseRate": 55.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.00 }
+  },
+  "US_TO_GB": {
+    "usps-priority-intl": { "baseRate": 42.00, "baseWeightLimit": 1, "perUnitWeightCost": 6.00 },
+    "fedex-intl-economy": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.50 },
+    "dhl-express-worldwide-us": { "baseRate": 75.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.00 }
+  },
+  "US_TO_AU": {
+    "usps-priority-intl": { "baseRate": 48.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.50 },
+    "fedex-intl-economy": { "baseRate": 85.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.00 },
+    "dhl-express-worldwide-us": { "baseRate": 95.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.00 }
+  },
+  "US_TO_IN": {
+    "usps-priority-intl": { "baseRate": 52.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.00 },
+    "fedex-intl-economy": { "baseRate": 90.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.50 },
+    "dhl-express-worldwide-us": { "baseRate": 105.00, "baseWeightLimit": 1, "perUnitWeightCost": 16.00 }
+  },
+  "US_TO_DE": {
+    "usps-priority-intl": { "baseRate": 42.00, "baseWeightLimit": 1, "perUnitWeightCost": 6.00 },
+    "fedex-intl-economy": { "baseRate": 68.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.50 },
+    "dhl-express-worldwide-us": { "baseRate": 78.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.00 }
+  },
+  "US_TO_AE": {
+    "usps-priority-intl": { "baseRate": 45.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.50 },
+    "fedex-intl-economy": { "baseRate": 75.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.00 },
+    "dhl-express-worldwide-us": { "baseRate": 85.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.00 }
+  },
+  "GB_TO_US": {
+    "royal-mail-intl-tracked": { "baseRate": 16.50, "baseWeightLimit": 1, "perUnitWeightCost": 5.50 },
+    "parcelforce-worldwide": { "baseRate": 38.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.00 },
+    "dhl-express-gb": { "baseRate": 48.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.50 },
+    "ups-worldwide-gb": { "baseRate": 45.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.00 },
+    "fedex-intl-gb": { "baseRate": 42.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.50 }
+  },
+  "GB_TO_DE": {
+    "royal-mail-intl-tracked": { "baseRate": 10.50, "baseWeightLimit": 1, "perUnitWeightCost": 3.50 },
+    "parcelforce-worldwide": { "baseRate": 25.00, "baseWeightLimit": 1, "perUnitWeightCost": 4.50 },
+    "dhl-express-gb": { "baseRate": 32.00, "baseWeightLimit": 1, "perUnitWeightCost": 5.50 },
+    "ups-worldwide-gb": { "baseRate": 28.00, "baseWeightLimit": 1, "perUnitWeightCost": 5.00 },
+    "fedex-intl-gb": { "baseRate": 29.00, "baseWeightLimit": 1, "perUnitWeightCost": 5.20 }
+  },
+  "GB_TO_AU": {
+    "royal-mail-intl-tracked": { "baseRate": 19.50, "baseWeightLimit": 1, "perUnitWeightCost": 7.50 },
+    "parcelforce-worldwide": { "baseRate": 55.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.00 },
+    "dhl-express-gb": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.50 },
+    "ups-worldwide-gb": { "baseRate": 62.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.00 },
+    "fedex-intl-gb": { "baseRate": 60.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.50 }
+  },
+  "GB_TO_IN": {
+    "royal-mail-intl-tracked": { "baseRate": 18.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.00 },
+    "parcelforce-worldwide": { "baseRate": 52.00, "baseWeightLimit": 1, "perUnitWeightCost": 10.50 },
+    "dhl-express-gb": { "baseRate": 60.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.50 },
+    "ups-worldwide-gb": { "baseRate": 58.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.00 },
+    "fedex-intl-gb": { "baseRate": 55.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.50 }
+  },
+  "CA_TO_US": {
+    "canadapost-intl": { "baseRate": 22.00, "baseWeightLimit": 1, "perUnitWeightCost": 4.50 },
+    "fedex-intl-ca": { "baseRate": 45.00, "baseWeightLimit": 1, "perUnitWeightCost": 6.50 },
+    "ups-worldwide-ca": { "baseRate": 48.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.00 },
+    "dhl-express-ca": { "baseRate": 55.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.00 }
+  },
+  "CA_TO_GB": {
+    "canadapost-intl": { "baseRate": 45.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.50 },
+    "fedex-intl-ca": { "baseRate": 85.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.50 },
+    "ups-worldwide-ca": { "baseRate": 88.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.00 },
+    "dhl-express-ca": { "baseRate": 95.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.50 }
+  },
+  "CA_TO_DE": {
+    "canadapost-intl": { "baseRate": 48.00, "baseWeightLimit": 1, "perUnitWeightCost": 10.00 },
+    "fedex-intl-ca": { "baseRate": 88.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.00 },
+    "ups-worldwide-ca": { "baseRate": 92.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.50 },
+    "dhl-express-ca": { "baseRate": 98.00, "baseWeightLimit": 1, "perUnitWeightCost": 15.00 }
+  },
+  "CA_TO_AU": {
+    "canadapost-intl": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.00 },
+    "fedex-intl-ca": { "baseRate": 125.00, "baseWeightLimit": 1, "perUnitWeightCost": 18.50 },
+    "ups-worldwide-ca": { "baseRate": 130.00, "baseWeightLimit": 1, "perUnitWeightCost": 19.00 },
+    "dhl-express-ca": { "baseRate": 145.00, "baseWeightLimit": 1, "perUnitWeightCost": 22.00 }
+  },
+  "CA_TO_AE": {
+    "canadapost-intl": { "baseRate": 70.00, "baseWeightLimit": 1, "perUnitWeightCost": 15.00 },
+    "fedex-intl-ca": { "baseRate": 135.00, "baseWeightLimit": 1, "perUnitWeightCost": 20.00 },
+    "ups-worldwide-ca": { "baseRate": 140.00, "baseWeightLimit": 1, "perUnitWeightCost": 21.00 },
+    "dhl-express-ca": { "baseRate": 155.00, "baseWeightLimit": 1, "perUnitWeightCost": 23.50 }
+  },
+  "CA_TO_IN": {
+    "canadapost-intl": { "baseRate": 75.00, "baseWeightLimit": 1, "perUnitWeightCost": 16.00 },
+    "fedex-intl-ca": { "baseRate": 145.00, "baseWeightLimit": 1, "perUnitWeightCost": 22.00 },
+    "ups-worldwide-ca": { "baseRate": 150.00, "baseWeightLimit": 1, "perUnitWeightCost": 23.00 },
+    "dhl-express-ca": { "baseRate": 165.00, "baseWeightLimit": 1, "perUnitWeightCost": 25.00 }
+  },
+  "AU_TO_US": {
+    "auspost-intl-parcel": { "baseRate": 28.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.50 },
+    "ups-worldwide-au": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.00 },
+    "fedex-intl-au": { "baseRate": 68.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.50 },
+    "dhl-express-au": { "baseRate": 75.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.00 }
+  },
+  "AU_TO_CA": {
+    "auspost-intl-parcel": { "baseRate": 32.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.00 },
+    "ups-worldwide-au": { "baseRate": 70.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.00 },
+    "fedex-intl-au": { "baseRate": 72.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.50 },
+    "dhl-express-au": { "baseRate": 79.00, "baseWeightLimit": 1, "perUnitWeightCost": 15.00 }
+  },
+  "AU_TO_GB": {
+    "auspost-intl-parcel": { "baseRate": 34.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.50 },
+    "ups-worldwide-au": { "baseRate": 74.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.00 },
+    "fedex-intl-au": { "baseRate": 76.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.50 },
+    "dhl-express-au": { "baseRate": 85.00, "baseWeightLimit": 1, "perUnitWeightCost": 16.00 }
+  },
+  "AU_TO_DE": {
+    "auspost-intl-parcel": { "baseRate": 36.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.00 },
+    "ups-worldwide-au": { "baseRate": 76.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.50 },
+    "fedex-intl-au": { "baseRate": 78.00, "baseWeightLimit": 1, "perUnitWeightCost": 15.00 },
+    "dhl-express-au": { "baseRate": 88.00, "baseWeightLimit": 1, "perUnitWeightCost": 16.50 }
+  },
+  "AU_TO_IN": {
+    "auspost-intl-parcel": { "baseRate": 26.00, "baseWeightLimit": 1, "perUnitWeightCost": 6.80 },
+    "ups-worldwide-au": { "baseRate": 58.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.00 },
+    "fedex-intl-au": { "baseRate": 60.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.50 },
+    "dhl-express-au": { "baseRate": 68.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.00 }
+  },
+  "AU_TO_AE": {
+    "auspost-intl-parcel": { "baseRate": 30.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.20 },
+    "ups-worldwide-au": { "baseRate": 62.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.50 },
+    "fedex-intl-au": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.00 },
+    "dhl-express-au": { "baseRate": 72.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.50 }
+  },
+  "DE_TO_GB": {
+    "gls-intl-de": { "baseRate": 14.50, "baseWeightLimit": 1, "perUnitWeightCost": 2.50 },
+    "dhl-express-de": { "baseRate": 28.00, "baseWeightLimit": 1, "perUnitWeightCost": 4.50 },
+    "ups-worldwide-de": { "baseRate": 26.00, "baseWeightLimit": 1, "perUnitWeightCost": 4.00 },
+    "fedex-intl-de": { "baseRate": 27.50, "baseWeightLimit": 1, "perUnitWeightCost": 4.20 }
+  },
+  "DE_TO_US": {
+    "gls-intl-de": { "baseRate": 24.00, "baseWeightLimit": 1, "perUnitWeightCost": 6.50 },
+    "dhl-express-de": { "baseRate": 42.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.00 },
+    "ups-worldwide-de": { "baseRate": 45.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.50 },
+    "fedex-intl-de": { "baseRate": 44.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.20 }
+  },
+  "DE_TO_CA": {
+    "gls-intl-de": { "baseRate": 26.00, "baseWeightLimit": 1, "perUnitWeightCost": 7.00 },
+    "dhl-express-de": { "baseRate": 45.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.50 },
+    "ups-worldwide-de": { "baseRate": 48.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.00 },
+    "fedex-intl-de": { "baseRate": 47.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.80 }
+  },
+  "DE_TO_AE": {
+    "gls-intl-de": { "baseRate": 32.00, "baseWeightLimit": 1, "perUnitWeightCost": 8.50 },
+    "dhl-express-de": { "baseRate": 55.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.50 },
+    "ups-worldwide-de": { "baseRate": 58.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.00 },
+    "fedex-intl-de": { "baseRate": 60.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.50 }
+  },
+  "DE_TO_IN": {
+    "gls-intl-de": { "baseRate": 34.00, "baseWeightLimit": 1, "perUnitWeightCost": 9.00 },
+    "dhl-express-de": { "baseRate": 58.00, "baseWeightLimit": 1, "perUnitWeightCost": 12.00 },
+    "ups-worldwide-de": { "baseRate": 62.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.00 },
+    "fedex-intl-de": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 13.50 }
+  },
+  "DE_TO_AU": {
+    "gls-intl-de": { "baseRate": 38.00, "baseWeightLimit": 1, "perUnitWeightCost": 11.00 },
+    "dhl-express-de": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 14.50 },
+    "ups-worldwide-de": { "baseRate": 70.00, "baseWeightLimit": 1, "perUnitWeightCost": 15.50 },
+    "fedex-intl-de": { "baseRate": 72.00, "baseWeightLimit": 1, "perUnitWeightCost": 16.00 }
+  },
+  "AE_TO_IN": {
+    "aramex-intl-ae": { "baseRate": 65.00, "baseWeightLimit": 1, "perUnitWeightCost": 15.00 },
+    "fedex-intl-ae": { "baseRate": 110.00, "baseWeightLimit": 1, "perUnitWeightCost": 25.00 },
+    "ups-worldwide-ae": { "baseRate": 125.00, "baseWeightLimit": 1, "perUnitWeightCost": 28.00 },
+    "dhl-express-ae": { "baseRate": 140.00, "baseWeightLimit": 1, "perUnitWeightCost": 32.00 }
+  },
+  "AE_TO_GB": {
+    "aramex-intl-ae": { "baseRate": 110.00, "baseWeightLimit": 1, "perUnitWeightCost": 25.00 },
+    "fedex-intl-ae": { "baseRate": 165.00, "baseWeightLimit": 1, "perUnitWeightCost": 38.00 },
+    "ups-worldwide-ae": { "baseRate": 175.00, "baseWeightLimit": 1, "perUnitWeightCost": 40.00 },
+    "dhl-express-ae": { "baseRate": 195.00, "baseWeightLimit": 1, "perUnitWeightCost": 45.00 }
+  },
+  "AE_TO_DE": {
+    "aramex-intl-ae": { "baseRate": 115.00, "baseWeightLimit": 1, "perUnitWeightCost": 26.00 },
+    "fedex-intl-ae": { "baseRate": 170.00, "baseWeightLimit": 1, "perUnitWeightCost": 39.00 },
+    "ups-worldwide-ae": { "baseRate": 180.00, "baseWeightLimit": 1, "perUnitWeightCost": 42.00 },
+    "dhl-express-ae": { "baseRate": 205.00, "baseWeightLimit": 1, "perUnitWeightCost": 47.00 }
+  },
+  "AE_TO_US": {
+    "aramex-intl-ae": { "baseRate": 145.00, "baseWeightLimit": 1, "perUnitWeightCost": 35.00 },
+    "fedex-intl-ae": { "baseRate": 240.00, "baseWeightLimit": 1, "perUnitWeightCost": 55.00 },
+    "ups-worldwide-ae": { "baseRate": 255.00, "baseWeightLimit": 1, "perUnitWeightCost": 58.00 },
+    "dhl-express-ae": { "baseRate": 285.00, "baseWeightLimit": 1, "perUnitWeightCost": 65.00 }
+  },
+  "AE_TO_CA": {
+    "aramex-intl-ae": { "baseRate": 155.00, "baseWeightLimit": 1, "perUnitWeightCost": 38.00 },
+    "fedex-intl-ae": { "baseRate": 250.00, "baseWeightLimit": 1, "perUnitWeightCost": 58.00 },
+    "ups-worldwide-ae": { "baseRate": 265.00, "baseWeightLimit": 1, "perUnitWeightCost": 62.00 },
+    "dhl-express-ae": { "baseRate": 295.00, "baseWeightLimit": 1, "perUnitWeightCost": 68.00 }
+  },
+  "AE_TO_AU": {
+    "aramex-intl-ae": { "baseRate": 165.00, "baseWeightLimit": 1, "perUnitWeightCost": 42.00 },
+    "fedex-intl-ae": { "baseRate": 270.00, "baseWeightLimit": 1, "perUnitWeightCost": 65.00 },
+    "ups-worldwide-ae": { "baseRate": 285.00, "baseWeightLimit": 1, "perUnitWeightCost": 68.00 },
+    "dhl-express-ae": { "baseRate": 315.00, "baseWeightLimit": 1, "perUnitWeightCost": 75.00 }
+  },
+  "IN_TO_AE": {
+    "indiapost-ems-in": { "baseRate": 850.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 500.00 },
+    "garudavega-intl-in": { "baseRate": 1050.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 600.00 },
+    "aramex-intl-in": { "baseRate": 1200.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 650.00 },
+    "fedex-intl-in": { "baseRate": 2400.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 900.00 },
+    "ups-worldwide-in": { "baseRate": 2500.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 950.00 },
+    "dhl-express-in": { "baseRate": 2600.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1000.00 }
+  },
+  "IN_TO_GB": {
+    "indiapost-ems-in": { "baseRate": 1150.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 700.00 },
+    "garudavega-intl-in": { "baseRate": 1300.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 800.00 },
+    "aramex-intl-in": { "baseRate": 1800.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 900.00 },
+    "fedex-intl-in": { "baseRate": 3100.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1300.00 },
+    "ups-worldwide-in": { "baseRate": 3200.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1350.00 },
+    "dhl-express-in": { "baseRate": 3350.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1400.00 }
+  },
+  "IN_TO_DE": {
+    "indiapost-ems-in": { "baseRate": 1200.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 750.00 },
+    "garudavega-intl-in": { "baseRate": 1350.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 850.00 },
+    "aramex-intl-in": { "baseRate": 1900.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 950.00 },
+    "fedex-intl-in": { "baseRate": 3200.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1350.00 },
+    "ups-worldwide-in": { "baseRate": 3300.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1400.00 },
+    "dhl-express-in": { "baseRate": 3500.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1450.00 }
+  },
+  "IN_TO_US": {
+    "indiapost-ems-in": { "baseRate": 1450.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 850.00 },
+    "garudavega-intl-in": { "baseRate": 1650.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 950.00 },
+    "aramex-intl-in": { "baseRate": 2200.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1100.00 },
+    "fedex-intl-in": { "baseRate": 3600.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1600.00 },
+    "ups-worldwide-in": { "baseRate": 3750.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1650.00 },
+    "dhl-express-in": { "baseRate": 3900.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1700.00 }
+  },
+  "IN_TO_CA": {
+    "indiapost-ems-in": { "baseRate": 1500.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 900.00 },
+    "garudavega-intl-in": { "baseRate": 1700.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1000.00 },
+    "aramex-intl-in": { "baseRate": 2400.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1200.00 },
+    "fedex-intl-in": { "baseRate": 3900.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1800.00 },
+    "ups-worldwide-in": { "baseRate": 4100.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1850.00 },
+    "dhl-express-in": { "baseRate": 4250.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1900.00 }
+  },
+  "IN_TO_AU": {
+    "indiapost-ems-in": { "baseRate": 1400.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 900.00 },
+    "garudavega-intl-in": { "baseRate": 1600.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1000.00 },
+    "aramex-intl-in": { "baseRate": 2600.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1300.00 },
+    "fedex-intl-in": { "baseRate": 4100.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1850.00 },
+    "ups-worldwide-in": { "baseRate": 4200.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 1900.00 },
+    "dhl-express-in": { "baseRate": 4500.00, "baseWeightLimit": 0.5, "perUnitWeightCost": 2000.00 }
+  }
+};
