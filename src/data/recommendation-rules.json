@@ -1,0 +1,52 @@
+{
+  "cheapest": {
+    "priceWeight": 0.8,
+    "speedWeight": 0.1,
+    "reliabilityWeight": 0.1,
+    "requiredTags": [
+      "cheapest"
+    ]
+  },
+  "fastest": {
+    "priceWeight": 0.1,
+    "speedWeight": 0.8,
+    "reliabilityWeight": 0.1,
+    "requiredTags": [
+      "fastest"
+    ]
+  },
+  "reliable": {
+    "priceWeight": 0.1,
+    "speedWeight": 0.2,
+    "reliabilityWeight": 0.7,
+    "requiredTags": [
+      "reliable",
+      "most_reliable"
+    ]
+  },
+  "student": {
+    "priceWeight": 0.7,
+    "speedWeight": 0.1,
+    "reliabilityWeight": 0.2,
+    "requiredTags": [
+      "student_friendly"
+    ]
+  },
+  "business": {
+    "priceWeight": 0.2,
+    "speedWeight": 0.4,
+    "reliabilityWeight": 0.4,
+    "requiredTags": [
+      "business_friendly"
+    ]
+  },
+  "express": {
+    "priceWeight": 0.1,
+    "speedWeight": 0.7,
+    "reliabilityWeight": 0.2,
+    "requiredTags": [
+      "fastest",
+      "premium"
+    ]
+  }
+}

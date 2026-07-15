@@ -1,0 +1,84 @@
+{
+  "domestic": [
+    {
+      "name": "Local",
+      "min": 0,
+      "max": 50,
+      "multiplier": 1
+    },
+    {
+      "name": "Zone A",
+      "min": 50,
+      "max": 300,
+      "multiplier": 1.1
+    },
+    {
+      "name": "Zone B",
+      "min": 300,
+      "max": 800,
+      "multiplier": 1.25
+    },
+    {
+      "name": "Zone C",
+      "min": 800,
+      "max": 1500,
+      "multiplier": 1.45
+    },
+    {
+      "name": "Zone D",
+      "min": 1500,
+      "max": 999999,
+      "multiplier": 1.7
+    }
+  ],
+  "international": {
+    "neighbor": 1.2,
+    "same_region": 1.5,
+    "intercontinental": 2,
+    "long_haul": 2.5
+  },
+  "internationalRoutes": {
+    "US_TO_CA": "neighbor",
+    "US_TO_GB": "intercontinental",
+    "US_TO_AU": "long_haul",
+    "US_TO_IN": "long_haul",
+    "US_TO_DE": "intercontinental",
+    "US_TO_AE": "long_haul",
+    "GB_TO_US": "intercontinental",
+    "GB_TO_DE": "neighbor",
+    "GB_TO_AU": "long_haul",
+    "GB_TO_IN": "long_haul",
+    "GB_TO_CA": "intercontinental",
+    "GB_TO_AE": "long_haul",
+    "CA_TO_US": "neighbor",
+    "CA_TO_GB": "intercontinental",
+    "CA_TO_DE": "intercontinental",
+    "CA_TO_AU": "long_haul",
+    "CA_TO_AE": "long_haul",
+    "CA_TO_IN": "long_haul",
+    "AU_TO_US": "long_haul",
+    "AU_TO_CA": "long_haul",
+    "AU_TO_GB": "long_haul",
+    "AU_TO_DE": "long_haul",
+    "AU_TO_IN": "long_haul",
+    "AU_TO_AE": "long_haul",
+    "DE_TO_GB": "neighbor",
+    "DE_TO_US": "intercontinental",
+    "DE_TO_CA": "intercontinental",
+    "DE_TO_AE": "long_haul",
+    "DE_TO_IN": "long_haul",
+    "DE_TO_AU": "long_haul",
+    "AE_TO_IN": "same_region",
+    "AE_TO_GB": "long_haul",
+    "AE_TO_DE": "long_haul",
+    "AE_TO_US": "long_haul",
+    "AE_TO_CA": "long_haul",
+    "AE_TO_AU": "long_haul",
+    "IN_TO_AE": "same_region",
+    "IN_TO_GB": "long_haul",
+    "IN_TO_DE": "long_haul",
+    "IN_TO_US": "long_haul",
+    "IN_TO_CA": "long_haul",
+    "IN_TO_AU": "long_haul"
+  }
+}

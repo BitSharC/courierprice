@@ -1,0 +1,371 @@
+{
+  "domestic": {
+    "US": [
+      "ups-ground-us",
+      "ups-3-day-select",
+      "ups-next-day-air",
+      "fedex-ground-us",
+      "fedex-home-delivery",
+      "fedex-express-saver",
+      "usps-ground-advantage",
+      "usps-priority-mail",
+      "usps-priority-mail-express",
+      "ontrac-regional-us",
+      "lso-regional-tx",
+      "dhl-ecommerce-us"
+    ],
+    "GB": [
+      "royal-mail-tracked-24",
+      "royal-mail-tracked-48",
+      "royal-mail-special-delivery",
+      "dpd-local-gb",
+      "evri-standard-gb",
+      "parcelforce-express24",
+      "ups-standard-gb",
+      "dhl-parcel-uk"
+    ],
+    "CA": [
+      "canadapost-regular",
+      "canadapost-expedited",
+      "canadapost-xpresspost",
+      "purolator-express",
+      "ups-standard-ca",
+      "fedex-ground-ca",
+      "canpar-ground"
+    ],
+    "AU": [
+      "auspost-parcel-post",
+      "auspost-express-post",
+      "startrack-premium",
+      "couriersplease-standard",
+      "aramex-au-domestic"
+    ],
+    "DE": [
+      "dhl-paket-de",
+      "hermes-de",
+      "dpd-de",
+      "gls-de",
+      "ups-standard-de"
+    ],
+    "AE": [
+      "emirates-post-domestic",
+      "aramex-domestic-ae",
+      "shipa-delivery-ae"
+    ],
+    "IN": [
+      "indiapost-domestic-in",
+      "bluedart-domestic-in",
+      "dtdc-domestic-in",
+      "delhivery-domestic-in",
+      "xpressbees-domestic-in",
+      "ecomexpress-domestic-in",
+      "shadowfax-domestic-in",
+      "porter-domestic-in",
+      "professional-domestic-in"
+    ]
+  },
+  "international": {
+    "US": {
+      "CA": [
+        "dhl-express-worldwide-us",
+        "ups-worldwide-saver",
+        "ups-worldwide-expedited",
+        "fedex-intl-priority",
+        "fedex-intl-economy",
+        "usps-priority-intl",
+        "usps-express-mail-intl"
+      ],
+      "GB": [
+        "dhl-express-worldwide-us",
+        "ups-worldwide-saver",
+        "ups-worldwide-expedited",
+        "fedex-intl-priority",
+        "fedex-intl-economy",
+        "usps-priority-intl",
+        "usps-express-mail-intl"
+      ],
+      "AU": [
+        "dhl-express-worldwide-us",
+        "ups-worldwide-saver",
+        "ups-worldwide-expedited",
+        "fedex-intl-priority",
+        "fedex-intl-economy",
+        "usps-priority-intl",
+        "usps-express-mail-intl"
+      ],
+      "DE": [
+        "dhl-express-worldwide-us",
+        "ups-worldwide-saver",
+        "ups-worldwide-expedited",
+        "fedex-intl-priority",
+        "fedex-intl-economy",
+        "usps-priority-intl",
+        "usps-express-mail-intl"
+      ],
+      "AE": [
+        "dhl-express-worldwide-us",
+        "ups-worldwide-saver",
+        "ups-worldwide-expedited",
+        "fedex-intl-priority",
+        "fedex-intl-economy",
+        "usps-priority-intl",
+        "usps-express-mail-intl"
+      ],
+      "IN": [
+        "dhl-express-worldwide-us",
+        "ups-worldwide-saver",
+        "ups-worldwide-expedited",
+        "fedex-intl-priority",
+        "fedex-intl-economy",
+        "usps-priority-intl",
+        "usps-express-mail-intl"
+      ]
+    },
+    "GB": {
+      "US": [
+        "dhl-express-gb",
+        "ups-worldwide-gb",
+        "fedex-intl-gb",
+        "parcelforce-worldwide",
+        "royal-mail-intl-tracked"
+      ],
+      "CA": [
+        "dhl-express-gb",
+        "ups-worldwide-gb",
+        "fedex-intl-gb",
+        "parcelforce-worldwide",
+        "royal-mail-intl-tracked"
+      ],
+      "AU": [
+        "dhl-express-gb",
+        "ups-worldwide-gb",
+        "fedex-intl-gb",
+        "parcelforce-worldwide",
+        "royal-mail-intl-tracked"
+      ],
+      "DE": [
+        "dhl-express-gb",
+        "ups-worldwide-gb",
+        "fedex-intl-gb",
+        "parcelforce-worldwide",
+        "royal-mail-intl-tracked"
+      ],
+      "AE": [
+        "dhl-express-gb",
+        "ups-worldwide-gb",
+        "fedex-intl-gb",
+        "parcelforce-worldwide",
+        "royal-mail-intl-tracked"
+      ],
+      "IN": [
+        "dhl-express-gb",
+        "ups-worldwide-gb",
+        "fedex-intl-gb",
+        "parcelforce-worldwide",
+        "royal-mail-intl-tracked"
+      ]
+    },
+    "CA": {
+      "US": [
+        "dhl-express-ca",
+        "ups-worldwide-ca",
+        "fedex-intl-ca",
+        "canadapost-intl"
+      ],
+      "GB": [
+        "dhl-express-ca",
+        "ups-worldwide-ca",
+        "fedex-intl-ca",
+        "canadapost-intl"
+      ],
+      "AU": [
+        "dhl-express-ca",
+        "ups-worldwide-ca",
+        "fedex-intl-ca",
+        "canadapost-intl"
+      ],
+      "DE": [
+        "dhl-express-ca",
+        "ups-worldwide-ca",
+        "fedex-intl-ca",
+        "canadapost-intl"
+      ],
+      "AE": [
+        "dhl-express-ca",
+        "ups-worldwide-ca",
+        "fedex-intl-ca",
+        "canadapost-intl"
+      ],
+      "IN": [
+        "dhl-express-ca",
+        "ups-worldwide-ca",
+        "fedex-intl-ca",
+        "canadapost-intl"
+      ]
+    },
+    "AU": {
+      "US": [
+        "dhl-express-au",
+        "fedex-intl-au",
+        "ups-worldwide-au",
+        "auspost-intl-parcel"
+      ],
+      "CA": [
+        "dhl-express-au",
+        "fedex-intl-au",
+        "ups-worldwide-au",
+        "auspost-intl-parcel"
+      ],
+      "GB": [
+        "dhl-express-au",
+        "fedex-intl-au",
+        "ups-worldwide-au",
+        "auspost-intl-parcel"
+      ],
+      "DE": [
+        "dhl-express-au",
+        "fedex-intl-au",
+        "ups-worldwide-au",
+        "auspost-intl-parcel"
+      ],
+      "AE": [
+        "dhl-express-au",
+        "fedex-intl-au",
+        "ups-worldwide-au",
+        "auspost-intl-parcel"
+      ],
+      "IN": [
+        "dhl-express-au",
+        "fedex-intl-au",
+        "ups-worldwide-au",
+        "auspost-intl-parcel"
+      ]
+    },
+    "DE": {
+      "US": [
+        "dhl-express-de",
+        "fedex-intl-de",
+        "ups-worldwide-de",
+        "gls-intl-de"
+      ],
+      "CA": [
+        "dhl-express-de",
+        "fedex-intl-de",
+        "ups-worldwide-de",
+        "gls-intl-de"
+      ],
+      "GB": [
+        "dhl-express-de",
+        "fedex-intl-de",
+        "ups-worldwide-de",
+        "gls-intl-de"
+      ],
+      "AU": [
+        "dhl-express-de",
+        "fedex-intl-de",
+        "ups-worldwide-de",
+        "gls-intl-de"
+      ],
+      "AE": [
+        "dhl-express-de",
+        "fedex-intl-de",
+        "ups-worldwide-de",
+        "gls-intl-de"
+      ],
+      "IN": [
+        "dhl-express-de",
+        "fedex-intl-de",
+        "ups-worldwide-de",
+        "gls-intl-de"
+      ]
+    },
+    "AE": {
+      "US": [
+        "aramex-intl-ae",
+        "dhl-express-ae",
+        "fedex-intl-ae",
+        "ups-worldwide-ae"
+      ],
+      "CA": [
+        "aramex-intl-ae",
+        "dhl-express-ae",
+        "fedex-intl-ae",
+        "ups-worldwide-ae"
+      ],
+      "GB": [
+        "aramex-intl-ae",
+        "dhl-express-ae",
+        "fedex-intl-ae",
+        "ups-worldwide-ae"
+      ],
+      "AU": [
+        "aramex-intl-ae",
+        "dhl-express-ae",
+        "fedex-intl-ae",
+        "ups-worldwide-ae"
+      ],
+      "DE": [
+        "aramex-intl-ae",
+        "dhl-express-ae",
+        "fedex-intl-ae",
+        "ups-worldwide-ae"
+      ],
+      "IN": [
+        "aramex-intl-ae",
+        "dhl-express-ae",
+        "fedex-intl-ae",
+        "ups-worldwide-ae"
+      ]
+    },
+    "IN": {
+      "US": [
+        "dhl-express-in",
+        "fedex-intl-in",
+        "ups-worldwide-in",
+        "aramex-intl-in",
+        "garudavega-intl-in",
+        "indiapost-ems-in"
+      ],
+      "CA": [
+        "dhl-express-in",
+        "fedex-intl-in",
+        "ups-worldwide-in",
+        "aramex-intl-in",
+        "garudavega-intl-in",
+        "indiapost-ems-in"
+      ],
+      "GB": [
+        "dhl-express-in",
+        "fedex-intl-in",
+        "ups-worldwide-in",
+        "aramex-intl-in",
+        "garudavega-intl-in",
+        "indiapost-ems-in"
+      ],
+      "AU": [
+        "dhl-express-in",
+        "fedex-intl-in",
+        "ups-worldwide-in",
+        "aramex-intl-in",
+        "garudavega-intl-in",
+        "indiapost-ems-in"
+      ],
+      "DE": [
+        "dhl-express-in",
+        "fedex-intl-in",
+        "ups-worldwide-in",
+        "aramex-intl-in",
+        "garudavega-intl-in",
+        "indiapost-ems-in"
+      ],
+      "AE": [
+        "dhl-express-in",
+        "fedex-intl-in",
+        "ups-worldwide-in",
+        "aramex-intl-in",
+        "garudavega-intl-in",
+        "indiapost-ems-in"
+      ]
+    }
+  }
+}

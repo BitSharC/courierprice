@@ -1,0 +1,1717 @@
+[
+  {
+    "id": "ups-ground-us",
+    "company": "UPS",
+    "serviceName": "Ground",
+    "deliveryDays": {
+      "min": 1,
+      "max": 5
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "most_reliable",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "ups-3-day-select",
+    "company": "UPS",
+    "serviceName": "3 Day Select",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "ups-next-day-air",
+    "company": "UPS",
+    "serviceName": "Next Day Air",
+    "deliveryDays": {
+      "min": 1,
+      "max": 1
+    },
+    "reliabilityScore": 9.8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "premium"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "fedex-ground-us",
+    "company": "FedEx",
+    "serviceName": "Ground",
+    "deliveryDays": {
+      "min": 1,
+      "max": 5
+    },
+    "reliabilityScore": 9.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "best_value",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "fedex-home-delivery",
+    "company": "FedEx",
+    "serviceName": "Home Delivery",
+    "deliveryDays": {
+      "min": 1,
+      "max": 5
+    },
+    "reliabilityScore": 9.1,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "fedex-express-saver",
+    "company": "FedEx",
+    "serviceName": "Express Saver",
+    "deliveryDays": {
+      "min": 3,
+      "max": 3
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "usps-ground-advantage",
+    "company": "USPS",
+    "serviceName": "Ground Advantage",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 8.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/usps.svg",
+    "website": "https://www.usps.com"
+  },
+  {
+    "id": "usps-priority-mail",
+    "company": "USPS",
+    "serviceName": "Priority Mail",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 8.8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "best_value"
+    ],
+    "logo": "/assets/logos/usps.svg",
+    "website": "https://www.usps.com"
+  },
+  {
+    "id": "usps-priority-mail-express",
+    "company": "USPS",
+    "serviceName": "Priority Mail Express",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 9,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "fastest"
+    ],
+    "logo": "/assets/logos/usps.svg",
+    "website": "https://www.usps.com"
+  },
+  {
+    "id": "ontrac-regional-us",
+    "company": "OnTrac",
+    "serviceName": "Regional Ground",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 8.2,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "ecommerce_friendly",
+      "regional_specialist"
+    ],
+    "logo": "/assets/logos/ontrac.svg",
+    "website": "https://www.ontrac.com"
+  },
+  {
+    "id": "lso-regional-tx",
+    "company": "LSO",
+    "serviceName": "Regional",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 8.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "ecommerce_friendly",
+      "regional_specialist"
+    ],
+    "logo": "/assets/logos/lso.svg",
+    "website": "https://www.lso.com"
+  },
+  {
+    "id": "dhl-ecommerce-us",
+    "company": "DHL",
+    "serviceName": "eCommerce",
+    "deliveryDays": {
+      "min": 3,
+      "max": 8
+    },
+    "reliabilityScore": 8,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "cheapest",
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "dhl-express-worldwide-us",
+    "company": "DHL",
+    "serviceName": "Express Worldwide",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.6,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "ups-worldwide-saver",
+    "company": "UPS",
+    "serviceName": "Worldwide Saver",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "ups-worldwide-expedited",
+    "company": "UPS",
+    "serviceName": "Worldwide Expedited",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "fedex-intl-priority",
+    "company": "FedEx",
+    "serviceName": "International Priority",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "premium"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "fedex-intl-economy",
+    "company": "FedEx",
+    "serviceName": "International Economy",
+    "deliveryDays": {
+      "min": 4,
+      "max": 6
+    },
+    "reliabilityScore": 9,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "best_value"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "usps-priority-intl",
+    "company": "USPS",
+    "serviceName": "Priority Mail International",
+    "deliveryDays": {
+      "min": 6,
+      "max": 10
+    },
+    "reliabilityScore": 7.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/usps.svg",
+    "website": "https://www.usps.com"
+  },
+  {
+    "id": "usps-express-mail-intl",
+    "company": "USPS",
+    "serviceName": "Express Mail International",
+    "deliveryDays": {
+      "min": 3,
+      "max": 5
+    },
+    "reliabilityScore": 8.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "best_value"
+    ],
+    "logo": "/assets/logos/usps.svg",
+    "website": "https://www.usps.com"
+  },
+  {
+    "id": "royal-mail-tracked-24",
+    "company": "Royal Mail",
+    "serviceName": "Tracked 24",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 8.8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/royalmail.svg",
+    "website": "https://www.royalmail.com"
+  },
+  {
+    "id": "royal-mail-tracked-48",
+    "company": "Royal Mail",
+    "serviceName": "Tracked 48",
+    "deliveryDays": {
+      "min": 2,
+      "max": 3
+    },
+    "reliabilityScore": 8.7,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "cheapest",
+      "best_value"
+    ],
+    "logo": "/assets/logos/royalmail.svg",
+    "website": "https://www.royalmail.com"
+  },
+  {
+    "id": "royal-mail-special-delivery",
+    "company": "Royal Mail",
+    "serviceName": "Special Delivery Guaranteed",
+    "deliveryDays": {
+      "min": 1,
+      "max": 1
+    },
+    "reliabilityScore": 9.7,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "premium",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/royalmail.svg",
+    "website": "https://www.royalmail.com"
+  },
+  {
+    "id": "dpd-local-gb",
+    "company": "DPD",
+    "serviceName": "Local Next Day",
+    "deliveryDays": {
+      "min": 1,
+      "max": 1
+    },
+    "reliabilityScore": 9.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/dpd.svg",
+    "website": "https://www.dpd.com"
+  },
+  {
+    "id": "evri-standard-gb",
+    "company": "Evri",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 7.5,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "cheapest",
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/evri.svg",
+    "website": "https://www.evri.com"
+  },
+  {
+    "id": "parcelforce-express24",
+    "company": "Parcelforce",
+    "serviceName": "Express24",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 8.9,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable"
+    ],
+    "logo": "/assets/logos/parcelforce.svg",
+    "website": "https://www.parcelforce.com"
+  },
+  {
+    "id": "ups-standard-gb",
+    "company": "UPS",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 9.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "dhl-parcel-uk",
+    "company": "DHL",
+    "serviceName": "Parcel UK Next Day",
+    "deliveryDays": {
+      "min": 1,
+      "max": 1
+    },
+    "reliabilityScore": 9.1,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "dhl-express-gb",
+    "company": "DHL",
+    "serviceName": "Express Worldwide",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.6,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "ups-worldwide-gb",
+    "company": "UPS",
+    "serviceName": "Worldwide Saver",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "fedex-intl-gb",
+    "company": "FedEx",
+    "serviceName": "International Priority",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "premium"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "parcelforce-worldwide",
+    "company": "Parcelforce",
+    "serviceName": "Global Priority",
+    "deliveryDays": {
+      "min": 3,
+      "max": 7
+    },
+    "reliabilityScore": 8.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "best_value"
+    ],
+    "logo": "/assets/logos/parcelforce.svg",
+    "website": "https://www.parcelforce.com"
+  },
+  {
+    "id": "royal-mail-intl-tracked",
+    "company": "Royal Mail",
+    "serviceName": "International Tracked",
+    "deliveryDays": {
+      "min": 5,
+      "max": 9
+    },
+    "reliabilityScore": 8.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/royalmail.svg",
+    "website": "https://www.royalmail.com"
+  },
+  {
+    "id": "canadapost-regular",
+    "company": "Canada Post",
+    "serviceName": "Regular Parcel",
+    "deliveryDays": {
+      "min": 3,
+      "max": 9
+    },
+    "reliabilityScore": 8,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/canadapost.svg",
+    "website": "https://www.canadapost-postescanada.ca"
+  },
+  {
+    "id": "canadapost-expedited",
+    "company": "Canada Post",
+    "serviceName": "Expedited Parcel",
+    "deliveryDays": {
+      "min": 2,
+      "max": 7
+    },
+    "reliabilityScore": 8.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "best_value",
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/canadapost.svg",
+    "website": "https://www.canadapost-postescanada.ca"
+  },
+  {
+    "id": "canadapost-xpresspost",
+    "company": "Canada Post",
+    "serviceName": "Xpresspost",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 8.9,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest"
+    ],
+    "logo": "/assets/logos/canadapost.svg",
+    "website": "https://www.canadapost-postescanada.ca"
+  },
+  {
+    "id": "purolator-express",
+    "company": "Purolator",
+    "serviceName": "Express",
+    "deliveryDays": {
+      "min": 1,
+      "max": 1
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "premium"
+    ],
+    "logo": "/assets/logos/purolator.svg",
+    "website": "https://www.purolator.com"
+  },
+  {
+    "id": "ups-standard-ca",
+    "company": "UPS",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 1,
+      "max": 5
+    },
+    "reliabilityScore": 9.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "fedex-ground-ca",
+    "company": "FedEx",
+    "serviceName": "Ground",
+    "deliveryDays": {
+      "min": 1,
+      "max": 5
+    },
+    "reliabilityScore": 9.1,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "canpar-ground",
+    "company": "Canpar",
+    "serviceName": "Ground",
+    "deliveryDays": {
+      "min": 2,
+      "max": 6
+    },
+    "reliabilityScore": 8.2,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "cheapest",
+      "ecommerce_friendly",
+      "regional_specialist"
+    ],
+    "logo": "/assets/logos/canpar.svg",
+    "website": "https://www.canpar.com"
+  },
+  {
+    "id": "dhl-express-ca",
+    "company": "DHL",
+    "serviceName": "Express Worldwide",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.6,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "ups-worldwide-ca",
+    "company": "UPS",
+    "serviceName": "Worldwide Saver",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "fedex-intl-ca",
+    "company": "FedEx",
+    "serviceName": "International Priority",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "premium"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "canadapost-intl",
+    "company": "Canada Post",
+    "serviceName": "International Parcel",
+    "deliveryDays": {
+      "min": 6,
+      "max": 14
+    },
+    "reliabilityScore": 7.8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/canadapost.svg",
+    "website": "https://www.canadapost-postescanada.ca"
+  },
+  {
+    "id": "auspost-parcel-post",
+    "company": "Australia Post",
+    "serviceName": "Parcel Post",
+    "deliveryDays": {
+      "min": 2,
+      "max": 6
+    },
+    "reliabilityScore": 8.7,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "best_value"
+    ],
+    "logo": "/assets/logos/australiapost.svg",
+    "website": "https://auspost.com.au"
+  },
+  {
+    "id": "auspost-express-post",
+    "company": "Australia Post",
+    "serviceName": "Express Post",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "fastest",
+      "reliable"
+    ],
+    "logo": "/assets/logos/australiapost.svg",
+    "website": "https://auspost.com.au"
+  },
+  {
+    "id": "startrack-premium",
+    "company": "StarTrack",
+    "serviceName": "Premium Express",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/startrack.svg",
+    "website": "https://startrack.com.au"
+  },
+  {
+    "id": "couriersplease-standard",
+    "company": "CouriersPlease",
+    "serviceName": "Standard Parcel",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "cheapest",
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/couriersplease.svg",
+    "website": "https://www.couriersplease.com.au"
+  },
+  {
+    "id": "aramex-au-domestic",
+    "company": "Aramex",
+    "serviceName": "Domestic Courier",
+    "deliveryDays": {
+      "min": 3,
+      "max": 7
+    },
+    "reliabilityScore": 7.6,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "cheapest"
+    ],
+    "logo": "/assets/logos/aramex.svg",
+    "website": "https://www.aramex.com"
+  },
+  {
+    "id": "dhl-express-au",
+    "company": "DHL",
+    "serviceName": "Express Worldwide",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.6,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "fedex-intl-au",
+    "company": "FedEx",
+    "serviceName": "International Priority",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "premium"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "ups-worldwide-au",
+    "company": "UPS",
+    "serviceName": "Worldwide Saver",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "auspost-intl-parcel",
+    "company": "Australia Post",
+    "serviceName": "International Standard",
+    "deliveryDays": {
+      "min": 6,
+      "max": 12
+    },
+    "reliabilityScore": 8.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/australiapost.svg",
+    "website": "https://auspost.com.au"
+  },
+  {
+    "id": "dhl-paket-de",
+    "company": "DHL",
+    "serviceName": "Paket",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "most_reliable",
+      "best_value"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "hermes-de",
+    "company": "Hermes",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 8.1,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/hermes.svg",
+    "website": "https://www.hermes.com"
+  },
+  {
+    "id": "dpd-de",
+    "company": "DPD",
+    "serviceName": "Classic",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 8.8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/dpd.svg",
+    "website": "https://www.dpd.com"
+  },
+  {
+    "id": "gls-de",
+    "company": "GLS",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 8.5,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/gls.svg",
+    "website": "https://gls-group.com"
+  },
+  {
+    "id": "ups-standard-de",
+    "company": "UPS",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 9.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "reliable"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "dhl-express-de",
+    "company": "DHL",
+    "serviceName": "Express Worldwide",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.7,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "fedex-intl-de",
+    "company": "FedEx",
+    "serviceName": "International Priority",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "premium"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "ups-worldwide-de",
+    "company": "UPS",
+    "serviceName": "Worldwide Saver",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "gls-intl-de",
+    "company": "GLS",
+    "serviceName": "International",
+    "deliveryDays": {
+      "min": 4,
+      "max": 8
+    },
+    "reliabilityScore": 8.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "best_value"
+    ],
+    "logo": "/assets/logos/gls.svg",
+    "website": "https://gls-group.com"
+  },
+  {
+    "id": "emirates-post-domestic",
+    "company": "Emirates Post",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 8.5,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/emiratespost.svg",
+    "website": "https://www.emiratespost.ae"
+  },
+  {
+    "id": "aramex-domestic-ae",
+    "company": "Aramex",
+    "serviceName": "Domestic Express",
+    "deliveryDays": {
+      "min": 1,
+      "max": 2
+    },
+    "reliabilityScore": 9.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "reliable",
+      "best_value"
+    ],
+    "logo": "/assets/logos/aramex.svg",
+    "website": "https://www.aramex.com"
+  },
+  {
+    "id": "shipa-delivery-ae",
+    "company": "Shipa Delivery",
+    "serviceName": "Next Day Delivery",
+    "deliveryDays": {
+      "min": 1,
+      "max": 1
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/shipadelivery.svg",
+    "website": "https://www.shipadelivery.com"
+  },
+  {
+    "id": "aramex-intl-ae",
+    "company": "Aramex",
+    "serviceName": "International Express",
+    "deliveryDays": {
+      "min": 3,
+      "max": 6
+    },
+    "reliabilityScore": 9,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "best_value",
+      "regional_specialist"
+    ],
+    "logo": "/assets/logos/aramex.svg",
+    "website": "https://www.aramex.com"
+  },
+  {
+    "id": "dhl-express-ae",
+    "company": "DHL",
+    "serviceName": "Express Worldwide",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.6,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "fedex-intl-ae",
+    "company": "FedEx",
+    "serviceName": "International Priority",
+    "deliveryDays": {
+      "min": 2,
+      "max": 4
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "premium"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "ups-worldwide-ae",
+    "company": "UPS",
+    "serviceName": "Worldwide Saver",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 9.2,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "indiapost-domestic-in",
+    "company": "India Post",
+    "serviceName": "Speed Post",
+    "deliveryDays": {
+      "min": 3,
+      "max": 7
+    },
+    "reliabilityScore": 8,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/indiapost.svg",
+    "website": "https://www.indiapost.gov.in"
+  },
+  {
+    "id": "bluedart-domestic-in",
+    "company": "Blue Dart",
+    "serviceName": "Domestic Priority",
+    "deliveryDays": {
+      "min": 1,
+      "max": 3
+    },
+    "reliabilityScore": 9.6,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "premium",
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/bluedart.svg",
+    "website": "https://www.bluedart.com"
+  },
+  {
+    "id": "dtdc-domestic-in",
+    "company": "DTDC",
+    "serviceName": "Lite / Plus",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 8.8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "best_value",
+      "reliable"
+    ],
+    "logo": "/assets/logos/dtdc.svg",
+    "website": "https://www.dtdc.in"
+  },
+  {
+    "id": "delhivery-domestic-in",
+    "company": "Delhivery",
+    "serviceName": "Express",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 8.9,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/delhivery.svg",
+    "website": "https://www.delhivery.com"
+  },
+  {
+    "id": "xpressbees-domestic-in",
+    "company": "XpressBees",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 8.4,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "ecommerce_friendly",
+      "cheapest"
+    ],
+    "logo": "/assets/logos/xpressbees.svg",
+    "website": "https://www.xpressbees.com"
+  },
+  {
+    "id": "ecomexpress-domestic-in",
+    "company": "Ecom Express",
+    "serviceName": "Standard",
+    "deliveryDays": {
+      "min": 2,
+      "max": 6
+    },
+    "reliabilityScore": 8.5,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/ecomexpress.svg",
+    "website": "https://ecomexpress.in"
+  },
+  {
+    "id": "shadowfax-domestic-in",
+    "company": "Shadowfax",
+    "serviceName": "Express",
+    "deliveryDays": {
+      "min": 1,
+      "max": 4
+    },
+    "reliabilityScore": 8.6,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "ecommerce_friendly"
+    ],
+    "logo": "/assets/logos/shadowfax.svg",
+    "website": "https://www.shadowfax.in"
+  },
+  {
+    "id": "porter-domestic-in",
+    "company": "Porter",
+    "serviceName": "City Courier",
+    "deliveryDays": {
+      "min": 1,
+      "max": 1
+    },
+    "reliabilityScore": 9,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "regional_specialist"
+    ],
+    "logo": "/assets/logos/porter.svg",
+    "website": "https://www.porter.in"
+  },
+  {
+    "id": "professional-domestic-in",
+    "company": "The Professional Couriers",
+    "serviceName": "",
+    "deliveryDays": {
+      "min": 2,
+      "max": 6
+    },
+    "reliabilityScore": 8.2,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": true
+    },
+    "tags": [
+      "best_value"
+    ],
+    "logo": "/assets/logos/professionalcouriers.svg",
+    "website": "https://www.tpcindia.com"
+  },
+  {
+    "id": "dhl-express-in",
+    "company": "DHL",
+    "serviceName": "Express Worldwide",
+    "deliveryDays": {
+      "min": 2,
+      "max": 5
+    },
+    "reliabilityScore": 9.6,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "fastest",
+      "most_reliable"
+    ],
+    "logo": "/assets/logos/dhl.svg",
+    "website": "https://www.dhl.com"
+  },
+  {
+    "id": "fedex-intl-in",
+    "company": "FedEx",
+    "serviceName": "International Priority",
+    "deliveryDays": {
+      "min": 3,
+      "max": 5
+    },
+    "reliabilityScore": 9.4,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "premium"
+    ],
+    "logo": "/assets/logos/fedex.svg",
+    "website": "https://www.fedex.com"
+  },
+  {
+    "id": "ups-worldwide-in",
+    "company": "UPS",
+    "serviceName": "Worldwide Express",
+    "deliveryDays": {
+      "min": 3,
+      "max": 6
+    },
+    "reliabilityScore": 9.3,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "business_friendly"
+    ],
+    "logo": "/assets/logos/ups.svg",
+    "website": "https://www.ups.com"
+  },
+  {
+    "id": "aramex-intl-in",
+    "company": "Aramex",
+    "serviceName": "International Parcel",
+    "deliveryDays": {
+      "min": 4,
+      "max": 7
+    },
+    "reliabilityScore": 8.8,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "best_value"
+    ],
+    "logo": "/assets/logos/aramex.svg",
+    "website": "https://www.aramex.com"
+  },
+  {
+    "id": "garudavega-intl-in",
+    "company": "Garudavega",
+    "serviceName": "International",
+    "deliveryDays": {
+      "min": 5,
+      "max": 9
+    },
+    "reliabilityScore": 8.7,
+    "features": {
+      "tracking": true,
+      "insurance": true,
+      "pickup": true
+    },
+    "tags": [
+      "regional_specialist",
+      "best_value"
+    ],
+    "logo": "/assets/logos/garudavega.svg",
+    "website": "https://www.garudavega.com"
+  },
+  {
+    "id": "indiapost-ems-in",
+    "company": "India Post",
+    "serviceName": "EMS Speed Post",
+    "deliveryDays": {
+      "min": 7,
+      "max": 14
+    },
+    "reliabilityScore": 7.5,
+    "features": {
+      "tracking": true,
+      "insurance": false,
+      "pickup": false
+    },
+    "tags": [
+      "cheapest",
+      "student_friendly"
+    ],
+    "logo": "/assets/logos/indiapost.svg",
+    "website": "https://www.indiapost.gov.in"
+  }
+]

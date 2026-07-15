@@ -96,7 +96,7 @@ const faqs = [
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map((item, idx) => ({
+  "mainEntity": faqs.map((item) => ({
     "@type": "Question",
     "name": item.q,
     "acceptedAnswer": {

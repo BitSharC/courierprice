@@ -1,5 +1,5 @@
 // src/utils/countryData.ts
-import { INDIA_STATES } from './indiaData';
+import { INDIA_STATES } from './indiaData.ts';
 
 export interface StateRegion {
   name: string;

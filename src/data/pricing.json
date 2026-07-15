@@ -1,0 +1,3824 @@
+{
+  "exchangeRates": {
+    "INR": 83,
+    "USD": 1,
+    "GBP": 0.79,
+    "CAD": 1.37,
+    "AUD": 1.5,
+    "EUR": 0.92,
+    "AED": 3.67
+  },
+  "domestic": {
+    "US": {
+      "ups-ground-us": {
+        "baseRate": 8.75,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.3,
+        "pickupCharges": {
+          "flat": 4
+        },
+        "expressMultiplier": 1,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "ups-3-day-select": {
+        "baseRate": 22.5,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 5.6,
+        "pickupCharges": {
+          "standard": 2,
+          "heavy": 5,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "ups-next-day-air": {
+        "baseRate": 38,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 9.6,
+        "pickupCharges": {
+          "standard": 2,
+          "heavy": 5,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "fedex-ground-us": {
+        "baseRate": 8.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.25,
+        "pickupCharges": {
+          "flat": 4
+        },
+        "expressMultiplier": 1,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "fedex-home-delivery": {
+        "baseRate": 15,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 4.3,
+        "pickupCharges": {
+          "standard": 2,
+          "heavy": 5,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "fedex-express-saver": {
+        "baseRate": 24,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 6.2,
+        "pickupCharges": {
+          "standard": 2,
+          "heavy": 5,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "usps-ground-advantage": {
+        "baseRate": 4.75,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 0.65,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-priority-mail": {
+        "baseRate": 9.2,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 3,
+        "pickupCharges": {
+          "standard": 2,
+          "heavy": 5,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-priority-mail-express": {
+        "baseRate": 28.5,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 7.6,
+        "pickupCharges": {
+          "standard": 2,
+          "heavy": 5,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "ontrac-regional-us": {
+        "baseRate": 7.1,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 0.95,
+        "pickupCharges": {
+          "flat": 3.5
+        },
+        "expressMultiplier": 1,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "lso-regional-tx": {
+        "baseRate": 7.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.1,
+        "pickupCharges": {
+          "flat": 3
+        },
+        "expressMultiplier": 1.5,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "USD"
+      },
+      "dhl-ecommerce-us": {
+        "baseRate": 5.8,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 2,
+        "pickupCharges": {
+          "standard": 2,
+          "heavy": 5,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 25,
+        "currency": "USD"
+      }
+    },
+    "GB": {
+      "royal-mail-tracked-24": {
+        "baseRate": 4.15,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.2,
+        "pickupCharges": {
+          "flat": 0.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      },
+      "royal-mail-tracked-48": {
+        "baseRate": 3.4,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1,
+        "pickupCharges": {
+          "flat": 0.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      },
+      "royal-mail-special-delivery": {
+        "baseRate": 7.35,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 2.5,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "dpd-local-gb": {
+        "baseRate": 6.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.4,
+        "pickupCharges": {
+          "flat": 2
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "evri-standard-gb": {
+        "baseRate": 2.99,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 0.85,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 15,
+        "currency": "GBP"
+      },
+      "parcelforce-express24": {
+        "baseRate": 8.1,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.3,
+        "pickupCharges": {
+          "flat": 2.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "ups-standard-gb": {
+        "baseRate": 7.9,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.5,
+        "pickupCharges": {
+          "flat": 2
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "GBP"
+      },
+      "dhl-parcel-uk": {
+        "baseRate": 7.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.6,
+        "pickupCharges": {
+          "flat": 2
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 50,
+        "currency": "GBP"
+      }
+    },
+    "CA": {
+      "canadapost-regular": {
+        "baseRate": 16.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 2.5,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      },
+      "canadapost-expedited": {
+        "baseRate": 18.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 2.75,
+        "pickupCharges": {
+          "flat": 3.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      },
+      "canadapost-xpresspost": {
+        "baseRate": 26,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 4.5,
+        "pickupCharges": {
+          "flat": 3.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      },
+      "purolator-express": {
+        "baseRate": 32,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 5,
+        "pickupCharges": {
+          "flat": 5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 65,
+        "currency": "CAD"
+      },
+      "ups-standard-ca": {
+        "baseRate": 21.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 3.3,
+        "pickupCharges": {
+          "flat": 4
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "CAD"
+      },
+      "fedex-ground-ca": {
+        "baseRate": 21,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 3.25,
+        "pickupCharges": {
+          "flat": 4
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "CAD"
+      },
+      "canpar-ground": {
+        "baseRate": 14.75,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 2.25,
+        "pickupCharges": {
+          "flat": 3
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      }
+    },
+    "AU": {
+      "auspost-parcel-post": {
+        "baseRate": 10.95,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 2.2,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 22,
+        "currency": "AUD"
+      },
+      "auspost-express-post": {
+        "baseRate": 14.95,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 3.5,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 22,
+        "currency": "AUD"
+      },
+      "startrack-premium": {
+        "baseRate": 18.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 3.8,
+        "pickupCharges": {
+          "flat": 4.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 50,
+        "currency": "AUD"
+      },
+      "couriersplease-standard": {
+        "baseRate": 11.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 2,
+        "pickupCharges": {
+          "flat": 2.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 25,
+        "currency": "AUD"
+      },
+      "aramex-au-domestic": {
+        "baseRate": 9.95,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.8,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "AUD"
+      }
+    },
+    "DE": {
+      "dhl-paket-de": {
+        "baseRate": 5.49,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 0.9,
+        "pickupCharges": {
+          "flat": 3
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 31.5,
+        "currency": "EUR"
+      },
+      "hermes-de": {
+        "baseRate": 4.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 0.7,
+        "pickupCharges": {
+          "flat": 2.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 25,
+        "currency": "EUR"
+      },
+      "dpd-de": {
+        "baseRate": 4.9,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 0.8,
+        "pickupCharges": {
+          "flat": 2.5
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 31.5,
+        "currency": "EUR"
+      },
+      "gls-de": {
+        "baseRate": 4.3,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 0.75,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "EUR"
+      },
+      "ups-standard-de": {
+        "baseRate": 7.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 1.2,
+        "pickupCharges": {
+          "flat": 4
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 50,
+        "currency": "EUR"
+      }
+    },
+    "AE": {
+      "emirates-post-domestic": {
+        "baseRate": 25,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 5,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "AED"
+      },
+      "aramex-domestic-ae": {
+        "baseRate": 30,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 6.5,
+        "pickupCharges": {
+          "flat": 10
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "AED"
+      },
+      "shipa-delivery-ae": {
+        "baseRate": 35,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7.5,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "AED"
+      }
+    },
+    "IN": {
+      "indiapost-domestic-in": {
+        "baseRate": 42,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 40,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "INR"
+      },
+      "bluedart-domestic-in": {
+        "baseRate": 180,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 120,
+        "pickupCharges": {
+          "flat": 50
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "INR"
+      },
+      "dtdc-domestic-in": {
+        "baseRate": 85,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 75,
+        "pickupCharges": {
+          "flat": 25
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "INR"
+      },
+      "delhivery-domestic-in": {
+        "baseRate": 65,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 60,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 150,
+        "currency": "INR"
+      },
+      "xpressbees-domestic-in": {
+        "baseRate": 55,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 50,
+        "pickupCharges": {
+          "flat": 10
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 50,
+        "currency": "INR"
+      },
+      "ecomexpress-domestic-in": {
+        "baseRate": 60,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 55,
+        "pickupCharges": {
+          "flat": 10
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 50,
+        "currency": "INR"
+      },
+      "shadowfax-domestic-in": {
+        "baseRate": 65,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 60,
+        "pickupCharges": {
+          "flat": 10
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "INR"
+      },
+      "porter-domestic-in": {
+        "baseRate": 150,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 20,
+        "pickupCharges": {
+          "flat": 0
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 2000,
+        "currency": "INR"
+      },
+      "professional-domestic-in": {
+        "baseRate": 70,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 65,
+        "pickupCharges": {
+          "flat": 15
+        },
+        "expressMultiplier": 1.35,
+        "fuelSurcharge": 0.07,
+        "insuranceRate": 0.01,
+        "maxWeight": 70,
+        "currency": "INR"
+      }
+    }
+  },
+  "international": {
+    "US_TO_CA": {
+      "dhl-express-worldwide-us": {
+        "baseRate": 55,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-saver": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-expedited": {
+        "baseRate": 18,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 12.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-priority": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-economy": {
+        "baseRate": 45,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 6.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "usps-priority-intl": {
+        "baseRate": 30,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 4.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-express-mail-intl": {
+        "baseRate": 15,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 10,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      }
+    },
+    "US_TO_GB": {
+      "dhl-express-worldwide-us": {
+        "baseRate": 75,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-saver": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-expedited": {
+        "baseRate": 18,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 12.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-priority": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-economy": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "usps-priority-intl": {
+        "baseRate": 42,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 6,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-express-mail-intl": {
+        "baseRate": 15,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 10,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      }
+    },
+    "US_TO_AU": {
+      "dhl-express-worldwide-us": {
+        "baseRate": 95,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-saver": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-expedited": {
+        "baseRate": 18,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 12.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-priority": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-economy": {
+        "baseRate": 85,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "usps-priority-intl": {
+        "baseRate": 48,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-express-mail-intl": {
+        "baseRate": 15,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 10,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      }
+    },
+    "US_TO_DE": {
+      "dhl-express-worldwide-us": {
+        "baseRate": 78,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-saver": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-expedited": {
+        "baseRate": 18,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 12.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-priority": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-economy": {
+        "baseRate": 68,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "usps-priority-intl": {
+        "baseRate": 42,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 6,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-express-mail-intl": {
+        "baseRate": 15,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 10,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      }
+    },
+    "US_TO_AE": {
+      "dhl-express-worldwide-us": {
+        "baseRate": 85,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-saver": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-expedited": {
+        "baseRate": 18,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 12.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-priority": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-economy": {
+        "baseRate": 75,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "usps-priority-intl": {
+        "baseRate": 45,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-express-mail-intl": {
+        "baseRate": 15,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 10,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      }
+    },
+    "US_TO_IN": {
+      "dhl-express-worldwide-us": {
+        "baseRate": 105,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 16,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-saver": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "ups-worldwide-expedited": {
+        "baseRate": 18,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 12.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-priority": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "fedex-intl-economy": {
+        "baseRate": 90,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "USD"
+      },
+      "usps-priority-intl": {
+        "baseRate": 52,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      },
+      "usps-express-mail-intl": {
+        "baseRate": 15,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 10,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "USD"
+      }
+    },
+    "GB_TO_US": {
+      "dhl-express-gb": {
+        "baseRate": 48,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "ups-worldwide-gb": {
+        "baseRate": 45,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "fedex-intl-gb": {
+        "baseRate": 42,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "parcelforce-worldwide": {
+        "baseRate": 38,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "royal-mail-intl-tracked": {
+        "baseRate": 16.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 5.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      }
+    },
+    "GB_TO_CA": {
+      "dhl-express-gb": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 15,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "ups-worldwide-gb": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "fedex-intl-gb": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "parcelforce-worldwide": {
+        "baseRate": 16,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "royal-mail-intl-tracked": {
+        "baseRate": 10.5,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 7,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      }
+    },
+    "GB_TO_AU": {
+      "dhl-express-gb": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "ups-worldwide-gb": {
+        "baseRate": 62,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "fedex-intl-gb": {
+        "baseRate": 60,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "parcelforce-worldwide": {
+        "baseRate": 55,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "royal-mail-intl-tracked": {
+        "baseRate": 19.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      }
+    },
+    "GB_TO_DE": {
+      "dhl-express-gb": {
+        "baseRate": 32,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 5.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "ups-worldwide-gb": {
+        "baseRate": 28,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "fedex-intl-gb": {
+        "baseRate": 29,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 5.2,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "parcelforce-worldwide": {
+        "baseRate": 25,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 4.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "royal-mail-intl-tracked": {
+        "baseRate": 10.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 3.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      }
+    },
+    "GB_TO_AE": {
+      "dhl-express-gb": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 15,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "ups-worldwide-gb": {
+        "baseRate": 21,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "fedex-intl-gb": {
+        "baseRate": 22,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 14.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "parcelforce-worldwide": {
+        "baseRate": 16,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "royal-mail-intl-tracked": {
+        "baseRate": 10.5,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 7,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      }
+    },
+    "GB_TO_IN": {
+      "dhl-express-gb": {
+        "baseRate": 60,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "ups-worldwide-gb": {
+        "baseRate": 58,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "fedex-intl-gb": {
+        "baseRate": 55,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "GBP"
+      },
+      "parcelforce-worldwide": {
+        "baseRate": 52,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 10.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "GBP"
+      },
+      "royal-mail-intl-tracked": {
+        "baseRate": 18,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "GBP"
+      }
+    },
+    "CA_TO_US": {
+      "dhl-express-ca": {
+        "baseRate": 55,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "ups-worldwide-ca": {
+        "baseRate": 48,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "fedex-intl-ca": {
+        "baseRate": 45,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 6.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "canadapost-intl": {
+        "baseRate": 22,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 4.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      }
+    },
+    "CA_TO_GB": {
+      "dhl-express-ca": {
+        "baseRate": 95,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "ups-worldwide-ca": {
+        "baseRate": 88,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "fedex-intl-ca": {
+        "baseRate": 85,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "canadapost-intl": {
+        "baseRate": 45,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      }
+    },
+    "CA_TO_AU": {
+      "dhl-express-ca": {
+        "baseRate": 145,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 22,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "ups-worldwide-ca": {
+        "baseRate": 130,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 19,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "fedex-intl-ca": {
+        "baseRate": 125,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 18.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "canadapost-intl": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      }
+    },
+    "CA_TO_DE": {
+      "dhl-express-ca": {
+        "baseRate": 98,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 15,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "ups-worldwide-ca": {
+        "baseRate": 92,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "fedex-intl-ca": {
+        "baseRate": 88,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "canadapost-intl": {
+        "baseRate": 48,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 10,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      }
+    },
+    "CA_TO_AE": {
+      "dhl-express-ca": {
+        "baseRate": 155,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 23.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "ups-worldwide-ca": {
+        "baseRate": 140,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 21,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "fedex-intl-ca": {
+        "baseRate": 135,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 20,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "canadapost-intl": {
+        "baseRate": 70,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 15,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      }
+    },
+    "CA_TO_IN": {
+      "dhl-express-ca": {
+        "baseRate": 165,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 25,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "ups-worldwide-ca": {
+        "baseRate": 150,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 23,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "fedex-intl-ca": {
+        "baseRate": 145,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 22,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "CAD"
+      },
+      "canadapost-intl": {
+        "baseRate": 75,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 16,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 30,
+        "currency": "CAD"
+      }
+    },
+    "AU_TO_US": {
+      "dhl-express-au": {
+        "baseRate": 75,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "fedex-intl-au": {
+        "baseRate": 68,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "ups-worldwide-au": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "auspost-intl-parcel": {
+        "baseRate": 28,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "AUD"
+      }
+    },
+    "AU_TO_CA": {
+      "dhl-express-au": {
+        "baseRate": 79,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 15,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "fedex-intl-au": {
+        "baseRate": 72,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "ups-worldwide-au": {
+        "baseRate": 70,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "auspost-intl-parcel": {
+        "baseRate": 32,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "AUD"
+      }
+    },
+    "AU_TO_GB": {
+      "dhl-express-au": {
+        "baseRate": 85,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 16,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "fedex-intl-au": {
+        "baseRate": 76,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "ups-worldwide-au": {
+        "baseRate": 74,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "auspost-intl-parcel": {
+        "baseRate": 34,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "AUD"
+      }
+    },
+    "AU_TO_DE": {
+      "dhl-express-au": {
+        "baseRate": 88,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 16.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "fedex-intl-au": {
+        "baseRate": 78,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 15,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "ups-worldwide-au": {
+        "baseRate": 76,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "auspost-intl-parcel": {
+        "baseRate": 36,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "AUD"
+      }
+    },
+    "AU_TO_AE": {
+      "dhl-express-au": {
+        "baseRate": 72,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "fedex-intl-au": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "ups-worldwide-au": {
+        "baseRate": 62,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "auspost-intl-parcel": {
+        "baseRate": 30,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7.2,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "AUD"
+      }
+    },
+    "AU_TO_IN": {
+      "dhl-express-au": {
+        "baseRate": 68,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "fedex-intl-au": {
+        "baseRate": 60,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "ups-worldwide-au": {
+        "baseRate": 58,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AUD"
+      },
+      "auspost-intl-parcel": {
+        "baseRate": 26,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 6.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 20,
+        "currency": "AUD"
+      }
+    },
+    "DE_TO_US": {
+      "dhl-express-de": {
+        "baseRate": 42,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "fedex-intl-de": {
+        "baseRate": 44,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.2,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "ups-worldwide-de": {
+        "baseRate": 45,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "gls-intl-de": {
+        "baseRate": 24,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 6.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "EUR"
+      }
+    },
+    "DE_TO_CA": {
+      "dhl-express-de": {
+        "baseRate": 45,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "fedex-intl-de": {
+        "baseRate": 47,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.8,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "ups-worldwide-de": {
+        "baseRate": 48,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "gls-intl-de": {
+        "baseRate": 26,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 7,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "EUR"
+      }
+    },
+    "DE_TO_GB": {
+      "dhl-express-de": {
+        "baseRate": 28,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 4.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "fedex-intl-de": {
+        "baseRate": 27.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 4.2,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "ups-worldwide-de": {
+        "baseRate": 26,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 4,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "gls-intl-de": {
+        "baseRate": 14.5,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 2.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "EUR"
+      }
+    },
+    "DE_TO_AU": {
+      "dhl-express-de": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 14.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "fedex-intl-de": {
+        "baseRate": 72,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 16,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "ups-worldwide-de": {
+        "baseRate": 70,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 15.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "gls-intl-de": {
+        "baseRate": 38,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "EUR"
+      }
+    },
+    "DE_TO_AE": {
+      "dhl-express-de": {
+        "baseRate": 55,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 11.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "fedex-intl-de": {
+        "baseRate": 60,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "ups-worldwide-de": {
+        "baseRate": 58,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "gls-intl-de": {
+        "baseRate": 32,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 8.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "EUR"
+      }
+    },
+    "DE_TO_IN": {
+      "dhl-express-de": {
+        "baseRate": 58,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 12,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "fedex-intl-de": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13.5,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "ups-worldwide-de": {
+        "baseRate": 62,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 13,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "EUR"
+      },
+      "gls-intl-de": {
+        "baseRate": 34,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 9,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 40,
+        "currency": "EUR"
+      }
+    },
+    "AE_TO_US": {
+      "aramex-intl-ae": {
+        "baseRate": 145,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 35,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "AED"
+      },
+      "dhl-express-ae": {
+        "baseRate": 285,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 65,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "fedex-intl-ae": {
+        "baseRate": 240,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 55,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "ups-worldwide-ae": {
+        "baseRate": 255,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 58,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      }
+    },
+    "AE_TO_CA": {
+      "aramex-intl-ae": {
+        "baseRate": 155,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 38,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "AED"
+      },
+      "dhl-express-ae": {
+        "baseRate": 295,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 68,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "fedex-intl-ae": {
+        "baseRate": 250,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 58,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "ups-worldwide-ae": {
+        "baseRate": 265,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 62,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      }
+    },
+    "AE_TO_GB": {
+      "aramex-intl-ae": {
+        "baseRate": 110,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 25,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "AED"
+      },
+      "dhl-express-ae": {
+        "baseRate": 195,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 45,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "fedex-intl-ae": {
+        "baseRate": 165,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 38,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "ups-worldwide-ae": {
+        "baseRate": 175,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 40,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      }
+    },
+    "AE_TO_AU": {
+      "aramex-intl-ae": {
+        "baseRate": 165,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 42,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "AED"
+      },
+      "dhl-express-ae": {
+        "baseRate": 315,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 75,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "fedex-intl-ae": {
+        "baseRate": 270,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 65,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "ups-worldwide-ae": {
+        "baseRate": 285,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 68,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      }
+    },
+    "AE_TO_DE": {
+      "aramex-intl-ae": {
+        "baseRate": 115,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 26,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "AED"
+      },
+      "dhl-express-ae": {
+        "baseRate": 205,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 47,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "fedex-intl-ae": {
+        "baseRate": 170,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 39,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "ups-worldwide-ae": {
+        "baseRate": 180,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 42,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      }
+    },
+    "AE_TO_IN": {
+      "aramex-intl-ae": {
+        "baseRate": 65,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 15,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "AED"
+      },
+      "dhl-express-ae": {
+        "baseRate": 140,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 32,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "fedex-intl-ae": {
+        "baseRate": 110,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 25,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      },
+      "ups-worldwide-ae": {
+        "baseRate": 125,
+        "baseWeightLimit": 1,
+        "perUnitWeightCost": 28,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "AED"
+      }
+    },
+    "IN_TO_US": {
+      "dhl-express-in": {
+        "baseRate": 3900,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1700,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "fedex-intl-in": {
+        "baseRate": 3600,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1600,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "ups-worldwide-in": {
+        "baseRate": 3750,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1650,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "aramex-intl-in": {
+        "baseRate": 2200,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1100,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "INR"
+      },
+      "garudavega-intl-in": {
+        "baseRate": 1650,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 950,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 150,
+        "currency": "INR"
+      },
+      "indiapost-ems-in": {
+        "baseRate": 1450,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 850,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "INR"
+      }
+    },
+    "IN_TO_CA": {
+      "dhl-express-in": {
+        "baseRate": 4250,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1900,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "fedex-intl-in": {
+        "baseRate": 3900,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1800,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "ups-worldwide-in": {
+        "baseRate": 4100,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1850,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "aramex-intl-in": {
+        "baseRate": 2400,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1200,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "INR"
+      },
+      "garudavega-intl-in": {
+        "baseRate": 1700,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1000,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 150,
+        "currency": "INR"
+      },
+      "indiapost-ems-in": {
+        "baseRate": 1500,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 900,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "INR"
+      }
+    },
+    "IN_TO_GB": {
+      "dhl-express-in": {
+        "baseRate": 3350,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1400,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "fedex-intl-in": {
+        "baseRate": 3100,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1300,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "ups-worldwide-in": {
+        "baseRate": 3200,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1350,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "aramex-intl-in": {
+        "baseRate": 1800,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 900,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "INR"
+      },
+      "garudavega-intl-in": {
+        "baseRate": 1300,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 800,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 150,
+        "currency": "INR"
+      },
+      "indiapost-ems-in": {
+        "baseRate": 1150,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 700,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "INR"
+      }
+    },
+    "IN_TO_AU": {
+      "dhl-express-in": {
+        "baseRate": 4500,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 2000,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "fedex-intl-in": {
+        "baseRate": 4100,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1850,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "ups-worldwide-in": {
+        "baseRate": 4200,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1900,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "aramex-intl-in": {
+        "baseRate": 2600,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1300,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "INR"
+      },
+      "garudavega-intl-in": {
+        "baseRate": 1600,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1000,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 150,
+        "currency": "INR"
+      },
+      "indiapost-ems-in": {
+        "baseRate": 1400,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 900,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "INR"
+      }
+    },
+    "IN_TO_DE": {
+      "dhl-express-in": {
+        "baseRate": 3500,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1450,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "fedex-intl-in": {
+        "baseRate": 3200,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1350,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "ups-worldwide-in": {
+        "baseRate": 3300,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1400,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "aramex-intl-in": {
+        "baseRate": 1900,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 950,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "INR"
+      },
+      "garudavega-intl-in": {
+        "baseRate": 1350,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 850,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 150,
+        "currency": "INR"
+      },
+      "indiapost-ems-in": {
+        "baseRate": 1200,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 750,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "INR"
+      }
+    },
+    "IN_TO_AE": {
+      "dhl-express-in": {
+        "baseRate": 2600,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 1000,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "fedex-intl-in": {
+        "baseRate": 2400,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 900,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "ups-worldwide-in": {
+        "baseRate": 2500,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 950,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 300,
+        "currency": "INR"
+      },
+      "aramex-intl-in": {
+        "baseRate": 1200,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 650,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 100,
+        "currency": "INR"
+      },
+      "garudavega-intl-in": {
+        "baseRate": 1050,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 600,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 150,
+        "currency": "INR"
+      },
+      "indiapost-ems-in": {
+        "baseRate": 850,
+        "baseWeightLimit": 0.5,
+        "perUnitWeightCost": 500,
+        "pickupCharges": {
+          "standard": 3,
+          "heavy": 6,
+          "threshold": 30
+        },
+        "expressMultiplier": 1.4,
+        "fuelSurcharge": 0.12,
+        "insuranceRate": 0.01,
+        "maxWeight": 35,
+        "currency": "INR"
+      }
+    }
+  }
+}
