@@ -1,6 +1,7 @@
 // src/utils/calculator.ts
 
 import { COUNTRIES_DATA, type StateRegion } from './countryData';
+import { COURIER_SERVICES } from './courierData';
 
 export interface ParcelInput {
   weight: number;
@@ -88,565 +89,6 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
 function deg2rad(deg: number): number {
   return deg * (Math.PI / 180);
 }
-
-// Domestic courier configurations schema
-interface DomesticCourierConfig {
-  id: string;
-  name: string;
-  reliabilityScore: number;
-  tracking: boolean;
-  insurance: boolean;
-  pickup: boolean;
-  baseRate: number;                 // up to 0.5kg in local currency
-  perAdditionalHalfKgRate: number;      // rate per 0.5kg after the first 0.5kg
-  distanceRatePer500Km: number;         // distance charge per 500km
-  speedFactor: number;              // time scaling: lower is faster
-  minDays: number;
-  maxWeightAllowed: number;         // in kg
-  localOnly?: boolean;
-}
-
-// Country-specific domestic courier services configurations
-const DOMESTIC_COURIERS: Record<string, DomesticCourierConfig[]> = {
-  "IN": [
-    {
-      id: "india-post",
-      name: "India Post (Speed Post)",
-      reliabilityScore: 4.1,
-      tracking: true,
-      insurance: true,
-      pickup: false,
-      baseRate: 40,
-      perAdditionalHalfKgRate: 15,
-      distanceRatePer500Km: 8,
-      speedFactor: 1.2,
-      minDays: 3,
-      maxWeightAllowed: 35
-    },
-    {
-      id: "blue-dart",
-      name: "Blue Dart (DHL Group)",
-      reliabilityScore: 4.9,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 160,
-      perAdditionalHalfKgRate: 45,
-      distanceRatePer500Km: 25,
-      speedFactor: 0.5,
-      minDays: 1,
-      maxWeightAllowed: 100
-    },
-    {
-      id: "dtdc",
-      name: "DTDC Express",
-      reliabilityScore: 4.4,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 80,
-      perAdditionalHalfKgRate: 25,
-      distanceRatePer500Km: 15,
-      speedFactor: 0.8,
-      minDays: 2,
-      maxWeightAllowed: 70
-    },
-    {
-      id: "delhivery",
-      name: "Delhivery",
-      reliabilityScore: 4.5,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 70,
-      perAdditionalHalfKgRate: 22,
-      distanceRatePer500Km: 12,
-      speedFactor: 0.85,
-      minDays: 2,
-      maxWeightAllowed: 150
-    },
-    {
-      id: "xpressbees",
-      name: "XpressBees",
-      reliabilityScore: 4.2,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 50,
-      perAdditionalHalfKgRate: 18,
-      distanceRatePer500Km: 10,
-      speedFactor: 1.0,
-      minDays: 3,
-      maxWeightAllowed: 50
-    },
-    {
-      id: "porter",
-      name: "Porter (Intra-city & Heavy)",
-      reliabilityScore: 4.6,
-      tracking: true,
-      insurance: false,
-      pickup: true,
-      baseRate: 250,
-      perAdditionalHalfKgRate: 35,
-      distanceRatePer500Km: 150,
-      speedFactor: 0.4,
-      minDays: 1,
-      maxWeightAllowed: 2000,
-      localOnly: true
-    }
-  ],
-  "US": [
-    {
-      id: "usps-priority",
-      name: "USPS Priority Mail",
-      reliabilityScore: 4.3,
-      tracking: true,
-      insurance: true,
-      pickup: false,
-      baseRate: 9.20,
-      perAdditionalHalfKgRate: 1.50,
-      distanceRatePer500Km: 0.40,
-      speedFactor: 0.9,
-      minDays: 2,
-      maxWeightAllowed: 30
-    },
-    {
-      id: "fedex-ground",
-      name: "FedEx Ground",
-      reliabilityScore: 4.7,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 14.50,
-      perAdditionalHalfKgRate: 2.10,
-      distanceRatePer500Km: 0.60,
-      speedFactor: 0.7,
-      minDays: 2,
-      maxWeightAllowed: 70
-    },
-    {
-      id: "ups-ground",
-      name: "UPS Ground",
-      reliabilityScore: 4.6,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 13.80,
-      perAdditionalHalfKgRate: 1.90,
-      distanceRatePer500Km: 0.55,
-      speedFactor: 0.75,
-      minDays: 2,
-      maxWeightAllowed: 70
-    },
-    {
-      id: "dhl-express-us",
-      name: "DHL Express Domestic",
-      reliabilityScore: 4.8,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 28.00,
-      perAdditionalHalfKgRate: 4.50,
-      distanceRatePer500Km: 1.20,
-      speedFactor: 0.4,
-      minDays: 1,
-      maxWeightAllowed: 100
-    }
-  ],
-  "GB": [
-    {
-      id: "royal-mail-tracked",
-      name: "Royal Mail Tracked 48",
-      reliabilityScore: 4.4,
-      tracking: true,
-      insurance: true,
-      pickup: false,
-      baseRate: 3.50,
-      perAdditionalHalfKgRate: 0.80,
-      distanceRatePer500Km: 0.20,
-      speedFactor: 1.0,
-      minDays: 2,
-      maxWeightAllowed: 20
-    },
-    {
-      id: "evri-standard",
-      name: "Evri Standard",
-      reliabilityScore: 3.9,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 2.80,
-      perAdditionalHalfKgRate: 0.60,
-      distanceRatePer500Km: 0.15,
-      speedFactor: 1.2,
-      minDays: 3,
-      maxWeightAllowed: 15
-    },
-    {
-      id: "dpd-uk",
-      name: "DPD UK Delivery",
-      reliabilityScore: 4.7,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 7.20,
-      perAdditionalHalfKgRate: 1.40,
-      distanceRatePer500Km: 0.35,
-      speedFactor: 0.6,
-      minDays: 1,
-      maxWeightAllowed: 30
-    },
-    {
-      id: "dhl-uk",
-      name: "DHL UK Next Day",
-      reliabilityScore: 4.8,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 12.50,
-      perAdditionalHalfKgRate: 2.50,
-      distanceRatePer500Km: 0.50,
-      speedFactor: 0.5,
-      minDays: 1,
-      maxWeightAllowed: 50
-    }
-  ],
-  "CA": [
-    {
-      id: "canada-post",
-      name: "Canada Post Regular Parcel",
-      reliabilityScore: 4.2,
-      tracking: true,
-      insurance: true,
-      pickup: false,
-      baseRate: 9.80,
-      perAdditionalHalfKgRate: 1.80,
-      distanceRatePer500Km: 0.45,
-      speedFactor: 1.0,
-      minDays: 3,
-      maxWeightAllowed: 30
-    },
-    {
-      id: "purolator-ground",
-      name: "Purolator Ground",
-      reliabilityScore: 4.5,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 15.20,
-      perAdditionalHalfKgRate: 2.40,
-      distanceRatePer500Km: 0.70,
-      speedFactor: 0.8,
-      minDays: 2,
-      maxWeightAllowed: 65
-    },
-    {
-      id: "fedex-canada",
-      name: "FedEx Ground Canada",
-      reliabilityScore: 4.7,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 16.50,
-      perAdditionalHalfKgRate: 2.60,
-      distanceRatePer500Km: 0.75,
-      speedFactor: 0.75,
-      minDays: 2,
-      maxWeightAllowed: 70
-    },
-    {
-      id: "ups-canada",
-      name: "UPS Standard Canada",
-      reliabilityScore: 4.6,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 14.90,
-      perAdditionalHalfKgRate: 2.20,
-      distanceRatePer500Km: 0.65,
-      speedFactor: 0.8,
-      minDays: 2,
-      maxWeightAllowed: 70
-    }
-  ],
-  "AU": [
-    {
-      id: "auspost-parcel",
-      name: "Australia Post Parcel Post",
-      reliabilityScore: 4.3,
-      tracking: true,
-      insurance: true,
-      pickup: false,
-      baseRate: 8.95,
-      perAdditionalHalfKgRate: 1.90,
-      distanceRatePer500Km: 0.50,
-      speedFactor: 1.1,
-      minDays: 3,
-      maxWeightAllowed: 22
-    },
-    {
-      id: "sendle",
-      name: "Sendle Standard",
-      reliabilityScore: 4.1,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 6.95,
-      perAdditionalHalfKgRate: 1.40,
-      distanceRatePer500Km: 0.35,
-      speedFactor: 1.3,
-      minDays: 4,
-      maxWeightAllowed: 25
-    },
-    {
-      id: "toll-priority",
-      name: "Toll Priority",
-      reliabilityScore: 4.5,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 19.50,
-      perAdditionalHalfKgRate: 3.20,
-      distanceRatePer500Km: 0.90,
-      speedFactor: 0.6,
-      minDays: 1,
-      maxWeightAllowed: 50
-    },
-    {
-      id: "allied-express",
-      name: "Allied Express",
-      reliabilityScore: 4.2,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 14.00,
-      perAdditionalHalfKgRate: 2.30,
-      distanceRatePer500Km: 0.65,
-      speedFactor: 0.9,
-      minDays: 2,
-      maxWeightAllowed: 100
-    }
-  ],
-  "DE": [
-    {
-      id: "dhl-paket",
-      name: "DHL Paket",
-      reliabilityScore: 4.8,
-      tracking: true,
-      insurance: true,
-      pickup: false,
-      baseRate: 4.99,
-      perAdditionalHalfKgRate: 0.70,
-      distanceRatePer500Km: 0.15,
-      speedFactor: 0.8,
-      minDays: 2,
-      maxWeightAllowed: 31.5
-    },
-    {
-      id: "hermes-paket",
-      name: "Hermes Paket",
-      reliabilityScore: 4.1,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 3.99,
-      perAdditionalHalfKgRate: 0.60,
-      distanceRatePer500Km: 0.10,
-      speedFactor: 1.1,
-      minDays: 3,
-      maxWeightAllowed: 25
-    },
-    {
-      id: "dpd-germany",
-      name: "DPD Classic Germany",
-      reliabilityScore: 4.4,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 5.40,
-      perAdditionalHalfKgRate: 0.90,
-      distanceRatePer500Km: 0.20,
-      speedFactor: 0.9,
-      minDays: 2,
-      maxWeightAllowed: 31.5
-    },
-    {
-      id: "gls-germany",
-      name: "GLS Standard Germany",
-      reliabilityScore: 4.3,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 4.80,
-      perAdditionalHalfKgRate: 0.85,
-      distanceRatePer500Km: 0.18,
-      speedFactor: 0.9,
-      minDays: 2,
-      maxWeightAllowed: 40
-    }
-  ],
-  "AE": [
-    {
-      id: "aramex-domestic",
-      name: "Aramex Domestic",
-      reliabilityScore: 4.5,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 19.00,
-      perAdditionalHalfKgRate: 3.00,
-      distanceRatePer500Km: 4.00,
-      speedFactor: 0.6,
-      minDays: 1,
-      maxWeightAllowed: 30
-    },
-    {
-      id: "emirates-post",
-      name: "Emirates Post Courier",
-      reliabilityScore: 4.2,
-      tracking: true,
-      insurance: true,
-      pickup: false,
-      baseRate: 15.00,
-      perAdditionalHalfKgRate: 2.00,
-      distanceRatePer500Km: 2.50,
-      speedFactor: 0.9,
-      minDays: 2,
-      maxWeightAllowed: 35
-    },
-    {
-      id: "fetchr",
-      name: "Fetchr Next-Day",
-      reliabilityScore: 4.3,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 25.00,
-      perAdditionalHalfKgRate: 4.00,
-      distanceRatePer500Km: 5.00,
-      speedFactor: 0.5,
-      minDays: 1,
-      maxWeightAllowed: 20
-    },
-    {
-      id: "dhl-uae",
-      name: "DHL Domestic UAE",
-      reliabilityScore: 4.8,
-      tracking: true,
-      insurance: true,
-      pickup: true,
-      baseRate: 40.00,
-      perAdditionalHalfKgRate: 8.00,
-      distanceRatePer500Km: 8.00,
-      speedFactor: 0.4,
-      minDays: 1,
-      maxWeightAllowed: 50
-    }
-  ]
-};
-
-// Global International courier configurations (in base USD, converted dynamically)
-interface InternationalCourierConfig {
-  id: string;
-  name: string;
-  reliabilityScore: number;
-  tracking: boolean;
-  insurance: boolean;
-  pickup: boolean;
-  baseRateUsd: number;             // up to 0.5kg
-  perAdditionalHalfKgRateUsd: number; // rate per 0.5kg after
-  distanceRatePer2000KmUsd: number;    // distance charge per 2000km
-  speedFactor: number;
-  minDays: number;
-  maxWeightAllowed: number;        // in kg
-}
-
-const INTL_COURIERS: InternationalCourierConfig[] = [
-  {
-    id: "dhl-intl",
-    name: "DHL Express International",
-    reliabilityScore: 4.9,
-    tracking: true,
-    insurance: true,
-    pickup: true,
-    baseRateUsd: 22.00,
-    perAdditionalHalfKgRateUsd: 7.50,
-    distanceRatePer2000KmUsd: 2.50,
-    speedFactor: 0.4,
-    minDays: 2,
-    maxWeightAllowed: 300
-  },
-  {
-    id: "fedex-intl",
-    name: "FedEx International Priority",
-    reliabilityScore: 4.8,
-    tracking: true,
-    insurance: true,
-    pickup: true,
-    baseRateUsd: 20.00,
-    perAdditionalHalfKgRateUsd: 7.00,
-    distanceRatePer2000KmUsd: 2.30,
-    speedFactor: 0.45,
-    minDays: 3,
-    maxWeightAllowed: 300
-  },
-  {
-    id: "ups-intl",
-    name: "UPS Worldwide Saver",
-    reliabilityScore: 4.7,
-    tracking: true,
-    insurance: true,
-    pickup: true,
-    baseRateUsd: 18.50,
-    perAdditionalHalfKgRateUsd: 6.70,
-    distanceRatePer2000KmUsd: 2.20,
-    speedFactor: 0.45,
-    minDays: 3,
-    maxWeightAllowed: 300
-  },
-  {
-    id: "garudavega-intl",
-    name: "Garudavega International",
-    reliabilityScore: 4.4,
-    tracking: true,
-    insurance: true,
-    pickup: true,
-    baseRateUsd: 12.50,
-    perAdditionalHalfKgRateUsd: 4.20,
-    distanceRatePer2000KmUsd: 1.40,
-    speedFactor: 0.6,
-    minDays: 4,
-    maxWeightAllowed: 150
-  },
-  {
-    id: "aramex-intl",
-    name: "Aramex International",
-    reliabilityScore: 4.3,
-    tracking: true,
-    insurance: true,
-    pickup: true,
-    baseRateUsd: 13.00,
-    perAdditionalHalfKgRateUsd: 4.50,
-    distanceRatePer2000KmUsd: 1.50,
-    speedFactor: 0.65,
-    minDays: 4,
-    maxWeightAllowed: 100
-  },
-  {
-    id: "postal-ems-intl",
-    name: "EMS Global Postal",
-    reliabilityScore: 4.0,
-    tracking: true,
-    insurance: true,
-    pickup: false,
-    baseRateUsd: 9.50,
-    perAdditionalHalfKgRateUsd: 3.20,
-    distanceRatePer2000KmUsd: 1.10,
-    speedFactor: 0.85,
-    minDays: 5,
-    maxWeightAllowed: 35
-  }
-];
 
 export function getEstimates(input: ShippingInput): CourierEstimate[] {
   const pickupCountryObj = COUNTRIES_DATA[input.pickupCountry];
@@ -748,51 +190,69 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
 
   const estimates: CourierEstimate[] = [];
 
-  if (!isInternational) {
-    const configs = DOMESTIC_COURIERS[input.pickupCountry] || [];
-    
-    for (const courier of configs) {
-      if (totalBillingWeight > courier.maxWeightAllowed) continue;
-      if (courier.localOnly && distance > 250 && !isSameCity) continue;
+  const rateConversion = USD_TO_CURRENCY[currencyCode] || 1.0;
 
-      // Heavy load optimizations
-      if (totalBillingWeight > 40 && (courier.id === "india-post" || courier.id === "xpressbees" || courier.id === "usps-priority")) {
-        continue;
-      }
+  // Filter COURIER_SERVICES based on parameters
+  const activeCouriers = COURIER_SERVICES.filter(courier => {
+    if (isInternational) {
+      return (
+        courier.type === "international" &&
+        courier.originCountry === input.pickupCountry &&
+        courier.supportedRoutes.includes(input.deliveryCountry)
+      );
+    } else {
+      return (
+        courier.type === "domestic" &&
+        courier.originCountry === input.pickupCountry
+      );
+    }
+  });
 
-      // Base Charge
-      let baseCharge = courier.baseRate;
+  for (const courier of activeCouriers) {
+    if (totalBillingWeight > courier.maxWeightAllowed) continue;
 
-      // Weight Surcharge
-      let weightCharge = 0;
-      if (totalBillingWeight > 0.5) {
-        const additionalSlabs = (totalBillingWeight - 0.5) / 0.5;
-        if (courier.id === "porter") {
-          weightCharge = totalBillingWeight * courier.perAdditionalHalfKgRate;
-        } else {
-          weightCharge = additionalSlabs * courier.perAdditionalHalfKgRate;
-        }
-      }
+    // Heavy load optimizations
+    if (totalBillingWeight > 40 && (courier.id.includes("post") || courier.id.includes("xpressbees"))) {
+      continue;
+    }
 
-      // Special category adjustments
-      const mainCategory = input.parcels[0]?.category;
-      if (mainCategory === "documents" && totalBillingWeight < 0.5) {
-        baseCharge *= 0.6;
-        weightCharge = 0;
-      } else if (mainCategory === "fragile") {
-        baseCharge *= 1.25;
-      } else if (mainCategory === "bike") {
-        const bikeLoading = currencyCode === "INR" ? 500 : 15;
-        baseCharge += bikeLoading;
-      }
+    // Base Charge (For international, rates in courierData are in USD; for domestic, they are in local currency)
+    let baseCharge = isInternational ? courier.baseRate * rateConversion : courier.baseRate;
 
-      // Distance Charge
-      let distanceCharge = 0;
-      if (isSameCity) {
-        distanceCharge = courier.id === "porter" ? distance * (currencyCode === "INR" ? 30 : 0.8) : (currencyCode === "INR" ? 10 : 0.5);
+    // Weight Surcharge
+    let weightCharge = 0;
+    if (totalBillingWeight > 0.5) {
+      const additionalSlabs = (totalBillingWeight - 0.5) / 0.5;
+      const rawWeightRate = isInternational ? courier.perAdditionalHalfKgRate * rateConversion : courier.perAdditionalHalfKgRate;
+      if (courier.id.includes("porter")) {
+        weightCharge = totalBillingWeight * rawWeightRate;
       } else {
-        if (courier.id === "porter") continue;
-        distanceCharge = (distance / 500) * courier.distanceRatePer500Km;
+        weightCharge = additionalSlabs * rawWeightRate;
+      }
+    }
+
+    // Special category adjustments
+    const mainCategory = input.parcels[0]?.category;
+    if (mainCategory === "documents" && totalBillingWeight < 0.5) {
+      baseCharge *= isInternational ? 0.75 : 0.6;
+      weightCharge = 0;
+    } else if (mainCategory === "fragile") {
+      baseCharge *= isInternational ? 1.35 : 1.25;
+    } else if (!isInternational && mainCategory === "bike") {
+      const bikeLoading = currencyCode === "INR" ? 500 : 15;
+      baseCharge += bikeLoading;
+    }
+
+    // Distance Charge
+    let distanceCharge = 0;
+    if (!isInternational) {
+      if (isSameCity) {
+        distanceCharge = courier.id.includes("porter")
+          ? distance * (currencyCode === "INR" ? 30 : 0.8)
+          : (currencyCode === "INR" ? 10 : 0.5);
+      } else {
+        if (courier.id.includes("porter")) continue;
+        distanceCharge = (distance / 500) * courier.distanceRate;
       }
 
       // Zone Adjustments
@@ -803,156 +263,90 @@ export function getEstimates(input: ShippingInput): CourierEstimate[] {
       } else if (zone === "NATIONAL") {
         distanceCharge *= 1.25;
       }
+    } else {
+      distanceCharge = (distance / 2000) * courier.distanceRate * rateConversion;
+    }
 
-      // Insurance Surcharge (1.2% of billing weight scaling)
-      let insuranceCharge = 0;
-      if (input.insurance && courier.insurance) {
+    // Insurance Surcharge
+    let insuranceCharge = 0;
+    if (input.insurance && courier.features.insurance) {
+      if (!isInternational) {
         const minInsurance = currencyCode === "INR" ? 80 : 2.5;
         const weightMult = currencyCode === "INR" ? 18 : 0.5;
         insuranceCharge = Math.max(minInsurance, totalBillingWeight * weightMult);
+      } else {
+        const minInsurance = 5.0 * rateConversion;
+        const weightMult = 1.0 * rateConversion;
+        insuranceCharge = Math.max(minInsurance, totalBillingWeight * weightMult);
       }
+    }
 
-      // Home Pickup Surcharge
-      let pickupFee = 0;
-      if (input.pickupRequired && courier.pickup) {
+    // Home Pickup Surcharge
+    let pickupFee = 0;
+    if (input.pickupRequired && courier.features.pickup) {
+      if (!isInternational) {
         if (totalBillingWeight > 30) {
           pickupFee = currencyCode === "INR" ? 150 : 5.0;
         } else {
           pickupFee = currencyCode === "INR" ? 50 : 2.0;
         }
-      }
-
-      // Express Surcharges
-      let speedFactor = courier.speedFactor;
-      if (input.express) {
-        speedFactor *= 0.7;
-        baseCharge *= 1.35;
-        weightCharge *= 1.15;
-      }
-
-      // Transit days estimation
-      let transitDays = Math.ceil((distance / 420) * speedFactor);
-      if (isSameCity) {
-        transitDays = courier.id === "porter" || courier.id === "blue-dart" || courier.id === "dpd-uk" ? 1 : 2;
-      }
-      transitDays = Math.max(courier.minDays, transitDays);
-      if (transitDays > 10) {
-        transitDays = 10;
-      }
-
-      // Taxes (18% GST/VAT equivalent)
-      const subtotal = baseCharge + weightCharge + distanceCharge + insuranceCharge + totalPackagingCharge + pickupFee;
-      const taxes = Math.round(subtotal * 0.18 * 100) / 100;
-      const total = Math.round(subtotal + taxes);
-
-      estimates.push({
-        id: courier.id,
-        name: courier.name,
-        estimatedPrice: total,
-        estimatedDays: transitDays,
-        reliabilityScore: courier.reliabilityScore,
-        trackingAvailable: courier.tracking,
-        insuranceAvailable: courier.insurance,
-        pickupAvailable: courier.pickup,
-        breakdown: {
-          baseCharge: Math.round(baseCharge * 100) / 100,
-          weightCharge: Math.round(weightCharge * 100) / 100,
-          distanceCharge: Math.round(distanceCharge * 100) / 100,
-          insuranceCharge: Math.round(insuranceCharge * 100) / 100,
-          packagingCharge: Math.round(totalPackagingCharge * 100) / 100,
-          pickupFee: Math.round(pickupFee * 100) / 100,
-          taxes: Math.round(taxes * 100) / 100,
-          total: total
-        },
-        currencySymbol
-      });
-    }
-  } else {
-    // Process International Carriers
-    const rateConversion = USD_TO_CURRENCY[currencyCode] || 1.0;
-    
-    for (const courier of INTL_COURIERS) {
-      if (totalBillingWeight > courier.maxWeightAllowed) continue;
-      if (totalBillingWeight > 30 && courier.id === "postal-ems-intl") continue;
-
-      // Base Charge in Origin Currency
-      let baseCharge = courier.baseRateUsd * rateConversion;
-
-      // Weight Surcharge
-      let weightCharge = 0;
-      if (totalBillingWeight > 0.5) {
-        const additionalSlabs = (totalBillingWeight - 0.5) / 0.5;
-        weightCharge = additionalSlabs * courier.perAdditionalHalfKgRateUsd * rateConversion;
-      }
-
-      // Category adjustments
-      const mainCategory = input.parcels[0]?.category;
-      if (mainCategory === "documents" && totalBillingWeight < 0.5) {
-        baseCharge *= 0.75;
-        weightCharge = 0;
-      } else if (mainCategory === "fragile") {
-        baseCharge *= 1.35;
-      }
-
-      // Distance Charge
-      const distanceCharge = (distance / 2000) * courier.distanceRatePer2000KmUsd * rateConversion;
-
-      // Insurance Charge
-      let insuranceCharge = 0;
-      if (input.insurance && courier.insurance) {
-        const minInsurance = 5.0 * rateConversion;
-        const weightMult = 1.0 * rateConversion;
-        insuranceCharge = Math.max(minInsurance, totalBillingWeight * weightMult);
-      }
-
-      // Pickup Charge
-      let pickupFee = 0;
-      if (input.pickupRequired && courier.pickup) {
+      } else {
         pickupFee = (totalBillingWeight > 30 ? 6.0 : 3.0) * rateConversion;
       }
-
-      // Express Multipliers
-      let speedFactor = courier.speedFactor;
-      if (input.express) {
-        speedFactor *= 0.65;
-        baseCharge *= 1.4;
-        weightCharge *= 1.2;
-      }
-
-      // Transit days estimation
-      let transitDays = Math.ceil((distance / 2200) * speedFactor);
-      transitDays = Math.max(courier.minDays, transitDays);
-      if (transitDays > 14) {
-        transitDays = 14;
-      }
-
-      // Taxes (18% GST/VAT equivalent for export shipment fees)
-      const subtotal = baseCharge + weightCharge + distanceCharge + insuranceCharge + totalPackagingCharge + pickupFee;
-      const taxes = Math.round(subtotal * 0.18 * 100) / 100;
-      const total = Math.round(subtotal + taxes);
-
-      estimates.push({
-        id: courier.id,
-        name: courier.name,
-        estimatedPrice: total,
-        estimatedDays: transitDays,
-        reliabilityScore: courier.reliabilityScore,
-        trackingAvailable: courier.tracking,
-        insuranceAvailable: courier.insurance,
-        pickupAvailable: courier.pickup,
-        breakdown: {
-          baseCharge: Math.round(baseCharge * 100) / 100,
-          weightCharge: Math.round(weightCharge * 100) / 100,
-          distanceCharge: Math.round(distanceCharge * 100) / 100,
-          insuranceCharge: Math.round(insuranceCharge * 100) / 100,
-          packagingCharge: Math.round(totalPackagingCharge * 100) / 100,
-          pickupFee: Math.round(pickupFee * 100) / 100,
-          taxes: Math.round(taxes * 100) / 100,
-          total: total
-        },
-        currencySymbol
-      });
     }
+
+    // Express Surcharges / Speed Factors
+    let speedFactor = 1.0;
+    if (courier.tags.includes("fastest")) {
+      speedFactor = 0.45;
+    } else if (courier.tags.includes("premium")) {
+      speedFactor = 0.6;
+    } else if (courier.tags.includes("cheapest")) {
+      speedFactor = isInternational ? 1.25 : 1.2;
+    }
+
+    if (input.express) {
+      speedFactor *= isInternational ? 0.65 : 0.7;
+      baseCharge *= isInternational ? 1.4 : 1.35;
+      weightCharge *= isInternational ? 1.2 : 1.15;
+    }
+
+    // Transit days estimation
+    let transitDays = Math.ceil((distance / (isInternational ? 2200 : 420)) * speedFactor);
+    if (!isInternational && isSameCity) {
+      transitDays = (courier.id.includes("porter") || courier.id.includes("blue-dart") || courier.id.includes("dpd-local") || courier.tags.includes("fastest")) ? 1 : 2;
+    }
+    transitDays = Math.max(courier.deliveryDays.min, transitDays);
+    if (transitDays > courier.deliveryDays.max) {
+      transitDays = courier.deliveryDays.max;
+    }
+
+    // Taxes (18% GST/VAT equivalent)
+    const subtotal = baseCharge + weightCharge + distanceCharge + insuranceCharge + totalPackagingCharge + pickupFee;
+    const taxes = Math.round(subtotal * 0.18 * 100) / 100;
+    const total = Math.round(subtotal + taxes);
+
+    estimates.push({
+      id: courier.id,
+      name: `${courier.company} ${courier.serviceName}`,
+      estimatedPrice: total,
+      estimatedDays: transitDays,
+      reliabilityScore: courier.reliabilityScore,
+      trackingAvailable: courier.features.tracking,
+      insuranceAvailable: courier.features.insurance,
+      pickupAvailable: courier.features.pickup,
+      breakdown: {
+        baseCharge: Math.round(baseCharge * 100) / 100,
+        weightCharge: Math.round(weightCharge * 100) / 100,
+        distanceCharge: Math.round(distanceCharge * 100) / 100,
+        insuranceCharge: Math.round(insuranceCharge * 100) / 100,
+        packagingCharge: Math.round(totalPackagingCharge * 100) / 100,
+        pickupFee: Math.round(pickupFee * 100) / 100,
+        taxes: Math.round(taxes * 100) / 100,
+        total: total
+      },
+      currencySymbol
+    });
   }
 
   // Sort and apply recommendation badges
