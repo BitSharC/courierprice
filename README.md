@@ -1,46 +1,151 @@
-# Astro Starter Kit: Basics
+<div align="center">
 
-```sh
-npm create astro@latest -- --template basics
+# 📦 CourierPrice
+
+### Compare courier prices across multiple providers from a single, intuitive platform.
+
+<p>
+  <a href="https://courierprice.com">
+    <img src="https://img.shields.io/badge/🌐_Live_Website-courierprice.com-2563EB?style=for-the-badge" alt="Live Website" />
+  </a>
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/Astro-5.0-FF5D01?logo=astro&logoColor=white" alt="Astro">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Cloudflare_Pages-F38020?logo=cloudflare&logoColor=white" alt="Cloudflare Pages">
+</p>
+
+</div>
+
+---
+
+## 🖼️ Overview
+
+![CourierPrice Hero](assets/hero.png)
+
+---
+
+## 🎥 Quick Product Demo
+
+A 22-second walkthrough showing how to compare courier prices.
+
+> **Demo:**  
+
+```
+https://github.com/user-attachments/assets/3702bad3-f12c-4e29-b1ba-2c948180f730
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+## 💡 Why I Built CourierPrice
 
-Inside of your Astro project, you'll see the following folders and files:
+Whenever I needed to compare courier prices, I found myself opening multiple courier websites, entering the same shipment details repeatedly, and manually comparing different pricing structures.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+I wanted a faster and simpler workflow.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+So I built **CourierPrice**, a tool that lets users enter shipment details once and instantly compare shipping prices across multiple courier providers.
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## ✨ Features
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- 🌍 Domestic & International shipping support
+- 📍 Pickup & destination location selection
+- 📦 Multiple parcel categories
+- ⚖️ Weight & volumetric weight calculation
+- 📐 Parcel dimension support
+- 🚚 Home pickup option
+- 🛡️ Shipping insurance
+- ⚡ Express transit option
+- 💰 Instant courier price comparison
+- 📱 Fully responsive interface
+- 🌙 Light & Dark mode
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📸 Screenshots
+
+### Calculator Interface
+
+![Calculator UI](assets/calculator-ui.png)
+
+---
+
+### Comparison Results
+
+![Comparison Results](assets/comparison-results.png)
+
+---
+
+### Light Mode
+
+![Light Mode](assets/light-mode.png)
+
+---
+
+### Mobile Friendly
+
+![Mobile Friendly](assets/mobile-friendly.png)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Astro
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Deployment:** Cloudflare Pages
+
+---
+
+## 🌍 Supported Countries
+
+Currently supports shipment estimation for:
+
+- 🇮🇳 India
+- 🇺🇸 United States
+- 🇬🇧 United Kingdom
+- 🇨🇦 Canada
+- 🇦🇺 Australia
+- 🇩🇪 Germany
+- 🇦🇪 United Arab Emirates
+
+More countries are planned.
+
+---
+
+## 🚀 Roadmap
+
+- More courier providers
+- Additional supported countries
+- Delivery time comparison
+- Courier recommendations
+- Saved shipment history
+- User accounts
+- Shipment tracking
+
+---
+
+## 🌐 Live Website
+
+**https://courierprice.com**
+
+---
+
+## 💬 Feedback
+
+Suggestions, ideas, and feature requests are always welcome.
+
+If you have feedback that could improve CourierPrice, I'd love to hear it.
+
+---
+
+<div align="center">
+
+### 👨‍💻 Built by Tushar Chib (BitSharc)
+
+If you found this project useful, consider giving it a ⭐
+
+</div>
