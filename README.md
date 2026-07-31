@@ -1,6 +1,11 @@
 <div align="center">
 
-# 📦 CourierPrice
+<a href="https://courierprice.com">
+  <img src="assets/icon.png" alt="CourierPrice Logo" width="100">
+</a>
+
+
+# CourierPrice
 
 ### Compare courier prices across multiple providers from a single, intuitive platform.
 
