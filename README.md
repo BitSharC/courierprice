@@ -25,19 +25,16 @@
 
 ![CourierPrice Hero](assets/hero.png)
 
----
+Stop hopping between courier websites. Compare shipping prices from multiple providers in one place.
 
-## 🎥 Quick Product Demo
-
-A 22-second walkthrough showing how to compare courier prices.
-
-> **Demo:**  
-
-```
-https://github.com/user-attachments/assets/3702bad3-f12c-4e29-b1ba-2c948180f730
-```
+<p align="center">
+  <a href="https://github.com/user-attachments/assets/3702bad3-f12c-4e29-b1ba-2c948180f730">
+    <strong>▶️ Watch the 22-Second Product Demo</strong>
+  </a>
+</p>
 
 ---
+
 
 ## 💡 Why I Built CourierPrice
 
