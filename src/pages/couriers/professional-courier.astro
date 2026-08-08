@@ -1,0 +1,418 @@
+---
+// src/pages/couriers/professional-courier.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Professional Courier Price Calculator | Estimate Shipping Charges"
+  description="Estimate Professional Courier shipping charges based on weight, dimensions, pickup and delivery details. Calculate domestic courier costs with CourierPrice."
+>
+  <!-- Global Navigation Header -->
+  <Header />
+
+  <!-- Main Content Layout -->
+  <main class="flex-grow bg-canvas-soft transition-colors duration-200">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex text-xs font-mono text-mute gap-1.5 items-center" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="hover:text-ink cursor-default transition-colors">Couriers</span>
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-ink font-semibold" aria-current="page">Professional Courier</span>
+      </nav>
+
+      <!-- Hero Header Section -->
+      <section class="border-b border-hairline pb-8">
+        <span class="caption-mono uppercase tracking-wider text-mute text-xs">Courier Guide</span>
+        <h1 class="display-lg text-ink font-semibold mt-2 text-3xl sm:text-4xl leading-tight">
+          Professional Courier Price Calculator.
+        </h1>
+        <p class="body-lg text-body mt-3 leading-relaxed max-w-2xl">
+          Estimate Professional Courier shipping charges based on your pickup and delivery location, package weight, dimensions, and shipment details.
+        </p>
+      </section>
+
+      <!-- Calculator Section -->
+      <section id="calculator-anchor" class="scroll-mt-24 space-y-8">
+        <!-- Prominent Calculator Container -->
+        <CalculatorForm courierId="professional-domestic-in" />
+        
+        <!-- Live Results Container (populates after calculation) -->
+        <ResultsList courierId="professional-domestic-in" />
+      </section>
+
+      <!-- Educational Section 1: How Charges are Calculated -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">How Professional Courier Charges Are Calculated.</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed">
+          <p class="body-md text-body">
+            Professional Courier rates are calculated dynamically based on multiple parameters, rather than one flat rate. Key factors influencing the price include the origin city, destination region, actual physical weight, package size dimensions, service type, and whether the parcel is domestic or international.
+          </p>
+          <p class="body-md text-body">
+            In addition to basic transit tariffs, variables like remote location availability, applicable taxes (GST), and additional fuel surcharges are incorporated into the final quote. Using these parameters, the calculator generates a precise estimate of your shipping costs.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 2: Charges Per KG -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Professional Courier Charges Per KG.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Shippers frequently search for standard "Professional Courier weight charges per kg in India," hoping to estimate their costs with a single flat number. However, a single rate does not exist because pricing is structured around weight slabs and distance-based zones.
+          </p>
+          <p class="body-md text-body">
+            Typically, the first 500 grams (the base slab) carries a higher initial fee to cover administrative and pickup logistics. Every subsequent 500g or 1kg slab is charged at a significantly lower incremental rate. Furthermore, the rate per kg varies by zone; sending a parcel to a nearby city will have a much lower per-kg cost compared to cross-country transit or shipping to a remote region in India.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 3: Dead Weight vs Volumetric Weight -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">How Weight and Package Size Affect Professional Courier Charges.</h2>
+        <div class="space-y-6 leading-relaxed">
+          <p class="body-md text-body">
+            Professional Courier uses two separate measurements to determine shipping costs: dead weight (the physical weight on a scale) and volumetric weight (the dimensional space occupied by the parcel in the transport vehicle). The final chargeable weight is always the higher of these two values.
+          </p>
+
+          <!-- Formula & Example Container -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Left Side: Explanation & Formula Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <div>
+                <h3 class="body-md-strong text-ink font-semibold">The Volumetric Weight Formula</h3>
+                <p class="body-sm text-body mt-1">For domestic shipments, the volumetric weight is calculated using the industry standard factor of 5000:</p>
+              </div>
+              <div class="bg-canvas-soft border border-hairline rounded-md py-4 text-center">
+                <span class="font-mono text-ink text-sm sm:text-base font-semibold">
+                  Volumetric Weight (kg) = <br class="block sm:hidden" /> (L × W × H) / 5000
+                </span>
+                <span class="block text-xs text-mute mt-1">Dimensions must be in centimetres (cm)</span>
+              </div>
+              <div class="space-y-2 text-xs text-body">
+                <p><strong>Dead Weight:</strong> The actual scale weight of the package.</p>
+                <p><strong>Volumetric Weight:</strong> A measure reflecting package density. Large lightweight items take up cargo space, necessitating dimensional charging.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: Visual Example Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <h3 class="body-md-strong text-ink font-semibold">Visual Example: Large Lightweight Package</h3>
+              <div class="space-y-3 text-sm text-body">
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Package Dimensions</span>
+                  <span class="text-ink font-mono font-medium">60 × 25 × 40 cm</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Actual Weight (Scale)</span>
+                  <span class="text-ink font-mono font-medium">6.0 kg</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Calculated Volumetric Weight</span>
+                  <span class="text-ink font-mono font-medium">(60 × 25 × 40) / 5000 = 12.0 kg</span>
+                </div>
+                <div class="flex justify-between pt-1 font-semibold text-base text-ink">
+                  <span>Chargeable Weight</span>
+                  <span class="text-primary font-mono">12.0 kg</span>
+                </div>
+              </div>
+              <p class="text-xs text-mute leading-relaxed">
+                Since the volumetric weight (12 kg) is greater than the physical scale weight (6 kg), Professional Courier will bill the shipment based on the 12 kg volumetric weight limit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 4: Domestic Services -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Professional Courier Domestic Services.</h2>
+        <div class="space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            Depending on your delivery urgency, budget, and parcel dimensions, The Professional Couriers offers several domestic shipping options:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Express Service -->
+            <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-2 flex flex-col justify-between">
+              <div class="space-y-2">
+                <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-0.5 rounded uppercase">Express Service</span>
+                <h3 class="display-sm text-ink font-semibold mt-2">Priority Delivery.</h3>
+                <p class="body-sm text-body leading-relaxed">
+                  Designed for urgent documents and time-sensitive parcels. This service ensures swift transport, aiming for next-day or priority delivery to designated regional and metro networks in India.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-hairline flex justify-between items-center text-xs text-mute">
+                <span>Ideal for: Documents & urgent goods</span>
+                <span>Speed: Fast</span>
+              </div>
+            </div>
+
+            <!-- Surface Cargo -->
+            <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-2 flex flex-col justify-between">
+              <div class="space-y-2">
+                <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-0.5 rounded uppercase">Surface Cargo</span>
+                <h3 class="display-sm text-ink font-semibold mt-2">Economical Ground.</h3>
+                <p class="body-sm text-body leading-relaxed">
+                  Best suited for larger, bulky packages or commercial shipments that are not time-critical. Surface cargo uses an extensive road transportation network to keep shipping costs economical.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-hairline flex justify-between items-center text-xs text-mute">
+                <span>Ideal for: Bulk & heavy cargo</span>
+                <span>Speed: Standard</span>
+              </div>
+            </div>
+
+            <!-- Air Cargo -->
+            <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-2 flex flex-col justify-between">
+              <div class="space-y-2">
+                <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-0.5 rounded uppercase">Air Cargo</span>
+                <h3 class="display-sm text-ink font-semibold mt-2">Priority Payload.</h3>
+                <p class="body-sm text-body leading-relaxed">
+                  Utilizes commercial and cargo air routes to transport medium-to-large consignments quickly over long distances. Suitable for commercial distribution and valuable goods requiring expedited delivery.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-hairline flex justify-between items-center text-xs text-mute">
+                <span>Ideal for: Commercial air cargo</span>
+                <span>Speed: Rapid</span>
+              </div>
+            </div>
+
+            <!-- Dawn to Dusk -->
+            <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-2 flex flex-col justify-between">
+              <div class="space-y-2">
+                <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-0.5 rounded uppercase">Dawn to Dusk</span>
+                <h3 class="display-sm text-ink font-semibold mt-2">Same-Day Delivery.</h3>
+                <p class="body-sm text-body leading-relaxed">
+                  A premium service intended for same-day delivery. Shipments booked during the morning hours are scheduled for delivery by the evening, subject to local destination serviceability constraints.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-hairline flex justify-between items-center text-xs text-mute">
+                <span>Ideal for: Same-day documents</span>
+                <span>Speed: Immediate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 5: Same-Day Delivery Charges -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Professional Courier Same-Day Delivery Charges.</h2>
+        <p class="body-md text-body leading-relaxed">
+          Same-day delivery is handled via the specialized "Dawn to Dusk" service. Unlike standard courier transit, same-day shipping requires dedicated courier dispatch routes, meaning pricing carries a significant premium.
+        </p>
+        <p class="body-md text-body leading-relaxed">
+          The pricing for Dawn to Dusk is not flat and varies depending on location accessibility, package volume, and routing complexity. Since our calculator simulates standard domestic rates, same-day delivery pricing and regional serviceability must be confirmed directly with your local Professional Courier booking branch.
+        </p>
+      </section>
+
+      <!-- Educational Section 6: ProPremium -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Professional Courier ProPremium.</h2>
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            The ProPremium service represents the courier's premium tier, designed to handle highly time-sensitive packages and valuable shipments with specialized tracking and priority handling.
+          </p>
+          <p class="body-sm text-body leading-relaxed">
+            ProPremium shipments operate under strict SLA guidelines to ensure rapid transit. If you need to make a ProPremium booking or query its exact corporate pricing, you can consult their official branch networks. Note that CourierPrice is an independent comparator tool and is not affiliated with the courier.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 7: International Charges -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Professional Courier International Charges.</h2>
+        <p class="body-md text-body leading-relaxed">
+          Professional Courier also services major international destinations, with pricing structures that differ significantly from domestic routes. International charges depend on destination zone classifications, parcel dimensions, volumetric space limits, fuel prices, and destination-specific customs policies.
+        </p>
+        <p class="body-md text-body leading-relaxed">
+          Customs duties, import taxes, and special clearing surcharges may also apply at destination points. To calculate international shipping estimates, please refer to our main global calculator page.
+        </p>
+        
+        <div class="pt-4 flex flex-col items-center sm:items-start">
+          <span class="text-xs text-mute font-mono mb-2">Need an international shipping estimate?</span>
+          <a
+            href="/"
+            class="inline-flex items-center justify-center bg-canvas hover:bg-canvas-soft-2 text-ink border border-hairline text-sm font-semibold rounded-full px-6 py-2.5 shadow-level-2 active:scale-98 transition-all duration-200"
+          >
+            Use Global Courier Calculator
+          </a>
+        </div>
+      </section>
+
+      <!-- Educational Section 8: Example Calculation -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Example: Estimating Professional Courier Shipping Cost.</h2>
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            Let us look at a realistic domestic example to see how the billing weight is determined and how the estimation process operates:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-body">
+            <div class="space-y-2">
+              <h3 class="body-sm-strong text-ink font-semibold">Shipment Parameters</h3>
+              <ul class="list-disc pl-4 space-y-1">
+                <li><strong>Origin:</strong> Delhi Pincode (e.g., 110001)</li>
+                <li><strong>Destination:</strong> Mumbai Pincode (e.g., 400001)</li>
+                <li><strong>Actual Physical Weight:</strong> 2.0 kg</li>
+                <li><strong>Package Dimensions:</strong> 30 × 20 × 15 cm</li>
+              </ul>
+            </div>
+            
+            <div class="space-y-2">
+              <h3 class="body-sm-strong text-ink font-semibold">Weight Calculation Steps</h3>
+              <ol class="list-decimal pl-4 space-y-1">
+                <li>Calculate Volumetric weight: <br /><span class="font-mono text-ink text-xs">(30 × 20 × 15) / 5000 = 1.8 kg</span></li>
+                <li>Compare weights: <br /><span class="text-ink text-xs">Physical (2.0 kg) vs Volumetric (1.8 kg)</span></li>
+                <li>Chargeable weight selected: <br /><span class="text-ink font-semibold">2.0 kg (the higher of the two)</span></li>
+              </ol>
+            </div>
+          </div>
+          
+          <p class="text-xs text-mute pt-2 border-t border-hairline/60">
+            The final shipping estimate depends on the applicable pricing model, route, service mode (Standard or Express), and other shipment details. Use the calculator above to compute rates for your specific route.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 9: Why Prices Differ -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Why Can the Actual Professional Courier Price Differ?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed body-md text-body">
+          <div class="space-y-4">
+            <p>
+              Estimates generated by CourierPrice are based on standard domestic rates. However, the final price charged at booking might vary due to several real-world shipping factors:
+            </p>
+            <ul class="list-disc pl-4 space-y-2 text-sm">
+              <li><strong>Weight Discrepancies:</strong> Small variations on official courier scales compared to domestic scales.</li>
+              <li><strong>Package Bulges:</strong> Cardboard expansion or extra bubble wrap can increase measured dimensions, impacting volumetric weight.</li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <ul class="list-disc pl-4 space-y-2 text-sm md:pt-6">
+              <li><strong>ODA Surcharges:</strong> Shipping to remote areas (Out-of-Delivery Area) that require special transport routes.</li>
+              <li><strong>Taxes & Fuel:</strong> Fluctuations in monthly fuel surcharges or state-specific taxes.</li>
+              <li><strong>COD Surcharges:</strong> Collection fees applied for COD handling.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 10: Personal Parcels -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Sending a Personal Parcel With Professional Courier.</h2>
+        <p class="body-md text-body leading-relaxed">
+          If you are shipping personal items—like documents, clothing, books, or presents—you can easily use Professional Courier's retail counter services. Estimating costs beforehand using our calculator helps you verify weight parameters and pack items efficiently to prevent volumetric surcharges.
+        </p>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="pt-8 border-t border-hairline space-y-6 scroll-mt-24">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        
+        <div class="space-y-6">
+          <!-- Q1 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">1. How much does Professional Courier charge per kg?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              There is no single flat rate per kg. Charges are calculated based on destination zones, weight slab structure (e.g., base weight vs additional weight), package dimensions, and service mode.
+            </p>
+          </div>
+          <!-- Q2 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">2. How are Professional Courier charges calculated?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Charges are determined by evaluating the origin and destination pincodes, comparing actual package weight and volumetric weight (charging the higher of the two), and applying fuel surcharges, pickup fees, and GST.
+            </p>
+          </div>
+          <!-- Q3 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">3. What are Professional Courier charges per kg in India?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Rates vary significantly depending on the transit route. Local deliveries within a state are cheaper (typically starting around ₹40-₹70 per kg), while long-distance national routes carry a higher per-kg rate.
+            </p>
+          </div>
+          <!-- Q4 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">4. Does Professional Courier charge based on volumetric weight?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Yes. If a package is large but lightweight, the volumetric weight is calculated using the formula <code>(L × W × H) / 5000</code> in cm. If this value exceeds the physical weight, billing is based on volumetric weight.
+            </p>
+          </div>
+          <!-- Q5 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">5. How much does Professional Courier same-day delivery cost?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Same-day delivery is handled via the "Dawn to Dusk" service. This service carries a premium tariff because of specialized routing, and final costs vary by city and service availability.
+            </p>
+          </div>
+          <!-- Q6 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">6. What is Professional Courier Dawn to Dusk service?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Dawn to Dusk is a specialized same-day shipping option where parcels booked in the morning are delivered by the evening within supported metropolitan zones.
+            </p>
+          </div>
+          <!-- Q7 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">7. Does Professional Courier offer international shipping?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Yes. Professional Courier provides international parcel services to major global locations. Rates depend on the target country, package parameters, and customs clearance requirements.
+            </p>
+          </div>
+          <!-- Q8 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">8. Why is my actual Professional Courier price different from the estimate?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Differences occur due to minor scale differences, package size increases from volumetric bulges, fuel rate changes, out-of-delivery area (ODA) handling, or extra COD fees.
+            </p>
+          </div>
+          <!-- Q9 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">9. Can I calculate Professional Courier charges using pincodes?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Yes. Origin and destination pincodes indicate distance zones, which are primary variables in the carrier's standard domestic pricing tables.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comparison CTA Section -->
+      <section class="pt-8 border-t border-hairline text-center space-y-4">
+        <h2 class="display-sm text-ink font-semibold">Compare Professional Courier With Other Courier Services.</h2>
+        <p class="body-sm text-body max-w-md mx-auto">
+          Want to see how Professional Courier compares with other courier providers? Use CourierPrice to compare estimated shipping costs.
+        </p>
+        <div class="pt-2">
+          <a
+            href="/"
+            class="inline-flex items-center justify-center bg-primary text-on-primary text-sm font-semibold rounded-full px-8 py-3 shadow-level-3 hover:opacity-90 active:scale-98 transition-all duration-200"
+          >
+            Compare Rates Globally
+          </a>
+        </div>
+      </section>
+
+      <!-- Related Courier Links -->
+      <section class="pt-6 text-center text-xs text-mute">
+        <span>Looking for other calculators? View the </span>
+        <a href="/couriers/delhivery" class="text-link hover:underline">Delhivery Price Calculator</a>.
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer Nav -->
+  <Footer />
+</Layout>

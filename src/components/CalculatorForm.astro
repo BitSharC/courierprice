@@ -8,15 +8,39 @@ interface Props {
 }
 
 const { courierId = "" } = Astro.props;
+
+// Determine title, subtitle, and submit button labels
+let titleKey = 'form-title';
+let titleText = 'Shipping details.';
+let subtitleKey = 'form-subtitle';
+let subtitleText = 'Configure your domestic or international shipment parameters.';
+let submitBtnKey = 'form-btn-submit';
+let submitBtnText = 'Compare prices';
+
+if (courierId === 'delhivery-domestic-in') {
+  titleKey = 'form-title-delhivery';
+  titleText = 'Delhivery Courier Price Calculator';
+  subtitleKey = 'form-subtitle-delhivery';
+  subtitleText = 'Estimate domestic surface and express shipping charges for Delhivery.';
+  submitBtnKey = 'form-btn-submit-delhivery';
+  submitBtnText = 'Calculate Delhivery Price';
+} else if (courierId === 'professional-domestic-in') {
+  titleKey = 'form-title-professional';
+  titleText = 'Professional Courier Price Calculator';
+  subtitleKey = 'form-subtitle-professional';
+  subtitleText = 'Estimate domestic shipping charges for The Professional Couriers.';
+  submitBtnKey = 'form-btn-submit-professional';
+  submitBtnText = 'Calculate Professional Courier Price';
+}
 ---
 
 <div id="calculator" data-courier-id={courierId} class="w-full bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-3 transition-colors duration-200">
   <div class="mb-6">
-    <h2 class="display-sm text-ink mb-1.5" data-i18n={courierId === 'delhivery-domestic-in' ? 'form-title-delhivery' : 'form-title'}>
-      {courierId === 'delhivery-domestic-in' ? 'Delhivery Courier Price Calculator' : 'Shipping details.'}
+    <h2 class="display-sm text-ink mb-1.5" data-i18n={titleKey}>
+      {titleText}
     </h2>
-    <p class="body-sm text-body" data-i18n={courierId === 'delhivery-domestic-in' ? 'form-subtitle-delhivery' : 'form-subtitle'}>
-      {courierId === 'delhivery-domestic-in' ? 'Estimate domestic surface and express shipping charges for Delhivery.' : 'Configure your domestic or international shipment parameters.'}
+    <p class="body-sm text-body" data-i18n={subtitleKey}>
+      {subtitleText}
     </p>
   </div>
 
@@ -53,7 +77,7 @@ const { courierId = "" } = Astro.props;
       <div class="space-y-4">
         <h3 class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-pickup-title">Pickup Location</h3>
         
-        {courierId === 'delhivery-domestic-in' ? (
+        {courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in' ? (
           <input type="hidden" id="pickupCountry" name="pickupCountry" value="IN" />
         ) : (
           <div class="flex flex-col gap-1.5">
@@ -109,7 +133,7 @@ const { courierId = "" } = Astro.props;
       <div class="space-y-4">
         <h3 id="delivery-title" class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-delivery-title-dom">Delivery Location (Domestic)</h3>
         
-        {courierId === 'delhivery-domestic-in' ? (
+        {courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in' ? (
           <input type="hidden" id="deliveryCountry" name="deliveryCountry" value="IN" />
         ) : (
           <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden animate-fade-in">
@@ -316,13 +340,12 @@ const { courierId = "" } = Astro.props;
       </div>
     </div>
 
-    <!-- Submit Button -->
     <button 
       type="submit" 
       class="button-primary w-full shadow-level-3 font-medium transition-all"
-      data-i18n={courierId === 'delhivery-domestic-in' ? 'form-btn-submit-delhivery' : 'form-btn-submit'}
+      data-i18n={submitBtnKey}
     >
-      {courierId === 'delhivery-domestic-in' ? 'Calculate Delhivery Price' : 'Compare prices'}
+      {submitBtnText}
     </button>
   </form>
 </div>
@@ -705,7 +728,7 @@ const { courierId = "" } = Astro.props;
   });
 
   // Initialize defaults
-  if (courierId === 'delhivery-domestic-in') {
+  if (courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in') {
     const switcher = document.querySelector('.flex.justify-center.mb-8');
     if (switcher) switcher.classList.add('hidden');
     if (shippingType) shippingType.value = "domestic";

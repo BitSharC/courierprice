@@ -5,6 +5,23 @@ interface Props {
 }
 
 const { courierId = "" } = Astro.props;
+
+let titleKey = 'results-title';
+let titleText = 'Available Options.';
+let subtitleKey = 'results-subtitle';
+let subtitleText = 'Rates are estimates based on standard courier calculations.';
+
+if (courierId === 'delhivery-domestic-in') {
+  titleKey = 'results-title-delhivery';
+  titleText = 'Estimated Delhivery Shipping Cost';
+  subtitleKey = 'results-subtitle-delhivery';
+  subtitleText = 'Estimated courier charges for Delhivery Surface and Express services.';
+} else if (courierId === 'professional-domestic-in') {
+  titleKey = 'results-title-professional';
+  titleText = 'Estimated Professional Courier Cost';
+  subtitleKey = 'results-subtitle-professional';
+  subtitleText = 'Estimated shipping charges for Professional Courier Standard and Express services.';
+}
 ---
 
 <div id="comparison-results-section" data-courier-id={courierId} class="w-full space-y-8 scroll-mt-20 hidden">
@@ -12,15 +29,15 @@ const { courierId = "" } = Astro.props;
   <!-- Section Title -->
   <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-hairline pb-4 transition-colors duration-200">
     <div>
-      <h2 class="display-lg text-ink font-semibold" data-i18n={courierId === 'delhivery-domestic-in' ? 'results-title-delhivery' : 'results-title'}>
-        {courierId === 'delhivery-domestic-in' ? 'Estimated Delhivery Shipping Cost' : 'Available Options.'}
+      <h2 class="display-lg text-ink font-semibold" data-i18n={titleKey}>
+        {titleText}
       </h2>
-      <p class="body-sm text-body mt-1" data-i18n={courierId === 'delhivery-domestic-in' ? 'results-subtitle-delhivery' : 'results-subtitle'}>
-        {courierId === 'delhivery-domestic-in' ? 'Estimated courier charges for Delhivery Surface and Express services.' : 'Rates are estimates based on standard courier calculations.'}
+      <p class="body-sm text-body mt-1" data-i18n={subtitleKey}>
+        {subtitleText}
       </p>
     </div>
     
-    {courierId !== 'delhivery-domestic-in' && (
+    {courierId !== 'delhivery-domestic-in' && courierId !== 'professional-domestic-in' && (
       <div class="flex items-center gap-2 border border-hairline rounded-full p-1 bg-canvas shadow-level-1 text-sm transition-colors duration-200">
         <button 
           type="button" 
@@ -53,7 +70,7 @@ const { courierId = "" } = Astro.props;
   <!-- Shipment Summary Banner -->
   <div id="shipment-summary-banner"></div>
 
-  {courierId !== 'delhivery-domestic-in' && (
+  {courierId !== 'delhivery-domestic-in' && courierId !== 'professional-domestic-in' && (
     <div id="smart-recommendation-card" class="bg-canvas-soft border border-hairline rounded-lg p-6 shadow-level-2 transition-colors duration-200">
       <div class="flex items-start gap-4">
         <div class="p-2 bg-link/10 text-link rounded-md">
@@ -78,8 +95,8 @@ const { courierId = "" } = Astro.props;
 
   <!-- Disclaimer -->
   <div class="mt-8 pt-4 border-t border-hairline text-center">
-    <p class="text-xs text-mute leading-relaxed" data-i18n={courierId === 'delhivery-domestic-in' ? 'results-disclaimer-delhivery' : 'results-disclaimer'}>
-      {courierId === 'delhivery-domestic-in' ? 'CourierPrice provides independent shipping estimates for informational purposes. The estimated price is not an official Delhivery quote and may differ from the final amount charged by Delhivery.' : 'Prices are estimated based on shipment details, route and carrier pricing rules. Actual courier quotations may vary.'}
+    <p class="text-xs text-mute leading-relaxed" data-i18n={courierId === 'delhivery-domestic-in' ? 'results-disclaimer-delhivery' : (courierId === 'professional-domestic-in' ? 'results-disclaimer-professional' : 'results-disclaimer')}>
+      {courierId === 'delhivery-domestic-in' ? 'CourierPrice provides independent shipping estimates for informational purposes. The estimated price is not an official Delhivery quote and may differ from the final amount charged by Delhivery.' : (courierId === 'professional-domestic-in' ? 'CourierPrice provides independent shipping estimates for informational purposes. The estimated price is not an official quote from The Professional Couriers and may differ from the final amount charged by the courier.' : 'Prices are estimated based on shipment details, route and carrier pricing rules. Actual courier quotations may vary.')}
     </p>
   </div>
 </div>
@@ -177,6 +194,32 @@ const { courierId = "" } = Astro.props;
         const expressEst = { ...estimatesExpress[0] };
         expressEst.id = 'delhivery-express';
         expressEst.name = 'Delhivery Express';
+        expressEst.recommendationBadge = 'fastest';
+        currentEstimates.push(expressEst);
+      }
+    } else if (courierId === 'professional-domestic-in') {
+      // Calculate Standard (express = false)
+      const inputSurface = { ...input, express: false };
+      const estimatesSurface = getEstimates(inputSurface).filter(e => e.id === 'professional-domestic-in');
+      
+      // Calculate Express (express = true)
+      const inputExpress = { ...input, express: true };
+      const estimatesExpress = getEstimates(inputExpress).filter(e => e.id === 'professional-domestic-in');
+
+      currentEstimates = [];
+
+      if (estimatesSurface.length > 0) {
+        const surfaceEst = { ...estimatesSurface[0] };
+        surfaceEst.id = 'professional-standard';
+        surfaceEst.name = 'Professional Courier Standard';
+        surfaceEst.recommendationBadge = 'cheapest';
+        currentEstimates.push(surfaceEst);
+      }
+
+      if (estimatesExpress.length > 0) {
+        const expressEst = { ...estimatesExpress[0] };
+        expressEst.id = 'professional-express';
+        expressEst.name = 'Professional Courier Express';
         expressEst.recommendationBadge = 'fastest';
         currentEstimates.push(expressEst);
       }
@@ -340,7 +383,7 @@ const { courierId = "" } = Astro.props;
       const typeTrans = TRANSLATIONS[lang]?.[`form-tab-${currentInput.type}`] || currentInput.type;
       const parcelCountTrans = TRANSLATIONS[lang]?.[totalParcelsCount === 1 ? 'results-parcel-count' : 'results-parcels-count'] || (totalParcelsCount === 1 ? 'parcel' : 'parcels');
 
-      if (courierId === 'delhivery-domestic-in') {
+      if (courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in') {
         let totalVolumetricWeight = 0;
         let hasVolumetric = false;
         currentInput.parcels.forEach(p => {
