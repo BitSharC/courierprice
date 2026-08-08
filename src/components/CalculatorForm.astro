@@ -2,12 +2,22 @@
 // src/components/CalculatorForm.astro
 import { COUNTRIES_DATA } from '../utils/countryData';
 import { CATEGORIES } from '../utils/calculator';
+
+interface Props {
+  courierId?: string;
+}
+
+const { courierId = "" } = Astro.props;
 ---
 
-<div id="calculator" class="w-full bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-3 transition-colors duration-200">
+<div id="calculator" data-courier-id={courierId} class="w-full bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-3 transition-colors duration-200">
   <div class="mb-6">
-    <h2 class="display-sm text-ink mb-1.5" data-i18n="form-title">Shipping details.</h2>
-    <p class="body-sm text-body" data-i18n="form-subtitle">Configure your domestic or international shipment parameters.</p>
+    <h2 class="display-sm text-ink mb-1.5" data-i18n={courierId === 'delhivery-domestic-in' ? 'form-title-delhivery' : 'form-title'}>
+      {courierId === 'delhivery-domestic-in' ? 'Delhivery Courier Price Calculator' : 'Shipping details.'}
+    </h2>
+    <p class="body-sm text-body" data-i18n={courierId === 'delhivery-domestic-in' ? 'form-subtitle-delhivery' : 'form-subtitle'}>
+      {courierId === 'delhivery-domestic-in' ? 'Estimate domestic surface and express shipping charges for Delhivery.' : 'Configure your domestic or international shipment parameters.'}
+    </p>
   </div>
 
   <!-- Domestic vs International Switcher -->
@@ -43,22 +53,25 @@ import { CATEGORIES } from '../utils/calculator';
       <div class="space-y-4">
         <h3 class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-pickup-title">Pickup Location</h3>
         
-        <!-- Pickup Country -->
-        <div class="flex flex-col gap-1.5">
-          <label for="pickupCountry" class="caption text-mute text-xs font-semibold" data-i18n="form-origin-country">Origin Country</label>
-          <div class="relative">
-            <select id="pickupCountry" name="pickupCountry" required class="form-input w-full appearance-none pr-8 font-medium">
-              {Object.values(COUNTRIES_DATA).map(c => (
-                <option value={c.code} selected={c.code === 'IN'}>{c.name}</option>
-              ))}
-            </select>
-            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+        {courierId === 'delhivery-domestic-in' ? (
+          <input type="hidden" id="pickupCountry" name="pickupCountry" value="IN" />
+        ) : (
+          <div class="flex flex-col gap-1.5">
+            <label for="pickupCountry" class="caption text-mute text-xs font-semibold" data-i18n="form-origin-country">Origin Country</label>
+            <div class="relative">
+              <select id="pickupCountry" name="pickupCountry" required class="form-input w-full appearance-none pr-8 font-medium">
+                {Object.values(COUNTRIES_DATA).map(c => (
+                  <option value={c.code} selected={c.code === 'IN'}>{c.name}</option>
+                ))}
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- State -->
@@ -96,23 +109,26 @@ import { CATEGORIES } from '../utils/calculator';
       <div class="space-y-4">
         <h3 id="delivery-title" class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-delivery-title-dom">Delivery Location (Domestic)</h3>
         
-        <!-- Destination Country (International only) -->
-        <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden animate-fade-in">
-          <label for="deliveryCountry" class="caption text-mute text-xs font-semibold" data-i18n="form-delivery-country">Destination Country</label>
-          <div class="relative">
-            <select id="deliveryCountry" name="deliveryCountry" class="form-input w-full appearance-none pr-8">
-              <option value="" disabled selected data-i18n="select-country-prompt">Select destination country</option>
-              {Object.values(COUNTRIES_DATA).map(c => (
-                <option value={c.code}>{c.name}</option>
-              ))}
-            </select>
-            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+        {courierId === 'delhivery-domestic-in' ? (
+          <input type="hidden" id="deliveryCountry" name="deliveryCountry" value="IN" />
+        ) : (
+          <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden animate-fade-in">
+            <label for="deliveryCountry" class="caption text-mute text-xs font-semibold" data-i18n="form-delivery-country">Destination Country</label>
+            <div class="relative">
+              <select id="deliveryCountry" name="deliveryCountry" class="form-input w-full appearance-none pr-8">
+                <option value="" disabled selected data-i18n="select-country-prompt">Select destination country</option>
+                {Object.values(COUNTRIES_DATA).map(c => (
+                  <option value={c.code}>{c.name}</option>
+                ))}
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-mute">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- State -->
@@ -304,9 +320,9 @@ import { CATEGORIES } from '../utils/calculator';
     <button 
       type="submit" 
       class="button-primary w-full shadow-level-3 font-medium transition-all"
-      data-i18n="form-btn-submit"
+      data-i18n={courierId === 'delhivery-domestic-in' ? 'form-btn-submit-delhivery' : 'form-btn-submit'}
     >
-      Compare prices
+      {courierId === 'delhivery-domestic-in' ? 'Calculate Delhivery Price' : 'Compare prices'}
     </button>
   </form>
 </div>
@@ -316,18 +332,21 @@ import { CATEGORIES } from '../utils/calculator';
   import { CATEGORIES } from '../utils/calculator';
   import { TRANSLATIONS } from '../utils/translations';
 
+  const calculatorContainer = document.getElementById('calculator');
+  const courierId = calculatorContainer?.getAttribute('data-courier-id') || '';
+
   // Toggle Domestic/International Tab Switch
   const tabDomestic = document.getElementById('tab-domestic');
   const tabInternational = document.getElementById('tab-international');
   const shippingType = document.getElementById('shipping-type') as HTMLInputElement | null;
   
-  const pickupCountrySelect = document.getElementById('pickupCountry') as HTMLSelectElement | null;
+  const pickupCountrySelect = document.getElementById('pickupCountry') as HTMLSelectElement | HTMLInputElement | null;
   const pickupStateSelect = document.getElementById('pickupState') as HTMLSelectElement | null;
   const pickupDistrictSelect = document.getElementById('pickupDistrict') as HTMLSelectElement | null;
   const pickupDistrictContainer = document.getElementById('pickup-district-container');
 
   const deliveryCountryContainer = document.getElementById('delivery-country-container');
-  const deliveryCountrySelect = document.getElementById('deliveryCountry') as HTMLSelectElement | null;
+  const deliveryCountrySelect = document.getElementById('deliveryCountry') as HTMLSelectElement | HTMLInputElement | null;
   const deliveryStateSelect = document.getElementById('deliveryState') as HTMLSelectElement | null;
   const deliveryDistrictSelect = document.getElementById('deliveryDistrict') as HTMLSelectElement | null;
   const deliveryDistrictContainer = document.getElementById('delivery-district-container');
@@ -686,6 +705,11 @@ import { CATEGORIES } from '../utils/calculator';
   });
 
   // Initialize defaults
+  if (courierId === 'delhivery-domestic-in') {
+    const switcher = document.querySelector('.flex.justify-center.mb-8');
+    if (switcher) switcher.classList.add('hidden');
+    if (shippingType) shippingType.value = "domestic";
+  }
   handlePickupCountryChange();
 
   // Handle Form Submission

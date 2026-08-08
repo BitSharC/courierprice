@@ -1,0 +1,392 @@
+---
+// src/pages/couriers/delhivery.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Delhivery Courier Price Calculator | Estimate Shipping Charges"
+  description="Estimate Delhivery courier charges based on state, district, weight, dimensions, and shipment options with our free calculator. Learn how rates are calculated."
+>
+  <!-- Global Navigation Header -->
+  <Header />
+
+  <!-- Main Content Layout -->
+  <main class="flex-grow bg-canvas-soft transition-colors duration-200">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex text-xs font-mono text-mute gap-1.5 items-center" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="hover:text-ink cursor-default transition-colors">Couriers</span>
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-ink font-semibold" aria-current="page">Delhivery</span>
+      </nav>
+
+      <!-- Hero Header Section -->
+      <section class="border-b border-hairline pb-8">
+        <span class="caption-mono uppercase tracking-wider text-mute text-xs">Courier Guide</span>
+        <h1 class="display-lg text-ink font-semibold mt-2 text-3xl sm:text-4xl leading-tight">
+          Delhivery Courier Price Calculator.
+        </h1>
+        <p class="body-lg text-body mt-3 leading-relaxed max-w-2xl">
+          Estimate Delhivery shipping charges using your pickup and delivery locations, package weight, dimensions, and shipment details. Find standard and express courier options.
+        </p>
+      </section>
+
+      <!-- Calculator Section -->
+      <section id="calculator-anchor" class="scroll-mt-24 space-y-8">
+        <!-- Prominent Calculator Container -->
+        <CalculatorForm courierId="delhivery-domestic-in" />
+        
+        <!-- Live Results Container (populates after calculation) -->
+        <ResultsList courierId="delhivery-domestic-in" />
+      </section>
+
+      <!-- Educational Section 1: How Charges are Calculated -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">How Delhivery Shipping Charges Are Calculated.</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed">
+          <p class="body-md text-body">
+            Delhivery calculations do not rely on a single flat rate. Instead, Delhivery shipping charges are computed dynamically by taking multiple consignment factors into account. This ensures that shipping prices match the physical effort and speed required to deliver the parcel.
+          </p>
+          <p class="body-md text-body">
+            The core elements used in the calculation include the distance between origin and destination zones, the chargeable weight of the parcel, transit mode (Surface or Express), and add-on services such as cash on delivery handling or high-value insurance coverage.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 2: Dead Weight vs Volumetric Weight -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Dead Weight vs Volumetric Weight.</h2>
+        <div class="space-y-6 leading-relaxed">
+          <p class="body-md text-body">
+            Logistics companies utilize two distinct measurements to calculate shipping charges: dead weight and volumetric weight. The chargeable weight is determined by taking the higher of these two values.
+          </p>
+
+          <!-- Formula & Example Container -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Left Side: Explanation & Formula Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <div>
+                <h3 class="body-md-strong text-ink font-semibold">The Volumetric Weight Formula</h3>
+                <p class="body-sm text-body mt-1">Delhivery uses the industry standard factor of 5000 for Surface and Express domestic packages:</p>
+              </div>
+              <div class="bg-canvas-soft border border-hairline rounded-md py-4 text-center">
+                <span class="font-mono text-ink text-sm sm:text-base font-semibold">
+                  Volumetric Weight (kg) = <br class="block sm:hidden" /> (L × W × H) / 5000
+                </span>
+                <span class="block text-xs text-mute mt-1">Dimensions must be in centimetres (cm)</span>
+              </div>
+              <div class="space-y-2 text-xs text-body">
+                <p><strong>Dead Weight:</strong> The actual physical weight of the package measured on a scale.</p>
+                <p><strong>Volumetric Weight:</strong> Explains how much space the package occupies in transport vehicles relative to its weight.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: Visual Example Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <h3 class="body-md-strong text-ink font-semibold">Visual Example: Large Lightweight Package</h3>
+              <div class="space-y-3 text-sm text-body">
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Package Dimensions</span>
+                  <span class="text-ink font-mono font-medium">60 × 25 × 40 cm</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Actual Weight (Scale)</span>
+                  <span class="text-ink font-mono font-medium">6.0 kg</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Calculated Volumetric Weight</span>
+                  <span class="text-ink font-mono font-medium">(60 × 25 × 40) / 5000 = 12.0 kg</span>
+                </div>
+                <div class="flex justify-between pt-1 font-semibold text-base text-ink">
+                  <span>Chargeable Weight</span>
+                  <span class="text-primary font-mono">12.0 kg</span>
+                </div>
+              </div>
+              <p class="text-xs text-mute leading-relaxed">
+                Since the volumetric weight (12 kg) exceeds the actual dead weight (6 kg), Delhivery will charge the parcel based on 12 kg. Proper packaging can reduce volumetric weight and lower rates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 3: Delhivery Rates Per KG -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Delhivery Rates Per KG.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Many shippers search for a flat "Delhivery rate per kg" to estimate costs, but in reality, there is no single universal price per kilogram. Delhivery charges are tiered and depend heavily on the delivery distance zone (Local, Metro, Regional, National, or Special destinations).
+          </p>
+          <p class="body-md text-body">
+            For example, sending a 1 kg parcel locally within a metro city might result in an effective cost of ₹60-₹80 per kg, while sending the same package to a remote national zone could cost ₹120-₹180 per kg. Weight charges are also structure-based, where the first 500 grams (base weight limit) typically carry a higher cost, and each subsequent unit (add-on weight) is charged at a lower incremental rate.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 4: Surface vs Express -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Delhivery Surface vs Express.</h2>
+        <div class="space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            Delhivery operates two primary transit services to match different budget requirements and delivery timelines:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Surface Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-2 flex flex-col justify-between">
+              <div class="space-y-2">
+                <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-0.5 rounded uppercase">Standard Surface</span>
+                <h3 class="display-sm text-ink font-semibold mt-2">Road Transportation.</h3>
+                <p class="body-sm text-body leading-relaxed">
+                  Best suited for bulk items, heavy machinery, or non-urgent household cargo. Offers high weight limits (up to 150 kg or more) at economical prices, utilizing road networks across India.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-hairline flex justify-between items-center text-xs text-mute">
+                <span>Weight limits: High (up to 150kg)</span>
+                <span>Speed: Standard</span>
+              </div>
+            </div>
+
+            <!-- Express Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-2 flex flex-col justify-between">
+              <div class="space-y-2">
+                <span class="text-xs font-mono text-link font-semibold bg-link-bg-soft px-2 py-0.5 rounded uppercase">Fast Express</span>
+                <h3 class="display-sm text-ink font-semibold mt-2">Air Transportation.</h3>
+                <p class="body-sm text-body leading-relaxed">
+                  Optimized for documents, e-commerce orders, clothing, and small parcels where transit time is critical. Uses commercial air transport corridors where feasible for rapid delivery.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-hairline flex justify-between items-center text-xs text-mute">
+                <span>Weight limits: Standard</span>
+                <span>Speed: Very Fast</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 5: What Affects Shipping Cost -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">What Affects Delhivery Shipping Charges?</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Factor 1 -->
+          <div class="bg-canvas border border-hairline rounded-md p-5 shadow-level-2 transition-colors duration-200">
+            <span class="caption-mono uppercase text-mute text-xs block">Origin & Destination</span>
+            <h3 class="body-sm-strong text-ink font-semibold mt-1">Pickup and Delivery Pincodes</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed text-xs">
+              Pincodes define the geographical zones (Local, Regional, National, Metro). Longer routes increase transport efforts and base prices.
+            </p>
+          </div>
+          <!-- Factor 2 -->
+          <div class="bg-canvas border border-hairline rounded-md p-5 shadow-level-2 transition-colors duration-200">
+            <span class="caption-mono uppercase text-mute text-xs block">Weight</span>
+            <h3 class="body-sm-strong text-ink font-semibold mt-1">Chargeable Weight</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed text-xs">
+              Based on the greater of physical scale weight or volumetric space occupied. Heavier items push charges into higher pricing tiers.
+            </p>
+          </div>
+          <!-- Factor 3 -->
+          <div class="bg-canvas border border-hairline rounded-md p-5 shadow-level-2 transition-colors duration-200">
+            <span class="caption-mono uppercase text-mute text-xs block">Volume</span>
+            <h3 class="body-sm-strong text-ink font-semibold mt-1">Package Dimensions</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed text-xs">
+              Length, width, and height are measured to check for volumetric surcharges. Bulky, light parcels cost more to ship.
+            </p>
+          </div>
+          <!-- Factor 4 -->
+          <div class="bg-canvas border border-hairline rounded-md p-5 shadow-level-2 transition-colors duration-200">
+            <span class="caption-mono uppercase text-mute text-xs block">Speed</span>
+            <h3 class="body-sm-strong text-ink font-semibold mt-1">Surface vs Express</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed text-xs">
+              Express utilizes priority air routing, incurring an premium multiplier over standard road-bound surface transportation.
+            </p>
+          </div>
+          <!-- Factor 5 -->
+          <div class="bg-canvas border border-hairline rounded-md p-5 shadow-level-2 transition-colors duration-200">
+            <span class="caption-mono uppercase text-mute text-xs block">Payment Mode</span>
+            <h3 class="body-sm-strong text-ink font-semibold mt-1">COD Collections</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed text-xs">
+              Choosing Cash on Delivery (COD) requires courier handling of physical money, adding a processing surcharge to the billing receipt.
+            </p>
+          </div>
+          <!-- Factor 6 -->
+          <div class="bg-canvas border border-hairline rounded-md p-5 shadow-level-2 transition-colors duration-200">
+            <span class="caption-mono uppercase text-mute text-xs block">Extra Features</span>
+            <h3 class="body-sm-strong text-ink font-semibold mt-1">Surcharges & Insurance</h3>
+            <p class="body-sm text-body mt-2 leading-relaxed text-xs">
+              Optional features like declaration insurance, residential pickups, or fuel surcharge fluctuations affect the total calculated quote.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 6: Example Calculation -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Example: Estimating Delhivery Shipping Cost.</h2>
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            Let us look at a realistic example to see how the billing weight is determined and how the estimation process operates:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-body">
+            <div class="space-y-2">
+              <h3 class="body-sm-strong text-ink font-semibold">Shipment Parameters</h3>
+              <ul class="list-disc pl-4 space-y-1">
+                <li><strong>Origin:</strong> Delhi Pincode (e.g. 110001)</li>
+                <li><strong>Destination:</strong> Mumbai Pincode (e.g. 400001)</li>
+                <li><strong>Actual Physical Weight:</strong> 2.0 kg</li>
+                <li><strong>Package Dimensions:</strong> 30 × 20 × 15 cm</li>
+              </ul>
+            </div>
+            
+            <div class="space-y-2">
+              <h3 class="body-sm-strong text-ink font-semibold">Weight Calculation Steps</h3>
+              <ol class="list-decimal pl-4 space-y-1">
+                <li>Calculate Volumetric weight: <br /><span class="font-mono text-ink text-xs">(30 × 20 × 15) / 5000 = 1.8 kg</span></li>
+                <li>Compare weights: <br /><span class="text-ink text-xs">Physical (2.0 kg) vs Volumetric (1.8 kg)</span></li>
+                <li>Chargeable weight selected: <br /><span class="text-ink font-semibold">2.0 kg (the higher of the two)</span></li>
+              </ol>
+            </div>
+          </div>
+          
+          <p class="text-xs text-mute pt-2 border-t border-hairline/60">
+            The final shipping estimate depends on the applicable pricing model, route, service mode (Surface or Express), and other shipment details. Use the calculator above to compute rates for your specific route.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 7: Why Prices Differ -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Why Can the Actual Delhivery Price Be Different?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed body-md text-body">
+          <div class="space-y-4">
+            <p>
+              Estimates generated by CourierPrice use standardized pricing models and carrier calculations. However, your final bill at booking time may vary due to several practical factors:
+            </p>
+            <ul class="list-disc pl-4 space-y-2 text-sm">
+              <li><strong>Weight Discrepancies:</strong> If the courier scale records a different weight than entered during calculation.</li>
+              <li><strong>Volumetric Differences:</strong> Measuring protruding corners or packaging bulges can increase volumetric dimensions.</li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <ul class="list-disc pl-4 space-y-2 text-sm md:pt-6">
+              <li><strong>Fuel Surcharges:</strong> Dynamic adjustments based on monthly petroleum prices.</li>
+              <li><strong>Serviceability & ODA:</strong> Delivering to an Out-of-Delivery Area (ODA) or remote pincode may incur remote area surcharges.</li>
+              <li><strong>COD collection fees:</strong> Value handling fees applied by the logistics company.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 8: Personal Parcels -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Sending a Personal Parcel with Delhivery.</h2>
+        <p class="body-md text-body leading-relaxed">
+          If you are sending a personal package—such as gifts, books, clothes, or documents—to a family member or friend, Delhivery provides pickup and drop-off services for individual retail customers. You can use our calculator to estimate costs beforehand. Simply enter the state, district, weight, and dimensions, and the calculator will simulate the estimated Surface and Express charges, helping you pack and budget efficiently.
+        </p>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="pt-8 border-t border-hairline space-y-6 scroll-mt-24">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        
+        <div class="space-y-6">
+          <!-- Q1 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">1. How much does Delhivery charge per kg?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Delhivery does not have a single flat rate per kg. Charges depend on distance zones (Local vs National), transport mode (Surface vs Express), package size, and the chargeable weight of your shipment.
+            </p>
+          </div>
+          <!-- Q2 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">2. How is Delhivery shipping cost calculated?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              The cost is calculated based on the pickup and delivery locations, the higher of the dead weight or volumetric weight, the transport mode, payment type, and any additional surcharges.
+            </p>
+          </div>
+          <!-- Q3 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">3. How does Delhivery calculate volumetric weight?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Delhivery uses the industry-standard formula for domestic Surface and Express: <code>Length (cm) × Width (cm) × Height (cm) / 5000</code>.
+            </p>
+          </div>
+          <!-- Q4 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">4. Does package size affect Delhivery shipping charges?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Yes. Large, lightweight packages are charged based on their volumetric weight rather than actual physical weight if the volumetric weight is higher.
+            </p>
+          </div>
+          <!-- Q5 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">5. What is chargeable weight?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Chargeable weight is the weight used by the carrier to compute the shipment rate. It is the greater of the physical dead weight and the volumetric weight.
+            </p>
+          </div>
+          <!-- Q6 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">6. What is the difference between Delhivery Surface and Express?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Delhivery Surface uses road transport and is more economical for heavier shipments. Delhivery Express uses air transport where feasible for much faster transit times.
+            </p>
+          </div>
+          <!-- Q7 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">7. Does COD affect Delhivery shipping charges?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Yes, Cash on Delivery (COD) services usually incur additional handling fees or dynamic COD collection charges added to the base rate.
+            </p>
+          </div>
+          <!-- Q8 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">8. Why can the actual Delhivery charge differ from the estimate?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Differences can arise from discrepancies in weight or dimensions entered, changes in carrier tariff rates, additional surcharges, or COD handling fees.
+            </p>
+          </div>
+          <!-- Q9 -->
+          <div class="space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">9. Can I estimate Delhivery shipping charges using pincodes?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Yes. Pincodes determine the distance zone (local, regional, metro, national), which is a key factor in calculating the final shipping estimate.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comparison CTA Section -->
+      <section class="pt-8 border-t border-hairline text-center space-y-4">
+        <h2 class="display-sm text-ink font-semibold">Compare Delhivery With Other Courier Services.</h2>
+        <p class="body-sm text-body max-w-md mx-auto">
+          Want to see how Delhivery compares with other courier providers? Use CourierPrice to compare estimated shipping costs.
+        </p>
+        <div class="pt-2">
+          <a
+            href="/"
+            class="inline-flex items-center justify-center bg-primary text-on-primary text-sm font-semibold rounded-full px-8 py-3 shadow-level-3 hover:opacity-90 active:scale-98 transition-all duration-200"
+          >
+            Compare Rates Globally
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer Nav -->
+  <Footer />
+</Layout>

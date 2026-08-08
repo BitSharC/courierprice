@@ -1,64 +1,75 @@
 ---
 // src/components/ResultsList.astro
+interface Props {
+  courierId?: string;
+}
+
+const { courierId = "" } = Astro.props;
 ---
 
-<div id="comparison-results-section" class="w-full space-y-8 scroll-mt-20 hidden">
+<div id="comparison-results-section" data-courier-id={courierId} class="w-full space-y-8 scroll-mt-20 hidden">
   
   <!-- Section Title -->
   <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-hairline pb-4 transition-colors duration-200">
     <div>
-      <h2 class="display-lg text-ink font-semibold" data-i18n="results-title">Available Options.</h2>
-      <p class="body-sm text-body mt-1" data-i18n="results-subtitle">Rates are estimates based on standard courier calculations.</p>
+      <h2 class="display-lg text-ink font-semibold" data-i18n={courierId === 'delhivery-domestic-in' ? 'results-title-delhivery' : 'results-title'}>
+        {courierId === 'delhivery-domestic-in' ? 'Estimated Delhivery Shipping Cost' : 'Available Options.'}
+      </h2>
+      <p class="body-sm text-body mt-1" data-i18n={courierId === 'delhivery-domestic-in' ? 'results-subtitle-delhivery' : 'results-subtitle'}>
+        {courierId === 'delhivery-domestic-in' ? 'Estimated courier charges for Delhivery Surface and Express services.' : 'Rates are estimates based on standard courier calculations.'}
+      </p>
     </div>
     
-    <!-- Sorting buttons -->
-    <div class="flex items-center gap-2 border border-hairline rounded-full p-1 bg-canvas shadow-level-1 text-sm transition-colors duration-200">
-      <button 
-        type="button" 
-        id="sort-price" 
-        class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight transition-colors cursor-pointer bg-primary text-on-primary"
-        data-i18n="results-sort-price"
-      >
-        Lowest Price
-      </button>
-      <button 
-        type="button" 
-        id="sort-speed" 
-        class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
-        data-i18n="results-sort-speed"
-      >
-        Fastest Delivery
-      </button>
-      <button 
-        type="button" 
-        id="sort-rating" 
-        class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
-        data-i18n="results-sort-rating"
-      >
-        Best Rated
-      </button>
-    </div>
+    {courierId !== 'delhivery-domestic-in' && (
+      <div class="flex items-center gap-2 border border-hairline rounded-full p-1 bg-canvas shadow-level-1 text-sm transition-colors duration-200">
+        <button 
+          type="button" 
+          id="sort-price" 
+          class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight transition-colors cursor-pointer bg-primary text-on-primary"
+          data-i18n="results-sort-price"
+        >
+          Lowest Price
+        </button>
+        <button 
+          type="button" 
+          id="sort-speed" 
+          class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
+          data-i18n="results-sort-speed"
+        >
+          Fastest Delivery
+        </button>
+        <button 
+          type="button" 
+          id="sort-rating" 
+          class="px-4 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-colors cursor-pointer"
+          data-i18n="results-sort-rating"
+        >
+          Best Rated
+        </button>
+      </div>
+    )}
   </div>
 
   <!-- Shipment Summary Banner -->
   <div id="shipment-summary-banner"></div>
 
-  <!-- Smart Recommendation Card -->
-  <div id="smart-recommendation-card" class="bg-canvas-soft border border-hairline rounded-lg p-6 shadow-level-2 transition-colors duration-200">
-    <div class="flex items-start gap-4">
-      <div class="p-2 bg-link/10 text-link rounded-md">
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
-      </div>
-      <div>
-        <h3 class="body-md-strong text-ink" data-i18n="results-smart-rec">Smart recommendation</h3>
-        <p id="recommendation-text" class="body-sm text-body mt-1 leading-relaxed">
-          Comparing rates for your shipment...
-        </p>
+  {courierId !== 'delhivery-domestic-in' && (
+    <div id="smart-recommendation-card" class="bg-canvas-soft border border-hairline rounded-lg p-6 shadow-level-2 transition-colors duration-200">
+      <div class="flex items-start gap-4">
+        <div class="p-2 bg-link/10 text-link rounded-md">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="body-md-strong text-ink" data-i18n="results-smart-rec">Smart recommendation</h3>
+          <p id="recommendation-text" class="body-sm text-body mt-1 leading-relaxed">
+            Comparing rates for your shipment...
+          </p>
+        </div>
       </div>
     </div>
-  </div>
+  )}
 
   <!-- Comparison Cards Grid / Container -->
   <div id="estimates-list" class="space-y-4">
@@ -67,8 +78,8 @@
 
   <!-- Disclaimer -->
   <div class="mt-8 pt-4 border-t border-hairline text-center">
-    <p class="text-xs text-mute leading-relaxed" data-i18n="results-disclaimer">
-      Prices are estimated based on shipment details, route and carrier pricing rules. Actual courier quotations may vary.
+    <p class="text-xs text-mute leading-relaxed" data-i18n={courierId === 'delhivery-domestic-in' ? 'results-disclaimer-delhivery' : 'results-disclaimer'}>
+      {courierId === 'delhivery-domestic-in' ? 'CourierPrice provides independent shipping estimates for informational purposes. The estimated price is not an official Delhivery quote and may differ from the final amount charged by Delhivery.' : 'Prices are estimated based on shipment details, route and carrier pricing rules. Actual courier quotations may vary.'}
     </p>
   </div>
 </div>
@@ -78,13 +89,15 @@
   import { TRANSLATIONS } from '../utils/translations';
   import { COUNTRIES_DATA } from '../utils/countryData';
 
+  const resultsSection = document.getElementById('comparison-results-section');
+  const courierId = resultsSection?.getAttribute('data-courier-id') || '';
+
   // Component State
   let currentEstimates: CourierEstimate[] = [];
   let currentInput: ShippingInput | null = null;
   let currentSort: 'price' | 'speed' | 'rating' = 'price';
 
   // DOM elements
-  const resultsSection = document.getElementById('comparison-results-section');
   const estimatesList = document.getElementById('estimates-list');
   const recommendationText = document.getElementById('recommendation-text');
   const summaryBanner = document.getElementById('shipment-summary-banner');
@@ -141,13 +154,41 @@
 
     routeStr = `${pickupLoc} ➔ ${deliveryLoc}`;
 
-    // Calculate estimates
-    currentEstimates = getEstimates(input);
-    
-    // Sort initially by lowest price
-    currentSort = 'price';
-    updateSortButtonStyles();
-    sortEstimates();
+    if (courierId === 'delhivery-domestic-in') {
+      // Calculate Surface (express = false)
+      const inputSurface = { ...input, express: false };
+      const estimatesSurface = getEstimates(inputSurface).filter(e => e.id === 'delhivery-domestic-in');
+      
+      // Calculate Express (express = true)
+      const inputExpress = { ...input, express: true };
+      const estimatesExpress = getEstimates(inputExpress).filter(e => e.id === 'delhivery-domestic-in');
+
+      currentEstimates = [];
+
+      if (estimatesSurface.length > 0) {
+        const surfaceEst = { ...estimatesSurface[0] };
+        surfaceEst.id = 'delhivery-surface';
+        surfaceEst.name = 'Delhivery Surface';
+        surfaceEst.recommendationBadge = 'cheapest';
+        currentEstimates.push(surfaceEst);
+      }
+
+      if (estimatesExpress.length > 0) {
+        const expressEst = { ...estimatesExpress[0] };
+        expressEst.id = 'delhivery-express';
+        expressEst.name = 'Delhivery Express';
+        expressEst.recommendationBadge = 'fastest';
+        currentEstimates.push(expressEst);
+      }
+    } else {
+      // Calculate estimates
+      currentEstimates = getEstimates(input);
+      
+      // Sort initially by lowest price
+      currentSort = 'price';
+      updateSortButtonStyles();
+      sortEstimates();
+    }
 
     // Render results
     renderResults();
@@ -299,25 +340,63 @@
       const typeTrans = TRANSLATIONS[lang]?.[`form-tab-${currentInput.type}`] || currentInput.type;
       const parcelCountTrans = TRANSLATIONS[lang]?.[totalParcelsCount === 1 ? 'results-parcel-count' : 'results-parcels-count'] || (totalParcelsCount === 1 ? 'parcel' : 'parcels');
 
-      summaryBanner.innerHTML = `
-        <div class="bg-canvas border border-hairline rounded-lg px-5 py-4 flex flex-wrap gap-x-8 gap-y-3 justify-between items-center text-xs text-body transition-colors duration-200">
-          <div class="flex items-center gap-2">
-            <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
-            <span class="font-medium text-ink">${typeLabel}:</span>
-            <span class="capitalize text-body font-medium">${typeTrans}</span>
+      if (courierId === 'delhivery-domestic-in') {
+        let totalVolumetricWeight = 0;
+        let hasVolumetric = false;
+        currentInput.parcels.forEach(p => {
+          if (p.length && p.width && p.height) {
+            totalVolumetricWeight += (p.length * p.width * p.height) / 5000;
+            hasVolumetric = true;
+          }
+        });
+        const totalChargeableWeight = Math.max(0.5, Math.max(totalActualWeight, totalVolumetricWeight));
+
+        summaryBanner.innerHTML = `
+          <div class="bg-canvas border border-hairline rounded-lg px-5 py-4 flex flex-col md:flex-row gap-x-8 gap-y-3 justify-between items-start md:items-center text-xs text-body transition-colors duration-200">
+            <div class="flex items-center gap-2">
+              <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
+              <span class="font-medium text-ink">${routeLabel}:</span>
+              <span class="text-body font-medium">${routeStr}</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <div class="flex items-center gap-1.5">
+                <span class="font-medium text-ink">Actual Weight:</span>
+                <span class="text-body">${totalActualWeight.toFixed(2)} kg</span>
+              </div>
+              ${hasVolumetric ? `
+              <div class="flex items-center gap-1.5">
+                <span class="font-medium text-ink">Volumetric Weight:</span>
+                <span class="text-body">${totalVolumetricWeight.toFixed(2)} kg</span>
+              </div>
+              ` : ''}
+              <div class="flex items-center gap-1.5">
+                <span class="font-medium text-ink">Chargeable Weight:</span>
+                <span class="font-semibold text-primary">${totalChargeableWeight.toFixed(2)} kg</span>
+              </div>
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
-            <span class="font-medium text-ink">${routeLabel}:</span>
-            <span class="text-body font-medium">${routeStr}</span>
+        `;
+      } else {
+        summaryBanner.innerHTML = `
+          <div class="bg-canvas border border-hairline rounded-lg px-5 py-4 flex flex-wrap gap-x-8 gap-y-3 justify-between items-center text-xs text-body transition-colors duration-200">
+            <div class="flex items-center gap-2">
+              <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
+              <span class="font-medium text-ink">${typeLabel}:</span>
+              <span class="capitalize text-body font-medium">${typeTrans}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
+              <span class="font-medium text-ink">${routeLabel}:</span>
+              <span class="text-body font-medium">${routeStr}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
+              <span class="font-medium text-ink">${consLabel}:</span>
+              <span class="text-body">${totalParcelsCount} ${parcelCountTrans} | ${weightLabel}: ${totalActualWeight.toFixed(2)} kg</span>
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="inline-block h-2 w-2 rounded-full bg-link"></span>
-            <span class="font-medium text-ink">${consLabel}:</span>
-            <span class="text-body">${totalParcelsCount} ${parcelCountTrans} | ${weightLabel}: ${totalActualWeight.toFixed(2)} kg</span>
-          </div>
-        </div>
-      `;
+        `;
+      }
     }
 
     // Set Recommendation text
