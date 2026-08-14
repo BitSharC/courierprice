@@ -274,6 +274,18 @@ if (courierId === 'delhivery-domestic-in') {
                 <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
               </div>
             </div>
+
+            <!-- Volumetric Weight Live Preview Badge -->
+            <div class="volumetric-preview-badge hidden mt-2.5 p-2.5 rounded-md border text-xs flex items-center justify-between transition-all duration-200">
+              <div class="flex items-center gap-2">
+                <span class="text-sm">📦</span>
+                <div>
+                  <span class="font-medium vol-summary text-ink">Volumetric Weight: 0 kg</span>
+                  <span class="block text-[11px] text-mute vol-chargeable-note"></span>
+                </div>
+              </div>
+              <span class="vol-badge-tag px-2 py-0.5 rounded font-mono text-[10px] font-semibold"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -587,6 +599,62 @@ if (courierId === 'delhivery-domestic-in') {
     });
   }
 
+  // Volumetric Weight Live Preview Handler
+  function attachVolumetricPreview(card: HTMLElement) {
+    const weightInput = card.querySelector('input[name="parcelWeight"]') as HTMLInputElement | null;
+    const unitSelect = card.querySelector('select[name="parcelWeightUnit"]') as HTMLSelectElement | null;
+    const lInput = card.querySelector('input[name="parcelLength"]') as HTMLInputElement | null;
+    const wInput = card.querySelector('input[name="parcelWidth"]') as HTMLInputElement | null;
+    const hInput = card.querySelector('input[name="parcelHeight"]') as HTMLInputElement | null;
+    const badge = card.querySelector('.volumetric-preview-badge') as HTMLElement | null;
+    const volSummary = card.querySelector('.vol-summary') as HTMLElement | null;
+    const volNote = card.querySelector('.vol-chargeable-note') as HTMLElement | null;
+    const volTag = card.querySelector('.vol-badge-tag') as HTMLElement | null;
+
+    function calculatePreview() {
+      if (!badge || !volSummary || !volNote || !volTag) return;
+      const l = parseFloat(lInput?.value || '0');
+      const w = parseFloat(wInput?.value || '0');
+      const h = parseFloat(hInput?.value || '0');
+      const rawWeight = parseFloat(weightInput?.value || '0');
+      const unit = unitSelect?.value || 'kg';
+      const scaleWeightKg = unit === 'g' ? rawWeight / 1000 : rawWeight;
+
+      if (l > 0 && w > 0 && h > 0) {
+        const volWeightKg = Math.round(((l * w * h) / 5000) * 100) / 100;
+        const chargeableKg = Math.max(scaleWeightKg > 0 ? scaleWeightKg : 0, volWeightKg);
+
+        badge.classList.remove('hidden');
+        if (scaleWeightKg > 0 && volWeightKg > scaleWeightKg) {
+          badge.className = "volumetric-preview-badge mt-2.5 p-2.5 rounded-md border border-warning/40 bg-warning-soft/30 text-xs flex items-center justify-between transition-all duration-200";
+          volTag.className = "vol-badge-tag px-2 py-0.5 rounded font-mono text-[10px] font-semibold bg-warning/20 text-warning-deep";
+          volTag.textContent = "Volumetric Applied";
+          volSummary.textContent = `Volumetric: ${volWeightKg.toFixed(2)} kg (Scale: ${scaleWeightKg.toFixed(2)} kg)`;
+          volNote.textContent = `Billed on ${chargeableKg.toFixed(2)} kg because box size exceeds scale weight.`;
+        } else if (scaleWeightKg > 0) {
+          badge.className = "volumetric-preview-badge mt-2.5 p-2.5 rounded-md border border-hairline bg-canvas-soft text-xs flex items-center justify-between transition-all duration-200";
+          volTag.className = "vol-badge-tag px-2 py-0.5 rounded font-mono text-[10px] font-semibold bg-canvas-soft-2 text-mute border border-hairline";
+          volTag.textContent = "Scale Weight Applied";
+          volSummary.textContent = `Volumetric: ${volWeightKg.toFixed(2)} kg • Scale: ${scaleWeightKg.toFixed(2)} kg`;
+          volNote.textContent = `Billed on ${chargeableKg.toFixed(2)} kg (actual scale weight).`;
+        } else {
+          badge.className = "volumetric-preview-badge mt-2.5 p-2.5 rounded-md border border-hairline bg-canvas-soft text-xs flex items-center justify-between transition-all duration-200";
+          volTag.className = "vol-badge-tag px-2 py-0.5 rounded font-mono text-[10px] font-semibold bg-canvas-soft-2 text-mute border border-hairline";
+          volTag.textContent = "Volumetric Estimate";
+          volSummary.textContent = `Volumetric Weight: ${volWeightKg.toFixed(2)} kg`;
+          volNote.textContent = `Enter physical scale weight to determine chargeable weight.`;
+        }
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    [weightInput, unitSelect, lInput, wInput, hInput].forEach(el => {
+      el?.addEventListener('input', calculatePreview);
+      el?.addEventListener('change', calculatePreview);
+    });
+  }
+
   function bindRemoveEvent(card: HTMLElement) {
     const removeBtn = card.querySelector('.remove-parcel-btn');
     removeBtn?.addEventListener('click', () => {
@@ -595,10 +663,11 @@ if (courierId === 'delhivery-domestic-in') {
     });
   }
 
-  // Bind initial card's remove button
+  // Bind initial card
   const initialCard = parcelsContainer?.querySelector('.parcel-card') as HTMLElement | null;
   if (initialCard) {
     bindRemoveEvent(initialCard);
+    attachVolumetricPreview(initialCard);
   }
 
   addParcelBtn?.addEventListener('click', () => {
@@ -680,7 +749,6 @@ if (courierId === 'delhivery-domestic-in') {
         </div>
       </div>
 
-
       <!-- Dimensions -->
       <div class="space-y-2">
         <span class="body-sm-strong text-ink text-xs block font-semibold" data-i18n="form-parcel-dim-title">${dimTitle}</span>
@@ -698,11 +766,24 @@ if (courierId === 'delhivery-domestic-in') {
             <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
           </div>
         </div>
+
+        <!-- Volumetric Weight Live Preview Badge -->
+        <div class="volumetric-preview-badge hidden mt-2.5 p-2.5 rounded-md border text-xs flex items-center justify-between transition-all duration-200">
+          <div class="flex items-center gap-2">
+            <span class="text-sm">📦</span>
+            <div>
+              <span class="font-medium vol-summary text-ink">Volumetric Weight: 0 kg</span>
+              <span class="block text-[11px] text-mute vol-chargeable-note"></span>
+            </div>
+          </div>
+          <span class="vol-badge-tag px-2 py-0.5 rounded font-mono text-[10px] font-semibold"></span>
+        </div>
       </div>
     `;
 
     parcelsContainer.appendChild(newCard);
     bindRemoveEvent(newCard);
+    attachVolumetricPreview(newCard);
     updateParcelNumbers();
   });
 
@@ -734,6 +815,84 @@ if (courierId === 'delhivery-domestic-in') {
     if (shippingType) shippingType.value = "domestic";
   }
   handlePickupCountryChange();
+
+  // URL Query Parameters Pre-fill Handler
+  function initQueryParamPrefill() {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (!urlParams.toString()) return;
+
+      const typeParam = urlParams.get('type') || urlParams.get('mode');
+      const fromParam = urlParams.get('from') || urlParams.get('pickupCountry');
+      const toParam = urlParams.get('to') || urlParams.get('deliveryCountry');
+      const fromStateParam = urlParams.get('fromState') || urlParams.get('pickupState');
+      const toStateParam = urlParams.get('toState') || urlParams.get('deliveryState');
+      const weightParam = urlParams.get('weight') || urlParams.get('kg');
+      const lengthParam = urlParams.get('length') || urlParams.get('l');
+      const widthParam = urlParams.get('width') || urlParams.get('w');
+      const heightParam = urlParams.get('height') || urlParams.get('h');
+      const catParam = urlParams.get('category') || urlParams.get('cat');
+
+      if (typeParam === 'international' && tabInternational) {
+        tabInternational.click();
+      } else if (typeParam === 'domestic' && tabDomestic) {
+        tabDomestic.click();
+      }
+
+      if (fromParam && pickupCountrySelect) {
+        pickupCountrySelect.value = fromParam.toUpperCase();
+        handlePickupCountryChange();
+      }
+
+      if (toParam && deliveryCountrySelect) {
+        deliveryCountrySelect.value = toParam.toUpperCase();
+        handleDeliveryCountryChange();
+      }
+
+      if (fromStateParam && pickupStateSelect) {
+        setTimeout(() => {
+          pickupStateSelect.value = fromStateParam;
+          pickupStateSelect.dispatchEvent(new Event('change'));
+        }, 50);
+      }
+
+      if (toStateParam && deliveryStateSelect) {
+        setTimeout(() => {
+          deliveryStateSelect.value = toStateParam;
+          deliveryStateSelect.dispatchEvent(new Event('change'));
+        }, 50);
+      }
+
+      if (initialCard) {
+        if (weightParam) {
+          const wInput = initialCard.querySelector('input[name="parcelWeight"]') as HTMLInputElement | null;
+          if (wInput) wInput.value = weightParam;
+        }
+        if (lengthParam) {
+          const lInput = initialCard.querySelector('input[name="parcelLength"]') as HTMLInputElement | null;
+          if (lInput) lInput.value = lengthParam;
+        }
+        if (widthParam) {
+          const wInput = initialCard.querySelector('input[name="parcelWidth"]') as HTMLInputElement | null;
+          if (wInput) wInput.value = widthParam;
+        }
+        if (heightParam) {
+          const hInput = initialCard.querySelector('input[name="parcelHeight"]') as HTMLInputElement | null;
+          if (hInput) hInput.value = heightParam;
+        }
+        if (catParam) {
+          const cSelect = initialCard.querySelector('select[name="parcelCategory"]') as HTMLSelectElement | null;
+          if (cSelect) cSelect.value = catParam;
+        }
+        const weightInput = initialCard.querySelector('input[name="parcelWeight"]');
+        weightInput?.dispatchEvent(new Event('input'));
+      }
+    } catch (e) {
+      console.warn("Could not prefill form parameters:", e);
+    }
+  }
+
+  initQueryParamPrefill();
 
   // Handle Form Submission
   const form = document.getElementById('shipping-form') as HTMLFormElement | null;

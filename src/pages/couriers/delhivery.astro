@@ -126,8 +126,8 @@ const webAppSchema = {
 ---
 
 <Layout
-  title="Delhivery Courier Price Calculator | Estimate Shipping Charges"
-  description="Estimate Delhivery courier charges based on state, district, weight, dimensions, and shipment options with our free calculator. Learn how rates are calculated."
+  title="Delhivery Price Calculator & Rates Per KG | CourierPrice"
+  description="Estimate Delhivery courier charges with our free calculator. Calculate domestic surface and express parcel rates per kg by pincode and dimensions."
   jsonLd={[breadcrumbSchema, faqSchema, webAppSchema]}
 >
   <!-- Global Navigation Header -->
@@ -487,26 +487,101 @@ const webAppSchema = {
         </div>
       </section>
 
-      <!-- Comparison CTA Section -->
-      <section class="pt-8 border-t border-hairline text-center space-y-4">
-        <h2 class="display-sm text-ink font-semibold">Compare Delhivery With Other Courier Services.</h2>
-        <p class="body-sm text-body max-w-md mx-auto">
-          Want to see how Delhivery compares with other courier providers? Use CourierPrice to compare estimated shipping costs.
-        </p>
-        <div class="pt-2">
-          <a
-            href="/"
-            class="inline-flex items-center justify-center bg-primary text-on-primary text-sm font-semibold rounded-full px-8 py-3 shadow-level-3 hover:opacity-90 active:scale-98 transition-all duration-200"
-          >
-            Compare Rates Globally
+      <!-- Alternative Domestic Carriers Comparison Grid -->
+      <section class="pt-10 border-t border-hairline space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="display-sm text-ink font-semibold">Alternative Domestic Courier Calculators</h2>
+            <p class="body-sm text-mute mt-0.5">Compare Delhivery with other major logistics and parcel services</p>
+          </div>
+          <a href="/couriers" class="hidden sm:inline-flex text-xs font-semibold text-link hover:underline items-center gap-1">
+            View All Carriers ➔
           </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <!-- Card 1: Professional Courier -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="body-md-strong text-ink font-semibold">Professional Courier</h3>
+                  <span class="text-xs text-mute font-mono">Standard & Express</span>
+                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-canvas-soft-2 border border-hairline px-2 py-0.5 rounded">★ 8.7</span>
+              </div>
+              <p class="body-sm text-body text-xs leading-relaxed">
+                Budget-friendly surface slabs and same-day Dawn-to-Dusk service across South and North India.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between text-xs">
+              <span class="text-mute font-mono">2–6 Days</span>
+              <a href="/couriers/professional-courier" class="text-link font-semibold hover:underline flex items-center gap-0.5">
+                Calculator ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: DTDC -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="body-md-strong text-ink font-semibold">DTDC</h3>
+                  <span class="text-xs text-mute font-mono">Express & Lite</span>
+                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-canvas-soft-2 border border-hairline px-2 py-0.5 rounded">★ 8.9</span>
+              </div>
+              <p class="body-sm text-body text-xs leading-relaxed">
+                Extensive franchise network with DTDC Plus and Lite options for corporate and retail packages.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between text-xs">
+              <span class="text-mute font-mono">1–4 Days</span>
+              <a href="/#calculator-anchor" class="text-body font-medium hover:text-ink flex items-center gap-0.5">
+                Compare ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: India Post Speed Post -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="body-md-strong text-ink font-semibold">India Post Speed Post</h3>
+                  <span class="text-xs text-mute font-mono">Government Postal</span>
+                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-canvas-soft-2 border border-hairline px-2 py-0.5 rounded">★ 8.8</span>
+              </div>
+              <p class="body-sm text-body text-xs leading-relaxed">
+                Unbeatable reach covering every single pincode in India at economical baseline postal tariffs.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between text-xs">
+              <span class="text-mute font-mono">2–5 Days</span>
+              <a href="/#calculator-anchor" class="text-body font-medium hover:text-ink flex items-center gap-0.5">
+                Compare ➔
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Related Courier Links -->
-      <section class="pt-6 text-center text-xs text-mute">
-        <span>Looking for other calculators? View the </span>
-        <a href="/couriers/professional-courier" class="text-link hover:underline">Professional Courier Calculator</a>.
+      <!-- Bottom Global Comparison CTA -->
+      <section class="bg-canvas border border-hairline rounded-lg p-8 shadow-level-3 text-center space-y-4 transition-colors duration-200">
+        <h2 class="display-sm text-ink font-semibold text-xl">Compare All Courier Providers in Real-Time</h2>
+        <p class="body-sm text-body max-w-lg mx-auto">
+          Need to compare Delhivery prices against other couriers for your exact weight and route? Use our unified comparison engine.
+        </p>
+        <div class="pt-2">
+          <a
+            href="/#calculator-anchor"
+            class="inline-flex items-center justify-center bg-primary text-on-primary text-sm font-semibold rounded-full px-7 py-2.5 shadow-level-3 hover:opacity-90 active:scale-98 transition-all duration-200"
+          >
+            Launch Unified Comparison
+          </a>
+        </div>
       </section>
 
     </div>
