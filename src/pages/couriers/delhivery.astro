@@ -250,6 +250,61 @@ const webAppSchema = {
           <p class="body-md text-body">
             For example, sending a 1 kg parcel locally within a metro city might result in an effective cost of ₹60-₹80 per kg, while sending the same package to a remote national zone could cost ₹120-₹180 per kg. Weight charges are also structure-based, where the first 500 grams (base weight limit) typically carry a higher cost, and each subsequent unit (add-on weight) is charged at a lower incremental rate.
           </p>
+
+          <!-- Indicative Rate Slab Matrix Table -->
+          <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2 mt-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                  <th class="py-3 px-4">Weight Slab</th>
+                  <th class="py-3 px-4">Local / Intra-City</th>
+                  <th class="py-3 px-4">Metro to Metro</th>
+                  <th class="py-3 px-4">Rest of India (National)</th>
+                  <th class="py-3 px-4">Special / Remote Zones</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-body font-mono">
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Up to 0.5 kg (Base)</td>
+                  <td class="py-2.5 px-4">₹40 – ₹60</td>
+                  <td class="py-2.5 px-4">₹60 – ₹90</td>
+                  <td class="py-2.5 px-4">₹80 – ₹120</td>
+                  <td class="py-2.5 px-4">₹120 – ₹180</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg</td>
+                  <td class="py-2.5 px-4">₹60 – ₹90</td>
+                  <td class="py-2.5 px-4">₹90 – ₹140</td>
+                  <td class="py-2.5 px-4">₹120 – ₹190</td>
+                  <td class="py-2.5 px-4">₹180 – ₹260</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg</td>
+                  <td class="py-2.5 px-4">₹100 – ₹150</td>
+                  <td class="py-2.5 px-4">₹150 – ₹230</td>
+                  <td class="py-2.5 px-4">₹200 – ₹310</td>
+                  <td class="py-2.5 px-4">₹290 – ₹420</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg (Surface)</td>
+                  <td class="py-2.5 px-4">₹200 – ₹290</td>
+                  <td class="py-2.5 px-4">₹290 – ₹440</td>
+                  <td class="py-2.5 px-4">₹380 – ₹590</td>
+                  <td class="py-2.5 px-4">₹550 – ₹820</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">10.0 kg (Bulk)</td>
+                  <td class="py-2.5 px-4">₹340 – ₹490</td>
+                  <td class="py-2.5 px-4">₹480 – ₹720</td>
+                  <td class="py-2.5 px-4">₹650 – ₹990</td>
+                  <td class="py-2.5 px-4">₹950 – ₹1,450</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-mute italic">
+            * Note: Indicative retail estimations based on standard domestic tariff models. Actual booking rates depend on exact pincode serviceability, volumetric dimensions, fuel surcharges, and applicable 18% GST.
+          </p>
         </div>
       </section>
 

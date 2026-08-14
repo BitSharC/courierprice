@@ -193,6 +193,61 @@ const webAppSchema = {
           <p class="body-md text-body">
             Typically, the first 500 grams (the base slab) carries a higher initial fee to cover administrative and pickup logistics. Every subsequent 500g or 1kg slab is charged at a significantly lower incremental rate. Furthermore, the rate per kg varies by zone; sending a parcel to a nearby city will have a much lower per-kg cost compared to cross-country transit or shipping to a remote region in India.
           </p>
+
+          <!-- Indicative Rate Slab Matrix Table -->
+          <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2 mt-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                  <th class="py-3 px-4">Weight Slab</th>
+                  <th class="py-3 px-4">Intra-State / Regional</th>
+                  <th class="py-3 px-4">Metro to Metro</th>
+                  <th class="py-3 px-4">National (Rest of India)</th>
+                  <th class="py-3 px-4">Dawn-to-Dusk (Same-Day)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-body font-mono">
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Documents (Up to 250g)</td>
+                  <td class="py-2.5 px-4">₹30 – ₹50</td>
+                  <td class="py-2.5 px-4">₹50 – ₹80</td>
+                  <td class="py-2.5 px-4">₹70 – ₹110</td>
+                  <td class="py-2.5 px-4">₹150 – ₹250</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">0.5 kg (Base Slab)</td>
+                  <td class="py-2.5 px-4">₹40 – ₹60</td>
+                  <td class="py-2.5 px-4">₹60 – ₹90</td>
+                  <td class="py-2.5 px-4">₹80 – ₹120</td>
+                  <td class="py-2.5 px-4">₹200 – ₹320</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg</td>
+                  <td class="py-2.5 px-4">₹60 – ₹90</td>
+                  <td class="py-2.5 px-4">₹90 – ₹130</td>
+                  <td class="py-2.5 px-4">₹120 – ₹180</td>
+                  <td class="py-2.5 px-4">₹280 – ₹450</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg</td>
+                  <td class="py-2.5 px-4">₹100 – ₹140</td>
+                  <td class="py-2.5 px-4">₹140 – ₹210</td>
+                  <td class="py-2.5 px-4">₹190 – ₹290</td>
+                  <td class="py-2.5 px-4">₹450 – ₹700</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg (Surface)</td>
+                  <td class="py-2.5 px-4">₹180 – ₹260</td>
+                  <td class="py-2.5 px-4">₹260 – ₹390</td>
+                  <td class="py-2.5 px-4">₹350 – ₹540</td>
+                  <td class="py-2.5 px-4">Contact Branch</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-mute italic">
+            * Note: Indicative estimates reflecting typical domestic retail branch rates. Actual booking bills depend on distance routing, dimensional weight comparisons, pickup charges, and GST.
+          </p>
         </div>
       </section>
 

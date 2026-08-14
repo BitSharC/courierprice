@@ -99,6 +99,14 @@ if (courierId === 'delhivery-domestic-in') {
       {courierId === 'delhivery-domestic-in' ? 'CourierPrice provides independent shipping estimates for informational purposes. The estimated price is not an official Delhivery quote and may differ from the final amount charged by Delhivery.' : (courierId === 'professional-domestic-in' ? 'CourierPrice provides independent shipping estimates for informational purposes. The estimated price is not an official quote from The Professional Couriers and may differ from the final amount charged by the courier.' : 'Prices are estimated based on shipment details, route and carrier pricing rules. Actual courier quotations may vary.')}
     </p>
   </div>
+
+  <!-- Floating Toast Feedback for Shared Quotes -->
+  <div id="share-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2.5 bg-ink text-canvas text-xs font-semibold px-4 py-2.5 rounded-full shadow-level-5">
+    <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    <span id="share-toast-msg">Quote link copied to clipboard!</span>
+  </div>
 </div>
 
 <script>
@@ -416,6 +424,17 @@ if (courierId === 'delhivery-domestic-in') {
                 <span class="font-medium text-ink">Chargeable Weight:</span>
                 <span class="font-semibold text-primary">${totalChargeableWeight.toFixed(2)} kg</span>
               </div>
+              <button
+                type="button"
+                id="share-quote-btn"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95 ml-auto"
+                title="Copy shareable link for this quote"
+              >
+                <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                <span>Share Quote</span>
+              </button>
             </div>
           </div>
         `;
@@ -437,6 +456,17 @@ if (courierId === 'delhivery-domestic-in') {
               <span class="font-medium text-ink">${consLabel}:</span>
               <span class="text-body">${totalParcelsCount} ${parcelCountTrans} | ${weightLabel}: ${totalActualWeight.toFixed(2)} kg</span>
             </div>
+            <button
+              type="button"
+              id="share-quote-btn"
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95 ml-auto"
+              title="Copy shareable link for this quote"
+            >
+              <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              </svg>
+              <span>Share Quote</span>
+            </button>
           </div>
         `;
       }
@@ -688,6 +718,47 @@ if (courierId === 'delhivery-domestic-in') {
             breakdownPanel.classList.add('hidden');
             arrow?.classList.remove('rotate-180');
           }
+        }
+      });
+    });
+
+    // Setup Share Quote Button
+    setupShareQuoteButton();
+  }
+
+  function setupShareQuoteButton() {
+    const shareBtns = document.querySelectorAll('#share-quote-btn');
+    shareBtns.forEach(shareBtn => {
+      shareBtn.addEventListener('click', async () => {
+        if (!currentInput) return;
+        try {
+          const p = new URLSearchParams();
+          p.set('type', currentInput.type);
+          p.set('from', currentInput.pickupCountry);
+          if (currentInput.pickupState) p.set('fromState', currentInput.pickupState);
+          if (currentInput.deliveryCountry) p.set('to', currentInput.deliveryCountry);
+          if (currentInput.deliveryState) p.set('toState', currentInput.deliveryState);
+          if (currentInput.parcels && currentInput.parcels[0]) {
+            p.set('weight', currentInput.parcels[0].weight.toString());
+            if (currentInput.parcels[0].length) p.set('length', currentInput.parcels[0].length.toString());
+            if (currentInput.parcels[0].width) p.set('width', currentInput.parcels[0].width.toString());
+            if (currentInput.parcels[0].height) p.set('height', currentInput.parcels[0].height.toString());
+            if (currentInput.parcels[0].category) p.set('category', currentInput.parcels[0].category);
+          }
+
+          const shareUrl = `${window.location.origin}${window.location.pathname}?${p.toString()}#calculator`;
+          await navigator.clipboard.writeText(shareUrl);
+
+          // Show floating toast
+          const toast = document.getElementById('share-toast');
+          if (toast) {
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+              toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 2600);
+          }
+        } catch (err) {
+          console.warn("Clipboard copy failed:", err);
         }
       });
     });

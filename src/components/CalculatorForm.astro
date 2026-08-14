@@ -73,17 +73,22 @@ if (courierId === 'delhivery-domestic-in') {
     <!-- Route Parameters Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       
-      <!-- Pickup Location -->
+      <!-- Pickup Location Column -->
       <div class="space-y-4">
-        <h3 class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-pickup-title">Pickup Location</h3>
+        <div class="flex items-center justify-between border-b border-hairline pb-1.5">
+          <h3 class="body-sm-strong text-ink font-semibold flex items-center gap-1.5" data-i18n="form-pickup-title">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+            Pickup Location
+          </h3>
+        </div>
         
         {courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in' ? (
           <input type="hidden" id="pickupCountry" name="pickupCountry" value="IN" />
         ) : (
-          <div class="flex flex-col gap-1.5">
+          <div id="pickup-country-container" class="flex flex-col gap-1.5 hidden animate-fade-in">
             <label for="pickupCountry" class="caption text-mute text-xs font-semibold" data-i18n="form-origin-country">Origin Country</label>
             <div class="relative">
-              <select id="pickupCountry" name="pickupCountry" required class="form-input w-full appearance-none pr-8 font-medium">
+              <select id="pickupCountry" name="pickupCountry" class="form-input w-full appearance-none pr-8 font-medium">
                 {Object.values(COUNTRIES_DATA).map(c => (
                   <option value={c.code} selected={c.code === 'IN'}>{c.name}</option>
                 ))}
@@ -129,9 +134,26 @@ if (courierId === 'delhivery-domestic-in') {
         </div>
       </div>
 
-      <!-- Destination Location -->
+      <!-- Destination Location Column -->
       <div class="space-y-4">
-        <h3 id="delivery-title" class="body-sm-strong text-ink border-b border-hairline pb-1.5 font-semibold" data-i18n="form-delivery-title-dom">Delivery Location (Domestic)</h3>
+        <div class="flex items-center justify-between border-b border-hairline pb-1.5">
+          <h3 id="delivery-title" class="body-sm-strong text-ink font-semibold flex items-center gap-1.5" data-i18n="form-delivery-title-dom">
+            <span class="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
+            Delivery Location (Domestic)
+          </h3>
+          <button
+            type="button"
+            id="swap-route-btn"
+            class="inline-flex items-center gap-1.5 text-xs text-mute hover:text-ink font-medium px-2.5 py-0.5 rounded-full border border-hairline hover:border-hairline-strong bg-canvas-soft-2 hover:bg-canvas transition-all cursor-pointer group active:scale-95 shadow-level-1"
+            title="Swap pickup and delivery locations"
+            aria-label="Swap pickup and delivery locations"
+          >
+            <svg id="swap-icon" class="h-3 w-3 text-mute group-hover:text-ink transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span class="text-[11px] font-mono">Swap ⇄</span>
+          </button>
+        </div>
         
         {courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in' ? (
           <input type="hidden" id="deliveryCountry" name="deliveryCountry" value="IN" />
@@ -375,6 +397,7 @@ if (courierId === 'delhivery-domestic-in') {
   const tabInternational = document.getElementById('tab-international');
   const shippingType = document.getElementById('shipping-type') as HTMLInputElement | null;
   
+  const pickupCountryContainer = document.getElementById('pickup-country-container');
   const pickupCountrySelect = document.getElementById('pickupCountry') as HTMLSelectElement | HTMLInputElement | null;
   const pickupStateSelect = document.getElementById('pickupState') as HTMLSelectElement | null;
   const pickupDistrictSelect = document.getElementById('pickupDistrict') as HTMLSelectElement | null;
@@ -513,8 +536,13 @@ if (courierId === 'delhivery-domestic-in') {
     tabInternational?.setAttribute("class", "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer");
     
     // Visibility
+    pickupCountryContainer?.classList.add('hidden');
     deliveryCountryContainer?.classList.add('hidden');
     
+    if (pickupCountrySelect) {
+      pickupCountrySelect.value = 'IN';
+    }
+
     // Title Translation key update
     if (deliveryTitle) {
       deliveryTitle.setAttribute('data-i18n', 'form-delivery-title-dom');
@@ -528,6 +556,7 @@ if (courierId === 'delhivery-domestic-in') {
         deliveryCountrySelect.value = pickupCountrySelect.value;
       }
     }
+    handlePickupCountryChange();
     handleDeliveryCountryChange();
   });
 
@@ -539,6 +568,7 @@ if (courierId === 'delhivery-domestic-in') {
     tabDomestic?.setAttribute("class", "px-5 py-1.5 rounded-full font-medium text-xs tracking-tight text-body hover:text-ink transition-all cursor-pointer");
 
     // Visibility
+    pickupCountryContainer?.classList.remove('hidden');
     deliveryCountryContainer?.classList.remove('hidden');
 
     if (deliveryTitle) {
@@ -553,6 +583,7 @@ if (courierId === 'delhivery-domestic-in') {
         deliveryCountrySelect.value = ""; // Force them to pick a different country
       }
     }
+    handlePickupCountryChange();
     handleDeliveryCountryChange();
   });
 
@@ -893,6 +924,76 @@ if (courierId === 'delhivery-domestic-in') {
   }
 
   initQueryParamPrefill();
+
+  // Route Swap Button (Origin ⇄ Destination) Handler
+  const swapRouteBtn = document.getElementById('swap-route-btn');
+  const swapIcon = document.getElementById('swap-icon');
+  let isSwappedRotation = false;
+
+  swapRouteBtn?.addEventListener('click', () => {
+    // Rotation animation
+    isSwappedRotation = !isSwappedRotation;
+    if (swapIcon) {
+      swapIcon.style.transform = isSwappedRotation ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    const isDom = (shippingType?.value || 'domestic') === 'domestic';
+
+    if (isDom) {
+      const origPickupState = pickupStateSelect?.value || '';
+      const origPickupDistrict = pickupDistrictSelect?.value || '';
+      const origDeliveryState = deliveryStateSelect?.value || '';
+      const origDeliveryDistrict = deliveryDistrictSelect?.value || '';
+
+      if (origDeliveryState && pickupStateSelect) {
+        pickupStateSelect.value = origDeliveryState;
+        pickupStateSelect.dispatchEvent(new Event('change'));
+        if (origDeliveryDistrict && pickupDistrictSelect) {
+          setTimeout(() => {
+            pickupDistrictSelect.value = origDeliveryDistrict;
+          }, 40);
+        }
+      }
+
+      if (origPickupState && deliveryStateSelect) {
+        deliveryStateSelect.value = origPickupState;
+        deliveryStateSelect.dispatchEvent(new Event('change'));
+        if (origPickupDistrict && deliveryDistrictSelect) {
+          setTimeout(() => {
+            deliveryDistrictSelect.value = origPickupDistrict;
+          }, 40);
+        }
+      }
+    } else {
+      // International swap
+      const origPickupCountry = pickupCountrySelect?.value || '';
+      const origDeliveryCountry = deliveryCountrySelect?.value || '';
+      const origPickupState = pickupStateSelect?.value || '';
+      const origDeliveryState = deliveryStateSelect?.value || '';
+
+      if (origDeliveryCountry && pickupCountrySelect) {
+        pickupCountrySelect.value = origDeliveryCountry;
+        handlePickupCountryChange();
+        if (origDeliveryState && pickupStateSelect) {
+          setTimeout(() => {
+            pickupStateSelect.value = origDeliveryState;
+            pickupStateSelect.dispatchEvent(new Event('change'));
+          }, 50);
+        }
+      }
+
+      if (origPickupCountry && deliveryCountrySelect) {
+        deliveryCountrySelect.value = origPickupCountry;
+        handleDeliveryCountryChange();
+        if (origPickupState && deliveryStateSelect) {
+          setTimeout(() => {
+            deliveryStateSelect.value = origPickupState;
+            deliveryStateSelect.dispatchEvent(new Event('change'));
+          }, 50);
+        }
+      }
+    }
+  });
 
   // Handle Form Submission
   const form = document.getElementById('shipping-form') as HTMLFormElement | null;
