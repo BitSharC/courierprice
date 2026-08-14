@@ -19,6 +19,7 @@
     <!-- Nav Links (Desktop) -->
     <nav class="hidden md:flex items-center gap-6">
       <a href="/#calculator-anchor" data-i18n="nav-calculator" class="text-sm font-normal text-body hover:text-ink transition-colors px-3 py-1.5 rounded-full hover:bg-canvas-soft-2">Calculator</a>
+      <a href="/couriers" data-i18n="nav-couriers" class="text-sm font-normal text-body hover:text-ink transition-colors px-3 py-1.5 rounded-full hover:bg-canvas-soft-2">Couriers</a>
       <a href="/#guides" data-i18n="nav-guides" class="text-sm font-normal text-body hover:text-ink transition-colors px-3 py-1.5 rounded-full hover:bg-canvas-soft-2">Guides</a>
       <a href="/#faq" data-i18n="nav-faq" class="text-sm font-normal text-body hover:text-ink transition-colors px-3 py-1.5 rounded-full hover:bg-canvas-soft-2">FAQs</a>
       <span class="h-4 w-px bg-hairline"></span>
@@ -28,34 +29,159 @@
 
     <!-- Right-aligned Utility Actions -->
     <div class="flex items-center gap-3">
-      <!-- Language Selector -->
-      <div class="relative flex items-center border border-hairline rounded-sm px-1.5 bg-canvas hover:bg-canvas-soft-2 text-ink h-7.5 focus-within:ring-2 focus-within:ring-link/30 transition-all duration-150">
-        <svg class="h-3.5 w-3.5 text-body pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-        </svg>
-        <select 
-          id="lang-select" 
-          class="bg-transparent pl-0.5 text-xs font-semibold cursor-pointer focus:outline-none border-none outline-none appearance-none pr-3.5 text-ink uppercase"
+      <!-- Language Selector Custom Interactive Dropdown -->
+      <div class="relative" id="lang-dropdown-wrapper">
+        <button
+          type="button"
+          id="lang-menu-btn"
+          class="flex items-center gap-1.5 border border-hairline rounded-md px-2.5 bg-canvas hover:bg-canvas-soft-2 text-ink h-8 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-link/30 transition-all duration-150 cursor-pointer shadow-level-1"
+          aria-haspopup="true"
+          aria-expanded="false"
           aria-label="Select language"
         >
-          <option value="en" class="bg-canvas text-ink">EN</option>
-          <option value="hi" class="bg-canvas text-ink">HI</option>
-          <option value="es" class="bg-canvas text-ink">ES</option>
-          <option value="fr" class="bg-canvas text-ink">FR</option>
-          <option value="de" class="bg-canvas text-ink">DE</option>
-          <option value="ar" class="bg-canvas text-ink">AR</option>
-        </select>
-        <div class="absolute right-1 pointer-events-none text-mute">
-          <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="h-3.5 w-3.5 text-body pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+          </svg>
+          <span id="lang-current-label" class="uppercase tracking-wide font-mono text-[11px] text-ink font-bold">EN</span>
+          <svg id="lang-chevron" class="h-3 w-3 text-mute transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
+        </button>
+
+        <!-- Dropdown Menu Panel -->
+        <div
+          id="lang-menu"
+          class="hidden absolute right-0 mt-2 w-64 sm:w-72 rounded-xl border border-hairline bg-canvas shadow-level-5 p-1.5 z-50 transition-all duration-200 origin-top-right focus:outline-none"
+          role="menu"
+          aria-orientation="vertical"
+        >
+          <div class="px-2.5 py-2 border-b border-hairline flex items-center justify-between">
+            <span class="caption-mono uppercase tracking-wider text-[10px] text-mute font-semibold">Select Language</span>
+            <span class="caption-mono text-[10px] text-mute">6 Languages</span>
+          </div>
+
+          <div class="py-1 space-y-0.5" role="none">
+            <!-- English -->
+            <button
+              type="button"
+              data-lang="en"
+              class="lang-option w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left text-xs transition-colors duration-150 hover:bg-canvas-soft-2 cursor-pointer group"
+              role="menuitem"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-canvas-soft border border-hairline text-ink group-hover:border-hairline-strong">EN</span>
+                <div>
+                  <div class="font-medium text-ink">English</div>
+                  <div class="text-[10px] text-mute">Global (US / UK)</div>
+                </div>
+              </div>
+              <svg class="lang-check h-4 w-4 text-link hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+
+            <!-- Hindi -->
+            <button
+              type="button"
+              data-lang="hi"
+              class="lang-option w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left text-xs transition-colors duration-150 hover:bg-canvas-soft-2 cursor-pointer group"
+              role="menuitem"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-canvas-soft border border-hairline text-ink group-hover:border-hairline-strong">HI</span>
+                <div>
+                  <div class="font-medium text-ink font-sans">हिन्दी</div>
+                  <div class="text-[10px] text-mute">Hindi (India)</div>
+                </div>
+              </div>
+              <svg class="lang-check h-4 w-4 text-link hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+
+            <!-- Spanish -->
+            <button
+              type="button"
+              data-lang="es"
+              class="lang-option w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left text-xs transition-colors duration-150 hover:bg-canvas-soft-2 cursor-pointer group"
+              role="menuitem"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-canvas-soft border border-hairline text-ink group-hover:border-hairline-strong">ES</span>
+                <div>
+                  <div class="font-medium text-ink">Español</div>
+                  <div class="text-[10px] text-mute">Spanish</div>
+                </div>
+              </div>
+              <svg class="lang-check h-4 w-4 text-link hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+
+            <!-- French -->
+            <button
+              type="button"
+              data-lang="fr"
+              class="lang-option w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left text-xs transition-colors duration-150 hover:bg-canvas-soft-2 cursor-pointer group"
+              role="menuitem"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-canvas-soft border border-hairline text-ink group-hover:border-hairline-strong">FR</span>
+                <div>
+                  <div class="font-medium text-ink">Français</div>
+                  <div class="text-[10px] text-mute">French</div>
+                </div>
+              </div>
+              <svg class="lang-check h-4 w-4 text-link hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+
+            <!-- German -->
+            <button
+              type="button"
+              data-lang="de"
+              class="lang-option w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left text-xs transition-colors duration-150 hover:bg-canvas-soft-2 cursor-pointer group"
+              role="menuitem"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-canvas-soft border border-hairline text-ink group-hover:border-hairline-strong">DE</span>
+                <div>
+                  <div class="font-medium text-ink">Deutsch</div>
+                  <div class="text-[10px] text-mute">German</div>
+                </div>
+              </div>
+              <svg class="lang-check h-4 w-4 text-link hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+
+            <!-- Arabic -->
+            <button
+              type="button"
+              data-lang="ar"
+              class="lang-option w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left text-xs transition-colors duration-150 hover:bg-canvas-soft-2 cursor-pointer group"
+              role="menuitem"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-canvas-soft border border-hairline text-ink group-hover:border-hairline-strong">AR</span>
+                <div>
+                  <div class="font-medium text-ink font-sans">العربية</div>
+                  <div class="text-[10px] text-mute">Arabic</div>
+                </div>
+              </div>
+              <svg class="lang-check h-4 w-4 text-link hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Dark Mode Switcher -->
       <button 
         id="theme-toggle" 
-        class="inline-flex items-center justify-center h-8 w-8 rounded-full border border-hairline bg-canvas hover:bg-canvas-soft-2 text-ink cursor-pointer focus:outline-none focus:ring-2 focus:ring-link/50 transition-colors"
+        class="inline-flex items-center justify-center h-8 w-8 rounded-full border border-hairline bg-canvas hover:bg-canvas-soft-2 text-ink cursor-pointer focus:outline-none focus:ring-2 focus:ring-link/50 transition-colors shadow-level-1"
         aria-label="Toggle visual theme"
       >
         <!-- Sun (visible in dark) -->
@@ -106,6 +232,7 @@
   <div id="mobile-menu" class="hidden md:hidden w-full border-t border-hairline bg-canvas transition-all duration-200">
     <div class="flex flex-col gap-2 p-4">
       <a href="/#calculator-anchor" data-i18n="nav-calculator" class="text-sm font-normal text-body hover:text-ink p-2 rounded-md hover:bg-canvas-soft-2">Calculator</a>
+      <a href="/couriers" data-i18n="nav-couriers" class="text-sm font-normal text-body hover:text-ink p-2 rounded-md hover:bg-canvas-soft-2">Couriers</a>
       <a href="/#guides" data-i18n="nav-guides" class="text-sm font-normal text-body hover:text-ink p-2 rounded-md hover:bg-canvas-soft-2">Guides</a>
       <a href="/#faq" data-i18n="nav-faq" class="text-sm font-normal text-body hover:text-ink p-2 rounded-md hover:bg-canvas-soft-2">FAQs</a>
       <a href="/about" data-i18n="nav-about" class="text-sm font-normal text-body hover:text-ink p-2 rounded-md hover:bg-canvas-soft-2">About Us</a>
@@ -165,22 +292,92 @@
     });
   });
 
-  // Language Selector Event Handler
-  const langSelect = document.getElementById('lang-select') as HTMLSelectElement | null;
-  if (langSelect) {
-    langSelect.value = localStorage.getItem('lang') || 'en';
-    
-    langSelect.addEventListener('change', () => {
-      const selected = langSelect.value;
-      if ((window as any).applyLanguage) {
-        (window as any).applyLanguage(selected);
-      }
-    });
+  // Custom Interactive Language Dropdown Handler
+  const langWrapper = document.getElementById('lang-dropdown-wrapper');
+  const langMenuBtn = document.getElementById('lang-menu-btn');
+  const langMenu = document.getElementById('lang-menu');
+  const langChevron = document.getElementById('lang-chevron');
+  const langCurrentLabel = document.getElementById('lang-current-label');
+  const langOptions = document.querySelectorAll<HTMLButtonElement>('.lang-option');
 
-    window.addEventListener('language-change', (e: any) => {
-      if (langSelect.value !== e.detail) {
-        langSelect.value = e.detail;
+  const updateActiveLangUI = (currentLang: string) => {
+    if (langCurrentLabel) {
+      langCurrentLabel.textContent = currentLang.toUpperCase();
+    }
+    langOptions.forEach(opt => {
+      const code = opt.getAttribute('data-lang');
+      const check = opt.querySelector('.lang-check');
+      const isSelected = code === currentLang;
+      if (isSelected) {
+        opt.classList.add('bg-canvas-soft-2', 'font-semibold');
+        check?.classList.remove('hidden');
+      } else {
+        opt.classList.remove('bg-canvas-soft-2', 'font-semibold');
+        check?.classList.add('hidden');
       }
     });
-  }
+  };
+
+  const openLangMenu = () => {
+    langMenu?.classList.remove('hidden');
+    langMenuBtn?.setAttribute('aria-expanded', 'true');
+    langChevron?.classList.add('rotate-180');
+  };
+
+  const closeLangMenu = () => {
+    langMenu?.classList.add('hidden');
+    langMenuBtn?.setAttribute('aria-expanded', 'false');
+    langChevron?.classList.remove('rotate-180');
+  };
+
+  const toggleLangMenu = () => {
+    const isExpanded = langMenuBtn?.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      closeLangMenu();
+    } else {
+      openLangMenu();
+    }
+  };
+
+  langMenuBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleLangMenu();
+  });
+
+  // Select language handler
+  langOptions.forEach(opt => {
+    opt.addEventListener('click', () => {
+      const lang = opt.getAttribute('data-lang') || 'en';
+      updateActiveLangUI(lang);
+      closeLangMenu();
+      if ((window as any).applyLanguage) {
+        (window as any).applyLanguage(lang);
+      }
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (langWrapper && !langWrapper.contains(e.target as Node)) {
+      closeLangMenu();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLangMenu();
+    }
+  });
+
+  // Initial active language sync
+  const initialLang = localStorage.getItem('lang') || 'en';
+  updateActiveLangUI(initialLang);
+
+  // Sync with global event
+  window.addEventListener('language-change', (e: any) => {
+    if (e.detail) {
+      updateActiveLangUI(e.detail);
+    }
+  });
 </script>

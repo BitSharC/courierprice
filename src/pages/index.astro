@@ -8,11 +8,27 @@ import Educational from '../components/Educational.astro';
 import SeoContent from '../components/SeoContent.astro';
 import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CourierPrice Shipping Calculator",
+  "url": "https://courierprice.com",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free courier price calculator and parcel comparison tool for domestic and international shipping."
+};
 ---
 
 <Layout 
   title="Global Courier Price Calculator - Compare Shipping Rates"
   description="Compare courier shipping rates globally. Use our free calculator to find the best prices from top services like DHL, FedEx, UPS, USPS, Royal Mail & more."
+  jsonLd={webAppSchema}
 >
   <!-- Header Nav -->
   <Header />

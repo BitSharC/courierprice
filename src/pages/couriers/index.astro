@@ -1,0 +1,362 @@
+---
+// src/pages/couriers/index.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import couriersData from '../../data/couriers.json' with { type: 'json' };
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Couriers",
+      "item": "https://courierprice.com/couriers/"
+    }
+  ]
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Courier Shipping Calculators & Rates Directory",
+  "url": "https://courierprice.com/couriers/",
+  "description": "Browse shipping rate calculators, rate per kg breakdowns, and delivery estimates for top domestic and international couriers."
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which courier service is the cheapest for domestic shipping?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For small domestic parcels, national postal services (like India Post Speed Post, USPS Ground Advantage, or Royal Mail 2nd Class) are generally the most economical choice, followed by private ground carriers like DTDC Lite, Delhivery Surface, and The Professional Couriers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I calculate courier price per kg?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Courier rates per kg are calculated based on destination zones, delivery speed (Surface vs Express), and the higher of the package's actual dead weight or volumetric weight (L × W × H in cm / 5000)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compare multiple courier rates simultaneously?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, CourierPrice allows you to enter your origin, destination, parcel weight, and dimensions once to compare rates across all major domestic and international carriers in under 30 seconds."
+      }
+    }
+  ]
+};
+
+// Map dedicated calculators
+const dedicatedCouriers: Record<string, string> = {
+  'delhivery-domestic-in': '/couriers/delhivery',
+  'professional-domestic-in': '/couriers/professional-courier'
+};
+
+// Domestic Indian couriers
+const domesticInCouriers = couriersData.filter(c => 
+  c.id.endsWith('-in') && !c.id.includes('intl') && !c.id.includes('ems') && !c.id.includes('express-in') && !c.id.includes('worldwide')
+);
+
+// International / Global couriers
+const internationalCouriers = couriersData.filter(c => 
+  c.id.includes('intl') || c.id.includes('ems') || c.id.includes('worldwide') || c.id === 'dhl-express-in' || c.id.includes('-us') || c.id.includes('-uk') || c.id.includes('-ca')
+).slice(0, 12);
+---
+
+<Layout
+  title="Courier Calculators & Shipping Rate Lists | CourierPrice"
+  description="Browse shipping rate calculators, rate per kg breakdowns, and delivery estimates for top domestic and international couriers including Delhivery, Professional Courier, DTDC & more."
+  jsonLd={[breadcrumbSchema, collectionSchema, faqSchema]}
+>
+  <Header />
+
+  <main class="flex-grow bg-canvas-soft transition-colors duration-200">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-16">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex text-xs font-mono text-mute gap-1.5 items-center" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-ink font-semibold" aria-current="page">Couriers</span>
+      </nav>
+
+      <!-- Page Header -->
+      <section class="border-b border-hairline pb-8">
+        <span class="caption-mono uppercase tracking-wider text-mute text-xs">Carrier Directory</span>
+        <h1 class="display-lg text-ink font-semibold mt-2 text-3xl sm:text-4xl leading-tight">
+          Courier shipping calculators.
+        </h1>
+        <p class="body-lg text-body mt-3 leading-relaxed max-w-3xl">
+          Explore dedicated courier pricing tools, rate per kg guides, and service options for domestic and international logistics providers. Estimate costs before booking.
+        </p>
+      </section>
+
+      <!-- Featured Dedicated Calculators -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-hairline pb-3">
+          <div>
+            <h2 class="display-md text-ink font-semibold">Featured Carrier Calculators</h2>
+            <p class="body-sm text-mute mt-0.5">Dedicated rate estimators with detailed weight slab matrices and cost breakdowns</p>
+          </div>
+          <span class="caption-mono uppercase text-xs text-link font-semibold bg-link-bg-soft px-2.5 py-1 rounded">
+            Dedicated Tools
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Delhivery Card -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <span class="text-xs font-mono text-mute uppercase">Domestic & E-commerce</span>
+                  <h3 class="display-sm text-xl text-ink font-semibold mt-1">Delhivery</h3>
+                </div>
+                <div class="flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  <span>9.2 / 10 Reliability</span>
+                </div>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Calculate estimated shipping charges for Delhivery Surface (road transport) and Express (air transport) across 18,000+ Indian pincodes.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-mute pt-2">
+                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Surface & Express</span>
+                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Live Tracking</span>
+                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Door Pickup</span>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">1 – 5 Delivery Days</span>
+              <a 
+                href="/couriers/delhivery" 
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-on-primary bg-primary hover:opacity-90 px-4 py-2 rounded-md transition-all"
+              >
+                Open Calculator
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Professional Courier Card -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <span class="text-xs font-mono text-mute uppercase">Budget & Business</span>
+                  <h3 class="display-sm text-xl text-ink font-semibold mt-1">The Professional Couriers</h3>
+                </div>
+                <div class="flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold px-2.5 py-1 rounded-full">
+                  <span>8.7 / 10 Reliability</span>
+                </div>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Estimate domestic package charges, weight slab rates per kg, and same-day Dawn-to-Dusk transit costs across India.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-mute pt-2">
+                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Standard & Express</span>
+                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Economical Slabs</span>
+                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Pan-India Network</span>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">2 – 6 Delivery Days</span>
+              <a 
+                href="/couriers/professional-courier" 
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-on-primary bg-primary hover:opacity-90 px-4 py-2 rounded-md transition-all"
+              >
+                Open Calculator
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Supported Domestic Indian Carriers -->
+      <section class="space-y-6">
+        <div class="border-b border-hairline pb-3">
+          <h2 class="display-md text-ink font-semibold">Domestic Shipping Services (India)</h2>
+          <p class="body-sm text-mute mt-0.5">Compare rates across national postal and private carrier networks</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {domesticInCouriers.map((courier) => {
+            const dedicatedUrl = dedicatedCouriers[courier.id];
+            return (
+              <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all duration-200 flex flex-col justify-between space-y-4">
+                <div class="space-y-2">
+                  <div class="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 class="body-md-strong text-ink font-semibold">{courier.company}</h3>
+                      <span class="text-xs text-mute font-mono">{courier.serviceName}</span>
+                    </div>
+                    <span class="text-xs font-mono font-medium text-ink bg-canvas-soft-2 border border-hairline px-2 py-0.5 rounded">
+                      ★ {courier.reliabilityScore}
+                    </span>
+                  </div>
+
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    {courier.tags.map(tag => (
+                      <span class="caption text-[11px] text-body bg-canvas-soft border border-hairline/60 px-1.5 py-0.5 rounded capitalize">
+                        {tag.replace('_', ' ')}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div class="pt-3 border-t border-hairline flex items-center justify-between text-xs">
+                  <span class="text-mute">{courier.deliveryDays.min}–{courier.deliveryDays.max} Days</span>
+                  {dedicatedUrl ? (
+                    <a href={dedicatedUrl} class="text-link font-semibold hover:underline flex items-center gap-0.5">
+                      Calculator ➔
+                    </a>
+                  ) : (
+                    <a href="/#calculator-anchor" class="text-body font-medium hover:text-ink flex items-center gap-0.5">
+                      Compare ➔
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Supported International Express Carriers -->
+      <section class="space-y-6">
+        <div class="border-b border-hairline pb-3">
+          <h2 class="display-md text-ink font-semibold">International & Global Express Couriers</h2>
+          <p class="body-sm text-mute mt-0.5">Worldwide parcel forwarding, customs clearance, and global air express</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {internationalCouriers.map((courier) => (
+            <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all duration-200 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 class="body-md-strong text-ink font-semibold">{courier.company}</h3>
+                    <span class="text-xs text-mute font-mono">{courier.serviceName}</span>
+                  </div>
+                  <span class="text-xs font-mono font-medium text-ink bg-canvas-soft-2 border border-hairline px-2 py-0.5 rounded">
+                    ★ {courier.reliabilityScore}
+                  </span>
+                </div>
+
+                <div class="flex flex-wrap gap-1.5 pt-1">
+                  {courier.tags.map(tag => (
+                    <span class="caption text-[11px] text-body bg-canvas-soft border border-hairline/60 px-1.5 py-0.5 rounded capitalize">
+                      {tag.replace('_', ' ')}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-hairline flex items-center justify-between text-xs">
+                <span class="text-mute">{courier.deliveryDays.min}–{courier.deliveryDays.max} Days</span>
+                <a href="/#calculator-anchor" class="text-body font-medium hover:text-ink flex items-center gap-0.5">
+                  Compare ➔
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Educational Guide / How to Choose Section -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">How to Choose the Right Courier Service.</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 leading-relaxed">
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <span class="caption-mono uppercase text-xs text-link font-semibold">01 / Speed Priority</span>
+            <h3 class="body-md-strong text-ink font-semibold">Express Air Delivery</h3>
+            <p class="body-sm text-body text-xs">
+              Best for time-sensitive documents, urgent medical shipments, and high-value e-commerce orders requiring 1 to 2 business day delivery.
+            </p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <span class="caption-mono uppercase text-xs text-link font-semibold">02 / Cost Economy</span>
+            <h3 class="body-md-strong text-ink font-semibold">Standard Surface / Ground</h3>
+            <p class="body-sm text-body text-xs">
+              Saves up to 40-50% on shipping costs for non-urgent boxes, books, household items, and parcels weighing over 5 kg.
+            </p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <span class="caption-mono uppercase text-xs text-link font-semibold">03 / Cross-Border</span>
+            <h3 class="body-md-strong text-ink font-semibold">International Air Express</h3>
+            <p class="body-sm text-body text-xs">
+              Handles customs clearance, export declarations, and priority global transport with end-to-end milestone tracking.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Frequently Asked Questions -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        <div class="space-y-4">
+          <div class="bg-canvas border border-hairline rounded-lg p-5 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">Which courier service is the cheapest for domestic shipping?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              For small domestic parcels, national postal services (like India Post Speed Post, USPS Ground Advantage, or Royal Mail 2nd Class) are generally the most economical choice, followed by private ground carriers like DTDC Lite, Delhivery Surface, and The Professional Couriers.
+            </p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">How do I calculate courier price per kg?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Courier rates per kg are calculated based on destination zones, delivery speed (Surface vs Express), and the higher of the package's actual dead weight or volumetric weight (L × W × H in cm / 5000).
+            </p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">Can I compare multiple courier rates simultaneously?</h3>
+            <p class="body-sm text-body leading-relaxed">
+              Yes, CourierPrice allows you to enter your origin, destination, parcel weight, and dimensions once to compare rates across all major domestic and international carriers in under 30 seconds.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom All-in-One Comparison CTA -->
+      <section class="bg-canvas border border-hairline rounded-lg p-8 sm:p-10 shadow-level-3 text-center space-y-4 transition-colors duration-200">
+        <h2 class="display-md text-ink font-semibold text-2xl">Compare All Couriers in One Click.</h2>
+        <p class="body-md text-body max-w-xl mx-auto">
+          Instead of visiting multiple shipping websites individually, use our free unified calculator to find the fastest and cheapest rate instantly.
+        </p>
+        <div class="pt-3">
+          <a
+            href="/#calculator-anchor"
+            class="inline-flex items-center justify-center bg-primary text-on-primary text-sm font-semibold rounded-full px-8 py-3 shadow-level-4 hover:opacity-90 active:scale-98 transition-all duration-200"
+          >
+            Launch Free Comparison Calculator
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

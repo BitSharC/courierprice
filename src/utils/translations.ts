@@ -13,6 +13,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
   en: {
     // Header
     "nav-calculator": "Calculator",
+    "nav-couriers": "Couriers",
     "nav-guides": "Guides",
     "nav-faq": "FAQs",
     "nav-about": "About Us",
@@ -249,6 +250,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
   hi: {
     // Header
     "nav-calculator": "कैलकुलेटर",
+    "nav-couriers": "कूरियर",
     "nav-guides": "मार्गदर्शिकाएँ",
     "nav-faq": "अक्सर पूछे जाने वाले प्रश्न",
     "nav-about": "हमारे बारे में",
@@ -485,6 +487,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
   es: {
     // Header
     "nav-calculator": "Calculadora",
+    "nav-couriers": "Mensajerías",
     "nav-guides": "Guías",
     "nav-faq": "Preguntas frecuentes",
     "nav-about": "Sobre Nosotros",
@@ -721,6 +724,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
   fr: {
     // Header
     "nav-calculator": "Calculateur",
+    "nav-couriers": "Courriers",
     "nav-guides": "Guides",
     "nav-faq": "FAQ",
     "nav-about": "À Propos",
@@ -957,6 +961,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
   de: {
     // Header
     "nav-calculator": "Rechner",
+    "nav-couriers": "Kuriere",
     "nav-guides": "Anleitungen",
     "nav-faq": "FAQs",
     "nav-about": "Über uns",
@@ -1193,6 +1198,7 @@ export const TRANSLATIONS: Record<string, Record<string, string>> = {
   ar: {
     // Header
     "nav-calculator": "الحاسبة",
+    "nav-couriers": "شركات الشحن",
     "nav-guides": "الأدلة",
     "nav-faq": "الأسئلة الشائعة",
     "nav-about": "من نحن",

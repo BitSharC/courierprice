@@ -5,11 +5,130 @@ import Header from '../../components/Header.astro';
 import CalculatorForm from '../../components/CalculatorForm.astro';
 import ResultsList from '../../components/ResultsList.astro';
 import Footer from '../../components/Footer.astro';
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Couriers",
+      "item": "https://courierprice.com/couriers/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Professional Courier",
+      "item": "https://courierprice.com/couriers/professional-courier/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does Professional Courier charge per kg?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no single flat rate per kg. Charges are calculated based on destination zones, weight slab structure (e.g., base weight vs additional weight), package dimensions, and service mode."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are Professional Courier charges calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Charges are determined by evaluating the origin and destination pincodes, comparing actual package weight and volumetric weight (charging the higher of the two), and applying fuel surcharges, pickup fees, and GST."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are Professional Courier charges per kg in India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rates vary significantly depending on the transit route. Local deliveries within a state are cheaper (typically starting around ₹40-₹70 per kg), while long-distance national routes carry a higher per-kg rate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Professional Courier charge based on volumetric weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If a package is large but lightweight, the volumetric weight is calculated using the formula (L × W × H) / 5000 in cm. If this value exceeds the physical weight, billing is based on volumetric weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does Professional Courier same-day delivery cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Same-day delivery is handled via the \"Dawn to Dusk\" service. This service carries a premium tariff because of specialized routing, and final costs vary by city and service availability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Professional Courier Dawn to Dusk service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dawn to Dusk is a specialized same-day shipping option where parcels booked in the morning are delivered by the evening within supported metropolitan zones."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Professional Courier offer international shipping?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Professional Courier provides international parcel services to major global locations. Rates depend on the target country, package parameters, and customs clearance requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my actual Professional Courier price different from the estimate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Differences occur due to minor scale differences, package size increases from volumetric bulges, fuel rate changes, out-of-delivery area (ODA) handling, or extra COD fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I calculate Professional Courier charges using pincodes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Origin and destination pincodes indicate distance zones, which are primary variables in the carrier's standard domestic pricing tables."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Professional Courier Price Calculator",
+  "url": "https://courierprice.com/couriers/professional-courier/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "INR"
+  },
+  "description": "Estimate domestic shipping charges for The Professional Couriers across India."
+};
 ---
 
 <Layout
   title="Professional Courier Price Calculator | Estimate Shipping Charges"
   description="Estimate Professional Courier shipping charges based on weight, dimensions, pickup and delivery details. Calculate domestic courier costs with CourierPrice."
+  jsonLd={[breadcrumbSchema, faqSchema, webAppSchema]}
 >
   <!-- Global Navigation Header -->
   <Header />
@@ -24,7 +143,7 @@ import Footer from '../../components/Footer.astro';
         <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
         </svg>
-        <span class="hover:text-ink cursor-default transition-colors">Couriers</span>
+        <a href="/couriers" class="hover:text-ink transition-colors">Couriers</a>
         <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
         </svg>

@@ -5,15 +5,37 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 const {
   title = "Courier Price Comparison - Compare shipping rates across India",
   description = "Compare shipping estimates and courier delivery prices from India Post, Blue Dart, DTDC, Delhivery, Garudavega, Porter & more in under 30 seconds.",
-  canonical
+  canonical,
+  jsonLd
 } = Astro.props;
 
 const resolvedCanonical = canonical || new URL(Astro.url.pathname, 'https://courierprice.com').toString().replace(/\/$/, '') + '/';
+
+const globalSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "CourierPrice",
+    "url": "https://courierprice.com",
+    "description": "Compare courier shipping rates and prices across domestic and international carriers."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CourierPrice",
+    "url": "https://courierprice.com",
+    "logo": "https://courierprice.com/favicon.svg"
+  }
+];
+
+const customSchemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const allSchemas = [...globalSchemas, ...customSchemas];
 ---
 
 <!doctype html>
@@ -31,9 +53,7 @@ const resolvedCanonical = canonical || new URL(Astro.url.pathname, 'https://cour
 
     <!-- SEO Primary Meta Tags -->
     <title>{title}</title>
-    <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="keywords" content="courier price, dtdc courier price, garudavega courier price list, professional courier price per kg, dtdc courier price per kg, dtdc courier price calculator, courier price calculator, professional courier price list, courier price per kg, blue dart courier price, courier price list, dtdc courier price list, professional courier price calculator, delhivery courier price, professional courier price, delivery courier price, usa to india courier price, india to usa courier price, india to uk courier price, courier price comparison, shipping rates India" />
     <link rel="canonical" href={resolvedCanonical} />
     
     <!-- Open Graph / Facebook -->
@@ -53,6 +73,11 @@ const resolvedCanonical = canonical || new URL(Astro.url.pathname, 'https://cour
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://courierprice.com/og-image.png" />
+
+    <!-- Structured Data (JSON-LD) -->
+    {allSchemas.map((schema) => (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    ))}
 
     <!-- Google Fonts Preconnect and Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
