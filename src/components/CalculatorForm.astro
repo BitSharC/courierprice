@@ -314,15 +314,15 @@ if (courierId === 'delhivery-domestic-in') {
             <div class="grid grid-cols-3 gap-3">
               <div class="flex flex-col gap-1">
                 <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-l">Length (cm)</label>
-                <input type="number" name="parcelLength" min="1" placeholder="L" class="form-input w-full" />
+                <input type="number" name="parcelLength" min="0.01" step="0.01" placeholder="L" class="form-input w-full" />
               </div>
               <div class="flex flex-col gap-1">
                 <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-w">Width (cm)</label>
-                <input type="number" name="parcelWidth" min="1" placeholder="W" class="form-input w-full" />
+                <input type="number" name="parcelWidth" min="0.01" step="0.01" placeholder="W" class="form-input w-full" />
               </div>
               <div class="flex flex-col gap-1">
                 <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-h">Height (cm)</label>
-                <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
+                <input type="number" name="parcelHeight" min="0.01" step="0.01" placeholder="H" class="form-input w-full" />
               </div>
             </div>
 
@@ -815,15 +815,15 @@ if (courierId === 'delhivery-domestic-in') {
         <div class="grid grid-cols-3 gap-3">
           <div class="flex flex-col gap-1">
             <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-l">${dimL}</label>
-            <input type="number" name="parcelLength" min="1" placeholder="L" class="form-input w-full" />
+            <input type="number" name="parcelLength" min="0.01" step="0.01" placeholder="L" class="form-input w-full" />
           </div>
           <div class="flex flex-col gap-1">
             <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-w">${dimW}</label>
-            <input type="number" name="parcelWidth" min="1" placeholder="W" class="form-input w-full" />
+            <input type="number" name="parcelWidth" min="0.01" step="0.01" placeholder="W" class="form-input w-full" />
           </div>
           <div class="flex flex-col gap-1">
             <label class="caption text-mute text-xs" data-i18n="form-parcel-dim-h">${dimH}</label>
-            <input type="number" name="parcelHeight" min="1" placeholder="H" class="form-input w-full" />
+            <input type="number" name="parcelHeight" min="0.01" step="0.01" placeholder="H" class="form-input w-full" />
           </div>
         </div>
 

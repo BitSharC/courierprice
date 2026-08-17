@@ -41,6 +41,9 @@ if (courierId === 'delhivery-domestic-in') {
 
 <div id="comparison-results-section" data-courier-id={courierId} class="w-full space-y-8 scroll-mt-20 hidden">
   
+  <!-- Structured Printable PDF Quotation Sheet (Rendered only on Print / PDF export) -->
+  <div id="printable-quote-sheet" class="print-only"></div>
+
   <!-- Section Title -->
   <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-hairline pb-4 transition-colors duration-200">
     <div>
@@ -53,7 +56,7 @@ if (courierId === 'delhivery-domestic-in') {
     </div>
     
     {!courierId && (
-      <div class="flex items-center gap-2 border border-hairline rounded-full p-1 bg-canvas shadow-level-1 text-sm transition-colors duration-200">
+      <div class="sort-container flex items-center gap-2 border border-hairline rounded-full p-1 bg-canvas shadow-level-1 text-sm transition-colors duration-200">
         <button 
           type="button" 
           id="sort-price" 
@@ -481,7 +484,9 @@ if (courierId === 'delhivery-domestic-in') {
       const typeTrans = TRANSLATIONS[lang]?.[`form-tab-${currentInput.type}`] || currentInput.type;
       const parcelCountTrans = TRANSLATIONS[lang]?.[totalParcelsCount === 1 ? 'results-parcel-count' : 'results-parcels-count'] || (totalParcelsCount === 1 ? 'parcel' : 'parcels');
 
-      if (courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in') {
+      const isDedicatedSingleCourier = ['delhivery-domestic-in', 'professional-domestic-in', 'dtdc-domestic-in', 'indiapost-domestic-in', 'bluedart-domestic-in'].includes(courierId || '');
+
+      if (isDedicatedSingleCourier) {
         let totalVolumetricWeight = 0;
         let hasVolumetric = false;
         currentInput.parcels.forEach(p => {
@@ -514,17 +519,30 @@ if (courierId === 'delhivery-domestic-in') {
                 <span class="font-medium text-ink">Chargeable Weight:</span>
                 <span class="font-semibold text-primary">${totalChargeableWeight.toFixed(2)} kg</span>
               </div>
-              <button
-                type="button"
-                id="share-quote-btn"
-                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95 ml-auto"
-                title="Copy shareable link for this quote"
-              >
-                <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                </svg>
-                <span>Share Quote</span>
-              </button>
+              <div class="flex items-center gap-2 ml-auto">
+                <button
+                  type="button"
+                  id="print-quote-btn"
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95"
+                  title="Print or Save Quote as PDF"
+                >
+                  <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                  </svg>
+                  <span>Print / PDF</span>
+                </button>
+                <button
+                  type="button"
+                  id="share-quote-btn"
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95"
+                  title="Copy shareable link for this quote"
+                >
+                  <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                  </svg>
+                  <span>Share Quote</span>
+                </button>
+              </div>
             </div>
           </div>
         `;
@@ -546,17 +564,30 @@ if (courierId === 'delhivery-domestic-in') {
               <span class="font-medium text-ink">${consLabel}:</span>
               <span class="text-body">${totalParcelsCount} ${parcelCountTrans} | ${weightLabel}: ${totalActualWeight.toFixed(2)} kg</span>
             </div>
-            <button
-              type="button"
-              id="share-quote-btn"
-              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95 ml-auto"
-              title="Copy shareable link for this quote"
-            >
-              <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-              </svg>
-              <span>Share Quote</span>
-            </button>
+            <div class="flex items-center gap-2 ml-auto">
+              <button
+                type="button"
+                id="print-quote-btn"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95"
+                title="Print or Save Quote as PDF"
+              >
+                <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                <span>Print / PDF</span>
+              </button>
+              <button
+                type="button"
+                id="share-quote-btn"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-hairline bg-canvas-soft-2 hover:bg-canvas text-body hover:text-ink text-xs font-semibold shadow-level-1 transition-all cursor-pointer active:scale-95"
+                title="Copy shareable link for this quote"
+              >
+                <svg class="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                <span>Share Quote</span>
+              </button>
+            </div>
           </div>
         `;
       }
@@ -791,7 +822,7 @@ if (courierId === 'delhivery-domestic-in') {
       `;
     }).join('');
 
-    // Rebind togglers
+    // Details dropdown togglers
     const detailsBtns = estimatesList.querySelectorAll('.details-btn');
     detailsBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -812,45 +843,185 @@ if (courierId === 'delhivery-domestic-in') {
       });
     });
 
-    // Setup Share Quote Button
-    setupShareQuoteButton();
+    // Populate the clean structured printable quote sheet
+    const printSheet = document.getElementById('printable-quote-sheet');
+    if (printSheet) {
+      printSheet.innerHTML = generatePrintQuoteSheetHTML();
+    }
   }
 
-  function setupShareQuoteButton() {
-    const shareBtns = document.querySelectorAll('#share-quote-btn');
-    shareBtns.forEach(shareBtn => {
-      shareBtn.addEventListener('click', async () => {
-        if (!currentInput) return;
-        try {
-          const p = new URLSearchParams();
-          p.set('type', currentInput.type);
-          p.set('from', currentInput.pickupCountry);
-          if (currentInput.pickupState) p.set('fromState', currentInput.pickupState);
-          if (currentInput.deliveryCountry) p.set('to', currentInput.deliveryCountry);
-          if (currentInput.deliveryState) p.set('toState', currentInput.deliveryState);
-          if (currentInput.parcels && currentInput.parcels[0]) {
-            p.set('weight', currentInput.parcels[0].weight.toString());
-            if (currentInput.parcels[0].length) p.set('length', currentInput.parcels[0].length.toString());
-            if (currentInput.parcels[0].width) p.set('width', currentInput.parcels[0].width.toString());
-            if (currentInput.parcels[0].height) p.set('height', currentInput.parcels[0].height.toString());
-            if (currentInput.parcels[0].category) p.set('category', currentInput.parcels[0].category);
-          }
+  function generatePrintQuoteSheetHTML(): string {
+    if (!currentInput || currentEstimates.length === 0) return '';
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    const refCode = `CP-${now.getFullYear()}${String(now.getMonth()+1).padStart(2, '0')}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-          const shareUrl = `${window.location.origin}${window.location.pathname}?${p.toString()}#calculator`;
-          await navigator.clipboard.writeText(shareUrl);
-
-          // Show floating toast
-          const toast = document.getElementById('share-toast');
-          if (toast) {
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-              toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-            }, 2600);
-          }
-        } catch (err) {
-          console.warn("Clipboard copy failed:", err);
-        }
-      });
+    let totalVolWeight = 0;
+    currentInput.parcels.forEach(p => {
+      if (p.length && p.width && p.height) {
+        totalVolWeight += (p.length * p.width * p.height) / 5000;
+      }
     });
+    const totalChargeWeight = Math.max(0.5, Math.max(totalActualWeight, totalVolWeight));
+
+    const rowsHTML = currentEstimates.map((est, idx) => {
+      const isCheapest = est.recommendationBadge === 'cheapest';
+      const isFastest = est.recommendationBadge === 'fastest';
+      const isValue = est.recommendationBadge === 'value';
+
+      let badgeHTML = '';
+      if (isCheapest) {
+        badgeHTML = '<span style="display:inline-block; font-size:7.5pt; font-weight:700; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:1px 5px; border-radius:4px; margin-left:4px;">CHEAPEST</span>';
+      } else if (isFastest) {
+        badgeHTML = '<span style="display:inline-block; font-size:7.5pt; font-weight:700; color:#2563eb; background:#eff6ff; border:1px solid #bfdbfe; padding:1px 5px; border-radius:4px; margin-left:4px;">FASTEST</span>';
+      } else if (isValue) {
+        badgeHTML = '<span style="display:inline-block; font-size:7.5pt; font-weight:700; color:#111827; background:#f3f4f6; border:1px solid #d1d5db; padding:1px 5px; border-radius:4px; margin-left:4px;">BEST VALUE</span>';
+      }
+
+      const featureText = [
+        est.trackingAvailable ? 'Tracking ✓' : 'No Tracking',
+        est.insuranceAvailable ? 'Insured' : 'Std Liability',
+        est.pickupAvailable ? 'Doorstep Pickup' : 'Drop-off'
+      ].join(' • ');
+
+      const modeText = est.estimatedDays <= 3 ? 'Air Express' : 'Surface';
+
+      return `
+        <tr style="border-bottom: 1px solid #e5e7eb; ${idx % 2 === 1 ? 'background-color: #fafafa;' : ''}">
+          <td style="padding: 7px 10px; font-weight: 600; color: #111827; font-size: 9pt;">
+            ${est.name} ${badgeHTML}
+          </td>
+          <td style="padding: 7px 10px; color: #4b5563; font-size: 8.5pt;">
+            ${modeText}
+          </td>
+          <td style="padding: 7px 10px; color: #111827; font-size: 8.5pt; font-weight: 500;">
+            ${est.estimatedDays} Day${est.estimatedDays === 1 ? '' : 's'} (Est.)
+          </td>
+          <td style="padding: 7px 10px; color: #6b7280; font-size: 8pt;">
+            ${featureText}
+          </td>
+          <td style="padding: 7px 10px; text-align: right; font-weight: 700; font-size: 10.5pt; color: #111827;">
+            ${est.currencySymbol || '₹'}${est.estimatedPrice}
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    return `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #111827; line-height: 1.35; padding: 0; margin: 0;">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #111827; padding-bottom: 8px; margin-bottom: 12px;">
+          <div>
+            <h1 style="font-size: 17pt; font-weight: 800; margin: 0; color: #111827; letter-spacing: -0.5px;">CourierPrice<span style="color: #6b7280; font-weight: 400;">.com</span></h1>
+            <p style="font-size: 8pt; color: #4b5563; margin: 2px 0 0 0;">Official Shipping Tariff Comparison & Quotation Estimate</p>
+          </div>
+          <div style="text-align: right; font-size: 8pt; color: #374151; font-family: monospace;">
+            <div><strong>Reference:</strong> ${refCode}</div>
+            <div><strong>Generated:</strong> ${dateStr}, ${timeStr}</div>
+          </div>
+        </div>
+
+        <!-- Shipment Specification Box -->
+        <div style="border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; padding: 8px 12px; margin-bottom: 12px; font-size: 8.5pt;">
+          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr 1fr 1fr; gap: 8px;">
+            <div>
+              <div style="color: #6b7280; font-size: 7pt; text-transform: uppercase; font-weight: 600;">Route</div>
+              <div style="font-weight: 600; color: #111827; margin-top: 1px;">${routeStr}</div>
+            </div>
+            <div>
+              <div style="color: #6b7280; font-size: 7pt; text-transform: uppercase; font-weight: 600;">Shipment Type</div>
+              <div style="font-weight: 600; color: #111827; margin-top: 1px; text-transform: capitalize;">${currentInput.type}</div>
+            </div>
+            <div>
+              <div style="color: #6b7280; font-size: 7pt; text-transform: uppercase; font-weight: 600;">Consignment</div>
+              <div style="color: #111827; margin-top: 1px;">${totalParcelsCount} Item(s) | Gross: ${totalActualWeight.toFixed(2)} kg</div>
+            </div>
+            <div>
+              <div style="color: #6b7280; font-size: 7pt; text-transform: uppercase; font-weight: 600;">Chargeable Weight</div>
+              <div style="font-weight: 700; color: #111827; margin-top: 1px;">${totalChargeWeight.toFixed(2)} kg ${totalVolWeight > totalActualWeight ? '(Volumetric)' : ''}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div style="margin-bottom: 12px;">
+          <table style="width: 100%; border-collapse: collapse; border: 1px solid #d1d5db; font-size: 8.5pt;">
+            <thead>
+              <tr style="background: #f3f4f6; border-bottom: 2px solid #9ca3af; text-align: left; font-size: 7.5pt; text-transform: uppercase; color: #374151;">
+                <th style="padding: 6px 10px;">Carrier / Service</th>
+                <th style="padding: 6px 10px;">Mode</th>
+                <th style="padding: 6px 10px;">Est. Transit Time</th>
+                <th style="padding: 6px 10px;">Included Services</th>
+                <th style="padding: 6px 10px; text-align: right;">Total Estimated Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHTML}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer Terms & Validity -->
+        <div style="border-top: 1px solid #e5e7eb; padding-top: 6px; margin-top: 10px; font-size: 7pt; color: #6b7280; line-height: 1.35;">
+          <p style="margin: 0 0 2px 0;"><strong>Important Notice:</strong> Shipping costs are estimated based on standard tariff slabs, published fuel surcharges, and 18% statutory GST. Actual carrier booking quotations may vary depending on doorstep pickup surcharges, remote delivery area (ODA) fees, or volumetric package density.</p>
+          <p style="margin: 0;">Generated automatically via <strong>CourierPrice.com</strong> — 100% Free & Independent Shipping Rates Comparison Engine.</p>
+        </div>
+      </div>
+    `;
   }
+
+  // Global Event Delegation for Print and Share Actions
+  document.addEventListener('click', async (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    // Handle Print / PDF Button
+    const printBtn = target.closest('#print-quote-btn');
+    if (printBtn) {
+      e.preventDefault();
+      const printSheet = document.getElementById('printable-quote-sheet');
+      if (printSheet) {
+        printSheet.innerHTML = generatePrintQuoteSheetHTML();
+      }
+      window.print();
+      return;
+    }
+
+    // Handle Share Quote Button
+    const shareBtn = target.closest('#share-quote-btn');
+    if (shareBtn) {
+      e.preventDefault();
+      if (!currentInput) return;
+      try {
+        const p = new URLSearchParams();
+        p.set('type', currentInput.type);
+        p.set('from', currentInput.pickupCountry);
+        if (currentInput.pickupState) p.set('fromState', currentInput.pickupState);
+        if (currentInput.deliveryCountry) p.set('to', currentInput.deliveryCountry);
+        if (currentInput.deliveryState) p.set('toState', currentInput.deliveryState);
+        if (currentInput.parcels && currentInput.parcels[0]) {
+          p.set('weight', currentInput.parcels[0].weight.toString());
+          if (currentInput.parcels[0].length) p.set('length', currentInput.parcels[0].length.toString());
+          if (currentInput.parcels[0].width) p.set('width', currentInput.parcels[0].width.toString());
+          if (currentInput.parcels[0].height) p.set('height', currentInput.parcels[0].height.toString());
+          if (currentInput.parcels[0].category) p.set('category', currentInput.parcels[0].category);
+        }
+
+        const shareUrl = `${window.location.origin}${window.location.pathname}?${p.toString()}#calculator`;
+        await navigator.clipboard.writeText(shareUrl);
+
+        // Show floating toast
+        const toast = document.getElementById('share-toast');
+        if (toast) {
+          toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+          setTimeout(() => {
+            toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+          }, 2600);
+        }
+      } catch (err) {
+        console.warn("Clipboard copy failed:", err);
+      }
+    }
+  });
 </script>

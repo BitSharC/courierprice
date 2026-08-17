@@ -1,6 +1,7 @@
 {
-  "name": "Courier Price",
-  "short_name": "Courier",
+  "name": "CourierPrice - Parcel Shipping Calculator",
+  "short_name": "CourierPrice",
+  "start_url": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +16,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#171717",
+  "background_color": "#fafafa",
   "display": "standalone"
 }

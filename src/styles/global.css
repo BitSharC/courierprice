@@ -384,3 +384,89 @@ option {
   mix-blend-mode: plus-lighter;
   opacity: 0.45;
 }
+
+/* Print-only elements are hidden on screen */
+.print-only {
+  display: none !important;
+}
+
+/* Print / Save PDF Quote Stylesheet */
+@media print {
+  /* Reset document flow and heights */
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    overflow: visible !important;
+  }
+
+  /* Completely remove header, footer, navigation, forms, and background elements */
+  header,
+  footer,
+  nav,
+  form,
+  #calculator-anchor,
+  #calculator-form-container,
+  #theme-toggle,
+  #mobile-menu-btn,
+  #lang-dropdown-wrapper,
+  #share-toast,
+  #share-quote-btn,
+  #print-quote-btn,
+  #swap-route-btn,
+  #smart-recommendation-card,
+  #shipment-summary-banner,
+  #estimates-list,
+  .sort-container,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Hide all main siblings */
+  main {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  main > *:not(.max-w-4xl) {
+    display: none !important;
+  }
+
+  .max-w-4xl {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #comparison-results-section {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide all screen children of comparison results except the structured print sheet */
+  #comparison-results-section > *:not(#printable-quote-sheet) {
+    display: none !important;
+  }
+
+  /* Show strictly the structured print quote sheet */
+  #printable-quote-sheet {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm;
+  }
+}
