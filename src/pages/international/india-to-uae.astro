@@ -1,0 +1,236 @@
+---
+// src/pages/international/india-to-uae.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "International Shipping",
+      "item": "https://courierprice.com/international/india-to-uae/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "India to UAE",
+      "item": "https://courierprice.com/international/india-to-uae/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a parcel from India to UAE (Dubai)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shipping a 1 kg parcel from India to Dubai or Abu Dhabi typically costs ₹900 to ₹2,400. Aramex and India Post EMS offer the most economical rates, while DHL Express and FedEx provide rapid 1–3 day transit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the customs duty limit for UAE imports from India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Consignments with a declared value under 300 AED (approx ₹6,800 INR) are exempt from customs duty. Parcels valued above 300 AED attract 5% UAE customs duty plus 5% UAE VAT."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items are prohibited when sending courier to UAE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Narcotics, unapproved prescription medicines without MoHAP authorization, poppy seeds, e-cigarettes/vapes, alcohol, and counterfeit goods are strictly prohibited by Dubai Customs."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "India to UAE (Dubai) Courier Price Calculator & Shipping Guide",
+  "url": "https://courierprice.com/international/india-to-uae/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate international courier charges from India to Dubai and UAE. Compare Aramex, DHL, FedEx, and India Post EMS rates and customs duties."
+};
+---
+
+<Layout 
+  title="Courier Charges from India to UAE (Dubai) - Rates (2026)"
+  description="Compare courier charges from India to Dubai & UAE. Compare Aramex, DHL, FedEx & India Post EMS rates, UAE customs rules (300 AED limit), and delivery times."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-mute">International</span>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">India to UAE</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Middle East Shipping Corridor</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Courier Charges from India to UAE / Dubai (2026).
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Compare parcel shipping rates from India to Dubai, Abu Dhabi, Sharjah, and across the United Arab Emirates. Compare Aramex, DHL, FedEx, and India Post EMS tariffs with UAE customs clearance regulations.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm />
+      <ResultsList />
+    </section>
+
+    <!-- Educational Guide -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Section 1: Rate Matrix -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">Indicative Shipping Rates: India to UAE.</h2>
+        <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                <th class="py-3 px-4">Weight Slab</th>
+                <th class="py-3 px-4">Aramex Express</th>
+                <th class="py-3 px-4">India Post EMS</th>
+                <th class="py-3 px-4">DHL Express</th>
+                <th class="py-3 px-4">Estimated Transit</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline text-body font-mono">
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">0.5 kg (Documents)</td>
+                <td class="py-2.5 px-4">₹750 – ₹1,100</td>
+                <td class="py-2.5 px-4">₹850 – ₹1,200</td>
+                <td class="py-2.5 px-4">₹1,800 – ₹2,400</td>
+                <td class="py-2.5 px-4 font-sans text-xs">1 – 5 Days</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg</td>
+                <td class="py-2.5 px-4">₹1,100 – ₹1,600</td>
+                <td class="py-2.5 px-4">₹1,200 – ₹1,700</td>
+                <td class="py-2.5 px-4">₹2,400 – ₹3,100</td>
+                <td class="py-2.5 px-4 font-sans text-xs">1 – 5 Days</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg</td>
+                <td class="py-2.5 px-4">₹1,700 – ₹2,400</td>
+                <td class="py-2.5 px-4">₹1,900 – ₹2,600</td>
+                <td class="py-2.5 px-4">₹3,400 – ₹4,400</td>
+                <td class="py-2.5 px-4 font-sans text-xs">1 – 4 Days</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg</td>
+                <td class="py-2.5 px-4">₹3,400 – ₹4,600</td>
+                <td class="py-2.5 px-4">₹3,800 – ₹5,100</td>
+                <td class="py-2.5 px-4">₹6,200 – ₹7,900</td>
+                <td class="py-2.5 px-4 font-sans text-xs">1 – 4 Days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 2: UAE Customs & Thresholds -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Dubai Customs Regulations & 300 AED Threshold.</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">1. 300 AED Duty Exemption</h3>
+            <p class="body-sm text-body">Shipments under 300 AED (approx ₹6,800 INR) enter the UAE duty-free. Parcels above this threshold attract 5% customs duty + 5% VAT.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">2. Fast Flight Connections</h3>
+            <p class="body-sm text-body">Direct daily commercial cargo flights between Mumbai/Delhi and Dubai allow courier transit times as fast as 24–48 hours.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">3. Strict Medicine Rules</h3>
+            <p class="body-sm text-body">Personal medicines require valid prescription and online import approval from the UAE Ministry of Health (MoHAP).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // Automatically pre-fill the form with India -> UAE international route
+  window.addEventListener('DOMContentLoaded', () => {
+    const tabIntl = document.getElementById('tab-international');
+    if (tabIntl) tabIntl.click();
+
+    setTimeout(() => {
+      const pickupCountry = document.getElementById('pickupCountry') as HTMLSelectElement | null;
+      const deliveryCountry = document.getElementById('deliveryCountry') as HTMLSelectElement | null;
+      
+      if (pickupCountry) {
+        pickupCountry.value = 'IN';
+        pickupCountry.dispatchEvent(new Event('change'));
+      }
+      if (deliveryCountry) {
+        deliveryCountry.value = 'AE';
+        deliveryCountry.dispatchEvent(new Event('change'));
+      }
+    }, 100);
+  });
+</script>

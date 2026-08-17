@@ -1,0 +1,242 @@
+---
+// src/pages/compare/blue-dart-vs-dtdc.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://courierprice.com/compare/blue-dart-vs-dtdc/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Blue Dart vs DTDC",
+      "item": "https://courierprice.com/compare/blue-dart-vs-dtdc/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which is faster: Blue Dart or DTDC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blue Dart is generally faster for long-distance metro-to-metro corridors due to its dedicated Boeing freighter aircraft fleet that enables reliable next-morning delivery (Apex Priority). DTDC Plus also offers competitive air express transit across major cities."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is DTDC cheaper than Blue Dart?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, DTDC Lite surface rates and retail parcel tariffs are generally 30% to 50% lower than Blue Dart, making DTDC a more cost-effective choice for everyday non-urgent packages and personal consignments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which is better for high-value cargo and documents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blue Dart is widely recognized as the industry leader for high-value banking instruments, passports, electronics, and mission-critical corporate documentation due to its specialized security protocols."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Blue Dart vs DTDC Courier Comparison & Price Calculator",
+  "url": "https://courierprice.com/compare/blue-dart-vs-dtdc/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Compare shipping tariffs, air express speeds, and franchise network coverage between Blue Dart and DTDC."
+};
+---
+
+<Layout 
+  title="Blue Dart vs DTDC: Price & Delivery Comparison (2026)"
+  description="Compare Blue Dart vs DTDC courier rates, delivery speeds, service reliability, and pin code reach. Calculate prices side by side."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <a href="/couriers/" class="hover:text-ink transition-colors">Couriers</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">Blue Dart vs DTDC</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+          <span>Express vs Value Comparison</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Blue Dart vs DTDC: Premium Air vs Retail Reach.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Compare Blue Dart's aviation-grade air express network with DTDC's massive domestic franchise coverage. Evaluate prices, transit times, and service reliability.
+        </p>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Summary -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Blue Dart Overview -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div>
+              <span class="text-xs font-mono text-mute uppercase">Premium Aviation Logistics</span>
+              <h2 class="display-sm text-xl text-ink font-semibold mt-0.5">Blue Dart Express</h2>
+            </div>
+            <span class="text-xs font-mono font-medium text-ink bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-1 rounded-full">
+              ★ 9.4 Reliability
+            </span>
+          </div>
+          <p class="body-sm text-body leading-relaxed">
+            Dedicated Boeing freighter aircraft fleet with guaranteed overnight delivery to major metros and strict security standards for valuable goods.
+          </p>
+          <div class="space-y-2 text-xs text-body border-t border-hairline pt-3 font-mono">
+            <div class="flex justify-between"><span>Speed:</span><strong class="text-ink">Next Day – 3 Days</strong></div>
+            <div class="flex justify-between"><span>Aviation:</span><strong class="text-ink">Dedicated Boeing Fleet</strong></div>
+            <div class="flex justify-between"><span>Best For:</span><strong class="text-ink font-sans">Passports, Electronics & Urgent Air</strong></div>
+          </div>
+        </div>
+
+        <!-- DTDC Overview -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div>
+              <span class="text-xs font-mono text-mute uppercase">Affordable Multi-Tier Network</span>
+              <h2 class="display-sm text-xl text-ink font-semibold mt-0.5">DTDC Express</h2>
+            </div>
+            <span class="text-xs font-mono font-medium text-ink bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-1 rounded-full">
+              ★ 8.9 Reliability
+            </span>
+          </div>
+          <p class="body-sm text-body leading-relaxed">
+            Extensive network of 12,000+ franchise counters across India with economical ground cargo options and flexible pricing for budget-conscious shippers.
+          </p>
+          <div class="space-y-2 text-xs text-body border-t border-hairline pt-3 font-mono">
+            <div class="flex justify-between"><span>Speed:</span><strong class="text-ink">2 – 5 Days</strong></div>
+            <div class="flex justify-between"><span>Counters:</span><strong class="text-ink">12,000+ Franchise Hubs</strong></div>
+            <div class="flex justify-between"><span>Best For:</span><strong class="text-ink font-sans">Budget Parcels, Personal & Tier-3 Cities</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm />
+      <ResultsList />
+    </section>
+
+    <!-- Detailed Comparisons -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Slabs Table -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">Rate Comparison: Blue Dart vs DTDC.</h2>
+        <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                <th class="py-3 px-4">Weight Slab</th>
+                <th class="py-3 px-4">Blue Dart Apex (Air)</th>
+                <th class="py-3 px-4">Blue Dart Surface</th>
+                <th class="py-3 px-4">DTDC Plus (Air)</th>
+                <th class="py-3 px-4">DTDC Lite (Surface)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline text-body font-mono">
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">0.5 kg (Metro)</td>
+                <td class="py-2.5 px-4">₹110 – ₹160</td>
+                <td class="py-2.5 px-4">₹70 – ₹100</td>
+                <td class="py-2.5 px-4">₹70 – ₹110</td>
+                <td class="py-2.5 px-4">₹40 – ₹60</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg (National)</td>
+                <td class="py-2.5 px-4">₹220 – ₹330</td>
+                <td class="py-2.5 px-4">₹140 – ₹200</td>
+                <td class="py-2.5 px-4">₹140 – ₹210</td>
+                <td class="py-2.5 px-4">₹90 – ₹140</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg (National)</td>
+                <td class="py-2.5 px-4">₹370 – ₹550</td>
+                <td class="py-2.5 px-4">₹240 – ₹340</td>
+                <td class="py-2.5 px-4">₹230 – ₹330</td>
+                <td class="py-2.5 px-4">₹150 – ₹220</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg (Heavy)</td>
+                <td class="py-2.5 px-4">₹790 – ₹1,180</td>
+                <td class="py-2.5 px-4">₹480 – ₹720</td>
+                <td class="py-2.5 px-4">₹520 – ₹750</td>
+                <td class="py-2.5 px-4">₹320 – ₹470</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

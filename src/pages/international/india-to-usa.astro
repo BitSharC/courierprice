@@ -1,0 +1,259 @@
+---
+// src/pages/international/india-to-usa.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "International Shipping",
+      "item": "https://courierprice.com/international/india-to-usa/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "India to USA",
+      "item": "https://courierprice.com/international/india-to-usa/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the cheapest courier from India to USA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For small, non-urgent packages under 2 kg, India Post International Speed Post (EMS) is generally the most economical option (₹1,200–₹2,400). For faster commercial shipments and heavier parcels, DHL Express, FedEx International Economy, and specialized aggregators provide competitive tiered pricing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a 1 kg parcel from India to USA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sending a 1 kg package from India to the USA typically costs between ₹1,800 and ₹3,800 depending on the carrier and service speed (Economy vs Express Air)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the US customs duty exemption limit (De Minimis)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under Section 321 of US Customs law, goods imported into the United States valued under $800 USD per person per day are generally free of formal customs duties and import taxes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What documents are required to send a parcel from India to USA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You will need a KYC document of the sender (Aadhaar Card, Passport, or Voter ID), a detailed Commercial Invoice / Packing List with itemized values, and specialized declarations (e.g. FDA Prior Notice for food/spices)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items are prohibited when shipping to the USA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Homemade perishable foods without commercial packaging, unapproved pharmaceuticals, counterfeit goods, flammables/aerosols, and currency are strictly prohibited."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "India to USA Courier Price Calculator & Shipping Guide",
+  "url": "https://courierprice.com/international/india-to-usa/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate international courier charges from India to the USA. Compare DHL, FedEx, UPS, and India Post EMS rates and customs rules."
+};
+---
+
+<Layout 
+  title="Courier Charges from India to USA - Rates Per KG (2026)"
+  description="Compare courier charges from India to USA. Compare DHL, FedEx, UPS & India Post EMS rates, US customs rules ($800 de minimis), and delivery times."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-mute">International</span>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">India to USA</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
+          <span>International Shipping Corridor</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Courier Charges from India to USA (2026).
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Compare parcel shipping rates from India to the United States. Estimate costs across DHL Express, FedEx, UPS Worldwide, and India Post EMS with US customs regulations and duty thresholds.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm />
+      <ResultsList />
+    </section>
+
+    <!-- Educational Guide -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Section 1: Carrier Rate Matrix -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">Indicative Shipping Rates: India to USA.</h2>
+        <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                <th class="py-3 px-4">Weight Slab</th>
+                <th class="py-3 px-4">India Post EMS</th>
+                <th class="py-3 px-4">FedEx Economy</th>
+                <th class="py-3 px-4">DHL Express</th>
+                <th class="py-3 px-4">Estimated Transit</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline text-body font-mono">
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">0.5 kg (Doc/Small)</td>
+                <td class="py-2.5 px-4">₹1,100 – ₹1,500</td>
+                <td class="py-2.5 px-4">₹2,100 – ₹2,800</td>
+                <td class="py-2.5 px-4">₹2,800 – ₹3,600</td>
+                <td class="py-2.5 px-4 font-sans text-xs">2 – 8 Days</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg</td>
+                <td class="py-2.5 px-4">₹1,600 – ₹2,200</td>
+                <td class="py-2.5 px-4">₹2,800 – ₹3,700</td>
+                <td class="py-2.5 px-4">₹3,700 – ₹4,800</td>
+                <td class="py-2.5 px-4 font-sans text-xs">2 – 8 Days</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg</td>
+                <td class="py-2.5 px-4">₹2,600 – ₹3,400</td>
+                <td class="py-2.5 px-4">₹4,200 – ₹5,400</td>
+                <td class="py-2.5 px-4">₹5,400 – ₹6,900</td>
+                <td class="py-2.5 px-4 font-sans text-xs">2 – 7 Days</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg</td>
+                <td class="py-2.5 px-4">₹5,200 – ₹6,800</td>
+                <td class="py-2.5 px-4">₹7,800 – ₹9,900</td>
+                <td class="py-2.5 px-4">₹9,900 – ₹12,500</td>
+                <td class="py-2.5 px-4 font-sans text-xs">2 – 6 Days</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">10.0 kg (Box)</td>
+                <td class="py-2.5 px-4">₹9,500 – ₹12,500</td>
+                <td class="py-2.5 px-4">₹13,500 – ₹17,500</td>
+                <td class="py-2.5 px-4">₹17,000 – ₹21,500</td>
+                <td class="py-2.5 px-4 font-sans text-xs">2 – 5 Days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 2: US Customs & Documentation -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">US Customs & Duty Thresholds ($800 De Minimis).</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">1. $800 Duty-Free Limit</h3>
+            <p class="body-sm text-body">Shipments valued under $800 USD imported per person per day enter the US duty-free under Section 321.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">2. Sender KYC</h3>
+            <p class="body-sm text-body">Indian customs requires mandatory government identity proof (Aadhaar or Passport) before export dispatch.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">3. Food & Spices (FDA)</h3>
+            <p class="body-sm text-body">Packaged food, tea, and spices require an FDA Prior Notice declaration generated on the US FDA website.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // Automatically pre-fill the form with India -> US international route
+  window.addEventListener('DOMContentLoaded', () => {
+    const tabIntl = document.getElementById('tab-international');
+    if (tabIntl) tabIntl.click();
+
+    setTimeout(() => {
+      const pickupCountry = document.getElementById('pickupCountry') as HTMLSelectElement | null;
+      const deliveryCountry = document.getElementById('deliveryCountry') as HTMLSelectElement | null;
+      
+      if (pickupCountry) {
+        pickupCountry.value = 'IN';
+        pickupCountry.dispatchEvent(new Event('change'));
+      }
+      if (deliveryCountry) {
+        deliveryCountry.value = 'US';
+        deliveryCountry.dispatchEvent(new Event('change'));
+      }
+    }, 100);
+  });
+</script>

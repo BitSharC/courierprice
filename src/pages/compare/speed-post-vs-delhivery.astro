@@ -1,0 +1,237 @@
+---
+// src/pages/compare/speed-post-vs-delhivery.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://courierprice.com/compare/speed-post-vs-delhivery/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Speed Post vs Delhivery",
+      "item": "https://courierprice.com/compare/speed-post-vs-delhivery/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Speed Post cheaper than Delhivery?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For lightweight packages (under 500g) and long-distance or remote destinations, Speed Post is generally cheaper due to statutory government tariffs (₹35–₹90). For heavier commercial packages (above 5 kg), Delhivery Surface often offers better bulk freight rates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which has better tracking: Speed Post or Delhivery?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delhivery provides more frequent automated tracking updates, driver GPS tracking on delivery day, and instant SMS/WhatsApp alerts. Speed Post offers reliable milestone tracking across post office sorting hubs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Delhivery deliver to rural areas like Speed Post?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delhivery covers over 18,500+ pin codes focused on urban and semi-urban areas. India Post covers 100% of Indian territory across 155,000+ post offices, including every rural village and border area."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "India Post Speed Post vs Delhivery Comparison & Calculator",
+  "url": "https://courierprice.com/compare/speed-post-vs-delhivery/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Compare postal tariffs, delivery times, rural reach, and reliability between India Post Speed Post and Delhivery."
+};
+---
+
+<Layout 
+  title="Speed Post vs Delhivery: Rates & Service Comparison (2026)"
+  description="Compare India Post Speed Post vs Delhivery shipping rates, tracking, delivery speed, and pin code reach. Calculate prices side by side."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <a href="/couriers/" class="hover:text-ink transition-colors">Couriers</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">Speed Post vs Delhivery</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Postal vs Private Courier</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Speed Post vs Delhivery: Rate & Network Comparison.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Compare government postal tariffs with tech-enabled private courier logistics. Evaluate delivery speed, tracking transparency, rural coverage, and pricing per kg.
+        </p>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Summary -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Speed Post Overview -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div>
+              <span class="text-xs font-mono text-mute uppercase">National Postal Backbone</span>
+              <h2 class="display-sm text-xl text-ink font-semibold mt-0.5">India Post Speed Post</h2>
+            </div>
+            <span class="text-xs font-mono font-medium text-ink bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 rounded-full">
+              ★ 9.0 Reliability
+            </span>
+          </div>
+          <p class="body-sm text-body leading-relaxed">
+            Unbeatable 100% pin code reach across India with legally recognized proof of delivery and low regulated postal rates.
+          </p>
+          <div class="space-y-2 text-xs text-body border-t border-hairline pt-3 font-mono">
+            <div class="flex justify-between"><span>Coverage:</span><strong class="text-ink">100% (155,000+ POs)</strong></div>
+            <div class="flex justify-between"><span>Max Weight:</span><strong class="text-ink">35 kg</strong></div>
+            <div class="flex justify-between"><span>Best For:</span><strong class="text-ink font-sans">Legal Docs, Rural & Remote Areas</strong></div>
+          </div>
+        </div>
+
+        <!-- Delhivery Overview -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div>
+              <span class="text-xs font-mono text-mute uppercase">Private Express & Surface</span>
+              <h2 class="display-sm text-xl text-ink font-semibold mt-0.5">Delhivery</h2>
+            </div>
+            <span class="text-xs font-mono font-medium text-ink bg-green-500/10 text-green-600 dark:text-green-400 px-2.5 py-1 rounded-full">
+              ★ 9.2 Reliability
+            </span>
+          </div>
+          <p class="body-sm text-body leading-relaxed">
+            Automated courier network with fast doorstep collection, advanced tracking APIs, and streamlined commercial ecommerce logistics.
+          </p>
+          <div class="space-y-2 text-xs text-body border-t border-hairline pt-3 font-mono">
+            <div class="flex justify-between"><span>Coverage:</span><strong class="text-ink">18,500+ Pincodes</strong></div>
+            <div class="flex justify-between"><span>Pickup:</span><strong class="text-ink">Doorstep Collection</strong></div>
+            <div class="flex justify-between"><span>Best For:</span><strong class="text-ink font-sans">Ecommerce, D2C & Metro Express</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm />
+      <ResultsList />
+    </section>
+
+    <!-- Educational Guide & FAQs -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Rate Comparison Table -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">Speed Post vs Delhivery Pricing Slabs.</h2>
+        <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                <th class="py-3 px-4">Consignment Type</th>
+                <th class="py-3 px-4">Speed Post Tariff</th>
+                <th class="py-3 px-4">Delhivery Rate</th>
+                <th class="py-3 px-4">Advantage</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline text-body font-mono">
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">Document (under 50g)</td>
+                <td class="py-2.5 px-4">₹15 – ₹35</td>
+                <td class="py-2.5 px-4">₹40 – ₹80</td>
+                <td class="py-2.5 px-4 font-sans text-emerald-600 font-semibold">Speed Post (Cheaper)</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">0.5 kg Metro</td>
+                <td class="py-2.5 px-4">₹30 – ₹50</td>
+                <td class="py-2.5 px-4">₹50 – ₹70</td>
+                <td class="py-2.5 px-4 font-sans text-emerald-600 font-semibold">Speed Post (Cheaper)</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg National</td>
+                <td class="py-2.5 px-4">₹80 – ₹130</td>
+                <td class="py-2.5 px-4">₹110 – ₹160</td>
+                <td class="py-2.5 px-4 font-sans text-ink font-semibold">Comparable</td>
+              </tr>
+              <tr class="hover:bg-canvas-soft-2 transition-colors">
+                <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg Bulk Parcel</td>
+                <td class="py-2.5 px-4">₹350 – ₹500</td>
+                <td class="py-2.5 px-4">₹320 – ₹450</td>
+                <td class="py-2.5 px-4 font-sans text-blue-600 font-semibold">Delhivery (Cheaper)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

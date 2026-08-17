@@ -1,0 +1,289 @@
+---
+// src/pages/compare/delhivery-vs-dtdc.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare",
+      "item": "https://courierprice.com/compare/delhivery-vs-dtdc/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Delhivery vs DTDC",
+      "item": "https://courierprice.com/compare/delhivery-vs-dtdc/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which is cheaper: Delhivery or DTDC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For small retail parcels (under 1 kg), DTDC Lite and Delhivery Surface have very comparable base rates around ₹40–₹70 for local shipments. However, for bulk ecommerce shipments and heavier packages (above 5 kg), Delhivery Surface is typically more economical, while DTDC offers broader physical counter availability in small towns."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which delivers faster: Delhivery or DTDC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For metro-to-metro corridors, both Delhivery Express and DTDC Plus offer 1–2 business day delivery. For remote tier-3 and tier-4 locations, DTDC's extensive local franchise network often provides faster local last-mile clearance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which carrier is better for eCommerce sellers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delhivery is generally preferred by online merchants and D2C brands due to its automated API integration, rapid NDR (Non-Delivery Report) management, automated COD reconciliation, and tech-first tracking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the volumetric weight formula used by Delhivery and DTDC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both Delhivery and DTDC use the standard domestic logistics formula: Length (cm) × Width (cm) × Height (cm) / 5000."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Delhivery vs DTDC Courier Comparison & Price Calculator",
+  "url": "https://courierprice.com/compare/delhivery-vs-dtdc/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Compare shipping rates, delivery speeds, tracking accuracy, and coverage between Delhivery and DTDC."
+};
+---
+
+<Layout 
+  title="Delhivery vs DTDC: Courier Price & Service Comparison (2026)"
+  description="Compare Delhivery vs DTDC shipping rates, delivery times, pincode reach, and service quality. Calculate and compare estimated prices side by side."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <a href="/couriers/" class="hover:text-ink transition-colors">Couriers</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">Delhivery vs DTDC</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+          <span>Head-to-Head Comparison</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Delhivery vs DTDC: Which Courier Is Better?
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Compare shipping rates, delivery timeframes, pin code coverage, and tracking reliability between two of India's largest private logistics networks.
+        </p>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Quick Summary Card -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Delhivery Overview -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div>
+              <span class="text-xs font-mono text-mute uppercase">E-commerce & Tech Leader</span>
+              <h2 class="display-sm text-xl text-ink font-semibold mt-0.5">Delhivery</h2>
+            </div>
+            <span class="text-xs font-mono font-medium text-ink bg-green-500/10 text-green-600 dark:text-green-400 px-2.5 py-1 rounded-full">
+              ★ 9.2 Reliability
+            </span>
+          </div>
+          <p class="body-sm text-body leading-relaxed">
+            Fully automated logistics ecosystem with nationwide reach across 18,000+ pin codes. Best suited for D2C brands, online retailers, and automated pickup management.
+          </p>
+          <div class="space-y-2 text-xs text-body border-t border-hairline pt-3 font-mono">
+            <div class="flex justify-between"><span>Pincode Reach:</span><strong class="text-ink">18,500+</strong></div>
+            <div class="flex justify-between"><span>Speed:</span><strong class="text-ink">1 – 5 Business Days</strong></div>
+            <div class="flex justify-between"><span>Best For:</span><strong class="text-ink font-sans">Ecommerce & Heavy Cargo</strong></div>
+          </div>
+        </div>
+
+        <!-- DTDC Overview -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+          <div class="flex items-center justify-between border-b border-hairline pb-3">
+            <div>
+              <span class="text-xs font-mono text-mute uppercase">Franchise & Retail Leader</span>
+              <h2 class="display-sm text-xl text-ink font-semibold mt-0.5">DTDC Express</h2>
+            </div>
+            <span class="text-xs font-mono font-medium text-ink bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-1 rounded-full">
+              ★ 8.9 Reliability
+            </span>
+          </div>
+          <p class="body-sm text-body leading-relaxed">
+            Massive local franchise footprint across 14,000+ pin codes and 12,000+ booking counters. Excellent for walk-in retail consignments, urgent documents, and tier-3 towns.
+          </p>
+          <div class="space-y-2 text-xs text-body border-t border-hairline pt-3 font-mono">
+            <div class="flex justify-between"><span>Pincode Reach:</span><strong class="text-ink">14,000+</strong></div>
+            <div class="flex justify-between"><span>Speed:</span><strong class="text-ink">1 – 5 Business Days</strong></div>
+            <div class="flex justify-between"><span>Best For:</span><strong class="text-ink font-sans">Retail Counter & Small Towns</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator Comparison Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm />
+      <ResultsList />
+    </section>
+
+    <!-- Detailed Comparison Articles -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Section 1: Rate Comparison Matrix -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">Rate Matrix: Delhivery vs DTDC.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Below is an indicative side-by-side price comparison for typical domestic weight slabs across standard surface and express delivery services:
+          </p>
+
+          <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2 mt-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                  <th class="py-3 px-4">Weight Slab</th>
+                  <th class="py-3 px-4">Delhivery Surface</th>
+                  <th class="py-3 px-4">Delhivery Express</th>
+                  <th class="py-3 px-4">DTDC Lite (Surface)</th>
+                  <th class="py-3 px-4">DTDC Plus (Air)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-body font-mono">
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">0.5 kg (Metro)</td>
+                  <td class="py-2.5 px-4">₹50 – ₹70</td>
+                  <td class="py-2.5 px-4">₹80 – ₹110</td>
+                  <td class="py-2.5 px-4">₹50 – ₹80</td>
+                  <td class="py-2.5 px-4">₹90 – ₹130</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg (National)</td>
+                  <td class="py-2.5 px-4">₹110 – ₹150</td>
+                  <td class="py-2.5 px-4">₹160 – ₹220</td>
+                  <td class="py-2.5 px-4">₹120 – ₹170</td>
+                  <td class="py-2.5 px-4">₹170 – ₹240</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg (National)</td>
+                  <td class="py-2.5 px-4">₹180 – ₹240</td>
+                  <td class="py-2.5 px-4">₹270 – ₹360</td>
+                  <td class="py-2.5 px-4">₹190 – ₹260</td>
+                  <td class="py-2.5 px-4">₹290 – ₹390</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg (Heavy)</td>
+                  <td class="py-2.5 px-4">₹320 – ₹450</td>
+                  <td class="py-2.5 px-4">₹550 – ₹750</td>
+                  <td class="py-2.5 px-4">₹350 – ₹490</td>
+                  <td class="py-2.5 px-4">₹600 – ₹820</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">10.0 kg (Bulk Cargo)</td>
+                  <td class="py-2.5 px-4">₹550 – ₹780</td>
+                  <td class="py-2.5 px-4">₹980 – ₹1,350</td>
+                  <td class="py-2.5 px-4">₹620 – ₹890</td>
+                  <td class="py-2.5 px-4">₹1,050 – ₹1,490</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Feature & Capability Breakdown -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Key Differences & Capabilities.</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-canvas border border-hairline rounded-lg p-6 space-y-3 shadow-level-1">
+            <h3 class="body-md-strong text-ink font-semibold">When to Choose Delhivery</h3>
+            <ul class="text-sm text-body space-y-2 leading-relaxed">
+              <li>✓ <strong>Online Sellers & D2C Brands:</strong> Robust automated Shopify, WooCommerce, and custom API integrations.</li>
+              <li>✓ <strong>Heavier Shipments:</strong> Cost-effective surface cargo rates for boxes over 5 kg.</li>
+              <li>✓ <strong>Real-Time Tracking:</strong> Automated WhatsApp, SMS, and GPS driver tracking milestones.</li>
+              <li>✓ <strong>Automated Doorstep Pickup:</strong> Schedule collections online without visiting a branch.</li>
+            </ul>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-lg p-6 space-y-3 shadow-level-1">
+            <h3 class="body-md-strong text-ink font-semibold">When to Choose DTDC</h3>
+            <ul class="text-sm text-body space-y-2 leading-relaxed">
+              <li>✓ <strong>Walk-in Retail Senders:</strong> Over 12,000+ neighborhood franchise counters for easy drop-off.</li>
+              <li>✓ <strong>Remote & Semi-Urban Delivery:</strong> Unmatched ground branch presence in tier-3 and tier-4 regions.</li>
+              <li>✓ <strong>Urgent Documents (Prime Time):</strong> Guaranteed time-definite morning deliveries (10:30 AM / 12:00 PM).</li>
+              <li>✓ <strong>Personal Relocation / Parcels:</strong> Flexible assisted counter packaging for individual shippers.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
