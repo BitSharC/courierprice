@@ -1,0 +1,474 @@
+---
+// src/pages/couriers/blue-dart.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Couriers",
+      "item": "https://courierprice.com/couriers/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Blue Dart",
+      "item": "https://courierprice.com/couriers/blue-dart/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does Blue Dart charge per kg?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blue Dart rates vary depending on the destination zone, transport mode (Apex Air Express vs Surface Cargo), and chargeable weight. Local deliveries for 500g start around ₹70-₹110, while national next-day air express shipments range between ₹150-₹260 per kg including standard fuel surcharges."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is Blue Dart more expensive than other couriers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blue Dart operates its own dedicated fleet of Boeing 757 and 737 freighter aircraft in India, offering premium time-definite overnight delivery, temperature-controlled transit, and industry-leading reliability scores."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Blue Dart Apex and Surface?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blue Dart Apex is a premium door-to-door air express service with next-business-day delivery to major metros. Blue Dart Surface is an economical ground transport service designed for commercial freight, bulk parcels, and heavier consignments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Blue Dart calculate volumetric weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blue Dart uses the domestic standard formula: Length (cm) × Width (cm) × Height (cm) / 5000. Chargeable weight is the higher of actual physical scale weight and volumetric weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Blue Dart provide doorstep pickup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Blue Dart offers doorstep pickup for registered corporate account holders and retail customers through the Blue Dart website and customer care."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I track a Blue Dart shipment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can track your package by entering your 9 to 11 digit Blue Dart Waybill / Reference number on the official Blue Dart TrackDart portal or via SMS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Blue Dart Smart Box?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blue Dart Smart Box is a pre-priced packaging solution available in 10 kg and 25 kg flat-rate air and surface options, offering all-inclusive discounted door-to-door delivery."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items cannot be sent via Blue Dart?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dangerous goods (IATA hazard classes), pressurized aerosols, uninspected lithium battery packs, currency, jewelry, and restricted chemical liquids cannot be carried without specialized dangerous goods documentation."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Blue Dart Express Price Calculator",
+  "url": "https://courierprice.com/couriers/blue-dart/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate Blue Dart air express and surface cargo rates, volumetric weights, and delivery estimates across India."
+};
+---
+
+<Layout 
+  title="Blue Dart Express Price Calculator - Shipping Rates (2026)"
+  description="Calculate Blue Dart shipping charges and rate per kg across India. Compare Blue Dart Apex air express vs surface freight tariffs."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <a href="/couriers/" class="hover:text-ink transition-colors">Couriers</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">Blue Dart</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+          <span>Express Air & Surface Guide</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Blue Dart Express Price Calculator & Freight Rates.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Estimate Blue Dart shipping costs and charges across India. Calculate premium door-to-door air express (Apex) and economical ground cargo (Surface) with real-time volumetric validation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm courierId="bluedart-domestic-in" />
+      <ResultsList courierId="bluedart-domestic-in" />
+    </section>
+
+    <!-- SEO Educational Content Sections -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Educational Section 1: How Blue Dart Calculates Rates -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">How Blue Dart Shipping Charges Are Calculated.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Blue Dart (part of the DHL Group) is India's leading premium express logistics company. Blue Dart charges are calculated using aviation-grade formulas based on five key components:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">1. Chargeable Weight</h3>
+              <p class="body-sm text-body">The greater of scale dead weight or dimensional volumetric weight based on aircraft cargo density.</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">2. Distance & Metro Zones</h3>
+              <p class="body-sm text-body">Classified by zone matrices (Zone A: Intra-City/State, Zone B: Metro-to-Metro, Zone C: Rest of India, Zone D: Special/North East).</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">3. Aviation Fuel Surcharge</h3>
+              <p class="body-sm text-body">A dynamic monthly fuel surcharge percentage (FSC) indexed against Aviation Turbine Fuel (ATF) market prices.</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">4. Service Type</h3>
+              <p class="body-sm text-body">Apex (Dedicated Air Express), Surface (Ground Fleet Cargo), or Dart Plus (Guaranteed Early Delivery).</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">5. Security & Handling Surcharges</h3>
+              <p class="body-sm text-body">Airport screening fees, emergency situation surcharges (if applicable), and GST statutory tax (18%).</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">6. Value Add-ons</h3>
+              <p class="body-sm text-body">Freight On Delivery (FOD), Cash on Delivery (COD), and declared value transit risk coverage (FOV).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 2: Blue Dart Volumetric Weight -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Blue Dart Volumetric Weight Formula.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Because Blue Dart operates dedicated freighter planes, aircraft payload space is strictly optimized. Large, lightweight parcels occupy substantial hold space and are priced according to volumetric weight:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-center">
+            <!-- Left Side: Formula Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <div>
+                <span class="caption-mono uppercase tracking-wider text-mute text-xs font-semibold">Air & Surface Formula</span>
+                <p class="body-sm text-body mt-1">Blue Dart uses the domestic industry divisor of 5000:</p>
+              </div>
+              <div class="bg-canvas-soft border border-hairline rounded-md py-4 text-center">
+                <span class="font-mono text-ink text-sm sm:text-base font-semibold">
+                  Volumetric Weight (kg) = <br class="block sm:hidden" /> (L × W × H) / 5000
+                </span>
+                <span class="block text-xs text-mute mt-1">Length, Width, Height measured in centimetres (cm)</span>
+              </div>
+              <div class="space-y-2 text-xs text-body">
+                <p><strong>Actual Scale Weight:</strong> Gross mass of the shipment in kg.</p>
+                <p><strong>Chargeable Weight:</strong> Higher value applied for freight invoicing.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: Visual Example Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <h3 class="body-md-strong text-ink font-semibold">Example: Air Express Carton</h3>
+              <div class="space-y-3 text-sm text-body">
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Carton Dimensions</span>
+                  <span class="text-ink font-mono font-medium">45 × 35 × 40 cm</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Scale Gross Weight</span>
+                  <span class="text-ink font-mono font-medium">5.0 kg</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Volumetric Calculation</span>
+                  <span class="text-ink font-mono font-medium">(45 × 35 × 40) / 5000 = 12.6 kg</span>
+                </div>
+                <div class="flex justify-between pt-1 font-semibold text-base text-ink">
+                  <span>Chargeable Weight</span>
+                  <span class="text-primary font-mono">13.0 kg (rounded up)</span>
+                </div>
+              </div>
+              <p class="text-xs text-mute leading-relaxed">
+                Blue Dart will bill this package based on 13 kg chargeable weight. Choosing form-fitting boxes reduces shipping expenses.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 3: Blue Dart Rates Per KG -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Blue Dart Rates Per KG (Indicative Slab Matrix).</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Blue Dart uses structured slab pricing where the first 500g base slab has a fixed rate, and each incremental 500g is added at a step rate. Below is an indicative retail rate estimation across typical Indian domestic corridors:
+          </p>
+
+          <!-- Indicative Rate Slab Matrix Table -->
+          <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2 mt-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                  <th class="py-3 px-4">Weight Slab</th>
+                  <th class="py-3 px-4">Intra-City (Local)</th>
+                  <th class="py-3 px-4">Metro to Metro</th>
+                  <th class="py-3 px-4">Rest of India (Air)</th>
+                  <th class="py-3 px-4">Special / Remote (NE/J&K)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-body font-mono">
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Up to 0.5 kg (Base)</td>
+                  <td class="py-2.5 px-4">₹70 – ₹100</td>
+                  <td class="py-2.5 px-4">₹110 – ₹160</td>
+                  <td class="py-2.5 px-4">₹140 – ₹210</td>
+                  <td class="py-2.5 px-4">₹190 – ₹290</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg</td>
+                  <td class="py-2.5 px-4">₹110 – ₹160</td>
+                  <td class="py-2.5 px-4">₹170 – ₹250</td>
+                  <td class="py-2.5 px-4">₹220 – ₹330</td>
+                  <td class="py-2.5 px-4">₹310 – ₹450</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg</td>
+                  <td class="py-2.5 px-4">₹180 – ₹260</td>
+                  <td class="py-2.5 px-4">₹280 – ₹410</td>
+                  <td class="py-2.5 px-4">₹370 – ₹550</td>
+                  <td class="py-2.5 px-4">₹520 – ₹760</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg (Surface)</td>
+                  <td class="py-2.5 px-4">₹260 – ₹380</td>
+                  <td class="py-2.5 px-4">₹420 – ₹620</td>
+                  <td class="py-2.5 px-4">₹560 – ₹830</td>
+                  <td class="py-2.5 px-4">₹790 – ₹1,180</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">10.0 kg (Heavy)</td>
+                  <td class="py-2.5 px-4">₹450 – ₹680</td>
+                  <td class="py-2.5 px-4">₹720 – ₹1,080</td>
+                  <td class="py-2.5 px-4">₹980 – ₹1,490</td>
+                  <td class="py-2.5 px-4">₹1,380 – ₹2,100</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-mute italic">
+            * Note: Indicative retail tariffs. Corporate contracts and ecommerce account rates differ based on monthly volume commitments. Rates subject to 18% GST and monthly fuel index adjustments.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 4: Blue Dart Services Breakdown -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Blue Dart Service Offerings.</h2>
+        <div class="space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            Blue Dart structures its logistics products to provide tailored solutions for individuals, SMEs, and enterprise shippers:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Apex Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">Domestic Priority (Apex)</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 font-mono">Air Express</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Dedicated Boeing air fleet service offering next-business-day delivery to key metro cities and commercial centres across India.
+              </p>
+            </div>
+
+            <!-- Surface Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">Surface Cargo</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-canvas-soft text-body font-mono">Ground Freight</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Cost-effective road express solution utilizing GPS-tracked container trucks for heavy parcels, palletized freight, and B2B goods.
+              </p>
+            </div>
+
+            <!-- Smart Box Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">Smart Box (10kg / 25kg)</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-canvas-soft text-body font-mono">Flat Rate</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                All-inclusive flat-rate heavy-duty corrugated boxes designed to eliminate volumetric surcharges for shipments up to 10 kg or 25 kg.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 5: Alternative Domestic Couriers -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Alternative Domestic Courier Calculators.</h2>
+        <p class="body-md text-body leading-relaxed">
+          Compare Blue Dart freight rates with other leading carriers in India:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+          <!-- Delhivery Card -->
+          <a 
+            href="/couriers/delhivery/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">Delhivery</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">Surface & Express</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Fast tech-driven parcel logistics with nationwide surface and express distribution.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open Delhivery Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+
+          <!-- DTDC Card -->
+          <a 
+            href="/couriers/dtdc/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">DTDC Courier</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">14,000+ Pincodes</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Extensive franchise network with affordable Lite ground and Plus air solutions.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open DTDC Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+
+          <!-- Speed Post Card -->
+          <a 
+            href="/couriers/speed-post/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">India Post Speed Post</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">National Reach</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Complete 100% pin code coverage with government statutory distance tariffs.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open Speed Post Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Educational Section 6: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions about Blue Dart.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Bottom Directory Navigation -->
+      <div class="pt-8 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-xs text-mute uppercase tracking-wider font-mono">Directory Hub</span>
+          <p class="text-sm font-semibold text-ink mt-0.5">Explore All 15+ Indian & International Courier Calculators</p>
+        </div>
+        <a 
+          href="/couriers/" 
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md border border-hairline bg-canvas hover:bg-canvas-soft text-xs font-medium text-ink shadow-level-1 transition-all"
+        >
+          <span>View All Couriers</span>
+          <span>➔</span>
+        </a>
+      </div>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

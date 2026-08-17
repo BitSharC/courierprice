@@ -1,0 +1,474 @@
+---
+// src/pages/couriers/dtdc.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Couriers",
+      "item": "https://courierprice.com/couriers/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "DTDC",
+      "item": "https://courierprice.com/couriers/dtdc/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does DTDC charge per kg?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DTDC courier charges vary based on distance zones, transport mode (DTDC Lite Surface vs DTDC Plus Air Express), and package chargeable weight. Local city parcels generally start around ₹40-₹60 for 500g, while national express parcels range from ₹90-₹150 per kg."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is DTDC shipping cost calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DTDC shipping charges are calculated based on origin and destination pincodes, the greater of dead weight or volumetric weight, delivery speed (Standard vs Express), fuel surcharges, and applicable GST."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between DTDC Lite and DTDC Plus?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DTDC Lite is the standard surface/ground network service ideal for economical and heavier cargo. DTDC Plus (and Prime Time) offers prioritized air transit for urgent documents and parcels with guaranteed delivery timeframes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does DTDC calculate volumetric weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DTDC uses the standard volumetric divisor: Length (cm) × Width (cm) × Height (cm) / 5000. If the volumetric weight exceeds the physical scale weight, charges are applied to the volumetric weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does DTDC deliver to all pincodes in India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DTDC has one of India's largest logistics networks covering over 14,000+ pin codes and 12,000+ franchise channel partners across metros, tier-2, tier-3 cities, and rural locations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does DTDC offer doorstep pickup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, DTDC offers doorstep pickup through their online booking portal, MyDTDC app, or via local franchise branches across India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I track my DTDC parcel online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every DTDC consignment is assigned a consignment number or reference number that can be tracked in real time on DTDC's official website or tracking portal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items are prohibited from shipping via DTDC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hazardous materials, flammables, explosives, illegal substances, liquid chemicals without MSDS, currency, and precious bullion are strictly prohibited under standard DTDC domestic courier terms."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DTDC Courier Price Calculator",
+  "url": "https://courierprice.com/couriers/dtdc/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate and estimate DTDC domestic courier charges, surface rates, and air express pricing across Indian states."
+};
+---
+
+<Layout 
+  title="DTDC Courier Price Calculator - Rates Per KG (2026)"
+  description="Calculate DTDC domestic shipping rates and cost per kg across India. Compare DTDC Lite surface vs DTDC Plus express charges instantly."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <a href="/couriers/" class="hover:text-ink transition-colors">Couriers</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">DTDC</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
+          <span>Domestic Courier Guide</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          DTDC Courier Price Calculator & Shipping Rates.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Estimate DTDC domestic parcel shipping charges across India. Calculate standard surface tariffs (DTDC Lite) and prioritized air express rates (DTDC Plus & Prime Time) with real-time volumetric weight verification.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm courierId="dtdc-domestic-in" />
+      <ResultsList courierId="dtdc-domestic-in" />
+    </section>
+
+    <!-- SEO Educational Content Sections -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Educational Section 1: How DTDC Calculates Shipping Cost -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">How DTDC Calculates Shipping Charges.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            DTDC (Desk to Desk Courier & Cargo) calculates domestic shipping costs using a structured pricing formula based on five core factors:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">1. Chargeable Weight</h3>
+              <p class="body-sm text-body">The greater value between actual dead weight on a scale and volumetric (dimensional) weight.</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">2. Distance & Zone</h3>
+              <p class="body-sm text-body">Tariffs scale across Local (within city), Regional (same state), Metro-to-Metro, and National zones.</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">3. Service Tier</h3>
+              <p class="body-sm text-body">DTDC Lite offers cost-effective ground transit, while DTDC Plus and Prime Time prioritize express air routing.</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">4. Fuel Surcharges</h3>
+              <p class="body-sm text-body">Variable percentages applied to freight to absorb airline and vehicular fuel price fluctuations.</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">5. Value-Added Add-ons</h3>
+              <p class="body-sm text-body">Optional insurance risk cover, doorstep collection surcharges, and Cash on Delivery (COD) handling.</p>
+            </div>
+            <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">6. GST & Taxes</h3>
+              <p class="body-sm text-body">A statutory 18% Goods & Services Tax (GST) is applied to all domestic courier and logistics services.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 2: Volumetric Weight Explanation -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">DTDC Volumetric Weight Formula.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Like most major parcel carriers, DTDC calculates the space your parcel takes up inside delivery vans and aircraft cargo holds. If a large box is light, it is billed by its dimensional weight rather than physical weight.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-center">
+            <!-- Left Side: Formula Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <div>
+                <span class="caption-mono uppercase tracking-wider text-mute text-xs font-semibold">Official Formula</span>
+                <p class="body-sm text-body mt-1">DTDC uses the standard divisor of 5000 for domestic shipments:</p>
+              </div>
+              <div class="bg-canvas-soft border border-hairline rounded-md py-4 text-center">
+                <span class="font-mono text-ink text-sm sm:text-base font-semibold">
+                  Volumetric Weight (kg) = <br class="block sm:hidden" /> (L × W × H) / 5000
+                </span>
+                <span class="block text-xs text-mute mt-1">Dimensions in centimetres (cm)</span>
+              </div>
+              <div class="space-y-2 text-xs text-body">
+                <p><strong>Dead Weight:</strong> Physical scale weight in kilograms.</p>
+                <p><strong>Volumetric Weight:</strong> Space density equivalent in kilograms.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: Visual Example Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-2 space-y-4">
+              <h3 class="body-md-strong text-ink font-semibold">Example: Bulky Lightweight Parcel</h3>
+              <div class="space-y-3 text-sm text-body">
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Package Dimensions</span>
+                  <span class="text-ink font-mono font-medium">50 × 40 × 30 cm</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Actual Scale Weight</span>
+                  <span class="text-ink font-mono font-medium">4.0 kg</span>
+                </div>
+                <div class="flex justify-between border-b border-hairline/60 pb-1.5">
+                  <span>Volumetric Calculation</span>
+                  <span class="text-ink font-mono font-medium">(50 × 40 × 30) / 5000 = 12.0 kg</span>
+                </div>
+                <div class="flex justify-between pt-1 font-semibold text-base text-ink">
+                  <span>Chargeable Weight</span>
+                  <span class="text-primary font-mono">12.0 kg</span>
+                </div>
+              </div>
+              <p class="text-xs text-mute leading-relaxed">
+                DTDC will bill this parcel based on 12.0 kg. Trimming box sizes helps significantly reduce courier rates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 3: DTDC Rates Per KG -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">DTDC Rates Per KG (Indicative Slabs).</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            DTDC pricing structures charge a higher base rate for the initial 500g slab, followed by reduced incremental costs for each additional 500g or 1 kg. Below is an indicative matrix for retail domestic consignments:
+          </p>
+
+          <!-- Indicative Rate Slab Matrix Table -->
+          <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2 mt-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                  <th class="py-3 px-4">Weight Slab</th>
+                  <th class="py-3 px-4">Local / Intra-City</th>
+                  <th class="py-3 px-4">Regional (Same State)</th>
+                  <th class="py-3 px-4">Metro to Metro</th>
+                  <th class="py-3 px-4">Rest of India (ROI)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-body font-mono">
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Up to 0.5 kg (Base)</td>
+                  <td class="py-2.5 px-4">₹40 – ₹60</td>
+                  <td class="py-2.5 px-4">₹50 – ₹80</td>
+                  <td class="py-2.5 px-4">₹70 – ₹110</td>
+                  <td class="py-2.5 px-4">₹90 – ₹140</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">1.0 kg</td>
+                  <td class="py-2.5 px-4">₹60 – ₹90</td>
+                  <td class="py-2.5 px-4">₹80 – ₹120</td>
+                  <td class="py-2.5 px-4">₹110 – ₹160</td>
+                  <td class="py-2.5 px-4">₹140 – ₹210</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">2.0 kg</td>
+                  <td class="py-2.5 px-4">₹100 – ₹150</td>
+                  <td class="py-2.5 px-4">₹130 – ₹190</td>
+                  <td class="py-2.5 px-4">₹180 – ₹260</td>
+                  <td class="py-2.5 px-4">₹230 – ₹330</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">5.0 kg (Surface)</td>
+                  <td class="py-2.5 px-4">₹190 – ₹280</td>
+                  <td class="py-2.5 px-4">₹260 – ₹380</td>
+                  <td class="py-2.5 px-4">₹350 – ₹510</td>
+                  <td class="py-2.5 px-4">₹460 – ₹680</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">10.0 kg (Cargo)</td>
+                  <td class="py-2.5 px-4">₹320 – ₹470</td>
+                  <td class="py-2.5 px-4">₹440 – ₹650</td>
+                  <td class="py-2.5 px-4">₹590 – ₹890</td>
+                  <td class="py-2.5 px-4">₹780 – ₹1,150</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-mute italic">
+            * Note: Estimated figures for general consumer guidance. Final franchise booking prices may include local docket charges, fuel surcharges, and 18% GST.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 4: DTDC Service Comparison -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">DTDC Service Options Explained.</h2>
+        <div class="space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            DTDC divides its domestic solutions into distinct operational categories based on delivery urgency:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Lite Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">DTDC Lite</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-canvas-soft text-body font-mono">Economical</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Standard surface transit across India. Ideal for routine retail parcels, ecommerce orders, and heavier cargo with flexible 3 to 7 business day timelines.
+              </p>
+            </div>
+
+            <!-- Plus Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">DTDC Plus</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-canvas-soft text-body font-mono">Air Express</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Time-sensitive express solution utilizing air connectivity for next-day and 2-day delivery across major commercial hubs and state capitals.
+              </p>
+            </div>
+
+            <!-- Prime Time Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">DTDC Prime Time (PTP)</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-canvas-soft text-body font-mono">Guaranteed</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Premium guaranteed time-definite delivery (such as 10:30 AM, 12:00 PM, or Sunday deliveries) with proactive tracking and tamper-evident packaging.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 5: Alternative Domestic Couriers -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Alternative Domestic Courier Calculators.</h2>
+        <p class="body-md text-body leading-relaxed">
+          Need to compare rates before booking? Check out price calculators for other leading domestic carriers in India:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+          <!-- Delhivery Card -->
+          <a 
+            href="/couriers/delhivery/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">Delhivery</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">Surface & Express</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Automated nationwide ecommerce logistics network with integrated express air routing and surface cargo.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open Delhivery Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+
+          <!-- Speed Post Card -->
+          <a 
+            href="/couriers/speed-post/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">India Post Speed Post</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">National Reach</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                India's government postal backbone with unparalleled 100% pin code coverage and affordable statutory tariffs.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open Speed Post Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+
+          <!-- Blue Dart Card -->
+          <a 
+            href="/couriers/blue-dart/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">Blue Dart Express</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">Premium Air</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Dedicated Boeing freighter aircraft fleet offering market-leading next-day express transit and B2B logistics.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open Blue Dart Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Educational Section 6: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions about DTDC.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Bottom Directory Navigation -->
+      <div class="pt-8 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-xs text-mute uppercase tracking-wider font-mono">Directory Hub</span>
+          <p class="text-sm font-semibold text-ink mt-0.5">Explore All 15+ Indian & International Courier Calculators</p>
+        </div>
+        <a 
+          href="/couriers/" 
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md border border-hairline bg-canvas hover:bg-canvas-soft text-xs font-medium text-ink shadow-level-1 transition-all"
+        >
+          <span>View All Couriers</span>
+          <span>➔</span>
+        </a>
+      </div>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,404 @@
+---
+// src/pages/couriers/speed-post.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Couriers",
+      "item": "https://courierprice.com/couriers/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Speed Post",
+      "item": "https://courierprice.com/couriers/speed-post/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does India Post charge for Speed Post per kg?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "India Post Speed Post tariffs are regulated by the Department of Posts based on distance bands. Local intra-city parcels start at ₹15 for 50g and ₹30 for 500g. For national distances beyond 2000 km, charges are ₹35 for the first 50g and ₹70-₹90 for 500g plus applicable 18% GST."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum weight allowed for Speed Post?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The maximum permissible weight for domestic Speed Post consignments is 35 kilograms across all standard delivery post offices in India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is Speed Post cost calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Speed Post tariffs are calculated strictly using standard distance slabs: Local (within municipal area), Up to 200 km, 201 to 1000 km, 1001 to 2000 km, and above 2000 km, scaled by weight brackets (up to 50g, 51g to 200g, 201g to 500g, and each additional 500g)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does India Post calculate volumetric weight for Speed Post?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard Speed Post documents and retail parcels are generally charged on physical dead weight. However, commercial logistics parcels and large bulk parcels are subject to volumetric dimensional calculations (L × W × H in cm / 5000)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many days does Speed Post take to deliver?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Local deliveries are typically completed in 1-2 business days, metro-to-metro in 2-3 business days, and national or remote pin codes in 4-6 business days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I track my Speed Post parcel online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, every Speed Post item has a 13-character tracking number (e.g., EU123456789IN) that can be tracked in real time on the official India Post website or via SMS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does India Post offer COD (Cash on Delivery)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, India Post offers Cash on Delivery (COD) service for Speed Post and Business Parcel consignments up to ₹50,000 value with nominal collection fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items are prohibited in Speed Post?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Explosives, inflammable items, sharp instruments without protection, gold coins/bullion above permissible limits, and contraband substances are prohibited under the Indian Post Office Act."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "India Post Speed Post Calculator",
+  "url": "https://courierprice.com/couriers/speed-post/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Official postal tariff calculator for India Post Speed Post and Standard Parcel rates across Indian pin codes."
+};
+---
+
+<Layout 
+  title="India Post Speed Post Calculator - Charges & Tariff (2026)"
+  description="Calculate India Post Speed Post charges and tariff rates per kg. Estimate domestic postal rates across all pin codes with official distance slabs."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <a href="/couriers/" class="hover:text-ink transition-colors">Couriers</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">Speed Post</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>National Postal Tariff Guide</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          India Post Speed Post Calculator & Postal Charges.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Calculate official India Post Speed Post tariffs and standard parcel shipping rates across all 19,000+ delivery pin codes in India. Estimate local, regional, and national distance slabs instantly.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <CalculatorForm courierId="indiapost-domestic-in" />
+      <ResultsList courierId="indiapost-domestic-in" />
+    </section>
+
+    <!-- SEO Educational Content Sections -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Educational Section 1: Official Speed Post Tariff Structure -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">Speed Post Official Tariff Structure.</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Operated by the Department of Posts (India Post), Speed Post is the premier high-speed domestic postal service in India. Unlike private couriers that use dynamic demand pricing, India Post calculates tariffs strictly based on regulated distance slabs and weight brackets:
+          </p>
+          
+          <!-- Official Tariff Matrix Table -->
+          <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2 mt-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                  <th class="py-3 px-4">Distance Slab</th>
+                  <th class="py-3 px-4">Up to 50 grams</th>
+                  <th class="py-3 px-4">51 to 200 grams</th>
+                  <th class="py-3 px-4">201 to 500 grams</th>
+                  <th class="py-3 px-4">Each Additional 500g</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-body font-mono">
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Local (Within City)</td>
+                  <td class="py-2.5 px-4">₹15</td>
+                  <td class="py-2.5 px-4">₹25</td>
+                  <td class="py-2.5 px-4">₹30</td>
+                  <td class="py-2.5 px-4">+ ₹10</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Up to 200 km</td>
+                  <td class="py-2.5 px-4">₹35</td>
+                  <td class="py-2.5 px-4">₹35</td>
+                  <td class="py-2.5 px-4">₹50</td>
+                  <td class="py-2.5 px-4">+ ₹15</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">201 to 1000 km</td>
+                  <td class="py-2.5 px-4">₹35</td>
+                  <td class="py-2.5 px-4">₹40</td>
+                  <td class="py-2.5 px-4">₹60</td>
+                  <td class="py-2.5 px-4">+ ₹30</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">1001 to 2000 km</td>
+                  <td class="py-2.5 px-4">₹35</td>
+                  <td class="py-2.5 px-4">₹60</td>
+                  <td class="py-2.5 px-4">₹80</td>
+                  <td class="py-2.5 px-4">+ ₹40</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Above 2000 km</td>
+                  <td class="py-2.5 px-4">₹35</td>
+                  <td class="py-2.5 px-4">₹70</td>
+                  <td class="py-2.5 px-4">₹90</td>
+                  <td class="py-2.5 px-4">+ ₹50</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-mute italic">
+            * Note: Base statutory rates subject to 18% GST. Bulk corporate contractual bookings via Business Post or Book Now Pay Later (BNPL) enjoy structured volume discounts.
+          </p>
+        </div>
+      </section>
+
+      <!-- Educational Section 2: Speed Post Key Advantages -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Why Choose India Post Speed Post?</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+          <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">100% Pin Code Reach</h3>
+            <p class="body-sm text-body">Covers every village, town, island, and high-altitude border area across 155,000+ post offices in India.</p>
+          </div>
+          <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">Legal Proof of Delivery</h3>
+            <p class="body-sm text-body">Speed Post delivery confirmation and acknowledgment cards are legally recognized documentation in Indian courts.</p>
+          </div>
+          <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">Weight Limit up to 35 kg</h3>
+            <p class="body-sm text-body">Handles both lightweight envelopes (50g) and heavy commercial consignments up to 35 kg per booking.</p>
+          </div>
+          <div class="bg-canvas-soft border border-hairline rounded-lg p-5 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">Affordable Tariffs</h3>
+            <p class="body-sm text-body">Significantly lower rates for long-distance and remote shipments compared to private commercial air couriers.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 3: Standard Parcel vs Speed Post -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Speed Post vs Standard Registered Parcel.</h2>
+        <div class="space-y-4">
+          <p class="body-md text-body leading-relaxed">
+            India Post provides two major domestic package services depending on your budget and urgency:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Speed Post Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">Speed Post (Priority Air/Surface)</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 font-mono">Fastest</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Prioritized multi-modal transport with end-to-end barcode scanning, SMS delivery alerts, and transit times of 1 to 4 business days.
+              </p>
+              <ul class="text-xs text-body space-y-1.5 pt-2 border-t border-hairline">
+                <li>• Transit speed: 1 – 4 Days</li>
+                <li>• Maximum weight: 35 kg</li>
+                <li>• Tracking: Real-time SMS & web tracking</li>
+              </ul>
+            </div>
+
+            <!-- Standard Parcel Card -->
+            <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-level-1 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="body-md-strong text-ink font-semibold">Standard Registered Parcel (Surface)</h3>
+                <span class="text-xs px-2 py-0.5 rounded bg-canvas-soft text-body font-mono">Economical</span>
+              </div>
+              <p class="body-sm text-body leading-relaxed">
+                Economical surface and railway transit suitable for non-urgent parcels and heavy bulk items where transit duration is flexible.
+              </p>
+              <ul class="text-xs text-body space-y-1.5 pt-2 border-t border-hairline">
+                <li>• Transit speed: 4 – 8 Days</li>
+                <li>• Maximum weight: 20 kg (unregistered: 4 kg)</li>
+                <li>• Tracking: Periodic hub scan milestones</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Section 4: Alternative Domestic Couriers -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Alternative Domestic Courier Calculators.</h2>
+        <p class="body-md text-body leading-relaxed">
+          Compare India Post rates with other trusted courier services in India:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+          <!-- Delhivery Card -->
+          <a 
+            href="/couriers/delhivery/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">Delhivery</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">Surface & Express</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Fast tech-enabled ecommerce delivery with automated tracking and surface logistics.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open Delhivery Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+
+          <!-- DTDC Card -->
+          <a 
+            href="/couriers/dtdc/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">DTDC Courier</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">14,000+ Pincodes</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Extensive retail franchise network offering Lite surface and Plus air express options.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open DTDC Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+
+          <!-- Blue Dart Card -->
+          <a 
+            href="/couriers/blue-dart/" 
+            class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+          >
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink group-hover:text-primary transition-colors text-base">Blue Dart Express</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">Premium Air</span>
+              </div>
+              <p class="text-xs text-body leading-relaxed">
+                Dedicated freighter fleet for reliable next-day document and parcel delivery.
+              </p>
+            </div>
+            <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+              <span>Open Blue Dart Calculator</span>
+              <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Educational Section 5: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Frequently Asked Questions about Speed Post.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Bottom Directory Navigation -->
+      <div class="pt-8 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-xs text-mute uppercase tracking-wider font-mono">Directory Hub</span>
+          <p class="text-sm font-semibold text-ink mt-0.5">Explore All 15+ Indian & International Courier Calculators</p>
+        </div>
+        <a 
+          href="/couriers/" 
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md border border-hairline bg-canvas hover:bg-canvas-soft text-xs font-medium text-ink shadow-level-1 transition-all"
+        >
+          <span>View All Couriers</span>
+          <span>➔</span>
+        </a>
+      </div>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

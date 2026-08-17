@@ -1,0 +1,582 @@
+---
+// src/pages/tools/volumetric-weight-calculator.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://courierprice.com/tools/volumetric-weight-calculator/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Volumetric Weight Calculator",
+      "item": "https://courierprice.com/tools/volumetric-weight-calculator/"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is volumetric weight (dimensional weight)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Volumetric weight (also called dimensional weight or DIM weight) is a pricing technique used by courier and freight companies to estimate the amount of space a parcel occupies relative to its actual physical weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the formula for calculating volumetric weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the metric system, the formula is: Length (cm) × Width (cm) × Height (cm) / Divisor (typically 5000 for domestic express couriers, or 6000 for IATA air cargo)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between 5000 and 6000 divisor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A divisor of 5000 is used by most domestic and international express couriers (e.g., Delhivery, DTDC, FedEx, DHL, Blue Dart). A divisor of 6000 is traditionally used in commercial IATA air freight forwarder bookings and results in a slightly lower dimensional weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is chargeable weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chargeable weight is the exact weight used by the shipping carrier to calculate your invoice. It is always whichever value is higher: the actual scale weight (gross dead weight) or the calculated volumetric weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you calculate CBM (Cubic Meters)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cubic Meters (CBM) is calculated by multiplying Length × Width × Height in metres: (Length in cm × Width in cm × Height in cm) / 1,000,000."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I reduce the volumetric weight of my package?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use form-fitting corrugated cartons, avoid oversized boxes with excess void fill, use compression bags for textiles/clothing, and trim carton corners down to the exact height of the contents."
+      }
+    }
+  ]
+};
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Volumetric Weight Calculator (CBM & DIM Weight)",
+  "url": "https://courierprice.com/tools/volumetric-weight-calculator/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free volumetric weight calculator tool. Compute dimensional weight in kg or lbs, CBM volume, and compare courier divisors 5000 vs 6000."
+};
+---
+
+<Layout 
+  title="Volumetric Weight Calculator - CBM & DIM Weight (2026)"
+  description="Calculate parcel volumetric weight, dimensional weight, and CBM volume in cm/inches. Compare domestic (5000) and IATA (6000) air freight divisors."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-mute">Tools</span>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">Volumetric Weight Calculator</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+          <span>Logistics Tool</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Volumetric Weight & CBM Calculator.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Compute dimensional parcel weight, total volume (CBM), and chargeable weight for domestic couriers, international air cargo, and ocean freight.
+        </p>
+      </div>
+    </section>
+
+    <!-- Interactive Calculator Card Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
+      <div class="w-full bg-canvas border border-hairline rounded-lg p-6 sm:p-8 shadow-level-3">
+        
+        <!-- Controls Header: Units & Divisors -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-hairline">
+          <!-- Unit System Toggle -->
+          <div class="flex items-center gap-1 border border-hairline rounded-full p-1 bg-canvas-soft-2 text-xs">
+            <button 
+              type="button" 
+              id="unit-metric" 
+              class="px-4 py-1.5 rounded-full font-medium transition-all cursor-pointer bg-primary text-on-primary"
+            >
+              Metric (cm, kg)
+            </button>
+            <button 
+              type="button" 
+              id="unit-imperial" 
+              class="px-4 py-1.5 rounded-full font-medium text-body hover:text-ink transition-all cursor-pointer"
+            >
+              Imperial (in, lbs)
+            </button>
+          </div>
+
+          <!-- Divisor Selector -->
+          <div class="flex items-center gap-2 text-xs">
+            <label for="divisor-select" class="text-mute font-semibold">Formula Divisor:</label>
+            <select id="divisor-select" class="form-input text-xs py-1.5 px-3 rounded-md bg-canvas font-medium">
+              <option value="5000" selected>Standard Express (5000 / 139)</option>
+              <option value="6000">IATA Air Freight (6000 / 166)</option>
+              <option value="4000">DHL Express / Premium (4000 / 111)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Main Form & Results Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
+          
+          <!-- Form Inputs (7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            <h2 class="body-sm-strong text-ink font-semibold border-b border-hairline pb-2">
+              Package Dimensions & Actual Weight
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Length -->
+              <div class="space-y-1.5">
+                <label for="dim-length" class="caption text-mute text-xs font-semibold">
+                  Length (<span class="unit-dim-label">cm</span>)
+                </label>
+                <input 
+                  type="number" 
+                  id="dim-length" 
+                  value="40" 
+                  min="0.1" 
+                  step="any" 
+                  class="form-input w-full font-mono text-sm" 
+                  placeholder="Length"
+                />
+              </div>
+
+              <!-- Width -->
+              <div class="space-y-1.5">
+                <label for="dim-width" class="caption text-mute text-xs font-semibold">
+                  Width (<span class="unit-dim-label">cm</span>)
+                </label>
+                <input 
+                  type="number" 
+                  id="dim-width" 
+                  value="30" 
+                  min="0.1" 
+                  step="any" 
+                  class="form-input w-full font-mono text-sm" 
+                  placeholder="Width"
+                />
+              </div>
+
+              <!-- Height -->
+              <div class="space-y-1.5">
+                <label for="dim-height" class="caption text-mute text-xs font-semibold">
+                  Height (<span class="unit-dim-label">cm</span>)
+                </label>
+                <input 
+                  type="number" 
+                  id="dim-height" 
+                  value="20" 
+                  min="0.1" 
+                  step="any" 
+                  class="form-input w-full font-mono text-sm" 
+                  placeholder="Height"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Actual Scale Weight -->
+              <div class="space-y-1.5">
+                <label for="actual-weight" class="caption text-mute text-xs font-semibold">
+                  Actual Scale Weight (<span class="unit-wt-label">kg</span>)
+                </label>
+                <input 
+                  type="number" 
+                  id="actual-weight" 
+                  value="2.5" 
+                  min="0.01" 
+                  step="any" 
+                  class="form-input w-full font-mono text-sm" 
+                  placeholder="Scale Weight"
+                />
+              </div>
+
+              <!-- Quantity Multiplier -->
+              <div class="space-y-1.5">
+                <label for="pkg-quantity" class="caption text-mute text-xs font-semibold">
+                  Number of Boxes (Quantity)
+                </label>
+                <input 
+                  type="number" 
+                  id="pkg-quantity" 
+                  value="1" 
+                  min="1" 
+                  max="500" 
+                  class="form-input w-full font-mono text-sm" 
+                  placeholder="Quantity"
+                />
+              </div>
+            </div>
+
+            <!-- Active Calculation Formula Pill -->
+            <div class="bg-canvas-soft border border-hairline rounded-md p-3 text-xs text-body flex items-center justify-between">
+              <span class="text-mute font-mono">Formula:</span>
+              <span id="formula-text" class="font-mono text-ink font-semibold">
+                (40 × 30 × 20) ÷ 5000 = 4.80 kg
+              </span>
+            </div>
+          </div>
+
+          <!-- Live Results Dashboard Card (5 cols) -->
+          <div class="lg:col-span-5 bg-canvas-soft border border-hairline rounded-lg p-6 flex flex-col justify-between space-y-6 shadow-level-1">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-hairline pb-3">
+                <span class="caption-mono uppercase tracking-wider text-xs font-semibold text-mute">Calculation Summary</span>
+                <span id="chargeable-badge" class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 font-semibold">
+                  Volumetric Billed
+                </span>
+              </div>
+
+              <div class="space-y-3 text-sm">
+                <div class="flex justify-between items-center text-body">
+                  <span>Actual Scale Weight:</span>
+                  <span id="res-actual-weight" class="font-mono font-semibold text-ink">2.50 kg</span>
+                </div>
+                <div class="flex justify-between items-center text-body">
+                  <span>Volumetric (DIM) Weight:</span>
+                  <span id="res-vol-weight" class="font-mono font-semibold text-ink">4.80 kg</span>
+                </div>
+                <div class="flex justify-between items-center text-body">
+                  <span>Total Volume (CBM):</span>
+                  <span id="res-cbm" class="font-mono font-semibold text-ink">0.024 m³</span>
+                </div>
+                <div class="flex justify-between items-center text-body">
+                  <span>Total Volume (cm³):</span>
+                  <span id="res-cm3" class="font-mono font-semibold text-ink">24,000 cm³</span>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-hairline flex justify-between items-baseline">
+                <div>
+                  <span class="text-xs text-mute uppercase font-mono tracking-wider block">Final Chargeable Weight</span>
+                  <span class="text-xs text-mute">Used for courier invoice calculation</span>
+                </div>
+                <div class="text-right">
+                  <span id="res-chargeable-weight" class="text-2xl font-mono font-bold text-primary">
+                    4.80 kg
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA button to Compare Prices -->
+            <button 
+              type="button" 
+              id="cta-compare-prices" 
+              class="button-primary w-full shadow-level-2 flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
+            >
+              <span>Compare Courier Prices For This Weight</span>
+              <span>➔</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEO Educational Guide Section -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Section 1: Divisor Comparison Table -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">Courier Divisors Explained (5000 vs 6000 vs 4000).</h2>
+        <div class="space-y-4 leading-relaxed">
+          <p class="body-md text-body">
+            Different shipping channels and freight forwarders use different divisors to convert dimensional volume into billable weight:
+          </p>
+
+          <div class="overflow-x-auto border border-hairline rounded-lg bg-canvas shadow-level-2 mt-4">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-hairline bg-canvas-soft text-ink font-semibold">
+                  <th class="py-3 px-4">Logistics Channel</th>
+                  <th class="py-3 px-4">Metric Divisor (cm³/kg)</th>
+                  <th class="py-3 px-4">Imperial Divisor (in³/lb)</th>
+                  <th class="py-3 px-4">Typical Carriers</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-hairline text-body font-mono">
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Domestic Couriers & Express</td>
+                  <td class="py-2.5 px-4">5000</td>
+                  <td class="py-2.5 px-4">139</td>
+                  <td class="py-2.5 px-4 font-sans text-xs">Delhivery, DTDC, Blue Dart, FedEx, UPS</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">IATA International Air Cargo</td>
+                  <td class="py-2.5 px-4">6000</td>
+                  <td class="py-2.5 px-4">166</td>
+                  <td class="py-2.5 px-4 font-sans text-xs">Airline Cargo Forwarders, Airport Freight</td>
+                </tr>
+                <tr class="hover:bg-canvas-soft-2 transition-colors">
+                  <td class="py-2.5 px-4 font-semibold text-ink font-sans">Premium Air Express</td>
+                  <td class="py-2.5 px-4">4000</td>
+                  <td class="py-2.5 px-4">111</td>
+                  <td class="py-2.5 px-4 font-sans text-xs">DHL Express Worldwide, Specialized Air charters</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: How to Reduce Volumetric Weight -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Tips to Reduce Volumetric Shipping Costs.</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">1. Cut Down Excess Box Height</h3>
+            <p class="body-sm text-body">Shaving just 5 cm off each carton dimension can reduce volumetric weight by up to 25% across multiple parcels.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">2. Vacuum-Pack Soft Goods</h3>
+            <p class="body-sm text-body">Apparel, blankets, and textiles can be vacuum compressed to eliminate air pockets before boxing.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">3. Use Custom-Fit Mailer Polybags</h3>
+            <p class="body-sm text-body">Flexible courier bags conform directly to goods and avoid rigid outer dimensional penalties.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">Volumetric Weight FAQs.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  let isMetric = true;
+  let activeDivisor = 5000;
+
+  const btnMetric = document.getElementById('unit-metric');
+  const btnImperial = document.getElementById('unit-imperial');
+  const divisorSelect = document.getElementById('divisor-select') as HTMLSelectElement | null;
+
+  const dimLength = document.getElementById('dim-length') as HTMLInputElement | null;
+  const dimWidth = document.getElementById('dim-width') as HTMLInputElement | null;
+  const dimHeight = document.getElementById('dim-height') as HTMLInputElement | null;
+  const actualWeight = document.getElementById('actual-weight') as HTMLInputElement | null;
+  const pkgQuantity = document.getElementById('pkg-quantity') as HTMLInputElement | null;
+
+  const formulaText = document.getElementById('formula-text');
+  const chargeableBadge = document.getElementById('chargeable-badge');
+  const resActualWeight = document.getElementById('res-actual-weight');
+  const resVolWeight = document.getElementById('res-vol-weight');
+  const resCbm = document.getElementById('res-cbm');
+  const resCm3 = document.getElementById('res-cm3');
+  const resChargeableWeight = document.getElementById('res-chargeable-weight');
+  const ctaComparePrices = document.getElementById('cta-compare-prices');
+
+  function calculate() {
+    const l = parseFloat(dimLength?.value || '0') || 0;
+    const w = parseFloat(dimWidth?.value || '0') || 0;
+    const h = parseFloat(dimHeight?.value || '0') || 0;
+    const actual = parseFloat(actualWeight?.value || '0') || 0;
+    const qty = parseInt(pkgQuantity?.value || '1', 10) || 1;
+
+    let divisor = activeDivisor;
+    if (!isMetric) {
+      // In Imperial: 5000 -> 139, 6000 -> 166, 4000 -> 111
+      if (activeDivisor === 6000) divisor = 166;
+      else if (activeDivisor === 4000) divisor = 111;
+      else divisor = 139;
+    }
+
+    const singleVolWeight = (l * w * h) / divisor;
+    const totalVolWeight = singleVolWeight * qty;
+    const totalActualWeight = actual * qty;
+    const finalChargeable = Math.max(totalActualWeight, totalVolWeight);
+
+    const wtUnit = isMetric ? 'kg' : 'lbs';
+
+    // Volume calculation
+    let totalCbm = 0;
+    let totalCm3 = 0;
+
+    if (isMetric) {
+      totalCm3 = l * w * h * qty;
+      totalCbm = totalCm3 / 1000000;
+    } else {
+      // Convert in³ to m³ and cm³
+      const totalIn3 = l * w * h * qty;
+      totalCm3 = totalIn3 * 16.387;
+      totalCbm = totalCm3 / 1000000;
+    }
+
+    // Update Text
+    if (formulaText) {
+      formulaText.textContent = `(${l} × ${w} × ${h}) ÷ ${divisor} = ${singleVolWeight.toFixed(2)} ${wtUnit}`;
+    }
+
+    if (resActualWeight) resActualWeight.textContent = `${totalActualWeight.toFixed(2)} ${wtUnit}`;
+    if (resVolWeight) resVolWeight.textContent = `${totalVolWeight.toFixed(2)} ${wtUnit}`;
+    if (resCbm) resCbm.textContent = `${totalCbm.toFixed(3)} m³`;
+    if (resCm3) resCm3.textContent = isMetric ? `${totalCm3.toLocaleString()} cm³` : `${(l * w * h * qty).toLocaleString()} in³`;
+    if (resChargeableWeight) resChargeableWeight.textContent = `${finalChargeable.toFixed(2)} ${wtUnit}`;
+
+    // Badge styling
+    if (chargeableBadge) {
+      if (totalVolWeight > totalActualWeight) {
+        chargeableBadge.textContent = 'Volumetric Billed';
+        chargeableBadge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 font-semibold';
+      } else {
+        chargeableBadge.textContent = 'Scale Weight Billed';
+        chargeableBadge.className = 'text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-semibold';
+      }
+    }
+  }
+
+  // Unit Switch Handlers
+  btnMetric?.addEventListener('click', () => {
+    if (isMetric) return;
+    isMetric = true;
+
+    btnMetric.className = "px-4 py-1.5 rounded-full font-medium transition-all cursor-pointer bg-primary text-on-primary";
+    btnImperial?.setAttribute("class", "px-4 py-1.5 rounded-full font-medium text-body hover:text-ink transition-all cursor-pointer");
+
+    document.querySelectorAll('.unit-dim-label').forEach(el => el.textContent = 'cm');
+    document.querySelectorAll('.unit-wt-label').forEach(el => el.textContent = 'kg');
+
+    // Convert values
+    if (dimLength && dimWidth && dimHeight && actualWeight) {
+      dimLength.value = (parseFloat(dimLength.value) * 2.54).toFixed(1);
+      dimWidth.value = (parseFloat(dimWidth.value) * 2.54).toFixed(1);
+      dimHeight.value = (parseFloat(dimHeight.value) * 2.54).toFixed(1);
+      actualWeight.value = (parseFloat(actualWeight.value) * 0.453592).toFixed(2);
+    }
+    calculate();
+  });
+
+  btnImperial?.addEventListener('click', () => {
+    if (!isMetric) return;
+    isMetric = false;
+
+    btnImperial.className = "px-4 py-1.5 rounded-full font-medium transition-all cursor-pointer bg-primary text-on-primary";
+    btnMetric?.setAttribute("class", "px-4 py-1.5 rounded-full font-medium text-body hover:text-ink transition-all cursor-pointer");
+
+    document.querySelectorAll('.unit-dim-label').forEach(el => el.textContent = 'in');
+    document.querySelectorAll('.unit-wt-label').forEach(el => el.textContent = 'lbs');
+
+    // Convert values
+    if (dimLength && dimWidth && dimHeight && actualWeight) {
+      dimLength.value = (parseFloat(dimLength.value) / 2.54).toFixed(1);
+      dimWidth.value = (parseFloat(dimWidth.value) / 2.54).toFixed(1);
+      dimHeight.value = (parseFloat(dimHeight.value) / 2.54).toFixed(1);
+      actualWeight.value = (parseFloat(actualWeight.value) / 0.453592).toFixed(2);
+    }
+    calculate();
+  });
+
+  // Divisor Handler
+  divisorSelect?.addEventListener('change', () => {
+    activeDivisor = parseInt(divisorSelect.value, 10) || 5000;
+    calculate();
+  });
+
+  // Input Listeners
+  [dimLength, dimWidth, dimHeight, actualWeight, pkgQuantity].forEach(input => {
+    input?.addEventListener('input', calculate);
+  });
+
+  // CTA Compare Prices Click Handler
+  ctaComparePrices?.addEventListener('click', () => {
+    let weightKg = parseFloat(actualWeight?.value || '2.5');
+    let lCm = parseFloat(dimLength?.value || '40');
+    let wCm = parseFloat(dimWidth?.value || '30');
+    let hCm = parseFloat(dimHeight?.value || '20');
+
+    if (!isMetric) {
+      weightKg = weightKg * 0.453592;
+      lCm = lCm * 2.54;
+      wCm = wCm * 2.54;
+      hCm = hCm * 2.54;
+    }
+
+    const query = new URLSearchParams({
+      weight: weightKg.toFixed(2),
+      l: lCm.toFixed(1),
+      w: wCm.toFixed(1),
+      h: hCm.toFixed(1)
+    });
+
+    window.location.href = `/?${query.toString()}`;
+  });
+
+  // Initial calculation
+  calculate();
+</script>

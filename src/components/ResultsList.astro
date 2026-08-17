@@ -21,6 +21,21 @@ if (courierId === 'delhivery-domestic-in') {
   titleText = 'Estimated Professional Courier Cost';
   subtitleKey = 'results-subtitle-professional';
   subtitleText = 'Estimated shipping charges for Professional Courier Standard and Express services.';
+} else if (courierId === 'dtdc-domestic-in') {
+  titleKey = 'results-title-dtdc';
+  titleText = 'Estimated DTDC Shipping Cost';
+  subtitleKey = 'results-subtitle-dtdc';
+  subtitleText = 'Estimated courier charges for DTDC Lite / Surface and Air Express services.';
+} else if (courierId === 'indiapost-domestic-in') {
+  titleKey = 'results-title-speedpost';
+  titleText = 'Estimated India Post Speed Post Cost';
+  subtitleKey = 'results-subtitle-speedpost';
+  subtitleText = 'Official estimated tariffs for India Post Standard Parcel and Speed Post Priority.';
+} else if (courierId === 'bluedart-domestic-in') {
+  titleKey = 'results-title-bluedart';
+  titleText = 'Estimated Blue Dart Shipping Cost';
+  subtitleKey = 'results-subtitle-bluedart';
+  subtitleText = 'Estimated freight charges for Blue Dart Surface and Apex Air Express services.';
 }
 ---
 
@@ -37,7 +52,7 @@ if (courierId === 'delhivery-domestic-in') {
       </p>
     </div>
     
-    {courierId !== 'delhivery-domestic-in' && courierId !== 'professional-domestic-in' && (
+    {!courierId && (
       <div class="flex items-center gap-2 border border-hairline rounded-full p-1 bg-canvas shadow-level-1 text-sm transition-colors duration-200">
         <button 
           type="button" 
@@ -230,6 +245,81 @@ if (courierId === 'delhivery-domestic-in') {
         expressEst.name = 'Professional Courier Express';
         expressEst.recommendationBadge = 'fastest';
         currentEstimates.push(expressEst);
+      }
+    } else if (courierId === 'dtdc-domestic-in') {
+      // DTDC Lite vs Express
+      const inputLite = { ...input, express: false };
+      const estimatesLite = getEstimates(inputLite).filter(e => e.id === 'dtdc-domestic-in');
+
+      const inputExpress = { ...input, express: true };
+      const estimatesExpress = getEstimates(inputExpress).filter(e => e.id === 'dtdc-domestic-in');
+
+      currentEstimates = [];
+
+      if (estimatesLite.length > 0) {
+        const liteEst = { ...estimatesLite[0] };
+        liteEst.id = 'dtdc-lite';
+        liteEst.name = 'DTDC Lite (Surface Cargo)';
+        liteEst.recommendationBadge = 'cheapest';
+        currentEstimates.push(liteEst);
+      }
+
+      if (estimatesExpress.length > 0) {
+        const expressEst = { ...estimatesExpress[0] };
+        expressEst.id = 'dtdc-express';
+        expressEst.name = 'DTDC Plus (Air Express)';
+        expressEst.recommendationBadge = 'fastest';
+        currentEstimates.push(expressEst);
+      }
+    } else if (courierId === 'indiapost-domestic-in') {
+      // India Post Standard vs Speed Post Priority
+      const inputStandard = { ...input, express: false };
+      const estimatesStandard = getEstimates(inputStandard).filter(e => e.id === 'indiapost-domestic-in');
+
+      const inputSpeed = { ...input, express: true };
+      const estimatesSpeed = getEstimates(inputSpeed).filter(e => e.id === 'indiapost-domestic-in');
+
+      currentEstimates = [];
+
+      if (estimatesStandard.length > 0) {
+        const stdEst = { ...estimatesStandard[0] };
+        stdEst.id = 'indiapost-parcel';
+        stdEst.name = 'India Post Standard Parcel';
+        stdEst.recommendationBadge = 'cheapest';
+        currentEstimates.push(stdEst);
+      }
+
+      if (estimatesSpeed.length > 0) {
+        const speedEst = { ...estimatesSpeed[0] };
+        speedEst.id = 'indiapost-speedpost';
+        speedEst.name = 'India Post Speed Post Priority';
+        speedEst.recommendationBadge = 'fastest';
+        currentEstimates.push(speedEst);
+      }
+    } else if (courierId === 'bluedart-domestic-in') {
+      // Blue Dart Surface vs Apex Air Express
+      const inputSurface = { ...input, express: false };
+      const estimatesSurface = getEstimates(inputSurface).filter(e => e.id === 'bluedart-domestic-in');
+
+      const inputApex = { ...input, express: true };
+      const estimatesApex = getEstimates(inputApex).filter(e => e.id === 'bluedart-domestic-in');
+
+      currentEstimates = [];
+
+      if (estimatesSurface.length > 0) {
+        const surfaceEst = { ...estimatesSurface[0] };
+        surfaceEst.id = 'bluedart-surface';
+        surfaceEst.name = 'Blue Dart Surface Cargo';
+        surfaceEst.recommendationBadge = 'cheapest';
+        currentEstimates.push(surfaceEst);
+      }
+
+      if (estimatesApex.length > 0) {
+        const apexEst = { ...estimatesApex[0] };
+        apexEst.id = 'bluedart-apex';
+        apexEst.name = 'Blue Dart Apex Air Express';
+        apexEst.recommendationBadge = 'fastest';
+        currentEstimates.push(apexEst);
       }
     } else {
       // Calculate estimates

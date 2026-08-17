@@ -9,6 +9,14 @@ interface Props {
 
 const { courierId = "" } = Astro.props;
 
+const isDedicatedIndianCourier = [
+  'delhivery-domestic-in',
+  'professional-domestic-in',
+  'dtdc-domestic-in',
+  'indiapost-domestic-in',
+  'bluedart-domestic-in'
+].includes(courierId);
+
 // Determine title, subtitle, and submit button labels
 let titleKey = 'form-title';
 let titleText = 'Shipping details.';
@@ -31,6 +39,27 @@ if (courierId === 'delhivery-domestic-in') {
   subtitleText = 'Estimate domestic shipping charges for The Professional Couriers.';
   submitBtnKey = 'form-btn-submit-professional';
   submitBtnText = 'Calculate Professional Courier Price';
+} else if (courierId === 'dtdc-domestic-in') {
+  titleKey = 'form-title-dtdc';
+  titleText = 'DTDC Courier Price Calculator';
+  subtitleKey = 'form-subtitle-dtdc';
+  subtitleText = 'Estimate domestic standard and express parcel shipping charges for DTDC.';
+  submitBtnKey = 'form-btn-submit-dtdc';
+  submitBtnText = 'Calculate DTDC Price';
+} else if (courierId === 'indiapost-domestic-in') {
+  titleKey = 'form-title-speedpost';
+  titleText = 'India Post Speed Post Calculator';
+  subtitleKey = 'form-subtitle-speedpost';
+  subtitleText = 'Estimate domestic tariffs and postal charges for India Post Speed Post.';
+  submitBtnKey = 'form-btn-submit-speedpost';
+  submitBtnText = 'Calculate Speed Post Price';
+} else if (courierId === 'bluedart-domestic-in') {
+  titleKey = 'form-title-bluedart';
+  titleText = 'Blue Dart Express Price Calculator';
+  subtitleKey = 'form-subtitle-bluedart';
+  subtitleText = 'Estimate domestic air and surface express freight rates for Blue Dart.';
+  submitBtnKey = 'form-btn-submit-bluedart';
+  submitBtnText = 'Calculate Blue Dart Price';
 }
 ---
 
@@ -82,7 +111,7 @@ if (courierId === 'delhivery-domestic-in') {
           </h3>
         </div>
         
-        {courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in' ? (
+        {isDedicatedIndianCourier ? (
           <input type="hidden" id="pickupCountry" name="pickupCountry" value="IN" />
         ) : (
           <div id="pickup-country-container" class="flex flex-col gap-1.5 hidden animate-fade-in">
@@ -155,7 +184,7 @@ if (courierId === 'delhivery-domestic-in') {
           </button>
         </div>
         
-        {courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in' ? (
+        {isDedicatedIndianCourier ? (
           <input type="hidden" id="deliveryCountry" name="deliveryCountry" value="IN" />
         ) : (
           <div id="delivery-country-container" class="flex flex-col gap-1.5 hidden animate-fade-in">
@@ -840,7 +869,7 @@ if (courierId === 'delhivery-domestic-in') {
   });
 
   // Initialize defaults
-  if (courierId === 'delhivery-domestic-in' || courierId === 'professional-domestic-in') {
+  if (courierId) {
     const switcher = document.querySelector('.flex.justify-center.mb-8');
     if (switcher) switcher.classList.add('hidden');
     if (shippingType) shippingType.value = "domestic";

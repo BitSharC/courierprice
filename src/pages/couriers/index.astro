@@ -66,7 +66,10 @@ const faqSchema = {
 // Map dedicated calculators
 const dedicatedCouriers: Record<string, string> = {
   'delhivery-domestic-in': '/couriers/delhivery',
-  'professional-domestic-in': '/couriers/professional-courier'
+  'professional-domestic-in': '/couriers/professional-courier',
+  'dtdc-domestic-in': '/couriers/dtdc',
+  'indiapost-domestic-in': '/couriers/speed-post',
+  'bluedart-domestic-in': '/couriers/blue-dart'
 };
 
 // Domestic Indian couriers
@@ -82,7 +85,7 @@ const internationalCouriers = couriersData.filter(c =>
 
 <Layout
   title="Courier Price Calculators & Rate Directory | CourierPrice"
-  description="Compare shipping rate calculators, price per kg breakdowns, and delivery times for top couriers including Delhivery, Professional Courier, DTDC & more."
+  description="Compare shipping rate calculators, price per kg breakdowns, and delivery times for top couriers including Delhivery, Speed Post, DTDC, Blue Dart & more."
   jsonLd={[breadcrumbSchema, collectionSchema, faqSchema]}
 >
   <Header />
@@ -110,85 +113,177 @@ const internationalCouriers = couriersData.filter(c =>
         </p>
       </section>
 
-      <!-- Featured Dedicated Calculators -->
+      <!-- Featured Dedicated Calculators Grid -->
       <section class="space-y-6">
         <div class="flex items-center justify-between border-b border-hairline pb-3">
           <div>
-            <h2 class="display-md text-ink font-semibold">Featured Carrier Calculators</h2>
+            <h2 class="display-md text-ink font-semibold">Dedicated Carrier Calculators</h2>
             <p class="body-sm text-mute mt-0.5">Dedicated rate estimators with detailed weight slab matrices and cost breakdowns</p>
           </div>
           <span class="caption-mono uppercase text-xs text-link font-semibold bg-link-bg-soft px-2.5 py-1 rounded">
-            Dedicated Tools
+            5 Calculators
           </span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Delhivery Card -->
-          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-5">
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex items-start justify-between gap-4">
                 <div>
-                  <span class="text-xs font-mono text-mute uppercase">Domestic & E-commerce</span>
-                  <h3 class="display-sm text-xl text-ink font-semibold mt-1">Delhivery</h3>
+                  <span class="text-xs font-mono text-mute uppercase">Surface & Air</span>
+                  <h3 class="display-sm text-lg text-ink font-semibold mt-0.5">Delhivery</h3>
                 </div>
-                <div class="flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold px-2.5 py-1 rounded-full">
-                  <span>9.2 / 10 Reliability</span>
-                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-green-500/10 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">
+                  ★ 9.2
+                </span>
               </div>
-              <p class="body-sm text-body leading-relaxed">
-                Calculate estimated shipping charges for Delhivery Surface (road transport) and Express (air transport) across 18,000+ Indian pincodes.
+              <p class="body-sm text-body leading-relaxed text-xs">
+                Calculate surface and express rates across 18,000+ Indian pin codes with volumetric weight validation.
               </p>
-              <div class="flex flex-wrap gap-2 text-xs text-mute pt-2">
-                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Surface & Express</span>
-                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Live Tracking</span>
-                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Door Pickup</span>
-              </div>
             </div>
-            <div class="pt-4 border-t border-hairline flex items-center justify-between">
-              <span class="text-xs text-mute font-mono">1 – 5 Delivery Days</span>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">1 – 5 Days</span>
               <a 
                 href="/couriers/delhivery" 
-                class="inline-flex items-center gap-1.5 text-sm font-semibold text-on-primary bg-primary hover:opacity-90 px-4 py-2 rounded-md transition-all"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-on-primary bg-primary hover:opacity-90 px-3 py-1.5 rounded transition-all"
               >
-                Open Calculator
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                Calculator ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Speed Post Card -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <span class="text-xs font-mono text-mute uppercase">National Postal</span>
+                  <h3 class="display-sm text-lg text-ink font-semibold mt-0.5">Speed Post</h3>
+                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full">
+                  ★ 9.0
+                </span>
+              </div>
+              <p class="body-sm text-body leading-relaxed text-xs">
+                Official India Post Speed Post tariffs based on statutory distance bands and weight slabs up to 35 kg.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">1 – 4 Days</span>
+              <a 
+                href="/couriers/speed-post" 
+                class="inline-flex items-center gap-1 text-xs font-semibold text-on-primary bg-primary hover:opacity-90 px-3 py-1.5 rounded transition-all"
+              >
+                Calculator ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Blue Dart Card -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <span class="text-xs font-mono text-mute uppercase">Premium Express</span>
+                  <h3 class="display-sm text-lg text-ink font-semibold mt-0.5">Blue Dart</h3>
+                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full">
+                  ★ 9.4
+                </span>
+              </div>
+              <p class="body-sm text-body leading-relaxed text-xs">
+                Dedicated Boeing freighter aircraft network delivering next-day priority Apex and Surface cargo.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">1 – 3 Days</span>
+              <a 
+                href="/couriers/blue-dart" 
+                class="inline-flex items-center gap-1 text-xs font-semibold text-on-primary bg-primary hover:opacity-90 px-3 py-1.5 rounded transition-all"
+              >
+                Calculator ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- DTDC Card -->
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <span class="text-xs font-mono text-mute uppercase">14,000+ Pincodes</span>
+                  <h3 class="display-sm text-lg text-ink font-semibold mt-0.5">DTDC Express</h3>
+                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full">
+                  ★ 8.9
+                </span>
+              </div>
+              <p class="body-sm text-body leading-relaxed text-xs">
+                Estimate DTDC Lite surface and DTDC Plus air express shipping rates with transparent weight slab matrices.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">2 – 5 Days</span>
+              <a 
+                href="/couriers/dtdc" 
+                class="inline-flex items-center gap-1 text-xs font-semibold text-on-primary bg-primary hover:opacity-90 px-3 py-1.5 rounded transition-all"
+              >
+                Calculator ➔
               </a>
             </div>
           </div>
 
           <!-- Professional Courier Card -->
-          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-5">
+          <div class="bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-5 shadow-level-2 hover:shadow-level-3 transition-all duration-200 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex items-start justify-between gap-4">
                 <div>
-                  <span class="text-xs font-mono text-mute uppercase">Budget & Business</span>
-                  <h3 class="display-sm text-xl text-ink font-semibold mt-1">The Professional Couriers</h3>
+                  <span class="text-xs font-mono text-mute uppercase">Budget & Commercial</span>
+                  <h3 class="display-sm text-lg text-ink font-semibold mt-0.5">Professional Couriers</h3>
                 </div>
-                <div class="flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold px-2.5 py-1 rounded-full">
-                  <span>8.7 / 10 Reliability</span>
-                </div>
+                <span class="text-xs font-mono font-medium text-ink bg-green-500/10 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">
+                  ★ 8.7
+                </span>
               </div>
-              <p class="body-sm text-body leading-relaxed">
-                Estimate domestic package charges, weight slab rates per kg, and same-day Dawn-to-Dusk transit costs across India.
+              <p class="body-sm text-body leading-relaxed text-xs">
+                Estimate domestic standard road package charges and Dawn-to-Dusk express courier rates.
               </p>
-              <div class="flex flex-wrap gap-2 text-xs text-mute pt-2">
-                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Standard & Express</span>
-                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Economical Slabs</span>
-                <span class="border border-hairline px-2 py-0.5 rounded bg-canvas-soft">Pan-India Network</span>
-              </div>
             </div>
-            <div class="pt-4 border-t border-hairline flex items-center justify-between">
-              <span class="text-xs text-mute font-mono">2 – 6 Delivery Days</span>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">2 – 6 Days</span>
               <a 
                 href="/couriers/professional-courier" 
-                class="inline-flex items-center gap-1.5 text-sm font-semibold text-on-primary bg-primary hover:opacity-90 px-4 py-2 rounded-md transition-all"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-on-primary bg-primary hover:opacity-90 px-3 py-1.5 rounded transition-all"
               >
-                Open Calculator
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                Calculator ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Standalone Tool Feature Card -->
+          <div class="bg-canvas border border-dashed border-primary/40 hover:border-primary rounded-lg p-5 shadow-level-1 hover:shadow-level-2 transition-all duration-200 flex flex-col justify-between space-y-4 bg-primary/[0.02]">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <span class="text-xs font-mono text-primary uppercase font-semibold">Standalone Tool</span>
+                  <h3 class="display-sm text-lg text-ink font-semibold mt-0.5">Volumetric Calculator</h3>
+                </div>
+                <span class="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-primary/10 text-primary shrink-0 whitespace-nowrap">
+                  CBM Tool
+                </span>
+              </div>
+              <p class="body-sm text-body leading-relaxed text-xs">
+                Calculate dimensional weight in kg/lbs, CBM volume, and compare divisors (5000 vs 6000 vs 4000).
+              </p>
+            </div>
+            <div class="pt-3 border-t border-hairline flex items-center justify-between">
+              <span class="text-xs text-mute font-mono">Free Utility</span>
+              <a 
+                href="/tools/volumetric-weight-calculator" 
+                class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline transition-all"
+              >
+                Open Tool ➔
               </a>
             </div>
           </div>
