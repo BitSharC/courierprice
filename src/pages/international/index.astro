@@ -1,0 +1,280 @@
+---
+// src/pages/international/index.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CalculatorForm from '../../components/CalculatorForm.astro';
+import ResultsList from '../../components/ResultsList.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "International Shipping",
+      "item": "https://courierprice.com/international/"
+    }
+  ]
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "International Courier Shipping Rates & Country Guides",
+  "url": "https://courierprice.com/international/",
+  "description": "Compare international parcel delivery rates from India to USA, UK, UAE, and over 200 countries with customs and duty guidelines."
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which courier is cheapest for international shipping from India?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For individual senders and small parcels under 2 kg, India Post International Speed Post (EMS) is usually the most economical option. For heavier packages and urgent shipments, commercial consolidators and express carriers like Aramex, FedEx International Economy, and DHL provide competitive volume rates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What documents are required for international parcel delivery?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard international shipments require: 1) Sender KYC proof (Aadhaar or Passport), 2) Itemized Commercial Invoice / Packing List with declared values in INR and destination currency, 3) Proof of delivery address, and 4) Mandatory export declarations depending on commodity type."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does international customs duty work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every country has a 'De Minimis' tax-free value threshold (e.g., $800 USD for USA, 300 AED for UAE, £135 for UK). Shipments declared above these thresholds are subject to destination import VAT and customs duty fees paid by the recipient."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What items are prohibited for international air courier?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flammable liquids, aerosols, loose uncertified lithium-ion batteries, currencies/precious metals, unverified liquids, perishable homemade foods, and narcotics cannot be shipped via international air courier."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title="International Courier Charges & Shipping Guides | CourierPrice"
+  description="Compare international courier shipping rates from India to USA, UK, UAE and 200+ countries. Calculate DHL, FedEx, Aramex & India Post EMS rates."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">International Shipping</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-blue-500"></span>
+          <span>Global Shipping Hub</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          International Courier Charges & Country Guides.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Find the cheapest and fastest ways to send parcels overseas. Compare air freight express, international postal EMS, customs duty thresholds, and documentation rules.
+        </p>
+      </div>
+    </section>
+
+    <!-- Top International Corridors Grid -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+      <div class="border-b border-hairline pb-3 mb-6 flex items-center justify-between">
+        <div>
+          <h2 class="display-md text-ink font-semibold">Popular Shipping Corridors</h2>
+          <p class="body-sm text-mute mt-0.5">Comprehensive route calculators with customs rules, duty limits, and rate per kg matrices</p>
+        </div>
+        <span class="caption-mono uppercase text-xs text-link font-semibold bg-link-bg-soft px-2.5 py-1 rounded">
+          Top Destinations
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- India to USA Card -->
+        <a 
+          href="/international/india-to-usa" 
+          class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+        >
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-mute uppercase">North America</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 font-semibold">
+                $800 De Minimis
+              </span>
+            </div>
+            <h3 class="display-sm text-xl text-ink font-semibold group-hover:text-primary transition-colors">
+              India to USA ➔
+            </h3>
+            <p class="body-sm text-body leading-relaxed text-xs">
+              Compare DHL, FedEx, UPS & India Post EMS rates to New York, California, Texas, and across the United States.
+            </p>
+            <div class="pt-2 border-t border-hairline/60 flex items-center justify-between text-xs font-mono text-mute">
+              <span>Transit: 2 – 6 Days</span>
+              <span class="text-ink font-semibold">From ₹1,100</span>
+            </div>
+          </div>
+          <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+            <span>View USA Shipping Guide</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+          </div>
+        </a>
+
+        <!-- India to UK Card -->
+        <a 
+          href="/international/india-to-uk" 
+          class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+        >
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-mute uppercase">Europe / Britain</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 font-semibold">
+                £135 VAT Limit
+              </span>
+            </div>
+            <h3 class="display-sm text-xl text-ink font-semibold group-hover:text-primary transition-colors">
+              India to UK ➔
+            </h3>
+            <p class="body-sm text-body leading-relaxed text-xs">
+              Estimate courier costs to London, Manchester, Birmingham, and Scotland with UK import VAT regulations.
+            </p>
+            <div class="pt-2 border-t border-hairline/60 flex items-center justify-between text-xs font-mono text-mute">
+              <span>Transit: 2 – 5 Days</span>
+              <span class="text-ink font-semibold">From ₹1,000</span>
+            </div>
+          </div>
+          <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+            <span>View UK Shipping Guide</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+          </div>
+        </a>
+
+        <!-- India to UAE Card -->
+        <a 
+          href="/international/india-to-uae" 
+          class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+        >
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-mute uppercase">Middle East</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 font-semibold">
+                300 AED Duty-Free
+              </span>
+            </div>
+            <h3 class="display-sm text-xl text-ink font-semibold group-hover:text-primary transition-colors">
+              India to UAE (Dubai) ➔
+            </h3>
+            <p class="body-sm text-body leading-relaxed text-xs">
+              Calculate shipping to Dubai, Abu Dhabi & Sharjah via Aramex, DHL, FedEx, and India Post with express 24-48h air routes.
+            </p>
+            <div class="pt-2 border-t border-hairline/60 flex items-center justify-between text-xs font-mono text-mute">
+              <span>Transit: 1 – 4 Days</span>
+              <span class="text-ink font-semibold">From ₹750</span>
+            </div>
+          </div>
+          <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+            <span>View UAE Shipping Guide</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Interactive International Calculator -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 space-y-8">
+      <div class="border-b border-hairline pb-3">
+        <h2 class="display-md text-ink font-semibold">Live International Shipping Calculator</h2>
+        <p class="body-sm text-mute mt-0.5">Calculate real-time estimates for 200+ global destinations</p>
+      </div>
+      <CalculatorForm />
+      <ResultsList />
+    </section>
+
+    <!-- Educational Guide Section -->
+    <article class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-hairline space-y-12">
+      
+      <!-- Section 1: Customs Checklist -->
+      <section class="space-y-6">
+        <h2 class="display-md text-ink font-semibold">International Shipping Documentation Checklist.</h2>
+        <p class="body-md text-body leading-relaxed">
+          To prevent customs clearance delays at origin and destination airports, ensure you prepare the following essential paperwork:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-2">
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">1. Sender KYC Proof</h3>
+            <p class="body-sm text-body text-xs">Self-attested copy of Indian Passport, Aadhaar Card, or Voter ID matching the sender address.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">2. Commercial Invoice</h3>
+            <p class="body-sm text-body text-xs">3 printed copies detailing every individual item, quantity, material composition, and declared value.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">3. HS Tariff Codes</h3>
+            <p class="body-sm text-body text-xs">6-digit Harmonized System (HS) codes assigned to each product for destination customs duties.</p>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-lg p-5 shadow-level-1 space-y-2">
+            <h3 class="body-md-strong text-ink font-semibold">4. Packing List</h3>
+            <p class="body-sm text-body text-xs">Detailed carton-by-carton breakdown of gross dead weight and outer dimensional measurements.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: FAQs -->
+      <section class="pt-8 border-t border-hairline space-y-6">
+        <h2 class="display-md text-ink font-semibold">International Shipping FAQs.</h2>
+        <div class="space-y-4">
+          {faqSchema.mainEntity.map(faq => (
+            <div class="border border-hairline rounded-lg p-5 bg-canvas shadow-level-1 space-y-2">
+              <h3 class="body-md-strong text-ink font-semibold">{faq.name}</h3>
+              <p class="body-sm text-body leading-relaxed">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // Ensure the calculator loads in international mode on this hub page
+  window.addEventListener('DOMContentLoaded', () => {
+    const tabIntl = document.getElementById('tab-international');
+    if (tabIntl) tabIntl.click();
+  });
+</script>

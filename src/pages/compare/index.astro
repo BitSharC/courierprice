@@ -1,0 +1,159 @@
+---
+// src/pages/compare/index.astro
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://courierprice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Compare Couriers",
+      "item": "https://courierprice.com/compare/"
+    }
+  ]
+};
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Courier Comparison & Rate Breakdown Directory",
+  "url": "https://courierprice.com/compare/",
+  "description": "Compare top courier services side-by-side: Delhivery vs DTDC, Speed Post vs Delhivery, Blue Dart vs DTDC."
+};
+---
+
+<Layout
+  title="Courier Comparisons & Side-by-Side Rates | CourierPrice"
+  description="Compare top shipping carriers side by side. Rate per kg comparisons, delivery speeds, coverage, and tracking quality."
+>
+  <!-- Schema Injections -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <Header />
+
+  <main class="w-full">
+    <!-- Breadcrumb Section -->
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+      <nav class="flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-ink transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-ink font-medium" aria-current="page">Compare Couriers</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-canvas-soft text-xs text-mute font-medium">
+          <span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+          <span>Side-by-Side Analysis</span>
+        </div>
+        <h1 class="display-lg text-ink font-semibold tracking-tight">
+          Head-to-Head Courier Comparisons.
+        </h1>
+        <p class="body-lg text-body leading-relaxed">
+          Evaluate delivery speed, price per kg, tracking precision, and pin code coverage between India's top shipping networks before booking.
+        </p>
+      </div>
+    </section>
+
+    <!-- Comparison Cards Grid -->
+    <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Delhivery vs DTDC -->
+        <a 
+          href="/compare/delhivery-vs-dtdc" 
+          class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+        >
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-mute uppercase">Ecommerce vs Franchise</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas-soft text-mute">Popular</span>
+            </div>
+            <h2 class="display-sm text-xl text-ink font-semibold group-hover:text-primary transition-colors">
+              Delhivery vs DTDC ➔
+            </h2>
+            <p class="body-sm text-body leading-relaxed text-xs">
+              Compare automated D2C e-commerce logistics against India's largest retail franchise network.
+            </p>
+            <div class="pt-2 border-t border-hairline/60 space-y-1 text-xs text-body font-mono">
+              <div class="flex justify-between"><span>Delhivery:</span><strong>18,500+ Pincodes</strong></div>
+              <div class="flex justify-between"><span>DTDC:</span><strong>12,000+ Counters</strong></div>
+            </div>
+          </div>
+          <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+            <span>Open Detailed Comparison</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+          </div>
+        </a>
+
+        <!-- Speed Post vs Delhivery -->
+        <a 
+          href="/compare/speed-post-vs-delhivery" 
+          class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+        >
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-mute uppercase">Postal vs Private</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 font-semibold">100% Reach</span>
+            </div>
+            <h2 class="display-sm text-xl text-ink font-semibold group-hover:text-primary transition-colors">
+              Speed Post vs Delhivery ➔
+            </h2>
+            <p class="body-sm text-body leading-relaxed text-xs">
+              Compare India Post's universal statutory postal tariffs with modern private automated parcel tracking.
+            </p>
+            <div class="pt-2 border-t border-hairline/60 space-y-1 text-xs text-body font-mono">
+              <div class="flex justify-between"><span>Speed Post:</span><strong>155,000+ Post Offices</strong></div>
+              <div class="flex justify-between"><span>Delhivery:</span><strong>Doorstep Collection</strong></div>
+            </div>
+          </div>
+          <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+            <span>Open Detailed Comparison</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+          </div>
+        </a>
+
+        <!-- Blue Dart vs DTDC -->
+        <a 
+          href="/compare/blue-dart-vs-dtdc" 
+          class="group bg-canvas border border-hairline hover:border-hairline-strong rounded-lg p-6 shadow-level-2 hover:shadow-level-3 transition-all flex flex-col justify-between space-y-4 cursor-pointer"
+        >
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-mute uppercase">Air Express vs Ground</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 font-semibold">Freighter Air</span>
+            </div>
+            <h2 class="display-sm text-xl text-ink font-semibold group-hover:text-primary transition-colors">
+              Blue Dart vs DTDC ➔
+            </h2>
+            <p class="body-sm text-body leading-relaxed text-xs">
+              Evaluate aviation-grade dedicated Boeing freighter overnight express versus budget franchise surface delivery.
+            </p>
+            <div class="pt-2 border-t border-hairline/60 space-y-1 text-xs text-body font-mono">
+              <div class="flex justify-between"><span>Blue Dart:</span><strong>Overnight Aviation</strong></div>
+              <div class="flex justify-between"><span>DTDC:</span><strong>Economical Slabs</strong></div>
+            </div>
+          </div>
+          <div class="flex items-center text-xs font-semibold text-primary pt-2 border-t border-hairline">
+            <span>Open Detailed Comparison</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">➔</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
