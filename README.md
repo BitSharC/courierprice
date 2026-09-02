@@ -146,7 +146,7 @@ If you have feedback that could improve CourierPrice, I'd love to hear it.
 
 <div align="center">
 
-### 👨‍💻 Built by Tushar Chib (BitSharc)
+### 👨‍💻 Built by BitSharc
 
 If you found this project useful, consider giving it a ⭐
 
